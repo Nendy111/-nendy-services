@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nendy Services — Carte d'identité</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --v: #7b9a80;
+    --vc: #b5c1a6;
+    --b: #d8c79e;
+    --cr: #f5f1e6;
+    --f: #ee07a5;
+    --txt: #1a1714;
+    --txt2: #5c5248;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 16px; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cr);
+    color: var(--txt);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── SECTION 1 — HERO ── */
+  .hero {
+    min-height: 100vh;
+    padding: 32px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-bottom: 1px solid rgba(123,154,128,.2);
+  }
+
+  .hero-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 60px;
+  }
+
+  .hero-nav-brand {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--txt2);
+    text-transform: uppercase;
+  }
+
+  .hero-nav-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--f);
+  }
+
+  .badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--f);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.85); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--txt2);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 9vw, 96px);
+    font-weight: 900;
+    line-height: 0.95;
+    color: var(--txt);
+    margin-bottom: 0;
+  }
+
+  .hero-title .fuchsia {
+    color: var(--f);
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  .hero-title .vert {
+    color: var(--v);
+  }
+
+  .hero-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 60px;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .hero-desc {
+    max-width: 380px;
+  }
+
+  .hero-desc-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--vc);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .hero-desc-txt {
+    font-size: 16px;
+    color: var(--txt2);
+    line-height: 1.7;
+  }
+
+  .hero-desc-txt em {
+    color: var(--f);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .hero-schema {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+  }
+
+  .schema-box {
+    border: 1.5px solid;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .schema-box.org {
+    border-color: var(--v);
+    color: var(--v);
+    background: rgba(123,154,128,.06);
+  }
+
+  .schema-box.assist {
+    border-color: var(--f);
+    color: var(--f);
+    background: rgba(238,7,165,.04);
+    margin-right: 20px;
+  }
+
+  .schema-arrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--b);
+    text-align: right;
+    margin-right: 60px;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--txt2);
+  }
+
+  .hero-scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--txt2);
+  }
+
+  /* ── SECTION 2 — QUI SUIS-JE ── */
+  .qui {
+    padding: 80px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    border-bottom: 1px solid rgba(123,154,128,.2);
+    align-items: center;
+  }
+
+  .qui-left {}
+
+  .qui-section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--f);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .qui-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(238,7,165,.2);
+  }
+
+  .qui-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--txt);
+    margin-bottom: 24px;
+  }
+
+  .qui-title .f { color: var(--f); font-style: italic; }
+  .qui-title .v { color: var(--v); }
+
+  .qui-text {
+    font-size: 15px;
+    color: var(--txt2);
+    line-height: 1.8;
+    margin-bottom: 30px;
+  }
+
+  .qui-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .qui-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(123,154,128,.3);
+    color: var(--txt2);
+  }
+
+  .qui-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .info-block {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(123,154,128,.12);
+  }
+
+  .info-block.accent-v { border-left: 3px solid var(--v); }
+  .info-block.accent-f { border-left: 3px solid var(--f); }
+  .info-block.accent-b { border-left: 3px solid var(--b); }
+
+  .info-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: var(--vc);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .info-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--txt);
+    line-height: 1.3;
+  }
+
+  .info-sub {
+    font-size: 12px;
+    color: var(--txt2);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  /* ── SECTION 3 — VALEURS ── */
+  .valeurs {
+    padding: 80px 40px;
+    border-bottom: 1px solid rgba(123,154,128,.2);
+  }
+
+  .valeurs-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .valeurs-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 900;
+    color: var(--txt);
+    line-height: 1;
+  }
+
+  .valeurs-title .f { color: var(--f); font-style: italic; }
+
+  .valeurs-sub {
+    font-size: 13px;
+    color: var(--txt2);
+    max-width: 280px;
+    line-height: 1.6;
+    text-align: right;
+  }
+
+  .valeurs-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: rgba(123,154,128,.15);
+    border: 1px solid rgba(123,154,128,.15);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .val-item {
+    background: var(--cr);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: background 0.2s;
+  }
+
+  .val-item:hover { background: white; }
+
+  .val-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--vc);
+    letter-spacing: 1px;
+  }
+
+  .val-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--txt);
+    line-height: 1.1;
+  }
+
+  .val-name.f { color: var(--f); }
+  .val-name.v { color: var(--v); }
+
+  .val-desc {
+    font-size: 11px;
+    color: var(--txt2);
+    line-height: 1.6;
+    margin-top: auto;
+  }
+
+  /* ── SECTION 4 — MISSION ── */
+  .mission {
+    padding: 80px 40px;
+    background: var(--v);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(123,154,128,.2);
+  }
+
+  .mission::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.05);
+    pointer-events: none;
+  }
+
+  .mission-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,.5);
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+
+  .mission-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    color: white;
+    line-height: 1.25;
+    max-width: 700px;
+    margin-bottom: 40px;
+  }
+
+  .mission-quote .f {
+    color: var(--f);
+    font-style: italic;
+  }
+
+  .mission-quote .b {
+    color: var(--b);
+  }
+
+  .mission-bottom {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .mission-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mission-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+  }
+
+  .mission-stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,.5);
+    text-transform: uppercase;
+  }
+
+  .mission-divider {
+    width: 1px;
+    height: 50px;
+    background: rgba(255,255,255,.2);
+  }
+
+  /* ── SECTION 5 — POUR QUI ── */
+  .pourqui {
+    padding: 80px 40px;
+    border-bottom: 1px solid rgba(123,154,128,.2);
+  }
+
+  .pourqui-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--f);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .pourqui-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 900;
+    color: var(--txt);
+    line-height: 1.05;
+    margin-bottom: 50px;
+  }
+
+  .pourqui-title .f { color: var(--f); font-style: italic; }
+
+  .pourqui-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .pourqui-card {
+    background: white;
+    border-radius: 14px;
+    padding: 28px;
+    border: 1px solid rgba(123,154,128,.12);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .pourqui-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--v);
+  }
+
+  .pourqui-card-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--vc);
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+
+  .pourqui-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--v);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .pourqui-card-desc {
+    font-size: 13px;
+    color: var(--txt2);
+    line-height: 1.7;
+  }
+
+  .pourqui-card-tag {
+    display: inline-block;
+    margin-top: 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: var(--f);
+    background: rgba(238,7,165,.06);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(238,7,165,.15);
+  }
+
+  /* ── SECTION 6 — CONTACT ── */
+  .contact {
+    padding: 80px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .contact-left {}
+
+  .contact-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--vc);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .contact-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 900;
+    color: var(--txt);
+    line-height: 1.1;
+    margin-bottom: 30px;
+  }
+
+  .contact-title .f { color: var(--f); font-style: italic; }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(123,154,128,.2);
+    background: white;
+    transition: transform 0.15s, border-color 0.15s;
+    max-width: 360px;
+  }
+
+  .contact-link:hover { transform: translateX(4px); border-color: var(--v); }
+
+  .contact-link-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contact-link-icon svg { width: 18px; height: 18px; }
+
+  .contact-link-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: var(--vc);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .contact-link-val {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--txt);
+    display: block;
+  }
+
+  .contact-link-arrow {
+    margin-left: auto;
+    font-size: 14px;
+    color: var(--v);
+    flex-shrink: 0;
+  }
+
+  .contact-right {
+    text-align: right;
+  }
+
+  .contact-sig {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    font-weight: 900;
+    color: rgba(123,154,128,.08);
+    line-height: 1;
+    letter-spacing: -4px;
+    user-select: none;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 30px 40px;
+    border-top: 1px solid rgba(123,154,128,.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-sig {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--b);
+  }
+
+  .footer-info {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: rgba(123,154,128,.4);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow { animation: fadeUp 0.6s ease 0.1s both; }
+  .hero-title { animation: fadeUp 0.7s ease 0.2s both; }
+  .hero-bottom { animation: fadeUp 0.6s ease 0.4s both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero { padding: 24px 20px 32px; }
+    .qui { grid-template-columns: 1fr; padding: 50px 20px; gap: 30px; }
+    .valeurs { padding: 50px 20px; }
+    .valeurs-grid { grid-template-columns: 1fr 1fr; }
+    .mission { padding: 50px 20px; }
+    .pourqui { padding: 50px 20px; }
+    .pourqui-grid { grid-template-columns: 1fr; }
+    .contact { padding: 50px 20px; }
+    .footer { padding: 20px; }
+    .hero-schema { display: none; }
+    .contact-sig { display: none; }
+    .valeurs-sub { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── SECTION 1 — HERO ── -->
+<section class="hero">
+  <nav class="hero-nav">
+    <span class="hero-nav-brand">Nendy Services</span>
+    <div class="hero-nav-badge">
+      <div class="badge-dot"></div>
+      Nouveau
+    </div>
+  </nav>
+
+  <div class="hero-eyebrow">Assistance virtuelle — Écosystèmes digitaux</div>
+
+  <h1 class="hero-title">
+    L'harmonie<br>
+    entre organisation<br>
+    <span class="fuchsia">& assistance.</span>
+  </h1>
+
+  <div class="hero-bottom">
+    <div class="hero-desc">
+      <div class="hero-desc-label">La mission</div>
+      <p class="hero-desc-txt">
+        J'accompagne les entrepreneurs solo, coachs et thérapeutes à structurer, organiser et automatiser leur activité — pour retrouver du temps, de l'énergie et de la <em>clarté</em>.
+      </p>
+    </div>
+    <div class="hero-schema">
+      <div class="schema-box org">Organisation</div>
+      <div class="schema-arrow">⟶</div>
+      <div class="schema-box assist">Assistance</div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    Faites glisser
+  </div>
+</section>
+
+<!-- ── SECTION 2 — QUI SUIS-JE ── -->
+<section class="qui">
+  <div class="qui-left">
+    <div class="qui-section-label">Qui suis-je</div>
+    <h2 class="qui-title">
+      Je suis <span class="v">Nendy.</span><br>
+      Votre bras droit<br>
+      <span class="f">digital.</span>
+    </h2>
+    <p class="qui-text">
+      Assistante virtuelle et conceptrice d'écosystèmes digitaux, je transforme les business désorganisés en systèmes fluides, clairs et autonomes. Pas de magie — de la méthode, de la rigueur et une vraie vision de ce que votre activité peut devenir.
+    </p>
+    <div class="qui-tags">
+      <span class="qui-tag">100% à distance</span>
+      <span class="qui-tag">Guadeloupe</span>
+      <span class="qui-tag">France & International</span>
+      <span class="qui-tag">Sur-mesure</span>
+    </div>
+  </div>
+  <div class="qui-right">
+    <div class="info-block accent-v">
+      <div class="info-label">Statut</div>
+      <div class="info-value">Assistante virtuelle</div>
+      <div class="info-sub">& Conceptrice d'écosystèmes digitaux</div>
+    </div>
+    <div class="info-block accent-f">
+      <div class="info-label">Spécialité</div>
+      <div class="info-value">Création de systèmes sur-mesure</div>
+      <div class="info-sub">Notion · Automatisation · Stratégie digitale · Agent IA</div>
+    </div>
+    <div class="info-block accent-b">
+      <div class="info-label">Zone de travail</div>
+      <div class="info-value">France entière & International</div>
+      <div class="info-sub">Basée en Guadeloupe · Disponible partout</div>
+    </div>
+    <div class="info-block accent-v">
+      <div class="info-label">Contact direct</div>
+      <div class="info-value">+590 690 70 33 27</div>
+      <div class="info-sub">nendy.services@gmail.com</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 3 — VALEURS ── -->
+<section class="valeurs">
+  <div class="valeurs-header">
+    <h2 class="valeurs-title">Ce qui me<br><span class="f">guide.</span></h2>
+    <p class="valeurs-sub">5 valeurs qui définissent comment je travaille et ce que vous pouvez attendre de notre collaboration.</p>
+  </div>
+  <div class="valeurs-grid">
+    <div class="val-item">
+      <div class="val-num">01</div>
+      <div class="val-name v">Clarté</div>
+      <div class="val-desc">Je transforme le chaos en système que vous comprenez du premier coup d'œil.</div>
+    </div>
+    <div class="val-item">
+      <div class="val-num">02</div>
+      <div class="val-name">Rigueur</div>
+      <div class="val-desc">Ce que je promets, je le livre. Toujours. Sans exception.</div>
+    </div>
+    <div class="val-item">
+      <div class="val-num">03</div>
+      <div class="val-name f">Confidentialité</div>
+      <div class="val-desc">Vos projets et votre intimité professionnelle restent entre nous.</div>
+    </div>
+    <div class="val-item">
+      <div class="val-num">04</div>
+      <div class="val-name v">Harmonie</div>
+      <div class="val-desc">Un business organisé, une vie équilibrée — c'est ça Nendy Services.</div>
+    </div>
+    <div class="val-item">
+      <div class="val-num">05</div>
+      <div class="val-name">Vision</div>
+      <div class="val-desc">Je vois où vous pouvez aller avant même que vous le demandiez.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 4 — MISSION ── -->
+<section class="mission">
+  <div class="mission-label">La promesse Nendy Services</div>
+  <p class="mission-quote">
+    "Tu as créé ton business pour vivre mieux.<br>
+    Pas pour <span class="f">t'épuiser</span> davantage.<br>
+    C'est <span class="b">exactement</span> pour ça que je suis là."
+  </p>
+  <div class="mission-bottom">
+    <div class="mission-stat">
+      <div class="mission-stat-num">100%</div>
+      <div class="mission-stat-label">À distance</div>
+    </div>
+    <div class="mission-divider"></div>
+    <div class="mission-stat">
+      <div class="mission-stat-num">24h</div>
+      <div class="mission-stat-label">Temps de réponse</div>
+    </div>
+    <div class="mission-divider"></div>
+    <div class="mission-stat">
+      <div class="mission-stat-num">Sur-mesure</div>
+      <div class="mission-stat-label">Chaque mission</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 5 — POUR QUI ── -->
+<section class="pourqui">
+  <div class="pourqui-label">Pour qui</div>
+  <h2 class="pourqui-title">On est faites pour<br>travailler ensemble <span class="f">si…</span></h2>
+  <div class="pourqui-grid">
+    <div class="pourqui-card">
+      <div class="pourqui-card-num">Profil 01</div>
+      <div class="pourqui-card-title">L'entrepreneur·e débordé·e</div>
+      <p class="pourqui-card-desc">Vous gérez tout seul·e et vous passez vos soirées sur l'admin au lieu de vous reposer. Vous aimez ce que vous faites — mais la gestion vous épuise.</p>
+      <span class="pourqui-card-tag">Le plus fréquent</span>
+    </div>
+    <div class="pourqui-card">
+      <div class="pourqui-card-num">Profil 02</div>
+      <div class="pourqui-card-title">Le·la coach ou thérapeute</div>
+      <p class="pourqui-card-desc">Votre énergie devrait aller à vos clients — pas à vos emails, vos RDV à organiser et vos factures à créer. Vous avez besoin d'un système qui tourne sans vous.</p>
+      <span class="pourqui-card-tag">Bien-être & accompagnement</span>
+    </div>
+    <div class="pourqui-card">
+      <div class="pourqui-card-num">Profil 03</div>
+      <div class="pourqui-card-title">Celui·celle qui veut scaler</div>
+      <p class="pourqui-card-desc">Votre activité marche — mais vous sentez que vous avez atteint votre plafond en solo. Il est temps de structurer pour grandir sans s'effondrer.</p>
+      <span class="pourqui-card-tag">Croissance & stratégie</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 6 — CONTACT ── -->
+<section class="contact">
+  <div class="contact-left">
+    <div class="contact-label">On commence ?</div>
+    <h2 class="contact-title">Parlons de<br>votre <span class="f">business.</span></h2>
+    <div class="contact-links">
+      <a href="https://wa.me/590690703327?text=Bonjour%20Nendy%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20services." class="contact-link">
+        <div class="contact-link-icon" style="background:#25D366;">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <div>
+          <span class="contact-link-label">WhatsApp</span>
+          <span class="contact-link-val">+590 690 70 33 27</span>
+        </div>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a href="mailto:nendy.services@gmail.com" class="contact-link">
+        <div class="contact-link-icon" style="background:rgba(123,154,128,.1);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7b9a80" stroke-width="1.8" stroke-linecap="round"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+        </div>
+        <div>
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-val">nendy.services@gmail.com</span>
+        </div>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a href="https://instagram.com/nendy_services" class="contact-link">
+        <div class="contact-link-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </div>
+        <div>
+          <span class="contact-link-label">Instagram</span>
+          <span class="contact-link-val">@nendy_services</span>
+        </div>
+        <span class="contact-link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+  <div class="contact-right">
+    <div class="contact-sig">N</div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-sig">Nendy Services — L'harmonie entre organisation et assistance.</div>
+  <div class="footer-info">Guadeloupe · France · International · 2026</div>
+</footer>
+
+</body>
+</html>
