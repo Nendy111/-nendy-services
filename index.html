@@ -3,796 +3,933 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nendy Services — Carte d'identité</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Nendy Services — Assistante Virtuelle & Écosystèmes Digitaux</title>
+<meta name="description" content="Nendy Services — Assistante virtuelle & conceptrice d'écosystèmes digitaux. Structurez, organisez et automatisez votre business. Basée en Guadeloupe, 100% à distance.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --v: #7b9a80;
-    --vc: #b5c1a6;
-    --b: #d8c79e;
-    --cr: #f5f1e6;
-    --f: #ee07a5;
-    --txt: #1a1714;
-    --txt2: #5c5248;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { font-size: 16px; }
-
-  body {
-    font-family: 'Jost', sans-serif;
-    background: var(--cr);
-    color: var(--txt);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* ── SECTION 1 — HERO ── */
-  .hero {
-    min-height: 100vh;
-    padding: 32px 40px 40px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    border-bottom: 1px solid rgba(123,154,128,.2);
-  }
-
-  .hero-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 60px;
-  }
-
-  .hero-nav-brand {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--txt2);
-    text-transform: uppercase;
-  }
-
-  .hero-nav-badge {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 2px;
-    color: var(--f);
-  }
-
-  .badge-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--f);
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(0.85); }
-  }
-
-  .hero-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--txt2);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-
-  .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(52px, 9vw, 96px);
-    font-weight: 900;
-    line-height: 0.95;
-    color: var(--txt);
-    margin-bottom: 0;
-  }
-
-  .hero-title .fuchsia {
-    color: var(--f);
-    font-style: italic;
-    font-weight: 700;
-  }
-
-  .hero-title .vert {
-    color: var(--v);
-  }
-
-  .hero-bottom {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-top: auto;
-    padding-top: 60px;
-    gap: 40px;
-    flex-wrap: wrap;
-  }
-
-  .hero-desc {
-    max-width: 380px;
-  }
-
-  .hero-desc-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: var(--vc);
-    margin-bottom: 10px;
-    text-transform: uppercase;
-  }
-
-  .hero-desc-txt {
-    font-size: 16px;
-    color: var(--txt2);
-    line-height: 1.7;
-  }
-
-  .hero-desc-txt em {
-    color: var(--f);
-    font-style: normal;
-    font-weight: 500;
-  }
-
-  .hero-schema {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: flex-end;
-  }
-
-  .schema-box {
-    border: 1.5px solid;
-    border-radius: 6px;
-    padding: 8px 16px;
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-  .schema-box.org {
-    border-color: var(--v);
-    color: var(--v);
-    background: rgba(123,154,128,.06);
-  }
-
-  .schema-box.assist {
-    border-color: var(--f);
-    color: var(--f);
-    background: rgba(238,7,165,.04);
-    margin-right: 20px;
-  }
-
-  .schema-arrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: var(--b);
-    text-align: right;
-    margin-right: 60px;
-  }
-
-  .hero-scroll {
-    position: absolute;
-    bottom: 32px;
-    right: 40px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: var(--txt2);
-  }
-
-  .hero-scroll-line {
-    width: 40px;
-    height: 1px;
-    background: var(--txt2);
-  }
-
-  /* ── SECTION 2 — QUI SUIS-JE ── */
-  .qui {
-    padding: 80px 40px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    border-bottom: 1px solid rgba(123,154,128,.2);
-    align-items: center;
-  }
-
-  .qui-left {}
-
-  .qui-section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 3px;
-    color: var(--f);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .qui-section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: rgba(238,7,165,.2);
-  }
-
-  .qui-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 5vw, 56px);
-    font-weight: 700;
-    line-height: 1.1;
-    color: var(--txt);
-    margin-bottom: 24px;
-  }
-
-  .qui-title .f { color: var(--f); font-style: italic; }
-  .qui-title .v { color: var(--v); }
-
-  .qui-text {
-    font-size: 15px;
-    color: var(--txt2);
-    line-height: 1.8;
-    margin-bottom: 30px;
-  }
-
-  .qui-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .qui-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 1px;
-    padding: 6px 14px;
-    border-radius: 20px;
-    border: 1px solid rgba(123,154,128,.3);
-    color: var(--txt2);
-  }
-
-  .qui-right {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .info-block {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    border: 1px solid rgba(123,154,128,.12);
-  }
-
-  .info-block.accent-v { border-left: 3px solid var(--v); }
-  .info-block.accent-f { border-left: 3px solid var(--f); }
-  .info-block.accent-b { border-left: 3px solid var(--b); }
-
-  .info-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 8px;
-    letter-spacing: 2px;
-    color: var(--vc);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
-  .info-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--txt);
-    line-height: 1.3;
-  }
-
-  .info-sub {
-    font-size: 12px;
-    color: var(--txt2);
-    margin-top: 4px;
-    line-height: 1.5;
-  }
-
-  /* ── SECTION 3 — VALEURS ── */
-  .valeurs {
-    padding: 80px 40px;
-    border-bottom: 1px solid rgba(123,154,128,.2);
-  }
-
-  .valeurs-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 50px;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-
-  .valeurs-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 5vw, 56px);
-    font-weight: 900;
-    color: var(--txt);
-    line-height: 1;
-  }
-
-  .valeurs-title .f { color: var(--f); font-style: italic; }
-
-  .valeurs-sub {
-    font-size: 13px;
-    color: var(--txt2);
-    max-width: 280px;
-    line-height: 1.6;
-    text-align: right;
-  }
-
-  .valeurs-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1px;
-    background: rgba(123,154,128,.15);
-    border: 1px solid rgba(123,154,128,.15);
-    border-radius: 16px;
-    overflow: hidden;
-  }
-
-  .val-item {
-    background: var(--cr);
-    padding: 30px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    transition: background 0.2s;
-  }
-
-  .val-item:hover { background: white; }
-
-  .val-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    color: var(--vc);
-    letter-spacing: 1px;
-  }
-
-  .val-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--txt);
-    line-height: 1.1;
-  }
-
-  .val-name.f { color: var(--f); }
-  .val-name.v { color: var(--v); }
-
-  .val-desc {
-    font-size: 11px;
-    color: var(--txt2);
-    line-height: 1.6;
-    margin-top: auto;
-  }
-
-  /* ── SECTION 4 — MISSION ── */
-  .mission {
-    padding: 80px 40px;
-    background: var(--v);
-    position: relative;
-    overflow: hidden;
-    border-bottom: 1px solid rgba(123,154,128,.2);
-  }
-
-  .mission::before {
-    content: '';
-    position: absolute;
-    top: -100px;
-    right: -100px;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    background: rgba(255,255,255,.05);
-    pointer-events: none;
-  }
-
-  .mission-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 3px;
-    color: rgba(255,255,255,.5);
-    text-transform: uppercase;
-    margin-bottom: 30px;
-  }
-
-  .mission-quote {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 4vw, 48px);
-    font-weight: 700;
-    color: white;
-    line-height: 1.25;
-    max-width: 700px;
-    margin-bottom: 40px;
-  }
-
-  .mission-quote .f {
-    color: var(--f);
-    font-style: italic;
-  }
-
-  .mission-quote .b {
-    color: var(--b);
-  }
-
-  .mission-bottom {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    flex-wrap: wrap;
-  }
-
-  .mission-stat {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .mission-stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px;
-    font-weight: 900;
-    color: white;
-    line-height: 1;
-  }
-
-  .mission-stat-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 1px;
-    color: rgba(255,255,255,.5);
-    text-transform: uppercase;
-  }
-
-  .mission-divider {
-    width: 1px;
-    height: 50px;
-    background: rgba(255,255,255,.2);
-  }
-
-  /* ── SECTION 5 — POUR QUI ── */
-  .pourqui {
-    padding: 80px 40px;
-    border-bottom: 1px solid rgba(123,154,128,.2);
-  }
-
-  .pourqui-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 3px;
-    color: var(--f);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-
-  .pourqui-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 5vw, 56px);
-    font-weight: 900;
-    color: var(--txt);
-    line-height: 1.05;
-    margin-bottom: 50px;
-  }
-
-  .pourqui-title .f { color: var(--f); font-style: italic; }
-
-  .pourqui-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .pourqui-card {
-    background: white;
-    border-radius: 14px;
-    padding: 28px;
-    border: 1px solid rgba(123,154,128,.12);
-    transition: transform 0.2s, border-color 0.2s;
-  }
-
-  .pourqui-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--v);
-  }
-
-  .pourqui-card-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    color: var(--vc);
-    letter-spacing: 1px;
-    margin-bottom: 14px;
-  }
-
-  .pourqui-card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--v);
-    margin-bottom: 12px;
-    line-height: 1.2;
-  }
-
-  .pourqui-card-desc {
-    font-size: 13px;
-    color: var(--txt2);
-    line-height: 1.7;
-  }
-
-  .pourqui-card-tag {
-    display: inline-block;
-    margin-top: 16px;
-    font-family: 'DM Mono', monospace;
-    font-size: 8px;
-    letter-spacing: 1px;
-    color: var(--f);
-    background: rgba(238,7,165,.06);
-    padding: 4px 10px;
-    border-radius: 20px;
-    border: 1px solid rgba(238,7,165,.15);
-  }
-
-  /* ── SECTION 6 — CONTACT ── */
-  .contact {
-    padding: 80px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-    flex-wrap: wrap;
-  }
-
-  .contact-left {}
-
-  .contact-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 3px;
-    color: var(--vc);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-
-  .contact-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 4vw, 48px);
-    font-weight: 900;
-    color: var(--txt);
-    line-height: 1.1;
-    margin-bottom: 30px;
-  }
-
-  .contact-title .f { color: var(--f); font-style: italic; }
-
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    text-decoration: none;
-    padding: 14px 18px;
-    border-radius: 12px;
-    border: 1px solid rgba(123,154,128,.2);
-    background: white;
-    transition: transform 0.15s, border-color 0.15s;
-    max-width: 360px;
-  }
-
-  .contact-link:hover { transform: translateX(4px); border-color: var(--v); }
-
-  .contact-link-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .contact-link-icon svg { width: 18px; height: 18px; }
-
-  .contact-link-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 8px;
-    letter-spacing: 1px;
-    color: var(--vc);
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 2px;
-  }
-
-  .contact-link-val {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--txt);
-    display: block;
-  }
-
-  .contact-link-arrow {
-    margin-left: auto;
-    font-size: 14px;
-    color: var(--v);
-    flex-shrink: 0;
-  }
-
-  .contact-right {
-    text-align: right;
-  }
-
-  .contact-sig {
-    font-family: 'Playfair Display', serif;
-    font-size: 80px;
-    font-weight: 900;
-    color: rgba(123,154,128,.08);
-    line-height: 1;
-    letter-spacing: -4px;
-    user-select: none;
-  }
-
-  /* ── FOOTER ── */
-  .footer {
-    padding: 30px 40px;
-    border-top: 1px solid rgba(123,154,128,.2);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .footer-sig {
-    font-family: 'Playfair Display', serif;
-    font-size: 14px;
-    font-style: italic;
-    color: var(--b);
-  }
-
-  .footer-info {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    color: rgba(123,154,128,.4);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero-eyebrow { animation: fadeUp 0.6s ease 0.1s both; }
-  .hero-title { animation: fadeUp 0.7s ease 0.2s both; }
-  .hero-bottom { animation: fadeUp 0.6s ease 0.4s both; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    .hero { padding: 24px 20px 32px; }
-    .qui { grid-template-columns: 1fr; padding: 50px 20px; gap: 30px; }
-    .valeurs { padding: 50px 20px; }
-    .valeurs-grid { grid-template-columns: 1fr 1fr; }
-    .mission { padding: 50px 20px; }
-    .pourqui { padding: 50px 20px; }
-    .pourqui-grid { grid-template-columns: 1fr; }
-    .contact { padding: 50px 20px; }
-    .footer { padding: 20px; }
-    .hero-schema { display: none; }
-    .contact-sig { display: none; }
-    .valeurs-sub { display: none; }
-  }
+:root {
+  --v: #7b9a80; --vc: #b5c1a6; --b: #d8c79e; --cr: #f5f1e6;
+  --f: #ee07a5; --txt: #1a1714; --txt2: #5c5248;
+  --white: #ffffff; --dark: #1a1714;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--cr);
+  color: var(--txt);
+  overflow-x: hidden;
+}
+
+/* ── CALENDRIER ── */
+#calendrier { background: white; }
+
+.cal-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center;
+  max-width: 1100px; margin: 0 auto;
+}
+
+.cal-left {}
+
+.cal-text {
+  font-size: 15px; color: var(--txt2); line-height: 1.8; margin-bottom: 24px;
+}
+.cal-text em { color: var(--f); font-style: normal; font-weight: 500; }
+
+.cal-infos { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
+.cal-info {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--cr); border-radius: 10px; padding: 12px 16px;
+  border: 1px solid rgba(123,154,128,.12);
+}
+.cal-info-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.cal-info-icon svg { width: 18px; height: 18px; }
+.cal-info-label { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 1px; color: var(--vc); text-transform: uppercase; display: block; margin-bottom: 2px; }
+.cal-info-val { font-size: 13px; font-weight: 500; color: var(--txt); }
+
+.cal-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--f); border-radius: 10px; padding: 14px 24px;
+  text-decoration: none; transition: transform .2s, opacity .2s;
+}
+.cal-btn:hover { transform: translateY(-2px); opacity: .9; }
+.cal-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+.cal-btn-txt { font-size: 14px; font-weight: 500; color: white; }
+.cal-btn-sub { font-family: 'DM Mono', monospace; font-size: 8px; color: rgba(255,255,255,.7); letter-spacing: 1px; margin-top: 2px; }
+
+.cal-right {
+  position: relative;
+}
+
+.cal-frame-wrapper {
+  border-radius: 18px; overflow: hidden;
+  border: 1px solid rgba(123,154,128,.15);
+  box-shadow: 0 20px 60px rgba(0,0,0,.08);
+  position: relative;
+}
+
+.cal-frame-header {
+  background: var(--v); padding: 14px 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.cal-frame-dots { display: flex; gap: 6px; }
+.cal-frame-dot { width: 10px; height: 10px; border-radius: 50%; }
+.cal-frame-title { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(255,255,255,.6); text-transform: uppercase; margin-left: 6px; }
+
+.cal-iframe {
+  width: 100%; height: 500px;
+  border: none; display: block;
+  background: white;
+}
+
+.cal-overlay-btn {
+  position: absolute; bottom: 20px; right: 20px;
+  display: flex; align-items: center; gap: 8px;
+  background: var(--f); border-radius: 8px; padding: 10px 16px;
+  text-decoration: none; transition: transform .2s;
+  box-shadow: 0 4px 16px rgba(238,7,165,.3);
+}
+.cal-overlay-btn:hover { transform: translateY(-2px); }
+.cal-overlay-btn-txt { font-size: 12px; font-weight: 500; color: white; }
+
+@media(max-width:900px) {
+  .cal-grid { grid-template-columns: 1fr; gap: 40px; }
+  .cal-iframe { height: 400px; }
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--cr); }
+::-webkit-scrollbar-thumb { background: var(--vc); border-radius: 2px; }
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 0 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+  background: rgba(245,241,230,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(123,154,128,.15);
+  transition: all .3s;
+}
+
+.nav.scrolled {
+  background: rgba(245,241,230,.98);
+  border-bottom-color: rgba(123,154,128,.25);
+}
+
+.nav-logo {
+  display: flex; flex-direction: column; line-height: 1; text-decoration: none;
+}
+.nav-logo-brand {
+  font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900;
+  color: var(--v); letter-spacing: 1px; text-transform: uppercase;
+}
+.nav-logo-sub {
+  font-family: 'Cormorant Garamond', serif; font-size: 11px;
+  color: var(--b); letter-spacing: 2px; font-style: italic;
+}
+
+.nav-links {
+  display: flex; align-items: center; gap: 32px; list-style: none;
+}
+.nav-links a {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px;
+  color: var(--txt2); text-decoration: none; text-transform: uppercase;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--v); }
+
+.nav-cta {
+  display: flex; align-items: center; gap: 8px;
+  background: #25D366; border-radius: 8px; padding: 8px 16px;
+  text-decoration: none; transition: transform .2s, opacity .2s;
+}
+.nav-cta:hover { transform: translateY(-1px); opacity: .9; }
+.nav-cta svg { width: 16px; height: 16px; flex-shrink: 0; }
+.nav-cta-txt { font-size: 11px; font-weight: 500; color: white; }
+
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px; cursor: pointer;
+  background: none; border: none; padding: 4px;
+}
+.nav-hamburger span {
+  width: 22px; height: 2px; background: var(--txt); border-radius: 1px;
+  transition: all .3s;
+}
+
+.mobile-menu {
+  display: none; position: fixed; top: 64px; left: 0; right: 0; z-index: 999;
+  background: var(--cr); border-bottom: 1px solid rgba(123,154,128,.2);
+  padding: 20px 24px; flex-direction: column; gap: 16px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px;
+  color: var(--txt2); text-decoration: none; text-transform: uppercase;
+  padding: 8px 0; border-bottom: 1px solid rgba(123,154,128,.1);
+}
+
+/* ── ANIMATIONS ── */
+.reveal {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── SECTION SHARED ── */
+section { padding: 100px 40px; }
+
+.section-label {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 3px;
+  color: var(--f); text-transform: uppercase;
+  display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: rgba(238,7,165,.15); }
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 5vw, 60px); font-weight: 900;
+  line-height: 1.0; margin-bottom: 20px;
+}
+.section-title .f { color: var(--f); font-style: italic; }
+.section-title .v { color: var(--v); }
+.section-title .b { color: var(--b); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh; padding: 120px 40px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+  background: var(--v);
+}
+
+.hero-deco-1 { position: absolute; top: -120px; right: -120px; width: 500px; height: 500px; border-radius: 50%; background: rgba(255,255,255,.04); pointer-events: none; }
+.hero-deco-2 { position: absolute; bottom: -80px; left: -80px; width: 350px; height: 350px; border-radius: 50%; background: rgba(238,7,165,.06); pointer-events: none; }
+.hero-deco-3 { position: absolute; top: 40%; right: 15%; width: 120px; height: 120px; border-radius: 50%; background: rgba(216,199,158,.08); pointer-events: none; }
+
+.hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px;
+  color: rgba(255,255,255,.5); text-transform: uppercase; margin-bottom: 24px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--f); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.6;transform:scale(.85);} }
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 9vw, 100px); font-weight: 900;
+  line-height: .92; color: white; margin-bottom: 28px;
+}
+.hero-title .f { color: var(--f); font-style: italic; }
+.hero-title .b { color: var(--b); }
+
+.hero-sub {
+  font-size: clamp(14px, 1.5vw, 17px); color: rgba(255,255,255,.75);
+  line-height: 1.75; max-width: 500px; margin-bottom: 40px;
+}
+.hero-sub em { color: white; font-style: normal; font-weight: 500; }
+
+.hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+
+.btn-primary {
+  display: flex; align-items: center; gap: 10px;
+  background: #25D366; border-radius: 10px; padding: 14px 24px;
+  text-decoration: none; transition: transform .2s, opacity .2s;
+}
+.btn-primary:hover { transform: translateY(-2px); opacity: .9; }
+.btn-primary svg { width: 20px; height: 20px; flex-shrink: 0; }
+.btn-primary-txt { font-size: 14px; font-weight: 500; color: white; }
+.btn-primary-sub { font-family: 'DM Mono', monospace; font-size: 8px; color: rgba(255,255,255,.7); letter-spacing: 1px; margin-top: 2px; }
+
+.btn-secondary {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+  border-radius: 10px; padding: 14px 22px;
+  text-decoration: none; font-size: 13px; color: rgba(255,255,255,.85);
+  transition: background .2s;
+}
+.btn-secondary:hover { background: rgba(255,255,255,.18); }
+
+.hero-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 50px; }
+.hero-badge {
+  font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 1.5px;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
+  border-radius: 20px; padding: 6px 14px; color: rgba(255,255,255,.6);
+}
+
+/* ── À PROPOS ── */
+#apropos { background: var(--cr); }
+
+.apropos-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  max-width: 1100px; margin: 0 auto;
+}
+
+.apropos-left {}
+
+.apropos-text {
+  font-size: 16px; color: var(--txt2); line-height: 1.85; margin-bottom: 28px;
+}
+.apropos-text em { color: var(--f); font-style: normal; font-weight: 500; }
+
+.apropos-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.apropos-tag {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1px;
+  padding: 6px 14px; border-radius: 20px;
+  border: 1px solid rgba(123,154,128,.3); color: var(--txt2);
+}
+
+.apropos-right { display: flex; flex-direction: column; gap: 14px; }
+
+.info-card {
+  background: white; border-radius: 14px; padding: 20px 22px;
+  border: 1px solid rgba(123,154,128,.12);
+  transition: transform .2s, border-color .2s;
+}
+.info-card:hover { transform: translateY(-3px); border-color: var(--vc); }
+.info-card.accent-v { border-left: 3px solid var(--v); }
+.info-card.accent-f { border-left: 3px solid var(--f); }
+.info-card.accent-b { border-left: 3px solid var(--b); }
+
+.info-label {
+  font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 2px;
+  color: var(--vc); text-transform: uppercase; margin-bottom: 6px;
+}
+.info-value {
+  font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700;
+  color: var(--txt); line-height: 1.2;
+}
+.info-sub { font-size: 12px; color: var(--txt2); margin-top: 4px; line-height: 1.5; }
+
+/* ── SERVICES ── */
+#services { background: white; }
+
+.services-intro {
+  max-width: 1100px; margin: 0 auto 60px;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  flex-wrap: wrap; gap: 20px;
+}
+
+.services-sub { font-size: 15px; color: var(--txt2); max-width: 380px; line-height: 1.7; }
+
+.discover-btn {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--f); border-radius: 10px; padding: 12px 22px;
+  text-decoration: none; transition: transform .2s, opacity .2s; flex-shrink: 0;
+}
+.discover-btn:hover { transform: translateY(-2px); opacity: .9; }
+.discover-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+.discover-btn-txt { font-size: 13px; font-weight: 500; color: white; }
+.discover-btn-sub { font-family: 'DM Mono', monospace; font-size: 8px; color: rgba(255,255,255,.75); letter-spacing: 1px; margin-top: 2px; }
+
+.services-wrapper { max-width: 1100px; margin: 0 auto; }
+
+/* Diagnostic cards */
+.diag-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 50px; }
+
+.diag-card {
+  background: var(--cr); border-radius: 16px; padding: 24px;
+  border: 1px solid rgba(123,154,128,.15);
+  display: flex; flex-direction: column; gap: 10px;
+  position: relative; transition: transform .2s, border-color .2s;
+}
+.diag-card:hover { transform: translateY(-4px); border-color: var(--vc); }
+.diag-card.featured { border: 1.5px solid var(--v); background: rgba(123,154,128,.04); }
+
+.diag-badge {
+  position: absolute; top: -1px; right: 16px;
+  font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 1.5px;
+  background: var(--v); color: white; padding: 4px 10px;
+  border-radius: 0 0 8px 8px;
+}
+
+.diag-code { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--v); letter-spacing: 1px; }
+.diag-name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--txt); line-height: 1.1; }
+.diag-desc { font-size: 12px; color: var(--txt2); line-height: 1.6; flex: 1; }
+.diag-price { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--v); }
+.diag-delay { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--txt2); letter-spacing: 1px; }
+.diag-strike { font-family: 'DM Mono', monospace; font-size: 10px; text-decoration: line-through; color: var(--txt2); opacity: .5; }
+
+/* Express table */
+.services-sublabel {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px;
+  color: var(--txt2); text-transform: uppercase; margin-bottom: 14px; opacity: .6;
+}
+
+.express-table { width: 100%; border-collapse: collapse; margin-bottom: 50px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(123,154,128,.15); }
+.express-table thead th {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px;
+  color: var(--v); text-transform: uppercase; padding: 12px 18px; text-align: left;
+  background: rgba(123,154,128,.06); border-bottom: 1px solid rgba(123,154,128,.15);
+}
+.express-table tbody tr { border-bottom: 1px solid rgba(123,154,128,.08); transition: background .15s; }
+.express-table tbody tr:last-child { border-bottom: none; }
+.express-table tbody tr:hover { background: rgba(245,241,230,.8); }
+.express-table td { padding: 14px 18px; vertical-align: middle; font-size: 13px; color: var(--txt); }
+.express-table td:first-child { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--v); white-space: nowrap; }
+.express-table td.ia { color: var(--f) !important; }
+.express-table td:nth-child(3) { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--txt2); white-space: nowrap; }
+.express-table td:last-child { font-weight: 600; text-align: right; white-space: nowrap; font-size: 15px; }
+
+/* Modules */
+.modules-grid { display: flex; flex-direction: column; gap: 14px; margin-bottom: 50px; }
+
+.module {
+  background: var(--cr); border-radius: 14px;
+  border: 1px solid rgba(123,154,128,.15); overflow: hidden;
+}
+
+.module-head {
+  display: flex; align-items: center; gap: 12px; padding: 16px 20px;
+  border-bottom: 1px solid rgba(123,154,128,.1);
+  background: rgba(255,255,255,.5);
+}
+
+.module-bar { width: 4px; height: 26px; border-radius: 2px; flex-shrink: 0; }
+.module-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; }
+.module-tagline { font-size: 12px; color: var(--txt2); font-style: italic; margin-left: auto; }
+
+.module-packs { display: flex; flex-direction: column; }
+.module-pack {
+  display: flex; align-items: center; gap: 12px; padding: 13px 20px;
+  border-bottom: 1px solid rgba(123,154,128,.08); transition: background .15s;
+}
+.module-pack:last-child { border-bottom: none; }
+.module-pack:hover { background: rgba(255,255,255,.6); }
+.pack-id { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--v); min-width: 130px; flex-shrink: 0; }
+.pack-desc { font-size: 13px; color: var(--txt2); flex: 1; }
+.pack-price { font-size: 15px; font-weight: 600; color: var(--txt); white-space: nowrap; }
+.pack-mois { font-size: 11px; font-weight: 400; color: var(--txt2); }
+
+/* Haute Couture */
+.hc-card {
+  background: white; border: 1.5px solid var(--b); border-radius: 16px;
+  padding: 28px 30px; position: relative; overflow: hidden;
+}
+.hc-card::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: rgba(216,199,158,.1); pointer-events: none;
+}
+.hc-badge {
+  position: absolute; top: -1px; right: 20px;
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px;
+  background: var(--cr); border: 1px solid var(--b); border-top: none;
+  border-radius: 0 0 8px 8px; color: var(--b); padding: 5px 14px;
+}
+.hc-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--v); margin-bottom: 6px; }
+.hc-sub { font-family: 'Playfair Display', serif; font-size: 14px; color: var(--b); font-style: italic; margin-bottom: 14px; }
+.hc-desc { font-size: 14px; color: var(--txt2); line-height: 1.7; margin-bottom: 18px; max-width: 600px; }
+.hc-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(216,199,158,.3); padding-top: 16px; flex-wrap: wrap; gap: 12px; }
+.hc-status { display: flex; align-items: center; gap: 8px; font-family: 'DM Mono', monospace; font-size: 9px; color: var(--txt2); letter-spacing: 1.5px; }
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--vc); }
+.hc-price { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--txt); }
+
+/* Discover CTA inside services */
+.services-cta-block {
+  background: var(--f); border-radius: 16px; padding: 28px 30px; margin-top: 50px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+}
+.services-cta-txt { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: white; }
+.services-cta-sub { font-size: 13px; color: rgba(255,255,255,.8); margin-top: 4px; }
+
+/* ── MÉTHODE ── */
+#methode { background: var(--txt); }
+#methode .section-label { color: var(--f); }
+#methode .section-title { color: white; }
+
+.methode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1100px; margin: 0 auto; }
+
+.methode-step {
+  background: rgba(255,255,255,.04); border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.08); padding: 28px;
+  transition: background .2s, border-color .2s;
+}
+.methode-step:hover { background: rgba(255,255,255,.07); border-color: rgba(123,154,128,.3); }
+
+.step-num { font-family: 'Playfair Display', serif; font-size: 60px; font-weight: 900; color: rgba(255,255,255,.06); line-height: 1; margin-bottom: -10px; }
+.step-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: white; margin-bottom: 10px; }
+.step-title .f { color: var(--f); font-style: italic; }
+.step-title .v { color: var(--vc); }
+.step-desc { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.75; }
+
+/* ── VALEURS ── */
+#valeurs { background: var(--cr); }
+
+.valeurs-header { max-width: 1100px; margin: 0 auto 50px; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+.valeurs-sub { font-size: 14px; color: var(--txt2); max-width: 300px; line-height: 1.7; text-align: right; }
+
+.valeurs-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: rgba(123,154,128,.12); border-radius: 16px; overflow: hidden; max-width: 1100px; margin: 0 auto; }
+
+.val-item { background: var(--cr); padding: 32px 22px; display: flex; flex-direction: column; gap: 14px; transition: background .2s; }
+.val-item:hover { background: white; }
+.val-num { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--vc); letter-spacing: 1px; }
+.val-name { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--txt); line-height: 1.1; }
+.val-name.f { color: var(--f); }
+.val-name.v { color: var(--v); }
+.val-desc { font-size: 12px; color: var(--txt2); line-height: 1.65; margin-top: auto; }
+
+/* ── POUR QUI ── */
+#pourqui { background: white; }
+
+.pourqui-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
+
+.pourqui-card {
+  background: var(--cr); border-radius: 16px; padding: 28px;
+  border: 1px solid rgba(123,154,128,.12);
+  display: flex; flex-direction: column; gap: 12px;
+  transition: transform .2s, border-color .2s;
+}
+.pourqui-card:hover { transform: translateY(-5px); border-color: var(--v); }
+
+.pourqui-num { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--vc); letter-spacing: 1px; }
+.pourqui-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--v); line-height: 1.2; }
+.pourqui-desc { font-size: 13px; color: var(--txt2); line-height: 1.75; flex: 1; }
+.pourqui-tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 1px; color: var(--f); background: rgba(238,7,165,.06); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(238,7,165,.15); margin-top: 4px; }
+
+/* ── TÉMOIGNAGES ── */
+#temoignages { background: var(--cr); }
+
+.temoignages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
+
+.temoignage-card {
+  background: white; border-radius: 16px; padding: 28px;
+  border: 1px solid rgba(123,154,128,.12);
+  display: flex; flex-direction: column; gap: 16px;
+}
+
+.temoignage-quote { font-family: 'Playfair Display', serif; font-size: 32px; color: rgba(123,154,128,.2); line-height: 1; }
+.temoignage-txt { font-size: 14px; color: var(--txt2); line-height: 1.75; font-style: italic; flex: 1; }
+.temoignage-author { display: flex; flex-direction: column; gap: 3px; border-top: 1px solid rgba(123,154,128,.1); padding-top: 14px; }
+.temoignage-name { font-size: 13px; font-weight: 500; color: var(--txt); }
+.temoignage-role { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--vc); letter-spacing: 1px; }
+.temoignage-placeholder { background: rgba(123,154,128,.05); border: 1px dashed rgba(123,154,128,.2); border-radius: 10px; padding: 14px; }
+.temoignage-placeholder-txt { font-family: 'DM Mono', monospace; font-size: 9px; color: rgba(123,154,128,.4); letter-spacing: 1px; text-align: center; }
+
+/* ── FAQ ── */
+#faq { background: white; }
+
+.faq-wrapper { max-width: 700px; margin: 0 auto; }
+
+.faq-item {
+  border-bottom: 1px solid rgba(123,154,128,.15); overflow: hidden;
+}
+.faq-item:last-child { border-bottom: none; }
+
+.faq-question {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 0; cursor: pointer; gap: 16px;
+}
+.faq-question-txt { font-size: 15px; font-weight: 500; color: var(--txt); line-height: 1.4; }
+.faq-icon { width: 24px; height: 24px; border-radius: 50%; background: rgba(123,154,128,.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform .3s, background .2s; }
+.faq-icon svg { width: 12px; height: 12px; }
+.faq-item.open .faq-icon { transform: rotate(45deg); background: var(--v); }
+.faq-item.open .faq-icon svg { stroke: white; }
+
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+.faq-answer-inner { padding: 0 0 20px; font-size: 14px; color: var(--txt2); line-height: 1.8; }
+.faq-item.open .faq-answer { max-height: 300px; }
+
+/* ── CONTACT ── */
+#contact { background: var(--v); }
+#contact .section-label { color: rgba(255,255,255,.5); }
+#contact .section-label::after { background: rgba(255,255,255,.15); }
+#contact .section-title { color: white; }
+
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1100px; margin: 0 auto; align-items: start; }
+
+.contact-links { display: flex; flex-direction: column; gap: 12px; }
+
+.contact-link {
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px; padding: 16px 18px; text-decoration: none;
+  transition: background .2s, transform .2s;
+}
+.contact-link:hover { background: rgba(255,255,255,.15); transform: translateX(4px); }
+
+.contact-link-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.contact-link-icon svg { width: 20px; height: 20px; }
+.contact-link-label { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 1.5px; color: rgba(255,255,255,.4); text-transform: uppercase; display: block; margin-bottom: 3px; }
+.contact-link-val { font-size: 14px; font-weight: 500; color: white; display: block; }
+.contact-link-arrow { margin-left: auto; font-size: 16px; color: rgba(255,255,255,.3); flex-shrink: 0; }
+
+.contact-right {}
+.contact-manifeste { font-family: 'Playfair Display', serif; font-size: clamp(20px, 2.5vw, 28px); font-style: italic; color: rgba(255,255,255,.8); line-height: 1.5; margin-bottom: 30px; }
+.contact-manifeste .f { color: var(--f); font-style: italic; }
+.contact-manifeste .b { color: var(--b); }
+
+.contact-sig { font-family: 'Playfair Display', serif; font-size: 80px; font-weight: 900; color: rgba(255,255,255,.05); line-height: 1; letter-spacing: -4px; user-select: none; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--txt); padding: 30px 40px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+
+.footer-sig { font-family: 'Playfair Display', serif; font-size: 14px; font-style: italic; color: rgba(255,255,255,.2); }
+.footer-links { display: flex; gap: 24px; }
+.footer-link { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 1.5px; color: rgba(255,255,255,.2); text-decoration: none; text-transform: uppercase; transition: color .2s; }
+.footer-link:hover { color: var(--vc); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  section { padding: 70px 24px; }
+  .nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  .hero { padding: 100px 24px 60px; }
+  .apropos-grid { grid-template-columns: 1fr; gap: 40px; }
+  .diag-grid { grid-template-columns: 1fr; }
+  .methode-grid { grid-template-columns: 1fr; }
+  .valeurs-grid { grid-template-columns: 1fr 1fr; }
+  .pourqui-grid { grid-template-columns: 1fr; }
+  .temoignages-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  footer { padding: 24px; }
+  .contact-sig { display: none; }
+  .valeurs-sub { display: none; }
+  .express-table td:nth-child(3) { display: none; }
+  .express-table th:nth-child(3) { display: none; }
+  .services-intro { flex-direction: column; align-items: flex-start; }
+}
 </style>
 </head>
 <body>
 
-<!-- ── SECTION 1 — HERO ── -->
-<section class="hero">
-  <nav class="hero-nav">
-    <span class="hero-nav-brand">Nendy Services</span>
-    <div class="hero-nav-badge">
-      <div class="badge-dot"></div>
-      Nouveau
+<!-- ── NAV ── -->
+<nav class="nav" id="nav">
+  <a href="#hero" class="nav-logo">
+    <span class="nav-logo-brand">Nendy</span>
+    <span class="nav-logo-sub">Services</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#apropos">À propos</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#methode">Méthode</a></li>
+    <li><a href="#valeurs">Valeurs</a></li>
+    <li><a href="#calendrier">Appel découverte</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://wa.me/590690703327?text=Bonjour%20Nendy%2C%20je%20souhaite%20r%C3%A9server%20mon%20appel%20d%C3%A9couverte%20gratuit." class="nav-cta">
+    <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span class="nav-cta-txt">Appel gratuit</span>
+  </a>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#apropos" onclick="toggleMenu()">À propos</a>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#methode" onclick="toggleMenu()">Méthode</a>
+  <a href="#valeurs" onclick="toggleMenu()">Valeurs</a>
+  <a href="#pourqui" onclick="toggleMenu()">Pour qui</a>
+  <a href="#calendrier" onclick="toggleMenu()">Appel découverte</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-deco-1"></div>
+  <div class="hero-deco-2"></div>
+  <div class="hero-deco-3"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow reveal">
+      <div class="hero-eyebrow-dot"></div>
+      Assistante virtuelle & écosystèmes digitaux
     </div>
-  </nav>
-
-  <div class="hero-eyebrow">Assistance virtuelle — Écosystèmes digitaux</div>
-
-  <h1 class="hero-title">
-    L'harmonie<br>
-    entre organisation<br>
-    <span class="fuchsia">& assistance.</span>
-  </h1>
-
-  <div class="hero-bottom">
-    <div class="hero-desc">
-      <div class="hero-desc-label">La mission</div>
-      <p class="hero-desc-txt">
-        J'accompagne les entrepreneurs solo, coachs et thérapeutes à structurer, organiser et automatiser leur activité — pour retrouver du temps, de l'énergie et de la <em>clarté</em>.
-      </p>
-    </div>
-    <div class="hero-schema">
-      <div class="schema-box org">Organisation</div>
-      <div class="schema-arrow">⟶</div>
-      <div class="schema-box assist">Assistance</div>
-    </div>
-  </div>
-
-  <div class="hero-scroll">
-    <div class="hero-scroll-line"></div>
-    Faites glisser
-  </div>
-</section>
-
-<!-- ── SECTION 2 — QUI SUIS-JE ── -->
-<section class="qui">
-  <div class="qui-left">
-    <div class="qui-section-label">Qui suis-je</div>
-    <h2 class="qui-title">
-      Je suis <span class="v">Nendy.</span><br>
-      Votre bras droit<br>
-      <span class="f">digital.</span>
-    </h2>
-    <p class="qui-text">
-      Assistante virtuelle et conceptrice d'écosystèmes digitaux, je transforme les business désorganisés en systèmes fluides, clairs et autonomes. Pas de magie — de la méthode, de la rigueur et une vraie vision de ce que votre activité peut devenir.
+    <h1 class="hero-title reveal">
+      Tu as osé<br>
+      te lancer.<br>
+      Maintenant,<br>
+      ose te <span class="f">libérer.</span>
+    </h1>
+    <p class="hero-sub reveal">
+      Tu as créé ton business pour vivre mieux. Pas pour t'épuiser davantage.
+      Nendy Services structure, organise et automatise ton activité pour te redonner <em>du temps, de l'énergie et de la clarté.</em>
     </p>
-    <div class="qui-tags">
-      <span class="qui-tag">100% à distance</span>
-      <span class="qui-tag">Guadeloupe</span>
-      <span class="qui-tag">France & International</span>
-      <span class="qui-tag">Sur-mesure</span>
+    <div class="hero-actions reveal">
+      <a href="https://wa.me/590690703327?text=Bonjour%20Nendy%2C%20je%20souhaite%20r%C3%A9server%20mon%20appel%20d%C3%A9couverte%20gratuit." class="btn-primary">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <div>
+          <div class="btn-primary-txt">Appel découverte gratuit</div>
+          <div class="btn-primary-sub">30 min · Sans engagement</div>
+        </div>
+      </a>
+      <a href="#services" class="btn-secondary">Voir les services →</a>
     </div>
-  </div>
-  <div class="qui-right">
-    <div class="info-block accent-v">
-      <div class="info-label">Statut</div>
-      <div class="info-value">Assistante virtuelle</div>
-      <div class="info-sub">& Conceptrice d'écosystèmes digitaux</div>
-    </div>
-    <div class="info-block accent-f">
-      <div class="info-label">Spécialité</div>
-      <div class="info-value">Création de systèmes sur-mesure</div>
-      <div class="info-sub">Notion · Automatisation · Stratégie digitale · Agent IA</div>
-    </div>
-    <div class="info-block accent-b">
-      <div class="info-label">Zone de travail</div>
-      <div class="info-value">France entière & International</div>
-      <div class="info-sub">Basée en Guadeloupe · Disponible partout</div>
-    </div>
-    <div class="info-block accent-v">
-      <div class="info-label">Contact direct</div>
-      <div class="info-value">+590 690 70 33 27</div>
-      <div class="info-sub">nendy.services@gmail.com</div>
+    <div class="hero-badges reveal">
+      <span class="hero-badge">100% à distance</span>
+      <span class="hero-badge">Guadeloupe</span>
+      <span class="hero-badge">France & International</span>
+      <span class="hero-badge">Sur-mesure</span>
     </div>
   </div>
 </section>
 
-<!-- ── SECTION 3 — VALEURS ── -->
-<section class="valeurs">
-  <div class="valeurs-header">
-    <h2 class="valeurs-title">Ce qui me<br><span class="f">guide.</span></h2>
+<!-- ── À PROPOS ── -->
+<section id="apropos">
+  <div class="apropos-grid">
+    <div class="apropos-left reveal">
+      <div class="section-label">À propos</div>
+      <h2 class="section-title">Je suis <span class="v">Nendy.</span><br>Votre bras droit <span class="f">digital.</span></h2>
+      <p class="apropos-text">
+        Assistante virtuelle et conceptrice d'écosystèmes digitaux, je transforme les business désorganisés en systèmes fluides, clairs et autonomes. Pas de magie — de la méthode, de la rigueur et une vraie <em>vision</em> de ce que votre activité peut devenir.
+      </p>
+      <p class="apropos-text">
+        Mon rôle n'est pas de créer une dépendance — c'est de vous rendre <em>autonome</em>. Je construis des systèmes que vous comprenez et maîtrisez. Et je reste là pour les faire évoluer avec vous.
+      </p>
+      <div class="apropos-tags">
+        <span class="apropos-tag">Notion</span>
+        <span class="apropos-tag">Automatisation</span>
+        <span class="apropos-tag">Agent IA</span>
+        <span class="apropos-tag">Stratégie digitale</span>
+        <span class="apropos-tag">Organisation</span>
+      </div>
+    </div>
+    <div class="apropos-right reveal">
+      <div class="info-card accent-v">
+        <div class="info-label">Statut</div>
+        <div class="info-value">Assistante virtuelle</div>
+        <div class="info-sub">& Conceptrice d'écosystèmes digitaux</div>
+      </div>
+      <div class="info-card accent-f">
+        <div class="info-label">Spécialité</div>
+        <div class="info-value">Systèmes sur-mesure</div>
+        <div class="info-sub">Notion · Automatisation · Stratégie · Agent IA</div>
+      </div>
+      <div class="info-card accent-b">
+        <div class="info-label">Zone</div>
+        <div class="info-value">France & International</div>
+        <div class="info-sub">Basée en Guadeloupe · 100% à distance</div>
+      </div>
+      <div class="info-card accent-v">
+        <div class="info-label">Contact direct</div>
+        <div class="info-value">+590 690 70 33 27</div>
+        <div class="info-sub">nendy.services@gmail.com</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="services-wrapper">
+    <div class="services-intro reveal">
+      <div>
+        <div class="section-label">Services</div>
+        <h2 class="section-title">Ce que je fais<br>pour <span class="f">vous.</span></h2>
+      </div>
+      <div style="text-align:right;">
+        <p class="services-sub">Du diagnostic au partenariat stratégique — une offre pour chaque étape de votre business.</p>
+        <a href="https://wa.me/590690703327?text=Bonjour%20Nendy%2C%20je%20souhaite%20r%C3%A9server%20mon%20appel%20d%C3%A9couverte%20gratuit." class="discover-btn" style="margin-top:16px;display:inline-flex;">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <div>
+            <div class="discover-btn-txt">Réserver mon appel découverte</div>
+            <div class="discover-btn-sub">Gratuit · 30 min · Sans engagement</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 00 Diagnostic -->
+    <div class="services-sublabel reveal">00 · Diagnostic — Le point de départ</div>
+    <div class="diag-grid reveal">
+      <div class="diag-card">
+        <div class="diag-code">AUDIT_BUSINESS</div>
+        <div class="diag-name">Audit Business</div>
+        <div class="diag-desc">Diagnostic complet de votre activité — forces, blocages et priorités identifiés.</div>
+        <div class="diag-price">90 €</div>
+        <div class="diag-delay">Délai 72h</div>
+      </div>
+      <div class="diag-card">
+        <div class="diag-code">PLAN_ACTION</div>
+        <div class="diag-name">Plan d'Action</div>
+        <div class="diag-desc">Roadmap priorisée avec outils, étapes et délais recommandés.</div>
+        <div class="diag-price">150 €</div>
+        <div class="diag-delay">Délai 72h</div>
+      </div>
+      <div class="diag-card featured">
+        <div class="diag-badge">BUNDLE</div>
+        <div class="diag-code">AUDIT + PLAN</div>
+        <div class="diag-name">Audit + Plan</div>
+        <div class="diag-desc">Diagnostic complet + Roadmap stratégique — la vision totale.</div>
+        <div class="diag-strike">240 €</div>
+        <div class="diag-price">220 €</div>
+        <div class="diag-delay">Délai 5j · Économisez 20€</div>
+      </div>
+    </div>
+
+    <!-- 01 Express -->
+    <div class="services-sublabel reveal">01 · Offres Express — Solutions concrètes et rapides</div>
+    <table class="express-table reveal">
+      <thead>
+        <tr>
+          <th>Module</th><th>Description</th><th>Délai</th><th>Tarif</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>SETUP_NOTION</td><td>Espace clé en main — CRM, Projets, Tâches</td><td>7j</td><td>350 €</td></tr>
+        <tr><td>AUTO_RDV</td><td>Calendly + Workflows emails + Réservation automatique</td><td>48h</td><td>150 €</td></tr>
+        <tr><td>DIGITAL_START</td><td>Templates Factures + Onboarding client clé en main</td><td>72h</td><td>180 €</td></tr>
+        <tr><td class="ia">AGENT_IA</td><td>Configuration + intégration + formation + suivi 30j</td><td>5j</td><td>280 €</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 02 Modules -->
+    <div class="services-sublabel reveal">02 · Modules d'Accompagnement — Dans la durée</div>
+    <div class="modules-grid reveal">
+      <div class="module">
+        <div class="module-head">
+          <div class="module-bar" style="background:#b5c1a6;"></div>
+          <div class="module-name" style="color:#7b9a80;">Flow</div>
+          <div class="module-tagline">Les bases solides</div>
+        </div>
+        <div style="padding:14px 20px;border-bottom:1px solid rgba(123,154,128,.08);">
+          <p style="font-size:12px;color:var(--txt2);font-style:italic;line-height:1.6;margin-bottom:12px;">"Pour poser les fondations sans vous engager sur le long terme."</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:rgba(123,154,128,.08);color:var(--v);border:1px solid rgba(123,154,128,.15);">Gestion emails</span>
+            <span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:rgba(123,154,128,.08);color:var(--v);border:1px solid rgba(123,154,128,.15);">Agenda & planning</span>
+            <span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:rgba(123,154,128,.08);color:var(--v);border:1px solid rgba(123,154,128,.15);">Suivi des tâches</span>
+            <span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:rgba(123,154,128,.08);color:var(--v);border:1px solid rgba(123,154,128,.15);">Mise en forme de documents</span>
+          </div>
+        </div>
+        <div class="module-packs">
+          <div class="module-pack"><span class="pack-id">[MINI_FLOW]</span><span class="pack-desc">5h — Le coup de pouce ponctuel</span><span class="pack-price">160 €</span></div>
+          <div class="module-pack"><span class="pack-id">[STARTER]</span><span class="pack-desc">10h — Soutien régulier et récurrent</span><span class="pack-price">300 €</span></div>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-head">
+          <div class="module-bar" style="background:#d8c79e;"></div>
+          <div class="module-name" style="color:#a08c5a;">Structure</div>
+          <div class="module-tagline">L'organisation consciente</div>
+        </div>
+        <div style="padding:14px 20px;border-bottom:1px solid rgba(123,154,128,.08);">
+          <p style="font-size:12px;color:var(--txt2);font-style:italic;line-height:1.6;margin-bottom:12px;">"Un système qui tourne — avec une présence régulière pour le faire évoluer."</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:rgba(216,199,158,.15);color:#a08c5a;border:1px solid rgba(216,199,158,.3);">Setup Notion</span>
+            <span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:rgba(216,199,158,.15);color:#a08c5a;border:1px solid rgba(216,199,158,.3);">Automatisation des process</span>
+            <span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:rgba(216,199,158,.15);color:#a08c5a;border:1px solid rgba(216,199,158,.3);">Gestion outils digitaux</span>
+            <span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:rgba(216,199,158,.15);color:#a08c5a;border:1px solid rgba(216,199,158,.3);">Parcours client</span>
+            <span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:rgba(216,199,158,.15);color:#a08c5a;border:1px solid rgba(216,199,158,.3);">Service client & relances</span>
+          </div>
+        </div>
+        <div class="module-packs">
+          <div class="module-pack"><span class="pack-id">[FOCUS]</span><span class="pack-desc">20h — Un chantier précis, un résultat concret</span><span class="pack-price">560 €</span></div>
+          <div class="module-pack"><span class="pack-id">[ABO_ORG]</span><span class="pack-desc">25h/mois — Maintenance et évolution continue</span><span class="pack-price">750 € <span class="pack-mois">/mois</span></span></div>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-head">
+          <div class="module-bar" style="background:#ee07a5;"></div>
+          <div class="module-name" style="color:#ee07a5;">Expansion</div>
+          <div class="module-tagline">Le bras droit stratégique</div>
+        </div>
+        <div style="padding:14px 20px;border-bottom:1px solid rgba(123,154,128,.08);">
+          <p style="font-size:12px;color:var(--txt2);font-style:italic;line-height:1.6;margin-bottom:12px;">"Pour scaler sans s'effondrer — une vision, une méthode, un vrai partenariat."</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:rgba(238,7,165,.06);color:var(--f);border:1px solid rgba(238,7,165,.15);">Stratégie & architecture digitale</span>
+            <span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:rgba(238,7,165,.06);color:var(--f);border:1px solid rgba(238,7,165,.15);">Intégration Agent IA</span>
+            <span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:rgba(238,7,165,.06);color:var(--f);border:1px solid rgba(238,7,165,.15);">Pilotage des opérations</span>
+            <span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:rgba(238,7,165,.06);color:var(--f);border:1px solid rgba(238,7,165,.15);">Coordination & suivi de projet</span>
+          </div>
+        </div>
+        <div class="module-packs">
+          <div class="module-pack"><span class="pack-id">[ALIGNEMENT]</span><span class="pack-desc">60h — Support complet pour un lancement réussi</span><span class="pack-price">1 500 €</span></div>
+          <div class="module-pack"><span class="pack-id">[ABO_PARTNER]</span><span class="pack-desc">45h/mois — Partenariat prioritaire et stratégique</span><span class="pack-price">1 250 € <span class="pack-mois">/mois</span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 Haute Couture -->
+    <div class="services-sublabel reveal">03 · Haute Couture — Sur mesure</div>
+    <div class="hc-card reveal">
+      <div class="hc-badge">ON DEMAND</div>
+      <div class="hc-title">Architecte d'Écosystème</div>
+      <div class="hc-sub">Design de système sur mesure</div>
+      <p class="hc-desc">Audit profond + création de votre architecture digitale de A à Z. Fusion entre vision stratégique et fluidité énergétique — pour les entrepreneurs qui veulent un système à leur image.</p>
+      <div class="hc-footer">
+        <div class="hc-status"><div class="status-dot"></div>Sur devis · Base</div>
+        <div class="hc-price">à partir de 1 800 € <span class="pack-mois">/mois</span></div>
+      </div>
+    </div>
+
+    <!-- CTA Block -->
+    <div class="services-cta-block reveal">
+      <div>
+        <div class="services-cta-txt">Pas sûr·e par où commencer ? 🌿</div>
+        <div class="services-cta-sub">L'appel découverte est fait pour ça — gratuit, sans engagement, 30 minutes.</div>
+      </div>
+      <a href="https://wa.me/590690703327?text=Bonjour%20Nendy%2C%20je%20souhaite%20r%C3%A9server%20mon%20appel%20d%C3%A9couverte%20gratuit." class="btn-primary">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <div>
+          <div class="btn-primary-txt">Réserver mon appel découverte</div>
+          <div class="btn-primary-sub">Gratuit · 30 min · Sans engagement</div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── MÉTHODE ── -->
+<section id="methode">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="reveal">
+      <div class="section-label">Méthode</div>
+      <h2 class="section-title" style="color:white;">Comment je<br>travaille <span class="f">avec vous.</span></h2>
+    </div>
+    <div class="methode-grid" style="margin-top:50px;">
+      <div class="methode-step reveal">
+        <div class="step-num">01</div>
+        <div class="step-title">On se <span class="v">rencontre</span></div>
+        <p class="step-desc">Appel découverte gratuit de 30 minutes. Je comprends votre situation, vos blocages, ce dont vous avez vraiment besoin. Pas de pitch — une vraie conversation.</p>
+      </div>
+      <div class="methode-step reveal">
+        <div class="step-num">02</div>
+        <div class="step-title">J'audite & <span class="f">je propose</span></div>
+        <p class="step-desc">Diagnostic complet de votre activité. Je vous présente une proposition sur-mesure avec le plan de travail, les outils et les délais. Vous validez — on démarre.</p>
+      </div>
+      <div class="methode-step reveal">
+        <div class="step-num">03</div>
+        <div class="step-title">On <span class="v">construit</span> ensemble</div>
+        <p class="step-desc">Mise en place de votre écosystème étape par étape. Des points réguliers pour que vous soyez toujours dans la boucle. On ajuste si nécessaire.</p>
+      </div>
+      <div class="methode-step reveal">
+        <div class="step-num">04</div>
+        <div class="step-title">Vous volez de vos <span class="f">propres ailes</span></div>
+        <p class="step-desc">Formation sur chaque outil livré. Votre autonomie est mon objectif — pas votre dépendance. Et je reste là pour faire évoluer le système avec vous.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VALEURS ── -->
+<section id="valeurs">
+  <div class="valeurs-header reveal">
+    <div>
+      <div class="section-label">Valeurs</div>
+      <h2 class="section-title">Ce qui me <span class="f">guide.</span></h2>
+    </div>
     <p class="valeurs-sub">5 valeurs qui définissent comment je travaille et ce que vous pouvez attendre de notre collaboration.</p>
   </div>
-  <div class="valeurs-grid">
+  <div class="valeurs-grid reveal">
     <div class="val-item">
       <div class="val-num">01</div>
       <div class="val-name v">Clarté</div>
@@ -821,106 +958,812 @@
   </div>
 </section>
 
-<!-- ── SECTION 4 — MISSION ── -->
-<section class="mission">
-  <div class="mission-label">La promesse Nendy Services</div>
-  <p class="mission-quote">
-    "Tu as créé ton business pour vivre mieux.<br>
-    Pas pour <span class="f">t'épuiser</span> davantage.<br>
-    C'est <span class="b">exactement</span> pour ça que je suis là."
-  </p>
-  <div class="mission-bottom">
-    <div class="mission-stat">
-      <div class="mission-stat-num">100%</div>
-      <div class="mission-stat-label">À distance</div>
+<!-- ── POUR QUI ── -->
+<section id="pourqui">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="reveal">
+      <div class="section-label">Pour qui</div>
+      <h2 class="section-title">On est faites pour<br>travailler ensemble <span class="f">si…</span></h2>
     </div>
-    <div class="mission-divider"></div>
-    <div class="mission-stat">
-      <div class="mission-stat-num">24h</div>
-      <div class="mission-stat-label">Temps de réponse</div>
-    </div>
-    <div class="mission-divider"></div>
-    <div class="mission-stat">
-      <div class="mission-stat-num">Sur-mesure</div>
-      <div class="mission-stat-label">Chaque mission</div>
-    </div>
-  </div>
-</section>
-
-<!-- ── SECTION 5 — POUR QUI ── -->
-<section class="pourqui">
-  <div class="pourqui-label">Pour qui</div>
-  <h2 class="pourqui-title">On est faites pour<br>travailler ensemble <span class="f">si…</span></h2>
-  <div class="pourqui-grid">
-    <div class="pourqui-card">
-      <div class="pourqui-card-num">Profil 01</div>
-      <div class="pourqui-card-title">L'entrepreneur·e débordé·e</div>
-      <p class="pourqui-card-desc">Vous gérez tout seul·e et vous passez vos soirées sur l'admin au lieu de vous reposer. Vous aimez ce que vous faites — mais la gestion vous épuise.</p>
-      <span class="pourqui-card-tag">Le plus fréquent</span>
-    </div>
-    <div class="pourqui-card">
-      <div class="pourqui-card-num">Profil 02</div>
-      <div class="pourqui-card-title">Le·la coach ou thérapeute</div>
-      <p class="pourqui-card-desc">Votre énergie devrait aller à vos clients — pas à vos emails, vos RDV à organiser et vos factures à créer. Vous avez besoin d'un système qui tourne sans vous.</p>
-      <span class="pourqui-card-tag">Bien-être & accompagnement</span>
-    </div>
-    <div class="pourqui-card">
-      <div class="pourqui-card-num">Profil 03</div>
-      <div class="pourqui-card-title">Celui·celle qui veut scaler</div>
-      <p class="pourqui-card-desc">Votre activité marche — mais vous sentez que vous avez atteint votre plafond en solo. Il est temps de structurer pour grandir sans s'effondrer.</p>
-      <span class="pourqui-card-tag">Croissance & stratégie</span>
+    <div class="pourqui-grid" style="margin-top:50px;">
+      <div class="pourqui-card reveal">
+        <div class="pourqui-num">Profil 01</div>
+        <div class="pourqui-title">L'entrepreneur·e débordé·e</div>
+        <p class="pourqui-desc">Vous gérez tout seul·e et vous passez vos soirées sur l'admin au lieu de vous reposer. Vous aimez ce que vous faites — mais la gestion vous épuise.</p>
+        <span class="pourqui-tag">Le plus fréquent</span>
+      </div>
+      <div class="pourqui-card reveal">
+        <div class="pourqui-num">Profil 02</div>
+        <div class="pourqui-title">Le·la coach ou thérapeute</div>
+        <p class="pourqui-desc">Votre énergie devrait aller à vos clients — pas à vos emails, vos RDV à organiser et vos factures à créer. Vous avez besoin d'un système qui tourne sans vous.</p>
+        <span class="pourqui-tag">Bien-être & accompagnement</span>
+      </div>
+      <div class="pourqui-card reveal">
+        <div class="pourqui-num">Profil 03</div>
+        <div class="pourqui-title">Celui·celle qui veut scaler</div>
+        <p class="pourqui-desc">Votre activité marche — mais vous sentez que vous avez atteint votre plafond en solo. Il est temps de structurer pour grandir sans s'effondrer.</p>
+        <span class="pourqui-tag">Croissance & stratégie</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ── SECTION 6 — CONTACT ── -->
-<section class="contact">
-  <div class="contact-left">
-    <div class="contact-label">On commence ?</div>
-    <h2 class="contact-title">Parlons de<br>votre <span class="f">business.</span></h2>
-    <div class="contact-links">
-      <a href="https://wa.me/590690703327?text=Bonjour%20Nendy%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20services." class="contact-link">
-        <div class="contact-link-icon" style="background:#25D366;">
-          <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+<!-- ── TÉMOIGNAGES ── -->
+<section id="temoignages">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="reveal">
+      <div class="section-label">Témoignages</div>
+      <h2 class="section-title">Ce qu'ils en <span class="f">disent.</span></h2>
+    </div>
+    <div class="temoignages-grid" style="margin-top:50px;">
+      <div class="temoignage-card reveal">
+        <div class="temoignage-placeholder">
+          <div class="temoignage-placeholder-txt">Témoignage à venir 🌿</div>
         </div>
-        <div>
-          <span class="contact-link-label">WhatsApp</span>
-          <span class="contact-link-val">+590 690 70 33 27</span>
+      </div>
+      <div class="temoignage-card reveal">
+        <div class="temoignage-placeholder">
+          <div class="temoignage-placeholder-txt">Témoignage à venir 🌿</div>
         </div>
-        <span class="contact-link-arrow">→</span>
-      </a>
-      <a href="mailto:nendy.services@gmail.com" class="contact-link">
-        <div class="contact-link-icon" style="background:rgba(123,154,128,.1);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#7b9a80" stroke-width="1.8" stroke-linecap="round"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+      </div>
+      <div class="temoignage-card reveal">
+        <div class="temoignage-placeholder">
+          <div class="temoignage-placeholder-txt">Témoignage à venir 🌿</div>
         </div>
-        <div>
-          <span class="contact-link-label">Email</span>
-          <span class="contact-link-val">nendy.services@gmail.com</span>
-        </div>
-        <span class="contact-link-arrow">→</span>
-      </a>
-      <a href="https://instagram.com/nendy_services" class="contact-link">
-        <div class="contact-link-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">
-          <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        </div>
-        <div>
-          <span class="contact-link-label">Instagram</span>
-          <span class="contact-link-val">@nendy_services</span>
-        </div>
-        <span class="contact-link-arrow">→</span>
-      </a>
+      </div>
     </div>
   </div>
-  <div class="contact-right">
-    <div class="contact-sig">N</div>
+</section>
+
+<!-- ── APPEL DÉCOUVERTE ── -->
+<section id="calendrier">
+  <div class="cal-grid">
+    <div class="cal-left reveal">
+      <div class="section-label">Appel découverte</div>
+      <h2 class="section-title">30 minutes pour<br>tout <span class="f">changer.</span></h2>
+      <p class="cal-text">
+        Avant de parler offres ou tarifs, j'ai besoin de comprendre une chose essentielle : <em>vous</em>. Qui vous êtes, ce que vous construisez, ce qui vous épuise.<br><br>
+        L'appel découverte, c'est un espace offert pour poser tout ça à plat. Sans jugement, sans script. Juste une vraie conversation sur votre business tel qu'il est aujourd'hui.
+      </p>
+      <div class="cal-infos">
+        <div class="cal-info">
+          <div class="cal-info-icon" style="background:rgba(123,154,128,.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#7b9a80" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <div>
+            <span class="cal-info-label">Durée</span>
+            <span class="cal-info-val">30 minutes</span>
+          </div>
+        </div>
+        <div class="cal-info">
+          <div class="cal-info-icon" style="background:rgba(238,7,165,.06);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ee07a5" stroke-width="1.8" stroke-linecap="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          </div>
+          <div>
+            <span class="cal-info-label">Tarif</span>
+            <span class="cal-info-val">Gratuit · Sans engagement</span>
+          </div>
+        </div>
+        <div class="cal-info">
+          <div class="cal-info-icon" style="background:rgba(216,199,158,.2);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#a08c5a" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <span class="cal-info-label">Format</span>
+            <span class="cal-info-val">100% en ligne · Visio ou téléphone</span>
+          </div>
+        </div>
+        <div class="cal-info">
+          <div class="cal-info-icon" style="background:rgba(123,154,128,.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#7b9a80" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l1.27-.54a2 2 0 012.11.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <span class="cal-info-label">Réponse</span>
+            <span class="cal-info-val">Confirmation sous 24h</span>
+          </div>
+        </div>
+      </div>
+      <a href="https://calendar.app.google/GoYfmbaTMX6owCus6" target="_blank" class="cal-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <div>
+          <div class="cal-btn-txt">Réserver mon créneau</div>
+          <div class="cal-btn-sub">Choisissez votre date directement</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="cal-right reveal">
+      <div class="cal-frame-wrapper">
+        <div class="cal-frame-header">
+          <div class="cal-frame-dots">
+            <div class="cal-frame-dot" style="background:rgba(255,255,255,.2);"></div>
+            <div class="cal-frame-dot" style="background:rgba(255,255,255,.2);"></div>
+            <div class="cal-frame-dot" style="background:rgba(255,255,255,.2);"></div>
+          </div>
+          <div class="cal-frame-title">Appel découverte · Nendy Services</div>
+        </div>
+        <iframe
+          class="cal-iframe"
+          src="https://calendar.app.google/GoYfmbaTMX6owCus6"
+          title="Réserver un appel découverte avec Nendy Services"
+          loading="lazy"
+          allowfullscreen>
+        </iframe>
+        <a href="https://calendar.app.google/GoYfmbaTMX6owCus6" target="_blank" class="cal-overlay-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          <span class="cal-overlay-btn-txt">Ouvrir en plein écran</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section id="faq" style="background:var(--cr);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="reveal">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Les questions <span class="f">fréquentes.</span></h2>
+    </div>
+    <div class="faq-wrapper" style="margin-top:50px;">
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <div class="faq-question-txt">Comment se passe le premier contact ?</div>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2v8M2 6h8"/></svg></div>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">Tout commence par un appel découverte gratuit de 30 minutes. On se rencontre, je comprends votre situation et vos besoins, et je vous propose une offre adaptée. Aucun engagement à ce stade — c'est une vraie conversation, pas un pitch commercial.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <div class="faq-question-txt">Comment fonctionne le paiement ?</div>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2v8M2 6h8"/></svg></div>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">Pour les Offres Express : paiement comptant 100% à la commande. Pour les Modules d'accompagnement et la Haute Couture : acompte de 40% à la commande, solde à la livraison. Le paiement en 3 fois est possible sans frais sur demande. Virement bancaire, PayPal et Stripe acceptés. Facture et contrat envoyés ensemble dès validation.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <div class="faq-question-txt">Est-ce que je resterai autonome après notre collaboration ?</div>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2v8M2 6h8"/></svg></div>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">Absolument — c'est même mon objectif principal. Je ne construis pas des systèmes dont vous dépendez. Je vous forme sur chaque outil livré pour que vous puissiez l'utiliser et le faire évoluer vous-même. Votre autonomie est ma priorité.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <div class="faq-question-txt">Travaillez-vous uniquement avec des clients en Guadeloupe ?</div>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2v8M2 6h8"/></svg></div>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">Pas du tout — je travaille 100% à distance et j'accompagne des entrepreneurs partout en France et à l'international. Être basée en Guadeloupe est une force : je comprends les spécificités des marchés des DOM-TOM tout en maîtrisant les codes du marché métropolitain.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <div class="faq-question-txt">Quel délai pour commencer à travailler ensemble ?</div>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2v8M2 6h8"/></svg></div>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">Dès réception du paiement, je reviens vers vous sous 48h avec le plan de travail détaillé et les premières étapes concrètes. Pour les Offres Express, les délais vont de 48h à 7 jours selon la prestation. Pour les modules d'accompagnement, on démarre la semaine suivante.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <div class="faq-question-txt">Mes données et informations sont-elles confidentielles ?</div>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2v8M2 6h8"/></svg></div>
+        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">Oui, totalement. Tout ce que vous partagez avec moi reste strictement confidentiel — données personnelles, informations commerciales, stratégies, contenus. Un engagement de confidentialité est inclus dans chaque contrat. Cet engagement est valable pendant et après notre collaboration, sans limite de durée.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title" style="color:white;">Parlons de<br>votre <span class="f">business.</span></h2>
+      <div class="contact-links" style="margin-top:30px;">
+        <a href="https://wa.me/590690703327?text=Bonjour%20Nendy%2C%20je%20souhaite%20r%C3%A9server%20mon%20appel%20d%C3%A9couverte%20gratuit." class="contact-link">
+          <div class="contact-link-icon" style="background:#25D366;">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <div><span class="contact-link-label">WhatsApp Business</span><span class="contact-link-val">+590 690 70 33 27</span></div>
+          <span class="contact-link-arrow">→</span>
+        </a>
+        <a href="mailto:nendy.services@gmail.com" class="contact-link">
+          <div class="contact-link-icon" style="background:rgba(255,255,255,.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+          </div>
+          <div><span class="contact-link-label">Email</span><span class="contact-link-val">nendy.services@gmail.com</span></div>
+          <span class="contact-link-arrow">→</span>
+        </a>
+        <a href="https://instagram.com/nendy_services" class="contact-link">
+          <div class="contact-link-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </div>
+          <div><span class="contact-link-label">Instagram</span><span class="contact-link-val">@nendy_services</span></div>
+          <span class="contact-link-arrow">→</span>
+        </a>
+        <a href="https://tiktok.com/@nendy_services" class="contact-link">
+          <div class="contact-link-icon" style="background:#000;">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.53V6.75a4.85 4.85 0 01-1.02-.06z"/></svg>
+          </div>
+          <div><span class="contact-link-label">TikTok</span><span class="contact-link-val">@nendy_services</span></div>
+          <span class="contact-link-arrow">→</span>
+        </a>
+      </div>
+    </div>
+    <div class="reveal">
+      <p class="contact-manifeste">"Tu as créé ton business pour vivre mieux. Pas pour t'épuiser davantage. C'est <span class="f">exactement</span> pour ça que je suis <span class="b">là.</span>"</p>
+      <div class="contact-sig">N</div>
+    </div>
   </div>
 </section>
 
 <!-- ── FOOTER ── -->
-<footer class="footer">
+<footer>
   <div class="footer-sig">Nendy Services — L'harmonie entre organisation et assistance.</div>
-  <div class="footer-info">Guadeloupe · France · International · 2026</div>
+  <div class="footer-links">
+    <a href="#apropos" class="footer-link">À propos</a>
+    <a href="#services" class="footer-link">Services</a>
+    <a href="#contact" class="footer-link">Contact</a>
+    <a href="https://instagram.com/nendy_services" class="footer-link">Instagram</a>
+    <a href="https://tiktok.com/@nendy_services" class="footer-link">TikTok</a>
+  </div>
 </footer>
+
+<script>
+// Nav scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Mobile menu
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// FAQ
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+
+<!-- ══════════════════════════════════════════
+     QUIZ POPUP
+══════════════════════════════════════════ -->
+<style>
+.quiz-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(26,23,20,.6);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .4s ease;
+}
+.quiz-overlay.open { opacity: 1; pointer-events: all; }
+
+.quiz-modal {
+  background: var(--cr); border-radius: 24px;
+  width: 100%; max-width: 560px;
+  max-height: 90vh; overflow-y: auto;
+  position: relative;
+  transform: translateY(30px) scale(.97);
+  transition: transform .4s ease;
+  box-shadow: 0 40px 80px rgba(0,0,0,.2);
+}
+.quiz-overlay.open .quiz-modal { transform: translateY(0) scale(1); }
+
+.quiz-close {
+  position: absolute; top: 16px; right: 16px; z-index: 10;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(123,154,128,.15); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s;
+}
+.quiz-close:hover { background: rgba(123,154,128,.3); }
+.quiz-close svg { width: 14px; height: 14px; }
+
+/* Header */
+.quiz-header {
+  background: var(--v); border-radius: 24px 24px 0 0;
+  padding: 32px 32px 28px;
+}
+.quiz-header-tag {
+  font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 2px;
+  color: rgba(255,255,255,.5); text-transform: uppercase; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.quiz-header-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--f); animation: pulse 2s infinite; }
+.quiz-header-title {
+  font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 900;
+  color: white; line-height: 1.1; margin-bottom: 8px;
+}
+.quiz-header-title .f { color: var(--f); font-style: italic; }
+.quiz-header-sub { font-size: 13px; color: rgba(255,255,255,.7); line-height: 1.6; }
+
+/* Progress */
+.quiz-progress-bar {
+  height: 3px; background: rgba(255,255,255,.15); margin-top: 20px; border-radius: 2px; overflow: hidden;
+}
+.quiz-progress-fill {
+  height: 100%; background: var(--f); border-radius: 2px;
+  transition: width .5s ease; width: 0%;
+}
+
+/* Body */
+.quiz-body { padding: 28px 32px 32px; }
+
+.quiz-step { display: none; }
+.quiz-step.active { display: block; }
+
+.quiz-step-num {
+  font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 2px;
+  color: var(--f); text-transform: uppercase; margin-bottom: 10px;
+}
+.quiz-question {
+  font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700;
+  color: var(--txt); line-height: 1.2; margin-bottom: 8px;
+}
+.quiz-question .f { color: var(--f); font-style: italic; }
+.quiz-hint { font-size: 12px; color: var(--txt2); margin-bottom: 20px; line-height: 1.5; }
+
+.quiz-options { display: flex; flex-direction: column; gap: 10px; }
+
+.quiz-option {
+  display: flex; align-items: center; gap: 14px;
+  background: white; border: 1.5px solid rgba(123,154,128,.15);
+  border-radius: 12px; padding: 14px 16px; cursor: pointer;
+  transition: all .2s; text-align: left;
+}
+.quiz-option:hover { border-color: var(--v); background: rgba(123,154,128,.04); transform: translateX(4px); }
+.quiz-option.selected { border-color: var(--v); background: rgba(123,154,128,.08); }
+.quiz-option.selected .opt-radio { background: var(--v); border-color: var(--v); }
+.quiz-option.selected .opt-radio::after { opacity: 1; }
+
+.opt-radio {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 2px solid rgba(123,154,128,.3); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s; position: relative;
+}
+.opt-radio::after {
+  content: ''; width: 8px; height: 8px; border-radius: 50%;
+  background: white; opacity: 0; transition: opacity .2s;
+}
+
+.opt-content { flex: 1; }
+.opt-title { font-size: 14px; font-weight: 500; color: var(--txt); line-height: 1.3; }
+.opt-sub { font-size: 11px; color: var(--txt2); margin-top: 2px; line-height: 1.4; }
+
+.opt-emoji { font-size: 20px; flex-shrink: 0; }
+
+/* Nav buttons */
+.quiz-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 24px; }
+.quiz-back {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1px;
+  color: var(--txt2); background: none; border: none; cursor: pointer;
+  padding: 8px 0; transition: color .2s;
+}
+.quiz-back:hover { color: var(--v); }
+.quiz-next {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--v); border: none; border-radius: 10px;
+  padding: 12px 22px; cursor: pointer; transition: all .2s;
+  font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500; color: white;
+}
+.quiz-next:hover { background: #6a8a6e; transform: translateY(-1px); }
+.quiz-next:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+
+/* Result */
+.quiz-result { display: none; }
+.quiz-result.active { display: block; }
+
+.result-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  border-radius: 20px; padding: 6px 14px; margin-bottom: 16px;
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1.5px;
+}
+
+.result-title {
+  font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900;
+  color: var(--txt); line-height: 1.1; margin-bottom: 8px;
+}
+.result-title .f { color: var(--f); font-style: italic; }
+.result-title .v { color: var(--v); }
+
+.result-desc { font-size: 14px; color: var(--txt2); line-height: 1.75; margin-bottom: 20px; }
+
+.result-offer {
+  border-radius: 14px; padding: 18px 20px; margin-bottom: 20px;
+  border: 1.5px solid;
+}
+.result-offer-label { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.result-offer-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.result-offer-price { font-size: 13px; font-weight: 500; }
+
+.result-services { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.result-tag {
+  font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 1px;
+  padding: 4px 10px; border-radius: 20px; border: 1px solid;
+}
+
+.result-cta {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.result-btn-primary {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: #25D366; border-radius: 10px; padding: 14px 22px;
+  text-decoration: none; transition: transform .2s, opacity .2s;
+}
+.result-btn-primary:hover { transform: translateY(-2px); opacity: .9; }
+.result-btn-primary svg { width: 20px; height: 20px; flex-shrink: 0; }
+.result-btn-txt { font-size: 14px; font-weight: 500; color: white; }
+.result-btn-sub { font-family: 'DM Mono', monospace; font-size: 8px; color: rgba(255,255,255,.7); letter-spacing: 1px; margin-top: 2px; }
+
+.result-btn-secondary {
+  display: flex; align-items: center; justify-content: center;
+  background: none; border: 1px solid rgba(123,154,128,.3); border-radius: 10px;
+  padding: 12px 22px; font-size: 13px; color: var(--txt2); cursor: pointer;
+  transition: border-color .2s;
+}
+.result-btn-secondary:hover { border-color: var(--v); color: var(--v); }
+
+.quiz-trigger {
+  position: fixed; bottom: 24px; right: 24px; z-index: 1500;
+  display: flex; align-items: center; gap: 10px;
+  background: var(--f); border-radius: 50px; padding: 12px 20px;
+  cursor: pointer; border: none;
+  box-shadow: 0 8px 24px rgba(238,7,165,.3);
+  transition: transform .2s, opacity .2s;
+  animation: slideUp .5s ease 31s both;
+}
+@keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.quiz-trigger:hover { transform: translateY(-3px); }
+.quiz-trigger-txt { font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500; color: white; }
+.quiz-trigger-emoji { font-size: 18px; }
+
+@media(max-width:600px) {
+  .quiz-body { padding: 20px; }
+  .quiz-header { padding: 24px 20px 20px; }
+  .quiz-header-title { font-size: 22px; }
+  .quiz-trigger { bottom: 16px; right: 16px; }
+}
+</style>
+
+<!-- Trigger button -->
+<button class="quiz-trigger" onclick="openQuiz()" id="quizTrigger" style="display:none;">
+  <span class="quiz-trigger-emoji">🌿</span>
+  <span class="quiz-trigger-txt">Quel accompagnement pour moi ?</span>
+</button>
+
+<!-- Quiz popup -->
+<div class="quiz-overlay" id="quizOverlay" onclick="closeOnOverlay(event)">
+  <div class="quiz-modal">
+    <button class="quiz-close" onclick="closeQuiz()">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l12 12M13 1L1 13"/></svg>
+    </button>
+
+    <!-- Header -->
+    <div class="quiz-header">
+      <div class="quiz-header-tag"><div class="quiz-header-dot"></div>Quiz Nendy Services</div>
+      <div class="quiz-header-title">Quel accompagnement<br>vous faut-il <span class="f">vraiment ?</span></div>
+      <div class="quiz-header-sub">6 questions pour identifier si vous avez besoin d'un accompagnement ponctuel, conscient ou expansif.</div>
+      <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <!-- Body -->
+    <div class="quiz-body">
+
+      <!-- Q1 -->
+      <div class="quiz-step active" data-step="1">
+        <div class="quiz-step-num">Question 01 / 06</div>
+        <div class="quiz-question">Depuis combien de temps<br>êtes-vous <span class="f">lancé·e ?</span></div>
+        <div class="quiz-hint">Votre ancienneté influence le type d'accompagnement dont vous avez besoin.</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOption(this, 'ponctuel')" data-score="ponctuel">
+            <span class="opt-emoji">🌱</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">Moins de 6 mois</div><div class="opt-sub">Je démarre, j'ai besoin de bases solides</div></div>
+          </button>
+          <button class="quiz-option" onclick="selectOption(this, 'conscient')" data-score="conscient">
+            <span class="opt-emoji">🌿</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">6 mois à 2 ans</div><div class="opt-sub">Je suis lancé·e mais j'ai besoin d'organisation</div></div>
+          </button>
+          <button class="quiz-option" onclick="selectOption(this, 'expansif')" data-score="expansif">
+            <span class="opt-emoji">🌳</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">Plus de 2 ans</div><div class="opt-sub">Mon business tourne, je veux aller plus loin</div></div>
+          </button>
+        </div>
+        <div class="quiz-nav">
+          <span></span>
+          <button class="quiz-next" onclick="nextStep()" id="next1" disabled>Suivant →</button>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="quiz-step" data-step="2">
+        <div class="quiz-step-num">Question 02 / 06</div>
+        <div class="quiz-question">Comment vous sentez-vous<br>dans votre <span class="f">business ?</span></div>
+        <div class="quiz-hint">Soyez honnête — c'est pour mieux vous orienter.</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOption(this, 'ponctuel')" data-score="ponctuel">
+            <span class="opt-emoji">😤</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">Débordé·e</div><div class="opt-sub">J'ai trop à faire, j'ai besoin d'aide sur des tâches précises</div></div>
+          </button>
+          <button class="quiz-option" onclick="selectOption(this, 'conscient')" data-score="conscient">
+            <span class="opt-emoji">😵</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">Désorganisé·e</div><div class="opt-sub">Mon business manque de structure et de système clair</div></div>
+          </button>
+          <button class="quiz-option" onclick="selectOption(this, 'expansif')" data-score="expansif">
+            <span class="opt-emoji">🚀</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">En croissance mais saturé·e</div><div class="opt-sub">Ça marche, mais j'ai atteint mon plafond en solo</div></div>
+          </button>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-back" onclick="prevStep()">← Retour</button>
+          <button class="quiz-next" onclick="nextStep()" id="next2" disabled>Suivant →</button>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="quiz-step" data-step="3">
+        <div class="quiz-step-num">Question 03 / 06</div>
+        <div class="quiz-question">Qu'est-ce qui vous prend le plus<br>de <span class="f">temps ?</span></div>
+        <div class="quiz-hint">Identifiez votre principal point de friction.</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOption(this, 'ponctuel')" data-score="ponctuel">
+            <span class="opt-emoji">📧</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">Les tâches admin au quotidien</div><div class="opt-sub">Emails, agenda, relances, documents</div></div>
+          </button>
+          <button class="quiz-option" onclick="selectOption(this, 'conscient')" data-score="conscient">
+            <span class="opt-emoji">🗂️</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">L'organisation globale</div><div class="opt-sub">Je n'ai pas de système clair, tout est éparpillé</div></div>
+          </button>
+          <button class="quiz-option" onclick="selectOption(this, 'expansif')" data-score="expansif">
+            <span class="opt-emoji">⚙️</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">La gestion des opérations</div><div class="opt-sub">Je veux automatiser et déléguer à grande échelle</div></div>
+          </button>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-back" onclick="prevStep()">← Retour</button>
+          <button class="quiz-next" onclick="nextStep()" id="next3" disabled>Suivant →</button>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="quiz-step" data-step="4">
+        <div class="quiz-step-num">Question 04 / 06</div>
+        <div class="quiz-question">Avez-vous déjà un système<br>en <span class="f">place ?</span></div>
+        <div class="quiz-hint">Un système c'est un outil, une méthode, un process que vous suivez régulièrement.</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOption(this, 'ponctuel')" data-score="ponctuel">
+            <span class="opt-emoji">🤷</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">Pas vraiment</div><div class="opt-sub">Je fais au feeling, sans méthode précise</div></div>
+          </button>
+          <button class="quiz-option" onclick="selectOption(this, 'conscient')" data-score="conscient">
+            <span class="opt-emoji">🛠️</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">Un peu, mais c'est brouillon</div><div class="opt-sub">J'ai des outils mais ils sont mal utilisés</div></div>
+          </button>
+          <button class="quiz-option" onclick="selectOption(this, 'expansif')" data-score="expansif">
+            <span class="opt-emoji">✅</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">Oui, mais je veux aller plus loin</div><div class="opt-sub">J'ai une base solide, je veux optimiser et scaler</div></div>
+          </button>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-back" onclick="prevStep()">← Retour</button>
+          <button class="quiz-next" onclick="nextStep()" id="next4" disabled>Suivant →</button>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="quiz-step" data-step="5">
+        <div class="quiz-step-num">Question 05 / 06</div>
+        <div class="quiz-question">Avez-vous déjà<br><span class="f">délégué ?</span></div>
+        <div class="quiz-hint">La délégation est une compétence qui s'apprend — pas d'inquiétude quelle que soit votre réponse.</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOption(this, 'ponctuel')" data-score="ponctuel">
+            <span class="opt-emoji">👶</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">Jamais</div><div class="opt-sub">Je fais tout moi-même, je ne sais pas par où commencer</div></div>
+          </button>
+          <button class="quiz-option" onclick="selectOption(this, 'conscient')" data-score="conscient">
+            <span class="opt-emoji">😕</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">Oui mais ça n'a pas marché</div><div class="opt-sub">Mauvaise expérience, je veux faire mieux cette fois</div></div>
+          </button>
+          <button class="quiz-option" onclick="selectOption(this, 'expansif')" data-score="expansif">
+            <span class="opt-emoji">🤝</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">Oui et j'en veux plus</div><div class="opt-sub">Je sais déléguer, je cherche un vrai partenariat</div></div>
+          </button>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-back" onclick="prevStep()">← Retour</button>
+          <button class="quiz-next" onclick="nextStep()" id="next5" disabled>Suivant →</button>
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="quiz-step" data-step="6">
+        <div class="quiz-step-num">Question 06 / 06</div>
+        <div class="quiz-question">Ce que vous voulez<br>dans 3 mois <span class="f">vraiment ?</span></div>
+        <div class="quiz-hint">Votre objectif final détermine le niveau d'accompagnement idéal.</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="selectOption(this, 'ponctuel')" data-score="ponctuel">
+            <span class="opt-emoji">😮‍💨</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">Reprendre du temps</div><div class="opt-sub">Déléguer des tâches précises et souffler</div></div>
+          </button>
+          <button class="quiz-option" onclick="selectOption(this, 'conscient')" data-score="conscient">
+            <span class="opt-emoji">🧘</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">Un business organisé</div><div class="opt-sub">Des systèmes clairs, une méthode, de la clarté</div></div>
+          </button>
+          <button class="quiz-option" onclick="selectOption(this, 'expansif')" data-score="expansif">
+            <span class="opt-emoji">🌟</span><div class="opt-radio"></div>
+            <div class="opt-content"><div class="opt-title">Scaler sereinement</div><div class="opt-sub">Grandir avec un écosystème digital sur-mesure</div></div>
+          </button>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-back" onclick="prevStep()">← Retour</button>
+          <button class="quiz-next" onclick="showResult()" id="next6" disabled>Voir mon résultat →</button>
+        </div>
+      </div>
+
+      <!-- RÉSULTAT -->
+      <div class="quiz-result" id="quizResult">
+        <div id="resultContent"></div>
+        <div class="result-cta" id="resultCta"></div>
+        <button class="result-btn-secondary" onclick="restartQuiz()" style="margin-top:10px;">Recommencer le quiz</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// ── QUIZ LOGIC ──
+const scores = { ponctuel: 0, conscient: 0, expansif: 0 };
+let currentStep = 1;
+const totalSteps = 6;
+
+// Show trigger after 30s
+setTimeout(() => {
+  const trigger = document.getElementById('quizTrigger');
+  if (trigger) { trigger.style.display = 'flex'; }
+}, 30000);
+
+function openQuiz() {
+  document.getElementById('quizOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  updateProgress();
+}
+
+function closeQuiz() {
+  document.getElementById('quizOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeOnOverlay(e) {
+  if (e.target === document.getElementById('quizOverlay')) closeQuiz();
+}
+
+function selectOption(btn, score) {
+  const step = btn.closest('.quiz-step');
+  step.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+  btn.classList.add('selected');
+  btn.dataset.chosen = score;
+  const nextBtn = step.querySelector('.quiz-next');
+  if (nextBtn) nextBtn.disabled = false;
+}
+
+function nextStep() {
+  const currentEl = document.querySelector(`.quiz-step[data-step="${currentStep}"]`);
+  const chosen = currentEl.querySelector('.quiz-option.selected')?.dataset.chosen;
+  if (chosen) scores[chosen]++;
+
+  currentEl.classList.remove('active');
+  currentStep++;
+  const nextEl = document.querySelector(`.quiz-step[data-step="${currentStep}"]`);
+  if (nextEl) { nextEl.classList.add('active'); updateProgress(); }
+}
+
+function prevStep() {
+  const currentEl = document.querySelector(`.quiz-step[data-step="${currentStep}"]`);
+  currentEl.classList.remove('active');
+  currentStep--;
+  const prevEl = document.querySelector(`.quiz-step[data-step="${currentStep}"]`);
+  if (prevEl) { prevEl.classList.add('active'); updateProgress(); }
+}
+
+function updateProgress() {
+  const pct = ((currentStep - 1) / totalSteps) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+function showResult() {
+  const currentEl = document.querySelector(`.quiz-step[data-step="${currentStep}"]`);
+  const chosen = currentEl.querySelector('.quiz-option.selected')?.dataset.chosen;
+  if (chosen) scores[chosen]++;
+  currentEl.classList.remove('active');
+
+  document.getElementById('progressFill').style.width = '100%';
+
+  const winner = Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
+  const results = {
+    ponctuel: {
+      badge: '🌱 Accompagnement Ponctuel',
+      badgeBg: 'rgba(123,154,128,.1)', badgeColor: '#7b9a80',
+      title: 'Vous avez besoin d\'un soutien <span class="v">ponctuel.</span>',
+      desc: 'Vous avez des tâches précises qui vous prennent du temps et vous avez besoin d\'aide ciblée, sans vous engager sur le long terme. Le module Flow est fait pour vous — flexible, rapide, efficace.',
+      offer: { label: 'Recommandation', name: 'Module Flow', price: 'À partir de 160€ · 5h ou 10h', borderColor: '#7b9a80', bg: 'rgba(123,154,128,.04)', labelColor: '#b5c1a6', nameColor: '#7b9a80', priceColor: '#5c5248' },
+      services: ['Gestion emails', 'Agenda & planning', 'Suivi des tâches', 'Mise en forme de documents'],
+      tagBg: 'rgba(123,154,128,.08)', tagColor: '#7b9a80', tagBorder: 'rgba(123,154,128,.2)',
+      wa: 'Bonjour%20Nendy%2C%20j\'ai%20fait%20le%20quiz%20et%20je%20pense%20avoir%20besoin%20d\'un%20accompagnement%20ponctuel%20(module%20Flow).%20Je%20voudrais%20r%C3%A9server%20mon%20appel%20d%C3%A9couverte.'
+    },
+    conscient: {
+      badge: '🌿 Accompagnement Conscient',
+      badgeBg: 'rgba(216,199,158,.2)', badgeColor: '#a08c5a',
+      title: 'Vous avez besoin d\'une organisation <span class="f">consciente.</span>',
+      desc: 'Votre business manque de structure et de systèmes clairs. Vous avez besoin d\'une présence régulière pour poser les bases, organiser, automatiser et faire évoluer votre activité. Le module Structure est votre allié.',
+      offer: { label: 'Recommandation', name: 'Module Structure', price: 'À partir de 560€ · 20h ou abonnement 25h/mois', borderColor: '#d8c79e', bg: 'rgba(216,199,158,.06)', labelColor: '#d8c79e', nameColor: '#a08c5a', priceColor: '#5c5248' },
+      services: ['Setup Notion', 'Automatisation', 'Parcours client', 'Service client & relances'],
+      tagBg: 'rgba(216,199,158,.15)', tagColor: '#a08c5a', tagBorder: 'rgba(216,199,158,.3)',
+      wa: 'Bonjour%20Nendy%2C%20j\'ai%20fait%20le%20quiz%20et%20je%20pense%20avoir%20besoin%20d\'un%20accompagnement%20conscient%20(module%20Structure).%20Je%20voudrais%20r%C3%A9server%20mon%20appel%20d%C3%A9couverte.'
+    },
+    expansif: {
+      badge: '🌳 Accompagnement Expansif',
+      badgeBg: 'rgba(238,7,165,.06)', badgeColor: '#ee07a5',
+      title: 'Vous avez besoin d\'un partenariat <span class="f">expansif.</span>',
+      desc: 'Votre business tourne, vous savez où vous allez — mais vous avez besoin d\'un vrai partenaire stratégique pour scaler sans vous effondrer. Le module Expansion est fait pour vous.',
+      offer: { label: 'Recommandation', name: 'Module Expansion', price: 'À partir de 1500€ · 60h ou abonnement 45h/mois', borderColor: '#ee07a5', bg: 'rgba(238,7,165,.04)', labelColor: 'rgba(238,7,165,.4)', nameColor: '#ee07a5', priceColor: '#5c5248' },
+      services: ['Stratégie digitale', 'Agent IA', 'Pilotage opérations', 'Coordination projet'],
+      tagBg: 'rgba(238,7,165,.06)', tagColor: '#ee07a5', tagBorder: 'rgba(238,7,165,.15)',
+      wa: 'Bonjour%20Nendy%2C%20j\'ai%20fait%20le%20quiz%20et%20je%20pense%20avoir%20besoin%20d\'un%20accompagnement%20expansif%20(module%20Expansion).%20Je%20voudrais%20r%C3%A9server%20mon%20appel%20d%C3%A9couverte.'
+    }
+  };
+
+  const r = results[winner];
+  document.getElementById('resultContent').innerHTML = `
+    <div class="result-badge" style="background:${r.badgeBg};color:${r.badgeColor};">${r.badge}</div>
+    <div class="result-title">${r.title}</div>
+    <p class="result-desc">${r.desc}</p>
+    <div class="result-offer" style="border-color:${r.offer.borderColor};background:${r.offer.bg};">
+      <div class="result-offer-label" style="color:${r.offer.labelColor};">${r.offer.label}</div>
+      <div class="result-offer-name" style="color:${r.offer.nameColor};">${r.offer.name}</div>
+      <div class="result-offer-price" style="color:${r.offer.priceColor};">${r.offer.price}</div>
+    </div>
+    <div class="result-services">
+      ${r.services.map(s => `<span class="result-tag" style="background:${r.tagBg};color:${r.tagColor};border-color:${r.tagBorder};">${s}</span>`).join('')}
+    </div>
+  `;
+
+  document.getElementById('resultCta').innerHTML = `
+    <a href="https://wa.me/590690703327?text=${r.wa}" class="result-btn-primary" target="_blank">
+      <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <div>
+        <div class="result-btn-txt">Réserver mon appel découverte gratuit</div>
+        <div class="result-btn-sub">30 min · Sans engagement · WhatsApp</div>
+      </div>
+    </a>
+  `;
+
+  document.getElementById('quizResult').classList.add('active');
+}
+
+function restartQuiz() {
+  scores.ponctuel = 0; scores.conscient = 0; scores.expansif = 0;
+  currentStep = 1;
+  document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.quiz-option').forEach(o => { o.classList.remove('selected'); o.querySelector('.quiz-option')?.removeAttribute('data-chosen'); });
+  document.querySelectorAll('.quiz-next').forEach(b => b.disabled = true);
+  document.getElementById('quizResult').classList.remove('active');
+  document.querySelector('.quiz-step[data-step="1"]').classList.add('active');
+  updateProgress();
+}
+</script>
 
 </body>
 </html>
