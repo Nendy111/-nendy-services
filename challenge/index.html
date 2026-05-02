@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Challenge 7 jours — Structure ton business · Nendy Services</title>
+<meta property="og:title" content="Challenge 7 jours — Structure ton business 🌿">
+<meta property="og:description" content="7 actions concrètes en 7 jours pour poser les bases d'un business qui tourne.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--v:#7b9a80;--vc:#b5c1a6;--b:#d8c79e;--cr:#f5f1e6;--f:#ee07a5;--txt:#1a1714;--txt2:#5c5248;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Jost',sans-serif;background:var(--cr);color:var(--txt);min-height:100vh;}
+header{background:var(--txt);padding:22px 36px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Playfair Display',serif;font-size:16px;color:var(--vc);}
+.logo small{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--b);display:block;}
+.htag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.3);}
+
+/* HERO */
+.hero{background:var(--txt);padding:60px 36px;text-align:center;}
+.hero-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--f);text-transform:uppercase;margin-bottom:16px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,6vw,56px);font-weight:700;line-height:1.1;color:white;margin-bottom:16px;}
+.hero h1 em{color:var(--f);font-style:italic;}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.55);line-height:1.75;max-width:500px;margin:0 auto 36px;}
+.hero-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;}
+.hpill{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;padding:6px 14px;border-radius:20px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.08);}
+.hero-form{max-width:420px;margin:0 auto;}
+.hero-input{width:100%;padding:14px 18px;border-radius:10px;border:none;font-family:'Jost',sans-serif;font-size:14px;background:rgba(255,255,255,.08);color:white;outline:none;margin-bottom:10px;}
+.hero-input::placeholder{color:rgba(255,255,255,.3);}
+.hero-btn{width:100%;padding:14px;background:var(--f);color:white;border:none;border-radius:10px;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:opacity .2s;}
+.hero-btn:hover{opacity:.85;}
+.hero-note{font-size:11px;color:rgba(255,255,255,.25);margin-top:8px;}
+
+/* MAIN */
+main{max-width:720px;margin:0 auto;padding:60px 28px 80px;}
+
+/* SECTION */
+.section-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--f);text-transform:uppercase;margin-bottom:8px;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,36px);font-weight:700;margin-bottom:8px;}
+.section-sub{font-size:14px;color:var(--txt2);line-height:1.75;margin-bottom:36px;}
+
+/* JOURS */
+.jours{display:flex;flex-direction:column;gap:14px;margin-bottom:60px;}
+.jour{background:white;border-radius:16px;border:1px solid rgba(123,154,128,.12);overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s;}
+.jour:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.07);}
+.jour.done{border-color:var(--v);}
+.jour.done .jour-num{background:var(--v);color:white;}
+.jour.open .jour-content{display:block;}
+.jour.open .jour-arrow{transform:rotate(180deg);}
+
+.jour-header{padding:18px 22px;display:flex;align-items:center;gap:16px;}
+.jour-num{width:44px;height:44px;border-radius:50%;background:rgba(123,154,128,.08);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--v);flex-shrink:0;transition:all .2s;}
+.jour-info{flex:1;}
+.jour-day{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--vc);text-transform:uppercase;margin-bottom:3px;}
+.jour-title{font-size:15px;font-weight:500;color:var(--txt);}
+.jour-theme{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:3px 10px;border-radius:8px;background:rgba(123,154,128,.08);color:var(--v);}
+.jour-arrow{color:var(--vc);font-size:10px;transition:transform .2s;margin-left:8px;}
+.jour-check{cursor:pointer;margin-left:4px;}
+
+.jour-content{display:none;padding:0 22px 22px;border-top:1px solid rgba(123,154,128,.08);}
+.jc-inner{padding-top:18px;}
+.jc-objectif{font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:16px;padding:12px 14px;background:rgba(123,154,128,.05);border-radius:8px;border-left:2px solid var(--v);}
+.jc-title{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--f);text-transform:uppercase;margin-bottom:8px;}
+.jc-steps{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.jc-step{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--txt);}
+.jc-step-num{font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);width:18px;flex-shrink:0;margin-top:2px;}
+.jc-tip{font-size:12px;color:var(--txt2);line-height:1.6;padding:10px 13px;background:rgba(238,7,165,.04);border-radius:8px;border-left:2px solid var(--f);}
+.jc-tip strong{color:var(--f);}
+.jc-done-btn{margin-top:14px;width:100%;padding:10px;background:transparent;border:1.5px solid rgba(123,154,128,.25);border-radius:8px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--v);cursor:pointer;transition:all .15s;text-transform:uppercase;}
+.jc-done-btn:hover{background:var(--v);color:white;border-color:var(--v);}
+.jour.done .jc-done-btn{background:var(--v);color:white;border-color:var(--v);}
+
+/* PROGRESS TRACKER */
+.tracker{background:white;border-radius:16px;border:1px solid rgba(123,154,128,.12);padding:24px;margin-bottom:60px;}
+.tracker-title{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:16px;}
+.tracker-bar{height:8px;background:rgba(123,154,128,.1);border-radius:4px;overflow:hidden;margin-bottom:10px;}
+.tracker-fill{height:8px;background:var(--v);border-radius:4px;transition:width .5s ease;width:0%;}
+.tracker-txt{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--txt2);}
+.tracker-dots{display:flex;gap:8px;margin-top:14px;}
+.tdot{width:32px;height:32px;border-radius:50%;border:2px solid rgba(123,154,128,.2);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:9px;color:var(--txt2);transition:all .2s;}
+.tdot.done{background:var(--v);border-color:var(--v);color:white;}
+
+/* CTA FINAL */
+.cta-final{background:var(--txt);border-radius:18px;padding:32px;text-align:center;}
+.cta-final h2{font-family:'Playfair Display',serif;font-size:26px;color:white;margin-bottom:10px;}
+.cta-final p{font-size:14px;color:rgba(255,255,255,.55);line-height:1.75;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--f);color:white;border:none;border-radius:10px;padding:14px 28px;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:opacity .2s;}
+.cta-btn:hover{opacity:.85;}
+
+@media(max-width:560px){header{padding:14px 18px;}hero{padding:40px 18px;}.main{padding:40px 18px 60px;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">NENDY Services<small>Challenge 7 jours</small></div>
+  <div class="htag">Structure ton business</div>
+</header>
+
+<div class="hero">
+  <div class="hero-tag">Challenge gratuit · 7 jours · 15 min/jour</div>
+  <h1>7 jours pour structurer<br>ton <em>business.</em></h1>
+  <p class="hero-sub">Une action concrète par jour. En 7 jours, tu poses les bases d'un business qui tourne — sans y passer ta vie.</p>
+  <div class="hero-pills">
+    <div class="hpill">📱 WhatsApp Business</div>
+    <div class="hpill">📅 Prise de RDV auto</div>
+    <div class="hpill">🗂️ Notion centralisé</div>
+    <div class="hpill">💰 Facturation</div>
+    <div class="hpill">🤖 Automatisation</div>
+    <div class="hpill">🌐 Présence digitale</div>
+    <div class="hpill">🏖️ Système autonome</div>
+  </div>
+  <div class="hero-form">
+    <input type="email" class="hero-input" id="heroEmail" placeholder="ton@email.com — pour recevoir le récap chaque jour">
+    <button class="hero-btn" onclick="startChallenge()">Je commence le challenge →</button>
+    <div class="hero-note">🔒 Aucun spam. Juste 7 emails utiles.</div>
+  </div>
+</div>
+
+<main>
+
+  <!-- TRACKER -->
+  <div class="tracker">
+    <div class="tracker-title">Ta progression 🌿</div>
+    <div class="tracker-bar"><div class="tracker-fill" id="tfill"></div></div>
+    <div class="tracker-txt" id="ttxt">0 / 7 jours complétés</div>
+    <div class="tracker-dots" id="tdots"></div>
+  </div>
+
+  <!-- JOURS -->
+  <div class="section-tag">Les 7 actions</div>
+  <div class="section-title">Une action.<br>Un jour. Un résultat.</div>
+  <p class="section-sub">Chaque action est réalisable en 15-30 minutes. Coche quand c'est fait — et passe au suivant.</p>
+
+  <div class="jours" id="jours"></div>
+
+  <!-- CTA FINAL -->
+  <div class="cta-final">
+    <h2>Tu veux aller plus vite ? 🌿</h2>
+    <p>Je peux configurer tout ça pour toi en 48-72h — sans que tu aies à y passer tes soirées. Un appel découverte de 30 min pour voir par où commencer.</p>
+    <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" target="_blank" class="cta-btn">Réserver mon appel gratuit →</a>
+  </div>
+
+</main>
+
+<script>
+var HOOK = 'https://hooks.zapier.com/hooks/catch/27297216/uv8zdhj/';
+var done = {};
+
+var JOURS_DATA = [
+  {
+    num:'J1', day:'Jour 1', title:'Configure ton WhatsApp Business', theme:'Communication',
+    objectif:'Aujourd\'hui tu professionnalises ton premier point de contact client. En 20 minutes, ton WhatsApp passe de perso à pro.',
+    steps:[
+      'Télécharge WhatsApp Business si ce n\'est pas encore fait',
+      'Remplis ton profil : photo pro, nom de ton activité, description courte, site web',
+      'Configure un message de bienvenue automatique ("Bonjour, merci de m\'avoir contacté·e. Je reviens vers vous dans les 24h.")',
+      'Active le message d\'absence pour les heures creuses',
+      'Crée 3 étiquettes : Nouveau client · En cours · À relancer'
+    ],
+    tip:'<strong>Astuce Nendy :</strong> Ton message de bienvenue doit donner une attente claire. "Je reviens dans les 24h" vaut mieux que pas de réponse pendant 3 jours.'
+  },
+  {
+    num:'J2', day:'Jour 2', title:'Automatise ta prise de rendez-vous', theme:'Organisation',
+    objectif:'Fini les aller-retours pour trouver un créneau. Aujourd\'hui tu mets en place un système qui gère tes RDV à ta place.',
+    steps:[
+      'Crée un compte Calendly (gratuit)',
+      'Connecte-le à ton Google Calendar',
+      'Configure tes disponibilités (jours, horaires, durée des RDV)',
+      'Personnalise l\'email de confirmation que reçoit le client',
+      'Active le rappel automatique 24h avant le RDV',
+      'Copie ton lien Calendly — mets-le dans ta bio Instagram et ta signature email'
+    ],
+    tip:'<strong>Astuce Nendy :</strong> Ajoute une question dans Calendly — "Quel est le sujet de l\'appel ?" Tu arrives préparé·e à chaque fois.'
+  },
+  {
+    num:'J3', day:'Jour 3', title:'Crée ton espace Notion central', theme:'Productivité',
+    objectif:'Tout dans un seul endroit. Aujourd\'hui tu poses les fondations de ton QG digital.',
+    steps:[
+      'Crée un compte Notion gratuit',
+      'Crée une page principale "Mon Business"',
+      'Ajoute 4 sous-pages : Clients · Projets · Finances · Contenu',
+      'Dans Clients : crée un tableau avec les colonnes Nom, Statut, Contact, Prestation, Notes',
+      'Ajoute tes 3-5 premiers clients dans ce tableau',
+      'Épingle la page sur ton bureau ou en favoris du navigateur'
+    ],
+    tip:'<strong>Astuce Nendy :</strong> Ne cherche pas la perfection le jour 1. Un Notion basique utilisé vaut 100 fois mieux qu\'un Notion parfait jamais ouvert.'
+  },
+  {
+    num:'J4', day:'Jour 4', title:'Structure ta facturation', theme:'Finances',
+    objectif:'Plus jamais de facture oubliée. Aujourd\'hui tu mets en place un système simple pour tes devis et factures.',
+    steps:[
+      'Télécharge Freebe, Indy ou Tiime (gratuit pour démarrer)',
+      'Renseigne tes informations légales et coordonnées bancaires',
+      'Crée un premier devis type pour ta prestation principale',
+      'Configure ta numérotation automatique (FACT-2026-001)',
+      'Teste en t\'envoyant un devis fictif',
+      'Note la date du prochain devis à envoyer dans ton Notion'
+    ],
+    tip:'<strong>Astuce Nendy :</strong> Le devis doit partir dans les 24h après un appel. Chaque heure qui passe refroidit le prospect.'
+  },
+  {
+    num:'J5', day:'Jour 5', title:'Professionnalise ta présence en ligne', theme:'Visibilité',
+    objectif:'Aujourd\'hui tu soignes ce que voit un client qui te cherche pour la première fois.',
+    steps:[
+      'Vérifie que ta page Facebook ou Instagram pro est bien configurée',
+      'Mets à jour ta bio avec : ce que tu fais, pour qui, et un CTA clair',
+      'Ajoute ton lien Calendly dans ta bio Instagram',
+      'Si tu as un site : vérifie que ton email et le lien de RDV sont visibles',
+      'Publie un post simple aujourd\'hui — une tip, une conviction, une coulisse',
+      'Réponds à tous tes messages en attente'
+    ],
+    tip:'<strong>Astuce Nendy :</strong> Ta bio c\'est ton pitch en 3 lignes. Qui tu es → ce que tu fais → comment te contacter. Simple et direct.'
+  },
+  {
+    num:'J6', day:'Jour 6', title:'Crée ton premier process client', theme:'Systèmes',
+    objectif:'Aujourd\'hui tu documentes comment tu accueilles un nouveau client — pour ne plus jamais repartir de zéro.',
+    steps:[
+      'Dans Notion, crée une page "Onboarding Client"',
+      'Écris les 5 étapes de ton accueil client (signature → premier contact → questionnaire → démarrage → suivi)',
+      'Crée un email de bienvenue type que tu copieras à chaque nouveau client',
+      'Prépare une liste de ce que tu as besoin du client pour démarrer',
+      'Crée un dossier Google Drive partageable pour chaque client type',
+      'Documente le tout en moins de 30 minutes — pas besoin que ce soit parfait'
+    ],
+    tip:'<strong>Astuce Nendy :</strong> Un bon onboarding c\'est la première impression que tu laisses. Un client bien accueilli reste plus longtemps et recommande plus facilement.'
+  },
+  {
+    num:'J7', day:'Jour 7', title:'Teste l\'autonomie de ton système', theme:'Autonomie',
+    objectif:'Le test final. Aujourd\'hui tu vérifies que ton système peut tourner sans toi — au moins un peu.',
+    steps:[
+      'Imagine que tu es absent·e 3 jours — qu\'est-ce qui se passe ?',
+      'Liste les 3 tâches que tu es le/la seul·e à pouvoir faire',
+      'Pour chacune : existe-t-il un outil ou une automatisation qui peut la remplacer ?',
+      'Configure au moins 1 automatisation supplémentaire aujourd\'hui (relance email, rappel Notion...)',
+      'Célèbre — tu as posé 7 bases solides cette semaine',
+      'Partage ton avancement — tag @nendy_services sur Instagram'
+    ],
+    tip:'<strong>Astuce Nendy :</strong> L\'objectif n\'est pas que tu ne travailles plus. C\'est que tu travailles sur ton business — pas dans ton business.'
+  }
+];
+
+function buildJours() {
+  var html = '';
+  var dotsHtml = '';
+  JOURS_DATA.forEach(function(j, i) {
+    var idx = i + 1;
+    html += '<div class="jour" id="j'+idx+'" onclick="toggleJour('+idx+')">';
+    html += '<div class="jour-header">';
+    html += '<div class="jour-num" id="jnum'+idx+'">'+j.num+'</div>';
+    html += '<div class="jour-info"><div class="jour-day">'+j.day+'</div><div class="jour-title">'+j.title+'</div></div>';
+    html += '<div class="jour-theme">'+j.theme+'</div>';
+    html += '<div class="jour-arrow" id="jarr'+idx+'">▼</div>';
+    html += '</div>';
+    html += '<div class="jour-content" id="jc'+idx+'">';
+    html += '<div class="jc-inner">';
+    html += '<div class="jc-objectif">🎯 '+j.objectif+'</div>';
+    html += '<div class="jc-title">Les étapes</div>';
+    html += '<div class="jc-steps">';
+    j.steps.forEach(function(s, si) {
+      html += '<div class="jc-step"><div class="jc-step-num">0'+(si+1)+'</div>'+s+'</div>';
+    });
+    html += '</div>';
+    html += '<div class="jc-tip">'+j.tip+'</div>';
+    html += '<button class="jc-done-btn" id="dbtn'+idx+'" onclick="markDone(event,'+idx+')">✓ Marquer comme complété</button>';
+    html += '</div></div></div>';
+
+    dotsHtml += '<div class="tdot" id="tdot'+idx+'">'+idx+'</div>';
+  });
+  document.getElementById('jours').innerHTML = html;
+  document.getElementById('tdots').innerHTML = dotsHtml;
+}
+
+function toggleJour(n) {
+  var jour = document.getElementById('j'+n);
+  var isOpen = jour.classList.contains('open');
+  document.querySelectorAll('.jour').forEach(function(j) { j.classList.remove('open'); });
+  document.querySelectorAll('.jour-arrow').forEach(function(a) { a.style.transform = ''; });
+  if (!isOpen) {
+    jour.classList.add('open');
+  }
+}
+
+function markDone(e, n) {
+  e.stopPropagation();
+  done[n] = !done[n];
+  var jour = document.getElementById('j'+n);
+  var btn = document.getElementById('dbtn'+n);
+  var dot = document.getElementById('tdot'+n);
+  var num = document.getElementById('jnum'+n);
+  if (done[n]) {
+    jour.classList.add('done');
+    btn.textContent = '✓ Complété !';
+    dot.classList.add('done');
+    num.textContent = '✓';
+  } else {
+    jour.classList.remove('done');
+    btn.textContent = '✓ Marquer comme complété';
+    dot.classList.remove('done');
+    num.textContent = JOURS_DATA[n-1].num;
+  }
+  updateTracker();
+}
+
+function updateTracker() {
+  var count = Object.values(done).filter(Boolean).length;
+  var pct = (count / 7) * 100;
+  document.getElementById('tfill').style.width = pct + '%';
+  document.getElementById('ttxt').textContent = count + ' / 7 jours complétés';
+}
+
+function startChallenge() {
+  var email = document.getElementById('heroEmail').value;
+  if (!email) { alert('Entre ton email pour démarrer !'); return; }
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', HOOK, true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify({type: 'Challenge 7 jours', email: email, action: 'Inscription'}));
+  document.getElementById('heroEmail').value = '';
+  document.querySelector('.hero-btn').textContent = 'Inscrit·e ! On commence 🌿';
+  document.querySelector('.hero-btn').style.background = '#7b9a80';
+  document.querySelector('main').scrollIntoView({behavior:'smooth'});
+}
+
+buildJours();
+</script>
+</body>
+</html>
