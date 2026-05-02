@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quel entrepreneur es-tu ? · Nendy Services</title>
+<meta property="og:title" content="Quel entrepreneur es-tu ? 🌿">
+<meta property="og:description" content="6 questions pour découvrir ton profil — et ce qui bloque vraiment ton business.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --v:#7b9a80; --vc:#b5c1a6; --b:#d8c79e; --cr:#f5f1e6; --f:#ee07a5;
+  --txt:#1a1714; --txt2:#5c5248; --bg:#1a1714; --card:#221f1c;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--cr);color:var(--txt);min-height:100vh;overflow-x:hidden;}
+
+/* PROGRESS */
+.progress-bar{position:fixed;top:0;left:0;right:0;height:3px;background:rgba(123,154,128,.15);z-index:100;}
+.progress-fill{height:3px;background:var(--f);transition:width .5s ease;width:0%;}
+
+/* HEADER */
+header{padding:24px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(123,154,128,.15);}
+.logo{font-family:'Playfair Display',serif;font-size:16px;color:var(--v);}
+.logo small{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--b);display:block;}
+.q-counter{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--txt2);}
+
+/* MAIN */
+main{max-width:640px;margin:0 auto;padding:56px 28px 80px;}
+
+/* STEPS */
+.step{display:none;animation:fadeUp .4s ease;}
+.step.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+
+/* INTRO */
+.intro-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--f);text-transform:uppercase;margin-bottom:12px;}
+.intro-title{font-family:'Playfair Display',serif;font-size:clamp(32px,6vw,52px);font-weight:700;line-height:1.1;margin-bottom:16px;}
+.intro-title em{color:var(--v);font-style:italic;}
+.intro-sub{font-size:15px;color:var(--txt2);line-height:1.75;margin-bottom:32px;max-width:480px;}
+.intro-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;}
+.pill{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;padding:6px 14px;border-radius:20px;background:var(--txt);color:rgba(255,255,255,.6);}
+.btn-start{display:inline-flex;align-items:center;gap:10px;background:var(--f);color:white;border:none;border-radius:12px;padding:16px 32px;font-family:'Jost',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:transform .2s,opacity .2s;}
+.btn-start:hover{transform:translateY(-2px);}
+
+/* QUESTION */
+.q-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--vc);text-transform:uppercase;margin-bottom:10px;}
+.q-title{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,34px);font-weight:700;line-height:1.2;margin-bottom:8px;}
+.q-sub{font-size:13px;color:var(--txt2);margin-bottom:32px;}
+
+/* OPTIONS */
+.options{display:flex;flex-direction:column;gap:10px;}
+.option{padding:16px 20px;border:1.5px solid rgba(123,154,128,.2);border-radius:14px;background:white;cursor:pointer;transition:all .2s;display:flex;align-items:flex-start;gap:14px;user-select:none;}
+.option:hover{border-color:var(--v);transform:translateX(4px);}
+.option.selected{border-color:var(--f);background:rgba(238,7,165,.04);transform:translateX(4px);}
+.opt-letter{font-family:'DM Mono',monospace;font-size:10px;color:var(--vc);width:20px;flex-shrink:0;margin-top:2px;}
+.option.selected .opt-letter{color:var(--f);}
+.opt-txt{font-size:14px;color:var(--txt);line-height:1.5;}
+.opt-sub{font-size:12px;color:var(--txt2);margin-top:2px;}
+
+/* NAV */
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:36px;padding-top:24px;border-top:1px solid rgba(123,154,128,.1);}
+.btn-back{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--txt2);background:none;border:none;cursor:pointer;}
+.btn-back:hover{color:var(--txt);}
+.btn-next{display:inline-flex;align-items:center;gap:8px;background:var(--txt);color:white;border:none;border-radius:10px;padding:13px 26px;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:transform .2s;opacity:.4;pointer-events:none;}
+.btn-next.ready{opacity:1;pointer-events:all;}
+.btn-next.ready:hover{transform:translateY(-2px);}
+.btn-next.pink{background:var(--f);}
+
+/* EMAIL STEP */
+.email-wrap{margin-bottom:20px;}
+.email-label{font-size:13px;font-weight:500;color:var(--txt);margin-bottom:8px;}
+.email-input{width:100%;padding:14px 16px;border:1.5px solid rgba(123,154,128,.2);border-radius:10px;font-family:'Jost',sans-serif;font-size:14px;background:white;color:var(--txt);outline:none;transition:border .2s;}
+.email-input:focus{border-color:var(--v);}
+.email-hint{font-size:11px;color:var(--txt2);margin-top:6px;}
+
+/* RÉSULTAT */
+#result{display:none;}
+.result-header{text-align:center;margin-bottom:48px;}
+.result-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--f);text-transform:uppercase;margin-bottom:12px;}
+.result-emoji{font-size:64px;margin-bottom:16px;display:block;}
+.result-profil{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,44px);font-weight:700;line-height:1.1;margin-bottom:8px;}
+.result-tagline{font-size:15px;color:var(--txt2);font-style:italic;margin-bottom:32px;}
+
+.result-card{background:white;border-radius:20px;border:1px solid rgba(123,154,128,.12);padding:28px;margin-bottom:16px;}
+.rc-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--f);text-transform:uppercase;margin-bottom:10px;}
+.rc-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--txt);margin-bottom:8px;}
+.rc-txt{font-size:14px;color:var(--txt2);line-height:1.75;}
+
+.forces{display:flex;flex-direction:column;gap:8px;margin-top:12px;}
+.force{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--txt);}
+.force-dot{width:6px;height:6px;border-radius:50%;background:var(--v);flex-shrink:0;}
+
+.blocages{display:flex;flex-direction:column;gap:8px;margin-top:12px;}
+.blocage{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--txt);}
+.blocage-dot{width:6px;height:6px;border-radius:50%;background:var(--f);flex-shrink:0;}
+
+/* RECO OFFRE */
+.reco-box{background:var(--txt);border-radius:20px;padding:28px;margin-bottom:24px;}
+.reco-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:12px;}
+.reco-title{font-family:'Playfair Display',serif;font-size:20px;color:white;margin-bottom:8px;}
+.reco-txt{font-size:13px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:20px;}
+.reco-offres{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+.reco-offre{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;padding:5px 12px;border-radius:8px;background:rgba(123,154,128,.15);color:var(--vc);}
+
+/* CTA */
+.cta-box{background:var(--v);border-radius:16px;padding:28px;text-align:center;}
+.cta-title{font-family:'Playfair Display',serif;font-size:22px;color:white;margin-bottom:8px;}
+.cta-sub{font-size:13px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:20px;}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--f);color:white;border:none;border-radius:10px;padding:14px 28px;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:opacity .2s;}
+.cta-btn:hover{opacity:.85;}
+.cta-share{margin-top:12px;font-size:12px;color:rgba(255,255,255,.5);}
+
+/* SHARE */
+.share-row{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap;}
+.share-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);background:transparent;cursor:pointer;transition:all .15s;text-decoration:none;}
+.share-btn:hover{border-color:white;color:white;}
+
+/* LOADING */
+.loading{text-align:center;padding:60px 0;}
+.loading-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--f);animation:pulse 1.4s ease-in-out infinite;}
+.loading-dot:nth-child(2){animation-delay:.2s;background:var(--v);}
+.loading-dot:nth-child(3){animation-delay:.4s;background:var(--b);}
+@keyframes pulse{0%,80%,100%{transform:scale(0.6);opacity:.4;}40%{transform:scale(1);opacity:1;}}
+
+@media(max-width:560px){
+  header{padding:16px 20px;}
+  main{padding:36px 18px 60px;}
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="pbar"></div></div>
+
+<header>
+  <div class="logo">NENDY Services<small>Quel entrepreneur es-tu ?</small></div>
+  <div class="q-counter" id="qcounter">6 questions · 2 min</div>
+</header>
+
+<main>
+
+<!-- INTRO -->
+<div class="step active" id="s0">
+  <div class="intro-tag">Quiz · Gratuit · 2 minutes</div>
+  <h1 class="intro-title">Quel<br>entrepreneur<br><em>es-tu ?</em></h1>
+  <p class="intro-sub">6 questions pour découvrir ton profil — et comprendre ce qui bloque vraiment ton business.</p>
+  <div class="intro-pills">
+    <div class="pill">🌀 Le Chaosé</div>
+    <div class="pill">🧠 Le Solitaire</div>
+    <div class="pill">🎯 Le Perfectionniste</div>
+    <div class="pill">🌿 Le Libéré</div>
+    <div class="pill">⚡ Le Débordé</div>
+  </div>
+  <button class="btn-start" onclick="startQuiz()">Découvrir mon profil →</button>
+</div>
+
+<!-- Q1 -->
+<div class="step" id="s1">
+  <div class="q-tag">Question 01 / 06</div>
+  <h2 class="q-title">Il est 8h du matin. Tu ouvres ton téléphone. C'est quoi ta réalité ?</h2>
+  <p class="q-sub">Choisis la réponse qui te correspond le mieux.</p>
+  <div class="options" id="opts1">
+    <div class="option" onclick="selectOpt(this,1,'chaos')">
+      <div class="opt-letter">A</div>
+      <div><div class="opt-txt">47 notifications. Tu sais même pas par où commencer.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,1,'solitaire')">
+      <div class="opt-letter">B</div>
+      <div><div class="opt-txt">Tu relis ta to-do liste dans ta tête. Elle est longue.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,1,'perfectionniste')">
+      <div class="opt-letter">C</div>
+      <div><div class="opt-txt">Tu revérifies les mails d'hier pour être sûr·e de n'avoir rien raté.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,1,'libere')">
+      <div class="opt-letter">D</div>
+      <div><div class="opt-txt">Ton dashboard Notion est ouvert. Tu sais exactement ce que tu fais aujourd'hui.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,1,'deborde')">
+      <div class="opt-letter">E</div>
+      <div><div class="opt-txt">Tu travailles déjà depuis 6h. Tu t'es pas arrêté·e.</div></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn-back" onclick="goBack(0)">← Retour</button>
+    <button class="btn-next" id="next1" onclick="goNext(2)">Continuer →</button>
+  </div>
+</div>
+
+<!-- Q2 -->
+<div class="step" id="s2">
+  <div class="q-tag">Question 02 / 06</div>
+  <h2 class="q-title">Un nouveau client veut te contacter. Il t'écrit à 21h. Que se passe-t-il ?</h2>
+  <p class="q-sub">Sois honnête — pas de bonne ou mauvaise réponse.</p>
+  <div class="options" id="opts2">
+    <div class="option" onclick="selectOpt(this,2,'chaos')">
+      <div class="opt-letter">A</div>
+      <div><div class="opt-txt">Il attend le lendemain. Ou le surlendemain. Il a peut-être trouvé quelqu'un d'autre.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,2,'solitaire')">
+      <div class="opt-letter">B</div>
+      <div><div class="opt-txt">Tu réponds toi-même à 21h. Toujours.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,2,'perfectionniste')">
+      <div class="opt-letter">C</div>
+      <div><div class="opt-txt">Tu lis le message, tu y réfléchis, tu relis, tu corriges, tu envoies 1h après.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,2,'libere')">
+      <div class="opt-letter">D</div>
+      <div><div class="opt-txt">Il reçoit un message automatique avec un lien pour réserver un appel directement.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,2,'deborde')">
+      <div class="opt-letter">E</div>
+      <div><div class="opt-txt">Tu réponds immédiatement, mais tu as 12 autres conversations ouvertes en parallèle.</div></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn-back" onclick="goBack(1)">← Retour</button>
+    <button class="btn-next" id="next2" onclick="goNext(3)">Continuer →</button>
+  </div>
+</div>
+
+<!-- Q3 -->
+<div class="step" id="s3">
+  <div class="q-tag">Question 03 / 06</div>
+  <h2 class="q-title">Comment tu gères tes factures et devis en ce moment ?</h2>
+  <div class="options" id="opts3">
+    <div class="option" onclick="selectOpt(this,3,'chaos')">
+      <div class="opt-letter">A</div>
+      <div><div class="opt-txt">Il y en a une dans mes mails, une sur Word, une que j'ai oublié d'envoyer.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,3,'solitaire')">
+      <div class="opt-letter">B</div>
+      <div><div class="opt-txt">Je les fais moi-même. À la main. Chaque fois.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,3,'perfectionniste')">
+      <div class="opt-letter">C</div>
+      <div><div class="opt-txt">J'ai un template parfait que je peaufine à chaque fois.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,3,'libere')">
+      <div class="opt-letter">D</div>
+      <div><div class="opt-txt">Logiciel dédié. Ça part automatiquement. Je vérifie juste.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,3,'deborde')">
+      <div class="opt-letter">E</div>
+      <div><div class="opt-txt">Je les reporte depuis des semaines. Je sais pas quand j'aurai le temps.</div></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn-back" onclick="goBack(2)">← Retour</button>
+    <button class="btn-next" id="next3" onclick="goNext(4)">Continuer →</button>
+  </div>
+</div>
+
+<!-- Q4 -->
+<div class="step" id="s4">
+  <div class="q-tag">Question 04 / 06</div>
+  <h2 class="q-title">Si tu partais 10 jours sans regarder ton téléphone, que se passerait-il ?</h2>
+  <div class="options" id="opts4">
+    <div class="option" onclick="selectOpt(this,4,'chaos')">
+      <div class="opt-letter">A</div>
+      <div><div class="opt-txt">Le chaos. Des clients perdus. Des messages sans réponse. Le carnage.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,4,'solitaire')">
+      <div class="opt-letter">B</div>
+      <div><div class="opt-txt">Tout s'arrête. Je suis le seul système qui fait tourner mon business.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,4,'perfectionniste')">
+      <div class="opt-letter">C</div>
+      <div><div class="opt-txt">Je pourrais pas. J'aurais trop peur que quelque chose cloche.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,4,'libere')">
+      <div class="opt-letter">D</div>
+      <div><div class="opt-txt">Mes automatisations tournent. Je reviens avec des demandes dans ma boîte.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,4,'deborde')">
+      <div class="opt-letter">E</div>
+      <div><div class="opt-txt">Je pourrais pas non plus. Il y a trop de choses urgentes en permanence.</div></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn-back" onclick="goBack(3)">← Retour</button>
+    <button class="btn-next" id="next4" onclick="goNext(5)">Continuer →</button>
+  </div>
+</div>
+
+<!-- Q5 -->
+<div class="step" id="s5">
+  <div class="q-tag">Question 05 / 06</div>
+  <h2 class="q-title">Quelle phrase te ressemble le plus en ce moment ?</h2>
+  <div class="options" id="opts5">
+    <div class="option" onclick="selectOpt(this,5,'chaos')">
+      <div class="opt-letter">A</div>
+      <div><div class="opt-txt">"J'ai plein d'idées mais rien n'avance vraiment."</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,5,'solitaire')">
+      <div class="opt-letter">B</div>
+      <div><div class="opt-txt">"Je préfère faire moi-même, au moins je sais que c'est bien fait."</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,5,'perfectionniste')">
+      <div class="opt-letter">C</div>
+      <div><div class="opt-txt">"Je voudrais publier mais ce n'est jamais assez parfait."</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,5,'libere')">
+      <div class="opt-letter">D</div>
+      <div><div class="opt-txt">"Mon système tourne, maintenant je cherche à passer au niveau suivant."</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,5,'deborde')">
+      <div class="opt-letter">E</div>
+      <div><div class="opt-txt">"Je travaille beaucoup mais j'ai l'impression de courir sur place."</div></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn-back" onclick="goBack(4)">← Retour</button>
+    <button class="btn-next" id="next5" onclick="goNext(6)">Continuer →</button>
+  </div>
+</div>
+
+<!-- Q6 -->
+<div class="step" id="s6">
+  <div class="q-tag">Question 06 / 06</div>
+  <h2 class="q-title">Qu'est-ce que tu veux vraiment dans les 3 prochains mois ?</h2>
+  <div class="options" id="opts6">
+    <div class="option" onclick="selectOpt(this,6,'chaos')">
+      <div class="opt-letter">A</div>
+      <div><div class="opt-txt">Arrêter de m'épuiser et avoir enfin un système clair.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,6,'solitaire')">
+      <div class="opt-letter">B</div>
+      <div><div class="opt-txt">Apprendre à déléguer sans avoir peur de perdre le contrôle.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,6,'perfectionniste')">
+      <div class="opt-letter">C</div>
+      <div><div class="opt-txt">Me lancer vraiment, sans attendre que tout soit parfait.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,6,'libere')">
+      <div class="opt-letter">D</div>
+      <div><div class="opt-txt">Automatiser davantage et scaler sans me rajouter de charge.</div></div>
+    </div>
+    <div class="option" onclick="selectOpt(this,6,'deborde')">
+      <div class="opt-letter">E</div>
+      <div><div class="opt-txt">Souffler. Juste souffler un peu.</div></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn-back" onclick="goBack(5)">← Retour</button>
+    <button class="btn-next pink" id="next6" onclick="goEmail()">Voir mon profil →</button>
+  </div>
+</div>
+
+<!-- EMAIL -->
+<div class="step" id="s-email">
+  <div class="q-tag">Presque là ✦</div>
+  <h2 class="q-title">Où on envoie<br>ton profil ?</h2>
+  <p class="q-sub">Tu recevras aussi des conseils personnalisés selon ton profil. Aucun spam — juste ce qui est utile.</p>
+  <div class="email-wrap">
+    <div class="email-label">Ton email</div>
+    <input type="email" class="email-input" id="emailInput" placeholder="ton@email.com">
+    <div class="email-hint">🔒 Tes données restent confidentielles. Aucune revente.</div>
+  </div>
+  <div class="nav" style="border:none;padding:0;justify-content:flex-end;">
+    <button class="btn-next pink ready" onclick="showResult()" style="opacity:1;pointer-events:all;">
+      Révéler mon profil →
+    </button>
+  </div>
+</div>
+
+<!-- RÉSULTAT -->
+<div id="result">
+  <div class="loading" id="loading">
+    <div style="margin-bottom:20px;">
+      <span class="loading-dot"></span>
+      <span class="loading-dot"></span>
+      <span class="loading-dot"></span>
+    </div>
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--txt2);">Analyse de ton profil...</div>
+  </div>
+
+  <div id="result-content" style="display:none;">
+    <div class="result-header">
+      <div class="result-tag">Ton profil entrepreneur</div>
+      <div class="result-emoji" id="r-emoji"></div>
+      <div class="result-profil" id="r-profil"></div>
+      <div class="result-tagline" id="r-tagline"></div>
+    </div>
+
+    <div class="result-card">
+      <div class="rc-label">Ce qui te définit</div>
+      <div class="rc-title" id="r-define-title"></div>
+      <div class="rc-txt" id="r-define-txt"></div>
+    </div>
+
+    <div class="result-card">
+      <div class="rc-label">Tes vraies forces 🌿</div>
+      <div class="forces" id="r-forces"></div>
+    </div>
+
+    <div class="result-card">
+      <div class="rc-label">Ce qui te bloque vraiment</div>
+      <div class="blocages" id="r-blocages"></div>
+    </div>
+
+    <div class="reco-box">
+      <div class="reco-label">Ce que Nendy peut faire pour toi</div>
+      <div class="reco-title" id="r-reco-title"></div>
+      <div class="reco-txt" id="r-reco-txt"></div>
+      <div class="reco-offres" id="r-offres"></div>
+    </div>
+
+    <div class="cta-box">
+      <div class="cta-title">Prêt·e à changer ça ? 🌿</div>
+      <div class="cta-sub">Un appel découverte de 30 minutes — gratuit, sans engagement. On regarde ensemble ce qui peut changer rapidement pour toi.</div>
+      <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" target="_blank" class="cta-btn">
+        Réserver mon appel gratuit →
+      </a>
+      <div class="cta-share">Partage ton profil avec un·e entrepreneur·e que tu connais 👇</div>
+      <div class="share-row">
+        <a href="#" onclick="shareResult()" class="share-btn">📋 Copier le lien</a>
+        <a href="#" onclick="shareLinkedIn()" class="share-btn">💼 LinkedIn</a>
+        <a href="#" onclick="shareWhatsApp()" class="share-btn">💬 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+var HOOK = 'https://hooks.zapier.com/hooks/catch/27297216/uv8zdhj/';
+var cur = 0;
+var answers = {};
+
+var PROFILS = {
+  chaos: {
+    emoji: '🌀',
+    profil: 'Le Chaosé',
+    tagline: 'Débordé mais ambitieux — l\'énergie est là, le système manque.',
+    defineTitle: 'Tu bouges vite, tu penses grand — mais tout part dans tous les sens.',
+    defineTxt: 'Tu as de l\'ambition, des idées, de l\'énergie. Le problème ce n\'est pas ta motivation — c\'est l\'absence d\'une architecture qui tient tout ça ensemble. Tu gères à vue, tu éteins des feux, et tu finis la journée épuisé·e sans avoir vraiment avancé.',
+    forces: ['Une capacité à générer des idées et à t\'adapter rapidement', 'Une énergie et une motivation que peu de gens ont', 'Tu sais ce que tu veux — tu manques juste d\'un chemin clair pour y arriver'],
+    blocages: ['L\'absence de système te coûte des clients et de l\'énergie chaque jour', 'Tu réinventes la roue en permanence faute de process documentés', 'La dispersion t\'empêche de capitaliser sur ce que tu fais bien'],
+    recoTitle: 'Un écosystème qui tient — enfin.',
+    recoTxt: 'Tu as besoin d\'un audit de ta situation, d\'un plan d\'action clair et d\'outils configurés pour que tout soit à sa place. On commence par ce qui a le plus d\'impact immédiat.',
+    offres: ['AUDIT_BUSINESS', 'SETUP_NOTION', 'DIGITAL_START']
+  },
+  solitaire: {
+    emoji: '🧠',
+    profil: 'Le Solitaire',
+    tagline: 'Tout dans la tête — efficace jusqu\'à ce que ça craque.',
+    defineTitle: 'Tu portes tout seul·e. Et tu es épuisé·e de le faire.',
+    defineTxt: 'Tu maîtrises ton activité mieux que quiconque — mais tout passe par toi. Tu ne délègues pas parce que tu penses que personne ne fera aussi bien. Résultat : ton business ne peut pas grandir sans toi, et toi tu ne peux pas souffler.',
+    forces: ['Une expertise réelle et une rigueur que tes clients apprécient', 'Tu connais chaque détail de ton activité sur le bout des doigts', 'Tu es fiable — les gens peuvent compter sur toi'],
+    blocages: ['Tu es le goulot d\'étranglement de ton propre business', 'Tu ne peux pas scaler sans t\'épuiser davantage', 'La peur de déléguer t\'empêche de libérer du temps pour ce qui compte vraiment'],
+    recoTitle: 'Construire un système qui tourne sans toi.',
+    recoTxt: 'Tu as besoin d\'externaliser ce qui peut l\'être et de documenter ce qui reste. On commence par configurer les outils qui t\'évitent de tout faire manuellement.',
+    offres: ['AUTO_RDV', 'SETUP_WA', 'ABO_ORG']
+  },
+  perfectionniste: {
+    emoji: '🎯',
+    profil: 'Le Perfectionniste',
+    tagline: 'Jamais assez prêt·e — mais toujours à fond.',
+    defineTitle: 'Tu peaufines en permanence. Mais pendant ce temps, tu n\'avances pas.',
+    defineTxt: 'Tu veux que tout soit parfait avant de montrer quoi que ce soit. Tes devis sont relus 10 fois. Tu repousses la publication du post parce que le visuel n\'est pas assez bien. Et pendant ce temps, d\'autres avancent avec des trucs imparfaits mais publiés.',
+    forces: ['Une qualité de travail irréprochable que tes clients adorent', 'Une attention au détail qui fait la différence sur tes livrables', 'Tu ne bâcles jamais — c\'est une vraie force dans ton marché'],
+    blocages: ['Le perfectionnisme est devenu un frein plus qu\'un atout', 'Tu passes plus de temps à corriger qu\'à créer', 'La peur du jugement t\'empêche de publier et de te montrer'],
+    recoTitle: 'Des templates et des process pour avancer sans te bloquer.',
+    recoTxt: 'Tu as besoin de systèmes qui décident pour toi — des templates prêts, des process validés une fois pour toutes. Plus de questionnement sur la forme, juste le fond.',
+    offres: ['DIGITAL_START', 'SETUP_NOTION', 'AUTO_RDV']
+  },
+  libere: {
+    emoji: '🌿',
+    profil: 'Le Libéré',
+    tagline: 'Tu as posé les bases — maintenant tu veux aller plus loin.',
+    defineTitle: 'Ton business tourne. Tu cherches le niveau suivant.',
+    defineTxt: 'Tu es déjà bien organisé·e — tu as des outils, des process, une certaine fluidité dans ton quotidien. Mais tu sens qu\'il reste de la marge. Des automatisations à pousser, des tâches encore manuelles, des flux à optimiser.',
+    forces: ['Tu as déjà construit quelque chose qui tient — c\'est rare', 'Tu sais déléguer et faire confiance — une compétence précieuse', 'Tu penses systèmes, pas juste tâches'],
+    blocages: ['Des automatisations encore manquantes qui te coûtent du temps', 'Des opportunités de scale que tu n\'as pas encore saisies', 'Tu pourrais aller plus vite avec les bons outils IA'],
+    recoTitle: 'Passer au niveau supérieur.',
+    recoTxt: 'Tu as les bases — il est temps d\'automatiser davantage, d\'intégrer l\'IA dans tes flux et d\'optimiser ce qui reste manuel. Le prochain palier est là.',
+    offres: ['AGENT_IA', 'ABO_PARTNER', 'HAUTE COUTURE']
+  },
+  deborde: {
+    emoji: '⚡',
+    profil: 'Le Débordé',
+    tagline: 'Tu travailles beaucoup — mais tu cours sur place.',
+    defineTitle: 'Tu es dans l\'action permanente. Mais le résultat ne suit pas.',
+    defineTxt: 'Tu travailles énormément. Trop. Mais tu as l\'impression de ne jamais avancer vraiment. C\'est parce que tu passes ton énergie sur des tâches qui devraient être automatisées, déléguées ou supprimées. Tu es occupé·e — pas productif·ve.',
+    forces: ['Une capacité de travail et une résilience impressionnantes', 'Tu t\'investis à 100% — tes clients le ressentent', 'Tu sais ce qu\'il faut faire — tu manques de temps pour le faire'],
+    blocages: ['Tu confonds agitation et avancement — ce n\'est pas la même chose', 'Tu n\'as pas de système pour prioriser ce qui compte vraiment', 'Tu as besoin de souffler — et de quelqu\'un pour prendre le relais'],
+    recoTitle: 'Souffler enfin — et déléguer intelligemment.',
+    recoTxt: 'Tu as besoin d\'un bras droit qui prend en charge l\'opérationnel pour que tu puisses enfin te concentrer sur ce qui compte. On commence par identifier ce qui peut partir immédiatement.',
+    offres: ['ABO_ORG', 'SETUP_WA', 'AUTO_RDV']
+  }
+};
+
+function startQuiz() {
+  document.getElementById('s0').classList.remove('active');
+  cur = 1;
+  document.getElementById('s1').classList.add('active');
+  updateProgress(1);
+  document.getElementById('qcounter').textContent = 'Question 1 / 6';
+}
+
+function selectOpt(el, qnum, profil) {
+  var opts = document.querySelectorAll('#opts' + qnum + ' .option');
+  opts.forEach(function(o) { o.classList.remove('selected'); });
+  el.classList.add('selected');
+  answers[qnum] = profil;
+  var btn = document.getElementById('next' + qnum);
+  if (btn) btn.classList.add('ready');
+}
+
+function goNext(n) {
+  document.getElementById('s' + (n-1)).classList.remove('active');
+  cur = n;
+  if (n <= 6) {
+    document.getElementById('s' + n).classList.add('active');
+    updateProgress(n);
+    document.getElementById('qcounter').textContent = 'Question ' + n + ' / 6';
+  }
+  window.scrollTo(0, 0);
+}
+
+function goBack(n) {
+  document.getElementById('s' + (n+1)).classList.remove('active');
+  cur = n;
+  if (n === 0) {
+    document.getElementById('s0').classList.add('active');
+    document.getElementById('qcounter').textContent = '6 questions · 2 min';
+  } else {
+    document.getElementById('s' + n).classList.add('active');
+    document.getElementById('qcounter').textContent = 'Question ' + n + ' / 6';
+  }
+  updateProgress(n);
+  window.scrollTo(0, 0);
+}
+
+function goEmail() {
+  document.getElementById('s6').classList.remove('active');
+  document.getElementById('s-email').classList.add('active');
+  document.getElementById('pbar').style.width = '95%';
+  document.getElementById('qcounter').textContent = 'Dernière étape';
+  window.scrollTo(0, 0);
+}
+
+function updateProgress(n) {
+  var pct = (n / 7) * 100;
+  document.getElementById('pbar').style.width = pct + '%';
+}
+
+function getWinningProfil() {
+  var scores = {chaos:0, solitaire:0, perfectionniste:0, libere:0, deborde:0};
+  Object.values(answers).forEach(function(p) {
+    if (scores[p] !== undefined) scores[p]++;
+  });
+  var winner = Object.keys(scores).reduce(function(a, b) {
+    return scores[a] >= scores[b] ? a : b;
+  });
+  return winner;
+}
+
+function showResult() {
+  var email = document.getElementById('emailInput').value;
+  var profil = getWinningProfil();
+  var p = PROFILS[profil];
+
+  // Send to Zapier
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', HOOK, true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify({
+    type: 'Quiz Profil Entrepreneur',
+    email: email,
+    profil: p.profil,
+    reponses: answers
+  }));
+
+  document.getElementById('s-email').classList.remove('active');
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('pbar').style.width = '100%';
+  document.getElementById('qcounter').textContent = 'Ton profil ✦';
+  window.scrollTo(0, 0);
+
+  setTimeout(function() {
+    document.getElementById('loading').style.display = 'none';
+    var rc = document.getElementById('result-content');
+    rc.style.display = 'block';
+
+    document.getElementById('r-emoji').textContent = p.emoji;
+    document.getElementById('r-profil').textContent = p.profil;
+    document.getElementById('r-tagline').textContent = p.tagline;
+    document.getElementById('r-define-title').textContent = p.defineTitle;
+    document.getElementById('r-define-txt').textContent = p.defineTxt;
+
+    document.getElementById('r-forces').innerHTML = p.forces.map(function(f) {
+      return '<div class="force"><div class="force-dot"></div>' + f + '</div>';
+    }).join('');
+
+    document.getElementById('r-blocages').innerHTML = p.blocages.map(function(b) {
+      return '<div class="blocage"><div class="blocage-dot"></div>' + b + '</div>';
+    }).join('');
+
+    document.getElementById('r-reco-title').textContent = p.recoTitle;
+    document.getElementById('r-reco-txt').textContent = p.recoTxt;
+    document.getElementById('r-offres').innerHTML = p.offres.map(function(o) {
+      return '<div class="reco-offre">' + o + '</div>';
+    }).join('');
+
+  }, 2000);
+}
+
+function shareResult() {
+  var profil = getWinningProfil();
+  var p = PROFILS[profil];
+  var txt = 'J\'ai découvert mon profil entrepreneur avec ce quiz Nendy Services : ' + p.emoji + ' ' + p.profil + '\n\nDécouvre le tien → ' + window.location.href;
+  navigator.clipboard.writeText(txt).then(function() {
+    alert('Lien copié !');
+  });
+}
+
+function shareLinkedIn() {
+  var url = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href);
+  window.open(url, '_blank');
+}
+
+function shareWhatsApp() {
+  var profil = getWinningProfil();
+  var p = PROFILS[profil];
+  var txt = 'Je suis ' + p.emoji + ' ' + p.profil + ' — découvre ton profil entrepreneur ici : ' + window.location.href;
+  window.open('https://wa.me/?text=' + encodeURIComponent(txt), '_blank');
+}
+</script>
+</body>
+</html>
