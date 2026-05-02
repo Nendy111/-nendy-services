@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boutique · Nendy Services — Outils Digitaux Sur Mesure</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--v:#7b9a80;--vc:#b5c1a6;--b:#d8c79e;--cr:#f5f1e6;--f:#ee07a5;--txt:#1a1714;--txt2:#5c5248;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Jost',sans-serif;background:var(--cr);color:var(--txt);}
+
+/* NAV */
+nav{background:var(--txt);padding:18px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:99;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:16px;color:var(--vc);}
+.nav-logo small{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--b);display:block;}
+.nav-links{display:flex;align-items:center;gap:24px;}
+.nav-link{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.4);text-decoration:none;text-transform:uppercase;transition:color .2s;}
+.nav-link:hover{color:white;}
+.nav-cta{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;padding:8px 16px;border-radius:8px;background:var(--f);color:white;text-decoration:none;text-transform:uppercase;}
+
+/* HERO */
+.hero{background:var(--txt);padding:80px 40px;text-align:center;}
+.hero-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--f);text-transform:uppercase;margin-bottom:14px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,62px);font-weight:700;line-height:1.05;color:white;margin-bottom:16px;}
+.hero h1 em{color:var(--v);font-style:italic;}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.5);line-height:1.75;max-width:520px;margin:0 auto 48px;}
+.hero-stats{display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;}
+.hstat{text-align:center;}
+.hstat-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:white;}
+.hstat-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.3);text-transform:uppercase;margin-top:4px;}
+.hstat-sep{width:1px;height:40px;background:rgba(255,255,255,.1);}
+
+/* COMMENT CA MARCHE */
+.how{max-width:860px;margin:0 auto;padding:64px 40px;}
+.how-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--f);text-transform:uppercase;margin-bottom:10px;}
+.how-title{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,38px);font-weight:700;margin-bottom:40px;}
+.how-steps{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;}
+.how-step{background:white;border-radius:14px;padding:20px;border:1px solid rgba(123,154,128,.12);position:relative;}
+.how-step::after{content:'→';position:absolute;right:-12px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--vc);z-index:1;}
+.how-step:last-child::after{display:none;}
+.how-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:rgba(123,154,128,.15);margin-bottom:8px;}
+.how-step-title{font-size:13px;font-weight:500;color:var(--txt);margin-bottom:4px;}
+.how-step-sub{font-size:11px;color:var(--txt2);line-height:1.5;}
+
+/* CATEGORIES */
+.cats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:0 40px;margin-bottom:40px;}
+.cat{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;padding:8px 18px;border-radius:20px;border:1.5px solid rgba(123,154,128,.2);color:var(--txt2);cursor:pointer;transition:all .15s;text-transform:uppercase;background:white;}
+.cat:hover{border-color:var(--v);color:var(--v);}
+.cat.active{background:var(--txt);border-color:var(--txt);color:white;}
+
+/* PRODUITS */
+.products{max-width:920px;margin:0 auto;padding:0 40px 80px;}
+.products-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;}
+
+.product{background:white;border-radius:18px;border:1px solid rgba(123,154,128,.12);overflow:hidden;transition:transform .2s,box-shadow .2s;display:none;}
+.product.visible{display:flex;flex-direction:column;}
+.product:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.08);}
+.product.featured{border-color:var(--f);grid-column:span 1;}
+
+.product-visual{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;position:relative;padding:24px;}
+.pv-tag{position:absolute;top:12px;left:12px;font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;padding:3px 9px;border-radius:6px;}
+.pv-badge{position:absolute;top:12px;right:12px;font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;padding:3px 9px;border-radius:6px;background:var(--f);color:white;}
+.pv-icon{font-size:40px;margin-bottom:8px;}
+.pv-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;text-align:center;line-height:1.2;}
+
+.theme-cr{background:var(--cr);}
+.theme-cr .pv-tag{background:rgba(123,154,128,.1);color:var(--v);}
+.theme-cr .pv-title{color:var(--txt);}
+.theme-dk{background:var(--txt);}
+.theme-dk .pv-tag{background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);}
+.theme-dk .pv-title{color:white;}
+.theme-sg{background:var(--v);}
+.theme-sg .pv-tag{background:rgba(255,255,255,.15);color:white;}
+.theme-sg .pv-title{color:white;}
+.theme-fk{background:var(--f);}
+.theme-fk .pv-tag{background:rgba(255,255,255,.15);color:white;}
+.theme-fk .pv-title{color:white;}
+.theme-bg{background:var(--b);}
+.theme-bg .pv-tag{background:rgba(26,23,20,.1);color:var(--txt2);}
+.theme-bg .pv-title{color:var(--txt);}
+
+.product-body{padding:20px;flex:1;display:flex;flex-direction:column;}
+.product-cat{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--vc);text-transform:uppercase;margin-bottom:6px;}
+.product-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--txt);margin-bottom:6px;line-height:1.2;}
+.product-desc{font-size:12px;color:var(--txt2);line-height:1.6;margin-bottom:14px;flex:1;}
+.product-features{display:flex;flex-direction:column;gap:5px;margin-bottom:16px;}
+.pf{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--txt2);}
+.pf-dot{width:4px;height:4px;border-radius:50%;background:var(--v);flex-shrink:0;}
+.product-footer{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(123,154,128,.1);}
+.product-price{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--txt);}
+.product-price small{font-family:'DM Mono',monospace;font-size:9px;color:var(--txt2);font-weight:400;display:block;}
+.product-delai{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--vc);}
+.btn-order{display:inline-flex;align-items:center;gap:6px;background:var(--txt);color:white;border:none;border-radius:8px;padding:9px 16px;font-family:'Jost',sans-serif;font-size:12px;font-weight:500;cursor:pointer;text-decoration:none;transition:opacity .2s;}
+.btn-order:hover{opacity:.85;}
+.btn-order.pink{background:var(--f);}
+
+/* MAINTENANCE */
+.maint{max-width:860px;margin:0 auto;padding:0 40px 60px;}
+.maint-box{background:var(--txt);border-radius:18px;padding:32px 36px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;}
+.maint-tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--f);text-transform:uppercase;margin-bottom:10px;}
+.maint-title{font-family:'Playfair Display',serif;font-size:26px;color:white;margin-bottom:10px;}
+.maint-sub{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7;}
+.maint-items{display:flex;flex-direction:column;gap:10px;}
+.maint-item{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border-radius:10px;padding:12px 14px;border:1px solid rgba(255,255,255,.07);}
+.maint-item-price{font-family:'Playfair Display',serif;font-size:20px;color:white;min-width:60px;}
+.maint-item-info{}
+.maint-item-title{font-size:12px;font-weight:500;color:#f0ece3;margin-bottom:2px;}
+.maint-item-sub{font-size:11px;color:rgba(255,255,255,.35);}
+
+/* SUR MESURE */
+.custom{max-width:860px;margin:0 auto;padding:0 40px 60px;}
+.custom-box{background:var(--v);border-radius:18px;padding:36px;text-align:center;}
+.custom-tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;color:rgba(255,255,255,.5);text-transform:uppercase;margin-bottom:10px;}
+.custom-title{font-family:'Playfair Display',serif;font-size:28px;color:white;margin-bottom:10px;}
+.custom-sub{font-size:14px;color:rgba(255,255,255,.7);line-height:1.7;max-width:480px;margin:0 auto 24px;}
+.custom-btn{display:inline-flex;align-items:center;gap:8px;background:var(--f);color:white;border:none;border-radius:10px;padding:14px 28px;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:opacity .2s;}
+.custom-btn:hover{opacity:.85;}
+
+/* FAQ */
+.faq{max-width:680px;margin:0 auto;padding:0 40px 80px;}
+.faq-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--f);text-transform:uppercase;margin-bottom:10px;}
+.faq-title{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,32px);font-weight:700;margin-bottom:28px;}
+.faq-item{border-bottom:1px solid rgba(123,154,128,.15);padding:18px 0;cursor:pointer;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:500;color:var(--txt);}
+.faq-arrow{color:var(--vc);font-size:10px;transition:transform .2s;}
+.faq-item.open .faq-arrow{transform:rotate(180deg);}
+.faq-a{display:none;font-size:13px;color:var(--txt2);line-height:1.75;padding-top:12px;}
+.faq-item.open .faq-a{display:block;}
+
+footer{background:var(--txt);padding:32px 40px;text-align:center;}
+.footer-logo{font-family:'Playfair Display',serif;font-size:16px;color:var(--vc);margin-bottom:6px;}
+.footer-sub{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.25);}
+
+@media(max-width:700px){
+  nav{padding:14px 20px;}.nav-links{display:none;}
+  .hero{padding:52px 20px;}.hero-stats{gap:20px;}
+  .how,.products,.maint,.custom,.faq{padding-left:20px;padding-right:20px;}
+  .how-steps{grid-template-columns:1fr 1fr;}
+  .how-step::after{display:none;}
+  .products-grid{grid-template-columns:1fr;}
+  .maint-box{grid-template-columns:1fr;}
+  .cats{padding:0 20px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">NENDY Services<small>Boutique Digitale</small></div>
+  <div class="nav-links">
+    <a href="#produits" class="nav-link">Produits</a>
+    <a href="#maintenance" class="nav-link">Maintenance</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+    <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="nav-cta">Discutons</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Boutique · Outils digitaux sur mesure</div>
+  <h1>Des outils qui <em>travaillent</em><br>à votre place.</h1>
+  <p class="hero-sub">Quiz, formulaires interactifs, sites vitrines, templates réseaux — créés sur mesure, livrés en 48-72h, personnalisés à votre charte graphique.</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-num">48h</div><div class="hstat-lbl">Délai moyen</div></div>
+    <div class="hstat-sep"></div>
+    <div class="hstat"><div class="hstat-num">100%</div><div class="hstat-lbl">Sur mesure</div></div>
+    <div class="hstat-sep"></div>
+    <div class="hstat"><div class="hstat-num">0</div><div class="hstat-lbl">Compétence technique requise</div></div>
+  </div>
+</div>
+
+<!-- COMMENT CA MARCHE -->
+<div class="how">
+  <div class="how-tag">Comment ça marche</div>
+  <div class="how-title">De l'idée à la livraison<br>en 4 étapes.</div>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="how-num">01</div>
+      <div class="how-step-title">Vous choisissez</div>
+      <div class="how-step-sub">Un produit ou vous me décrivez votre besoin.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">02</div>
+      <div class="how-step-title">On échange</div>
+      <div class="how-step-sub">Un appel de 30 min pour cadrer votre projet et votre charte.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">03</div>
+      <div class="how-step-title">Je crée</div>
+      <div class="how-step-sub">Livraison en 48-72h avec vos couleurs, textes et besoins.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">04</div>
+      <div class="how-step-title">Vous utilisez</div>
+      <div class="how-step-sub">Fichier prêt à l'emploi ou hébergé sur votre domaine.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTRES -->
+<div class="cats">
+  <div class="cat active" onclick="filter('all',this)">Tout voir</div>
+  <div class="cat" onclick="filter('outil',this)">Outils interactifs</div>
+  <div class="cat" onclick="filter('site',this)">Site vitrine</div>
+  <div class="cat" onclick="filter('template',this)">Templates réseaux</div>
+  <div class="cat" onclick="filter('pack',this)">Packs</div>
+</div>
+
+<!-- PRODUITS -->
+<div class="products" id="produits">
+  <div class="products-grid">
+
+    <!-- Quiz profil -->
+    <div class="product visible" data-cat="outil">
+      <div class="product-visual theme-cr">
+        <div class="pv-tag">Outil interactif</div>
+        <div style="text-align:center;">
+          <div class="pv-icon">🌀</div>
+          <div class="pv-title">Quiz<br>Profil</div>
+        </div>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">Outil interactif</div>
+        <div class="product-name">Quiz Profil Personnalisé</div>
+        <div class="product-desc">Un quiz de 5-8 questions qui révèle le profil de vos visiteurs et les oriente vers votre offre. Résultats détaillés, CTA intégré, partage réseaux sociaux.</div>
+        <div class="product-features">
+          <div class="pf"><div class="pf-dot"></div>5 profils de résultats personnalisés</div>
+          <div class="pf"><div class="pf-dot"></div>Charte graphique à vos couleurs</div>
+          <div class="pf"><div class="pf-dot"></div>CTA vers votre offre principale</div>
+          <div class="pf"><div class="pf-dot"></div>Partage LinkedIn / WhatsApp intégré</div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">120 €<small>Fichier livré · hébergement en option</small></div>
+          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order">Commander</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Score -->
+    <div class="product visible" data-cat="outil">
+      <div class="product-visual theme-dk">
+        <div class="pv-tag">Outil interactif</div>
+        <div style="text-align:center;">
+          <div class="pv-icon">📊</div>
+          <div class="pv-title" style="color:white;">Score &<br>Diagnostic</div>
+        </div>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">Outil interactif</div>
+        <div class="product-name">Score / Diagnostic Personnalisé</div>
+        <div class="product-desc">Un outil de scoring sur 100 points qui évalue la situation de votre prospect et génère un plan d'action personnalisé. Idéal pour qualifier vos leads.</div>
+        <div class="product-features">
+          <div class="pf"><div class="pf-dot"></div>Score sur 100 avec détail par axe</div>
+          <div class="pf"><div class="pf-dot"></div>Plan d'action généré automatiquement</div>
+          <div class="pf"><div class="pf-dot"></div>Collecte d'email intégrée</div>
+          <div class="pf"><div class="pf-dot"></div>Résultats partageables</div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">150 €<small>Fichier livré · hébergement en option</small></div>
+          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order">Commander</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Questionnaire -->
+    <div class="product visible featured" data-cat="outil">
+      <div class="product-visual theme-sg">
+        <div class="pv-tag">Outil interactif</div>
+        <div class="pv-badge">⭐ Populaire</div>
+        <div style="text-align:center;">
+          <div class="pv-icon">🗺️</div>
+          <div class="pv-title">Questionnaire<br>+ Mapping</div>
+        </div>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">Outil interactif · Avancé</div>
+        <div class="product-name">Questionnaire + Mapping</div>
+        <div class="product-desc">Un questionnaire sur mesure qui génère automatiquement une carte visuelle de la situation de votre prospect. Résultats en 4 onglets, plan d'action intégré.</div>
+        <div class="product-features">
+          <div class="pf"><div class="pf-dot"></div>20-30 questions personnalisées</div>
+          <div class="pf"><div class="pf-dot"></div>Mapping visuel généré automatiquement</div>
+          <div class="pf"><div class="pf-dot"></div>4 onglets de résultats</div>
+          <div class="pf"><div class="pf-dot"></div>Envoi des données vers votre CRM</div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">250 €<small>Fichier livré · hébergement en option</small></div>
+          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order pink">Commander</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Challenge -->
+    <div class="product visible" data-cat="outil">
+      <div class="product-visual theme-fk">
+        <div class="pv-tag">Outil interactif</div>
+        <div style="text-align:center;">
+          <div class="pv-icon">🌿</div>
+          <div class="pv-title">Challenge<br>Interactif</div>
+        </div>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">Outil interactif</div>
+        <div class="product-name">Challenge Interactif N Jours</div>
+        <div class="product-desc">Un challenge jour par jour avec tracker de progression, cases à cocher, tips personnalisés et CTA final. Parfait pour fidéliser votre audience et convertir.</div>
+        <div class="product-features">
+          <div class="pf"><div class="pf-dot"></div>7 à 30 jours selon votre besoin</div>
+          <div class="pf"><div class="pf-dot"></div>Tracker de progression interactif</div>
+          <div class="pf"><div class="pf-dot"></div>Collecte d'email à l'inscription</div>
+          <div class="pf"><div class="pf-dot"></div>CTA final vers votre offre</div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">180 €<small>Fichier livré · hébergement en option</small></div>
+          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order">Commander</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fiche interne -->
+    <div class="product visible" data-cat="outil">
+      <div class="product-visual theme-cr">
+        <div class="pv-tag">Outil interne</div>
+        <div style="text-align:center;">
+          <div class="pv-icon">📋</div>
+          <div class="pv-title">Fiche<br>Interactive</div>
+        </div>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">Outil interne</div>
+        <div class="product-name">Fiche de Suivi Interactive</div>
+        <div class="product-desc">Une fiche HTML interactive pour vos appels, audits ou suivis clients. Timer intégré, champs cliquables, résumé généré automatiquement, envoi vers votre CRM.</div>
+        <div class="product-features">
+          <div class="pf"><div class="pf-dot"></div>Timer live pendant l'appel</div>
+          <div class="pf"><div class="pf-dot"></div>Résumé généré automatiquement</div>
+          <div class="pf"><div class="pf-dot"></div>Envoi vers Notion / Zapier</div>
+          <div class="pf"><div class="pf-dot"></div>Usage 100% local ou en ligne</div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">120 €<small>Fichier local · pas d'hébergement nécessaire</small></div>
+          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order">Commander</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Site vitrine -->
+    <div class="product visible" data-cat="site">
+      <div class="product-visual theme-dk">
+        <div class="pv-tag">Site vitrine</div>
+        <div class="pv-badge">⭐ Populaire</div>
+        <div style="text-align:center;">
+          <div class="pv-icon">🌐</div>
+          <div class="pv-title" style="color:white;">Site Vitrine<br>Complet</div>
+        </div>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">Site vitrine</div>
+        <div class="product-name">Site Vitrine One-Page</div>
+        <div class="product-desc">Un site vitrine complet — hero, services, à propos, méthode, témoignages, contact. Design épuré et professionnel, hébergeable sur GitHub Pages gratuitement.</div>
+        <div class="product-features">
+          <div class="pf"><div class="pf-dot"></div>Design 100% personnalisé à votre charte</div>
+          <div class="pf"><div class="pf-dot"></div>Responsive mobile / tablette / desktop</div>
+          <div class="pf"><div class="pf-dot"></div>Formulaire de contact intégré</div>
+          <div class="pf"><div class="pf-dot"></div>Hébergement GitHub Pages inclus</div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">350 €<small>+ domaine à votre charge (~10€/an)</small></div>
+          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order pink">Commander</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page de liens -->
+    <div class="product visible" data-cat="site">
+      <div class="product-visual theme-sg">
+        <div class="pv-tag">Page de liens</div>
+        <div style="text-align:center;">
+          <div class="pv-icon">🔗</div>
+          <div class="pv-title">Page de liens<br>personnalisée</div>
+        </div>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">Site · Page de liens</div>
+        <div class="product-name">Ma Page de Liens</div>
+        <div class="product-desc">Votre Linktree à vous — à vos couleurs, sur votre domaine, avec votre logo. Tous vos liens importants en un seul endroit beau et professionnel.</div>
+        <div class="product-features">
+          <div class="pf"><div class="pf-dot"></div>Design 100% à votre charte</div>
+          <div class="pf"><div class="pf-dot"></div>Hébergé sur votre domaine</div>
+          <div class="pf"><div class="pf-dot"></div>Liens RDV, réseaux, site, WhatsApp</div>
+          <div class="pf"><div class="pf-dot"></div>Sans abonnement mensuel</div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">60 €<small>Fichier livré · hébergement en option</small></div>
+          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order">Commander</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Templates réseaux -->
+    <div class="product visible" data-cat="template">
+      <div class="product-visual theme-bg">
+        <div class="pv-tag">Templates</div>
+        <div style="text-align:center;">
+          <div class="pv-icon">🎨</div>
+          <div class="pv-title">Pack Templates<br>Réseaux</div>
+        </div>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">Templates réseaux sociaux</div>
+        <div class="product-name">Pack Templates Instagram / LinkedIn</div>
+        <div class="product-desc">10 templates SVG personnalisés à votre charte graphique — carrousels, citations, annonces, before/after. Prêts à exporter et publier.</div>
+        <div class="product-features">
+          <div class="pf"><div class="pf-dot"></div>10 templates variés</div>
+          <div class="pf"><div class="pf-dot"></div>Format carré 1:1 et portrait 4:5</div>
+          <div class="pf"><div class="pf-dot"></div>Couleurs et typographies à votre charte</div>
+          <div class="pf"><div class="pf-dot"></div>Exportables en PNG / PDF</div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">90 €<small>Fichiers livrés · modifiables</small></div>
+          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order">Commander</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Planning contenu -->
+    <div class="product visible" data-cat="template">
+      <div class="product-visual theme-sg">
+        <div class="pv-tag">Templates</div>
+        <div style="text-align:center;">
+          <div class="pv-icon">📅</div>
+          <div class="pv-title">Planning<br>Contenu</div>
+        </div>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">Templates · Stratégie contenu</div>
+        <div class="product-name">Planning Contenu 30 Jours</div>
+        <div class="product-desc">Un planning éditorial complet sur 30 jours avec scripts, visuels et stratégie adaptés à votre activité et votre plateforme principale.</div>
+        <div class="product-features">
+          <div class="pf"><div class="pf-dot"></div>30 posts avec scripts complets</div>
+          <div class="pf"><div class="pf-dot"></div>Visuels mockups intégrés</div>
+          <div class="pf"><div class="pf-dot"></div>Stratégie adaptée à votre cible</div>
+          <div class="pf"><div class="pf-dot"></div>Instagram · LinkedIn · TikTok</div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">120 €<small>Fichier HTML interactif livré</small></div>
+          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order">Commander</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mon QG Digital -->
+    <div class="product visible" data-cat="outil featured">
+      <div class="product-visual theme-dk">
+        <div class="pv-tag">Outil phare</div>
+        <div class="pv-badge">🆕 Nouveau</div>
+        <div style="text-align:center;">
+          <div class="pv-icon">🏠</div>
+          <div class="pv-title" style="color:white;">Mon QG<br>Digital</div>
+        </div>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">Outil · Dashboard personnalisé</div>
+        <div class="product-name">Mon QG Digital</div>
+        <div class="product-desc">Votre propre espace de gestion à vos couleurs — clients, projets, finances, contenu, liens et outils centralisés dans un seul endroit beau et fonctionnel. Comme Notion, mais à votre image.</div>
+        <div class="product-features">
+          <div class="pf"><div class="pf-dot"></div>Dashboard · Clients · Projets · Finances · Contenu</div>
+          <div class="pf"><div class="pf-dot"></div>Design 100% à votre charte graphique</div>
+          <div class="pf"><div class="pf-dot"></div>Hébergeable sur votre domaine</div>
+          <div class="pf"><div class="pf-dot"></div>Accessible depuis n'importe quel appareil</div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">290 €<small>Fichier livré · hébergement en option</small></div>
+          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order pink">Commander</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pack complet -->
+    <div class="product visible" data-cat="pack">
+      <div class="product-visual theme-fk">
+        <div class="pv-tag">Pack</div>
+        <div class="pv-badge">🔥 Best value</div>
+        <div style="text-align:center;">
+          <div class="pv-icon">⚡</div>
+          <div class="pv-title">Pack<br>Lancement</div>
+        </div>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">Pack · Lancement d'activité</div>
+        <div class="product-name">Pack Lancement Complet</div>
+        <div class="product-desc">Tout ce qu'il faut pour lancer son activité digitale : site vitrine + quiz profil + questionnaire prospect + 10 templates réseaux. Livré en 7 jours.</div>
+        <div class="product-features">
+          <div class="pf"><div class="pf-dot"></div>Site vitrine one-page complet</div>
+          <div class="pf"><div class="pf-dot"></div>Quiz profil personnalisé</div>
+          <div class="pf"><div class="pf-dot"></div>Questionnaire prospect + mapping</div>
+          <div class="pf"><div class="pf-dot"></div>Mon QG Digital personnalisé</div>
+          <div class="pf"><div class="pf-dot"></div>10 templates réseaux sociaux</div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">790 €<small>Valeur : 1100€ · Économie : 310€</small></div>
+          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order pink">Commander</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MAINTENANCE -->
+<div class="maint" id="maintenance">
+  <div class="maint-box">
+    <div>
+      <div class="maint-tag">Option maintenance</div>
+      <div class="maint-title">Votre outil évolue<br>avec vous.</div>
+      <div class="maint-sub">Mise à jour de contenu, ajout de questions, modification des offres, correction de bugs — je m'occupe de tout pendant que vous travaillez.</div>
+    </div>
+    <div class="maint-items">
+      <div class="maint-item">
+        <div class="maint-item-price">30 €</div>
+        <div class="maint-item-info">
+          <div class="maint-item-title">Maintenance légère</div>
+          <div class="maint-item-sub">1 modification / mois · Délai 48h</div>
+        </div>
+      </div>
+      <div class="maint-item">
+        <div class="maint-item-price">50 €</div>
+        <div class="maint-item-info">
+          <div class="maint-item-title">Maintenance standard</div>
+          <div class="maint-item-sub">3 modifications / mois · Délai 24h</div>
+        </div>
+      </div>
+      <div class="maint-item" style="border-color:rgba(238,7,165,.2);background:rgba(238,7,165,.05);">
+        <div class="maint-item-price" style="color:var(--f);">80 €</div>
+        <div class="maint-item-info">
+          <div class="maint-item-title" style="color:#f0ece3;">Maintenance + hébergement</div>
+          <div class="maint-item-sub">Modifications illimitées + domaine géré</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUR MESURE -->
+<div class="custom">
+  <div class="custom-box">
+    <div class="custom-tag">Vous ne trouvez pas ce qu'il vous faut ?</div>
+    <div class="custom-title">Décrivez-moi votre besoin.<br>Je crée l'outil.</div>
+    <div class="custom-sub">Calculateur, simulateur, formulaire multi-étapes, tableau de bord interactif — si vous pouvez le décrire, je peux le créer.</div>
+    <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="custom-btn">Discutons de votre projet →</a>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq" id="faq">
+  <div class="faq-tag">Questions fréquentes</div>
+  <div class="faq-title">Tout ce que vous<br>voulez savoir.</div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Ai-je besoin de compétences techniques ?<div class="faq-arrow">▼</div></div>
+    <div class="faq-a">Aucune. Je livre un fichier prêt à l'emploi. Vous pouvez l'héberger en glissant-déposant sur Netlify Drop — sans compte, sans code. Ou je m'en occupe pour vous avec l'option maintenance.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Comment se passe la personnalisation ?<div class="faq-arrow">▼</div></div>
+    <div class="faq-a">Après votre commande, on a un appel de 30 min pour recueillir vos couleurs, typos, textes et besoins. Je m'occupe du reste et vous livre dans les 48-72h.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Puis-je modifier l'outil après livraison ?<div class="faq-arrow">▼</div></div>
+    <div class="faq-a">Oui — avec l'option maintenance je m'occupe de toutes vos modifications. Sans maintenance, le fichier vous appartient mais les modifications sont à votre charge.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Comment se passe le paiement ?<div class="faq-arrow">▼</div></div>
+    <div class="faq-a">Acompte de 50% à la commande, solde à la livraison. Paiement par virement bancaire ou Stripe. Facture envoyée à chaque étape.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Puis-je héberger l'outil sur mon propre domaine ?<div class="faq-arrow">▼</div></div>
+    <div class="faq-a">Oui — je vous explique comment le faire sur GitHub Pages gratuitement, ou je m'en occupe avec l'option maintenance + hébergement à 80€/mois.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">Les données collectées vont où ?<div class="faq-arrow">▼</div></div>
+    <div class="faq-a">Vers l'outil de votre choix — Zapier, Notion, Google Sheets, votre CRM. Je configure la connexion pendant la création de votre outil.</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">NENDY Services</div>
+  <div class="footer-sub">L'harmonie entre organisation et assistance · nendyservices.com</div>
+</footer>
+
+<script>
+function filter(cat, el) {
+  document.querySelectorAll('.cat').forEach(function(c){c.classList.remove('active');});
+  el.classList.add('active');
+  document.querySelectorAll('.product').forEach(function(p){
+    if(cat==='all'||p.dataset.cat===cat){p.classList.add('visible');}
+    else{p.classList.remove('visible');}
+  });
+}
+
+function toggleFaq(item){
+  var isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(f){f.classList.remove('open');});
+  if(!isOpen)item.classList.add('open');
+}
+</script>
+</body>
+</html>
