@@ -759,7 +759,7 @@ footer {
         <div class="diag-code">AUDIT_BUSINESS</div>
         <div class="diag-name">Audit Business</div>
         <div class="diag-desc">Diagnostic complet de votre activité — forces, blocages et priorités identifiés.</div>
-        <div class="diag-price">90 €</div>
+        <div class="diag-price">59 €</div>
         <div class="diag-delay">Délai 72h</div>
       </div>
       <div class="diag-card">
@@ -774,29 +774,101 @@ footer {
         <div class="diag-code">AUDIT + PLAN</div>
         <div class="diag-name">Audit + Plan</div>
         <div class="diag-desc">Diagnostic complet + Roadmap stratégique — la vision totale.</div>
-        <div class="diag-strike">240 €</div>
-        <div class="diag-price">220 €</div>
+        <div class="diag-strike">209 €</div>
+        <div class="diag-price">189 €</div>
         <div class="diag-delay">Délai 5j · Économisez 20€</div>
       </div>
     </div>
 
     <!-- 01 Express -->
     <div class="services-sublabel reveal">01 · Offres Express — Solutions concrètes et rapides</div>
-    <table class="express-table reveal">
-      <thead>
-        <tr>
-          <th>Module</th><th>Description</th><th>Délai</th><th>Tarif</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>SETUP_NOTION</td><td>Espace clé en main — CRM, Projets, Tâches</td><td>7j</td><td>350 €</td></tr>
-        <tr><td>AUTO_RDV</td><td>Calendly + Workflows emails + Réservation automatique</td><td>48h</td><td>150 €</td></tr>
-        <tr><td>DIGITAL_START</td><td>Templates Factures + Onboarding client clé en main</td><td>72h</td><td>180 €</td></tr>
-        <tr><td class="ia">AGENT_IA</td><td>Configuration + intégration + formation + suivi 30j</td><td>Sur devis</td><td>Sur devis</td></tr>
-        <tr><td style="color:#25D366;font-weight:600;">SETUP_WA</td><td>WhatsApp Business clé en main — profil, messages auto, catalogue, étiquettes, scripts</td><td>48h</td><td>120 €</td></tr>
-        <tr><td style="color:#1877F2;font-weight:600;">SETUP_FB</td><td>Page Facebook Business — création, optimisation, mise en place complète</td><td>48h</td><td>80 €</td></tr>
-      </tbody>
-    </table>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:50px;" class="reveal">
+
+      <!-- SETUP NOTION -->
+      <div style="background:var(--txt);border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:16px;transition:transform .2s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform=''">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--vc);text-transform:uppercase;margin-bottom:8px;">SETUP_NOTION</div>
+            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:white;line-height:1.2;">Espace Notion<br>Clé en Main</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--b);">350€</div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);letter-spacing:1px;margin-top:2px;">7 jours</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,.65);line-height:1.75;">CRM, Projets, Tâches, Base clients — votre espace Notion conçu sur mesure pour piloter votre activité.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="font-family:'DM Mono',monospace;font-size:8px;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.06);color:var(--vc);border:1px solid rgba(255,255,255,.1);">CRM clients</span>
+          <span style="font-family:'DM Mono',monospace;font-size:8px;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.06);color:var(--vc);border:1px solid rgba(255,255,255,.1);">Gestion projets</span>
+          <span style="font-family:'DM Mono',monospace;font-size:8px;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.06);color:var(--vc);border:1px solid rgba(255,255,255,.1);">Suivi tâches</span>
+          <span style="font-family:'DM Mono',monospace;font-size:8px;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.06);color:var(--vc);border:1px solid rgba(255,255,255,.1);">Formation incluse</span>
+        </div>
+      </div>
+
+      <!-- FLOW RDV -->
+      <div style="background:var(--v);border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:16px;transition:transform .2s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform=''">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.5);text-transform:uppercase;margin-bottom:8px;">FLOW_RDV</div>
+            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:white;line-height:1.2;">Système de<br>Réservation Auto</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--b);">150€</div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.5);letter-spacing:1px;margin-top:2px;">48h</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,.8);line-height:1.75;">Calendly configuré + emails automatiques + rappels + intégration. Vos RDV se gèrent seuls.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="font-family:'DM Mono',monospace;font-size:8px;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15);">Calendly</span>
+          <span style="font-family:'DM Mono',monospace;font-size:8px;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15);">Emails auto</span>
+          <span style="font-family:'DM Mono',monospace;font-size:8px;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15);">Rappels</span>
+          <span style="font-family:'DM Mono',monospace;font-size:8px;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15);">Tout connecté</span>
+        </div>
+      </div>
+
+      <!-- KIT ONBOARDING -->
+      <div style="background:var(--b);border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:16px;transition:transform .2s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform=''">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:rgba(26,23,20,.5);text-transform:uppercase;margin-bottom:8px;">KIT_ONBOARDING</div>
+            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--txt);line-height:1.2;">Kit Onboarding<br>Client</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--txt);">180€</div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(26,23,20,.5);letter-spacing:1px;margin-top:2px;">72h</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--txt2);line-height:1.75;">Contrat, email de bienvenue, suivi de mission, templates factures — votre parcours client pro et clé en main.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="font-family:'DM Mono',monospace;font-size:8px;padding:4px 10px;border-radius:20px;background:rgba(26,23,20,.06);color:var(--txt2);border:1px solid rgba(26,23,20,.12);">Contrat</span>
+          <span style="font-family:'DM Mono',monospace;font-size:8px;padding:4px 10px;border-radius:20px;background:rgba(26,23,20,.06);color:var(--txt2);border:1px solid rgba(26,23,20,.12);">Email bienvenue</span>
+          <span style="font-family:'DM Mono',monospace;font-size:8px;padding:4px 10px;border-radius:20px;background:rgba(26,23,20,.06);color:var(--txt2);border:1px solid rgba(26,23,20,.12);">Suivi mission</span>
+          <span style="font-family:'DM Mono',monospace;font-size:8px;padding:4px 10px;border-radius:20px;background:rgba(26,23,20,.06);color:var(--txt2);border:1px solid rgba(26,23,20,.12);">Factures</span>
+        </div>
+      </div>
+
+      <!-- CHATBOT WA -->
+      <div style="background:var(--cr);border-radius:16px;padding:32px;border:1px solid rgba(123,154,128,.2);display:flex;flex-direction:column;gap:16px;transition:transform .2s,border-color .2s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='var(--v)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(123,154,128,.2)'">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:#25D366;text-transform:uppercase;margin-bottom:8px;">CHATBOT_WA</div>
+            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--txt);line-height:1.2;">WhatsApp Business<br>Clé en Main</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--v);">180€</div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);letter-spacing:1px;margin-top:2px;">48h</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--txt2);line-height:1.75;">Chatbot intelligent, messages automatiques, catalogue, étiquettes clients, scripts — votre WA Business opérationnel.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="font-family:'DM Mono',monospace;font-size:8px;padding:4px 10px;border-radius:20px;background:rgba(37,211,102,.08);color:#25D366;border:1px solid rgba(37,211,102,.2);">Chatbot</span>
+          <span style="font-family:'DM Mono',monospace;font-size:8px;padding:4px 10px;border-radius:20px;background:rgba(37,211,102,.08);color:#25D366;border:1px solid rgba(37,211,102,.2);">Messages auto</span>
+          <span style="font-family:'DM Mono',monospace;font-size:8px;padding:4px 10px;border-radius:20px;background:rgba(37,211,102,.08);color:#25D366;border:1px solid rgba(37,211,102,.2);">Catalogue</span>
+          <span style="font-family:'DM Mono',monospace;font-size:8px;padding:4px 10px;border-radius:20px;background:rgba(37,211,102,.08);color:#25D366;border:1px solid rgba(37,211,102,.2);">Scripts</span>
+        </div>
+      </div>
+
+    </div>
 
     <!-- 02 Modules -->
     <div class="services-sublabel reveal">02 · Modules d'Accompagnement — Dans la durée</div>
@@ -910,7 +982,7 @@ footer {
 </section>
 
 <!-- ── SÉLECTEUR PROFIL ── -->
-<section id="profil" style="background:var(--cr);padding:100px 40px;">
+<section id="profil" style="display:none;">
   <div style="max-width:1100px;margin:0 auto;">
     <div class="reveal" style="text-align:center;margin-bottom:50px;">
       <div class="section-label" style="justify-content:center;">Tu es...</div>
@@ -930,32 +1002,32 @@ footer {
     <div id="profil-solo" class="reveal">
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
         <div style="background:white;border-radius:16px;padding:28px;border:1px solid rgba(123,154,128,.12);transition:transform .2s,border-color .2s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='var(--v)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(123,154,128,.12)'">
-          <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--vc);text-transform:uppercase;margin-bottom:12px;">Diagnostic</div>
-          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">Audit Business</div>
-          <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:18px;">Diagnostic complet — forces, blocages et priorités. Livré en 72h.</div>
-          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--v);">59€</div>
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);letter-spacing:1px;margin-top:4px;">One shot · 72h</div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--vc);text-transform:uppercase;margin-bottom:12px;">Par où commencer</div>
+          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">Pack Clarté</div>
+          <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:18px;">Audit + Roadmap stratégique complète. Tu sais où tu en es et tu as un plan d'action concret.</div>
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--v);">189€</div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);letter-spacing:1px;margin-top:4px;">One shot · 5 jours · Économisez 20€</div>
+        </div>
+        <div style="background:white;border-radius:16px;padding:28px;border:1px solid rgba(123,154,128,.12);transition:transform .2s,border-color .2s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='var(--v)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(123,154,128,.12)'">
+          <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--vc);text-transform:uppercase;margin-bottom:12px;">Automatisation</div>
+          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">Flow RDV</div>
+          <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:18px;">Ton système de réservation tourne seul — calendrier, emails auto, rappels. Fini les allers-retours.</div>
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--v);">150€</div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);letter-spacing:1px;margin-top:4px;">One shot · 48h</div>
         </div>
         <div style="background:var(--v);border-radius:16px;padding:28px;border:1px solid var(--v);transition:transform .2s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform=''">
           <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.5);text-transform:uppercase;margin-bottom:12px;">⭐ Populaire</div>
-          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:white;margin-bottom:10px;line-height:1.2;">Pack Clarté</div>
-          <div style="font-size:13px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:18px;">Audit + Roadmap stratégique complète. La vision totale.</div>
-          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--b);">220€</div>
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.4);letter-spacing:1px;margin-top:4px;">5 jours · Économisez 20€</div>
+          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:white;margin-bottom:10px;line-height:1.2;">Kit Onboarding</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:18px;">Contrat, email de bienvenue, suivi de mission — ton parcours client pro et clé en main.</div>
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--b);">180€</div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.4);letter-spacing:1px;margin-top:4px;">One shot · 72h</div>
         </div>
         <div style="background:white;border-radius:16px;padding:28px;border:1px solid rgba(123,154,128,.12);transition:transform .2s,border-color .2s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='var(--v)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(123,154,128,.12)'">
-          <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--vc);text-transform:uppercase;margin-bottom:12px;">Agent IA</div>
-          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">Pack Intelligence</div>
-          <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:18px;">Agent IA + Notion + Formation 2h + Suivi 30 jours.</div>
-          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--v);">750€</div>
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);letter-spacing:1px;margin-top:4px;">Setup · +150€/mois maintenance</div>
-        </div>
-        <div style="background:white;border-radius:16px;padding:28px;border:1px solid rgba(123,154,128,.12);transition:transform .2s,border-color .2s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='var(--v)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(123,154,128,.12)'">
-          <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--vc);text-transform:uppercase;margin-bottom:12px;">Abonnement</div>
-          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">Abo Partner</div>
-          <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:18px;">Partenariat prioritaire. Tu délègues, je pilote.</div>
-          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--v);">1 250€</div>
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);letter-spacing:1px;margin-top:4px;">45h/mois · Récurrent</div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--vc);text-transform:uppercase;margin-bottom:12px;">Visibilité</div>
+          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">GMB Express</div>
+          <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:18px;">Ta fiche Google My Business créée et optimisée. Tu apparais sur Maps dès cette semaine.</div>
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--v);">120€</div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);letter-spacing:1px;margin-top:4px;">One shot · 48h</div>
         </div>
       </div>
     </div>
@@ -964,83 +1036,95 @@ footer {
     <div id="profil-tpe" style="display:none;" class="reveal">
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
         <div style="background:white;border-radius:16px;padding:28px;border:1px solid rgba(123,154,128,.12);transition:transform .2s,border-color .2s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='var(--v)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(123,154,128,.12)'">
-          <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--vc);text-transform:uppercase;margin-bottom:12px;">Diagnostic</div>
-          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">Audit Business</div>
-          <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:18px;">Diagnostic organisationnel complet avec recommandations outils.</div>
-          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--v);">59€</div>
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);letter-spacing:1px;margin-top:4px;">One shot · 72h</div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--vc);text-transform:uppercase;margin-bottom:12px;">Par où commencer</div>
+          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">Pack Clarté</div>
+          <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:18px;">Audit organisationnel + Roadmap priorisée. Vous posez les bases avant de structurer.</div>
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--v);">189€</div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);letter-spacing:1px;margin-top:4px;">One shot · 5 jours · Économisez 20€</div>
+        </div>
+        <div style="background:white;border-radius:16px;padding:28px;border:1px solid rgba(123,154,128,.12);transition:transform .2s,border-color .2s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='var(--v)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(123,154,128,.12)'">
+          <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--vc);text-transform:uppercase;margin-bottom:12px;">Organisation</div>
+          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">Setup Notion</div>
+          <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:18px;">CRM, projets, tâches, base clients — votre espace Notion conçu sur mesure pour votre équipe.</div>
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--v);">350€</div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);letter-spacing:1px;margin-top:4px;">One shot · 7 jours</div>
         </div>
         <div style="background:var(--v);border-radius:16px;padding:28px;border:1px solid var(--v);transition:transform .2s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform=''">
           <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.5);text-transform:uppercase;margin-bottom:12px;">⭐ Recommandé TPE</div>
-          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:white;margin-bottom:10px;line-height:1.2;">Pack Intelligence Pro</div>
-          <div style="font-size:13px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:18px;">Agents IA + Notion + Formation équipe 3h + Support WhatsApp.</div>
-          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--b);">600€</div>
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.4);letter-spacing:1px;margin-top:4px;">Setup · +400€/mois maintenance</div>
+          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:white;margin-bottom:10px;line-height:1.2;">Pack Intelligence</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:18px;">Agent IA + Notion + Formation équipe 2h + Suivi 30 jours. Votre business automatisé.</div>
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--b);">750€</div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.4);letter-spacing:1px;margin-top:4px;">Setup complet · Sur devis maintenance</div>
         </div>
         <div style="background:white;border-radius:16px;padding:28px;border:1px solid rgba(123,154,128,.12);transition:transform .2s,border-color .2s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='var(--v)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(123,154,128,.12)'">
-          <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--vc);text-transform:uppercase;margin-bottom:12px;">Visibilité</div>
-          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">Pack Visibilité Locale</div>
-          <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:18px;">GMB optimisé + 10 posts + stratégie avis + formation 30 min.</div>
-          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--v);">350€</div>
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);letter-spacing:1px;margin-top:4px;">One shot · Abo 150€/mois</div>
-        </div>
-        <div style="background:white;border-radius:16px;padding:28px;border:1px solid rgba(123,154,128,.12);transition:transform .2s,border-color .2s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='var(--v)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(123,154,128,.12)'">
-          <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--vc);text-transform:uppercase;margin-bottom:12px;">Abonnement</div>
-          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">Abo Partner Pro</div>
-          <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:18px;">Présence continue. Support email + WhatsApp. Rapport mensuel.</div>
+          <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--vc);text-transform:uppercase;margin-bottom:12px;">Partenariat</div>
+          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">Abo Partner</div>
+          <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:18px;">45h/mois de pilotage opérationnel. Vous scaler, je gère l'architecture.</div>
           <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--v);">1 250€</div>
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);letter-spacing:1px;margin-top:4px;">45h/mois · Récurrent</div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);letter-spacing:1px;margin-top:4px;">45h/mois · Récurrent · Prioritaire</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── OFFRES EXPRESS RESTRUCTURÉES ── -->
-<section id="express" style="background:white;padding:100px 40px;">
+<!-- ── OFFRES EXPRESS SUPPRIMÉES (doublon) ── -->
+<!-- ── VISIBILITÉ LOCALE ── -->
+<section id="visibilite" style="background:white;padding:100px 40px;">
   <div style="max-width:1100px;margin:0 auto;">
-    <div class="reveal">
-      <div class="section-label">Solutions rapides</div>
-      <h2 class="section-title">Offres <span class="f">Express</span></h2>
-      <p style="font-size:15px;color:var(--txt2);max-width:500px;line-height:1.75;margin-bottom:50px;">Des solutions concrètes livrées en 48h à 7 jours. Pour avancer vite sur un point précis.</p>
+    <div class="services-intro reveal">
+      <div>
+        <div class="section-label">Visibilité Locale</div>
+        <h2 class="section-title">Soyez visible là où<br>vos clients vous <span class="f">cherchent.</span></h2>
+      </div>
+      <div style="text-align:right;">
+        <p class="services-sub">Google Maps, avis clients, présence locale — je m'occupe de tout pour que vos clients vous trouvent facilement.</p>
+      </div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(123,154,128,.08);border-radius:16px;overflow:hidden;" class="reveal">
-      <div style="background:var(--cr);padding:32px 28px;transition:background .2s;" onmouseover="this.style.background='white'" onmouseout="this.style.background='var(--cr)'">
-        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--f);text-transform:uppercase;margin-bottom:8px;">Organisation</div>
-        <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">Setup Notion Clé en Main</div>
-        <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:16px;">CRM, Projets, Tâches, Base clients — votre espace Notion conçu sur mesure.</div>
-        <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--v);">350€ <span style="font-size:12px;font-weight:400;color:var(--txt2);font-family:'Jost',sans-serif;">· 7 jours</span></div>
+    <div class="services-sublabel reveal">02 · Visibilité Locale — Du one shot à l'abonnement</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;" class="reveal">
+
+      <!-- GMB EXPRESS -->
+      <div style="background:var(--cr);border-radius:16px;padding:32px;border:1px solid rgba(123,154,128,.15);transition:transform .2s,border-color .2s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='var(--v)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(123,154,128,.15)'">
+        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--v);text-transform:uppercase;margin-bottom:16px;">GMB_EXPRESS</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--txt);margin-bottom:12px;line-height:1.2;">GMB Express</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px;">
+          <div style="font-size:13px;color:var(--txt2);display:flex;gap:8px;"><span style="color:var(--v);">✦</span>Création / optimisation fiche Google My Business</div>
+          <div style="font-size:13px;color:var(--txt2);display:flex;gap:8px;"><span style="color:var(--v);">✦</span>Photos conseillées + description rédigée</div>
+          <div style="font-size:13px;color:var(--txt2);display:flex;gap:8px;"><span style="color:var(--v);">✦</span>Catégories + attributs bien configurés</div>
+        </div>
+        <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--v);">120 €</div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);letter-spacing:1px;margin-top:6px;">One shot · Livré en 48h</div>
       </div>
-      <div style="background:var(--cr);padding:32px 28px;transition:background .2s;" onmouseover="this.style.background='white'" onmouseout="this.style.background='var(--cr)'">
-        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--f);text-transform:uppercase;margin-bottom:8px;">Automatisation</div>
-        <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">Flow RDV</div>
-        <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:16px;">Système de réservation complet — calendrier + emails auto + rappels + intégration. Tout connecté.</div>
-        <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--v);">150€ <span style="font-size:12px;font-weight:400;color:var(--txt2);font-family:'Jost',sans-serif;">· 48h</span></div>
+
+      <!-- PACK VISIBILITÉ -->
+      <div style="background:var(--v);border-radius:16px;padding:32px;transition:transform .2s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform=''">
+        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.5);text-transform:uppercase;margin-bottom:16px;">⭐ PACK_VISIBILITÉ</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:white;margin-bottom:12px;line-height:1.2;">Pack Visibilité</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px;">
+          <div style="font-size:13px;color:rgba(255,255,255,.8);display:flex;gap:8px;"><span style="color:var(--b);">✦</span>Tout GMB Express inclus</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.8);display:flex;gap:8px;"><span style="color:var(--b);">✦</span>10 posts rédigés et programmés</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.8);display:flex;gap:8px;"><span style="color:var(--b);">✦</span>Stratégie pour collecter des avis clients</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.8);display:flex;gap:8px;"><span style="color:var(--b);">✦</span>Formation 30 min pour gérer en autonomie</div>
+        </div>
+        <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--b);">350 €</div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.4);letter-spacing:1px;margin-top:6px;">One shot · Livré en 7 jours</div>
       </div>
-      <div style="background:var(--cr);padding:32px 28px;transition:background .2s;" onmouseover="this.style.background='white'" onmouseout="this.style.background='var(--cr)'">
-        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--f);text-transform:uppercase;margin-bottom:8px;">Client</div>
-        <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">Kit Onboarding Client</div>
-        <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:16px;">Parcours client complet — contrat, email de bienvenue, suivi de mission, templates pro.</div>
-        <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--v);">180€ <span style="font-size:12px;font-weight:400;color:var(--txt2);font-family:'Jost',sans-serif;">· 72h</span></div>
+
+      <!-- ABO LOCAL -->
+      <div style="background:var(--cr);border-radius:16px;padding:32px;border:1px solid rgba(123,154,128,.15);transition:transform .2s,border-color .2s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='var(--v)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(123,154,128,.15)'">
+        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--f);text-transform:uppercase;margin-bottom:16px;">ABO_LOCAL</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--txt);margin-bottom:12px;line-height:1.2;">Abo Local</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px;">
+          <div style="font-size:13px;color:var(--txt2);display:flex;gap:8px;"><span style="color:var(--f);">✦</span>4 posts/mois rédigés et publiés</div>
+          <div style="font-size:13px;color:var(--txt2);display:flex;gap:8px;"><span style="color:var(--f);">✦</span>Réponse aux avis clients</div>
+          <div style="font-size:13px;color:var(--txt2);display:flex;gap:8px;"><span style="color:var(--f);">✦</span>Rapport mensuel de visibilité</div>
+          <div style="font-size:13px;color:var(--txt2);display:flex;gap:8px;"><span style="color:var(--f);">✦</span>Optimisation continue</div>
+        </div>
+        <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--v);">150 €</div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);letter-spacing:1px;margin-top:6px;">Récurrent · /mois</div>
       </div>
-      <div style="background:var(--cr);padding:32px 28px;transition:background .2s;" onmouseover="this.style.background='white'" onmouseout="this.style.background='var(--cr)'">
-        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--f);text-transform:uppercase;margin-bottom:8px;">Messagerie</div>
-        <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">Chatbot WhatsApp Business</div>
-        <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:16px;">Système WA complet — chatbot intelligent, messages auto, catalogue, scripts + formation.</div>
-        <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--v);">180€ <span style="font-size:12px;font-weight:400;color:var(--txt2);font-family:'Jost',sans-serif;">· 48h</span></div>
-      </div>
-      <div style="background:var(--cr);padding:32px 28px;transition:background .2s;" onmouseover="this.style.background='white'" onmouseout="this.style.background='var(--cr)'">
-        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--f);text-transform:uppercase;margin-bottom:8px;">Visibilité</div>
-        <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">GMB Express</div>
-        <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:16px;">Google My Business créé et optimisé — fiche complète, description rédigée. Apparaissez sur Maps.</div>
-        <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--v);">120€ <span style="font-size:12px;font-weight:400;color:var(--txt2);font-family:'Jost',sans-serif;">· 48h</span></div>
-      </div>
-      <div style="background:var(--cr);padding:32px 28px;transition:background .2s;" onmouseover="this.style.background='white'" onmouseout="this.style.background='var(--cr)'">
-        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--f);text-transform:uppercase;margin-bottom:8px;">Réseaux</div>
-        <div style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--txt);margin-bottom:10px;line-height:1.2;">Audit Réseaux Sociaux</div>
-        <div style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:16px;">Analyse de vos profils, identification des blocages, plan d'action concret pour booster votre présence.</div>
-        <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--v);">90€ <span style="font-size:12px;font-weight:400;color:var(--txt2);font-family:'Jost',sans-serif;">· 72h</span></div>
-      </div>
+
     </div>
   </div>
 </section>
@@ -1503,7 +1587,7 @@ function showMap(id, btn) {
           <div class="faq-question-txt">Quelle est la différence entre une Offre Express et un Module d'accompagnement ?</div>
           <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2v8M2 6h8"/></svg></div>
         </div>
-        <div class="faq-answer"><div class="faq-answer-inner">Les Offres Express sont des prestations ponctuelles avec un livrable défini et un délai court — idéal si vous avez un besoin précis à régler rapidement. Les Modules d'accompagnement sont des formules en heures, récurrentes ou non, pour un suivi dans la durée. Si vous démarrez et ne savez pas encore ce dont vous avez besoin, l'Audit Business à 90€ est le meilleur point de départ.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Les Offres Express sont des prestations ponctuelles avec un livrable défini et un délai court — idéal si vous avez un besoin précis à régler rapidement. Les Modules d'accompagnement sont des formules en heures, récurrentes ou non, pour un suivi dans la durée. Si vous démarrez et ne savez pas encore ce dont vous avez besoin, l'Audit Business à 59€ est le meilleur point de départ.</div></div>
       </div>
       <div class="faq-item reveal">
         <div class="faq-question" onclick="toggleFaq(this)">
