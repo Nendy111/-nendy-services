@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boutique Digitale — Nendy Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--v:#7b9a80;--vc:#b5c1a6;--b:#d8c79e;--cr:#f5f1e6;--f:#ee07a5;--txt:#1a1714;--txt2:#5c5248;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--cr);color:var(--txt);overflow-x:hidden;}
+
+/* NAV */
+nav{background:var(--txt);padding:18px 48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:17px;color:var(--vc);letter-spacing:.5px;}
+.nav-logo small{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--b);display:block;margin-top:2px;}
+.nav-right{display:flex;align-items:center;gap:24px;}
+.nav-link{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.4);text-decoration:none;text-transform:uppercase;transition:color .2s;}
+.nav-link:hover{color:white;}
+.nav-cta{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;padding:9px 18px;border-radius:8px;background:var(--f);color:white;text-decoration:none;text-transform:uppercase;transition:opacity .2s;}
+.nav-cta:hover{opacity:.88;}
+
+/* HERO */
+.hero{background:var(--txt);padding:80px 48px 120px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 100%,rgba(123,154,128,.18) 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(238,7,165,.06) 0%,transparent 50%);}
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;}
+.hero-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--f);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.hero-tag::before{content:'';width:24px;height:1px;background:var(--f);}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(40px,5vw,64px);font-weight:700;color:white;line-height:1.05;margin-bottom:20px;}
+.hero h1 em{color:var(--v);font-style:italic;}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:36px;max-width:440px;}
+.hero-badges{display:flex;flex-wrap:wrap;gap:8px;}
+.hero-badge{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.4);}
+.hero-badge.highlight{border-color:rgba(238,7,165,.4);color:rgba(238,7,165,.8);}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.hstat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px 20px;}
+.hstat-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:white;margin-bottom:4px;}
+.hstat-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.3);}
+
+/* SECTION */
+.section{padding:80px 48px;}
+.section-inner{max-width:1100px;margin:0 auto;}
+.section-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--f);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.section-tag::before{content:'';width:24px;height:1px;background:var(--f);}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,48px);font-weight:700;color:var(--txt);line-height:1.1;margin-bottom:12px;}
+.section-title em{color:var(--v);font-style:italic;}
+.section-sub{font-size:15px;color:var(--txt2);line-height:1.75;max-width:520px;margin-bottom:52px;}
+
+/* PRODUITS GRID */
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.prod{background:white;border-radius:20px;border:1px solid rgba(123,154,128,.12);overflow:hidden;transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;}
+.prod:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.1);}
+.prod.featured{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;}
+.prod.full{grid-column:span 3;}
+.prod-visual{aspect-ratio:4/3;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;overflow:hidden;}
+.prod.featured .prod-visual{aspect-ratio:auto;min-height:280px;}
+.prod.full .prod-visual{aspect-ratio:3/1;}
+.prod-visual-tag{position:absolute;top:14px;left:14px;font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.15);color:white;}
+.prod-visual-badge{position:absolute;top:14px;right:14px;font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;padding:4px 10px;border-radius:6px;background:var(--f);color:white;}
+.prod-visual-icon{font-size:44px;margin-bottom:12px;position:relative;z-index:1;}
+.prod-visual-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:white;text-align:center;line-height:1.15;position:relative;z-index:1;}
+.prod-spiral{position:absolute;opacity:.08;bottom:-30px;right:-30px;}
+.prod-body{padding:24px;flex:1;display:flex;flex-direction:column;}
+.prod-cat{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--f);margin-bottom:8px;}
+.prod-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--txt);margin-bottom:8px;line-height:1.2;}
+.prod-desc{font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:16px;flex:1;}
+.prod-local{display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--v);background:rgba(123,154,128,.08);border:1px solid rgba(123,154,128,.15);border-radius:6px;padding:4px 10px;margin-bottom:14px;}
+.prod-features{display:flex;flex-direction:column;gap:6px;margin-bottom:20px;}
+.prod-feature{font-size:12px;color:var(--txt2);display:flex;gap:8px;align-items:flex-start;}
+.prod-feature::before{content:'→';color:var(--v);flex-shrink:0;}
+.prod-footer{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(123,154,128,.1);}
+.prod-price{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--v);}
+.prod-price small{font-family:'Jost',sans-serif;font-size:11px;font-weight:300;color:var(--txt2);display:block;}
+.prod-price .original{font-size:14px;text-decoration:line-through;color:var(--txt2);opacity:.5;}
+.btn-gen{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:10px 20px;border-radius:10px;border:none;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;}
+.btn-gen.primary{background:var(--v);color:white;}
+.btn-gen.primary:hover{background:#5a7a60;transform:translateY(-1px);}
+.btn-gen.fuchsia{background:var(--f);color:white;}
+.btn-gen.fuchsia:hover{opacity:.88;transform:translateY(-1px);}
+.btn-gen.outline{background:transparent;color:var(--v);border:1.5px solid var(--v);}
+.btn-gen.outline:hover{background:var(--v);color:white;}
+.btn-gen.dark{background:var(--txt);color:white;}
+.btn-gen.dark:hover{opacity:.85;}
+
+/* SECTION TITRE CATÉGORIE */
+.cat-divider{display:flex;align-items:center;gap:16px;margin-bottom:32px;margin-top:48px;}
+.cat-divider:first-child{margin-top:0;}
+.cat-divider-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--txt2);white-space:nowrap;}
+.cat-divider-line{flex:1;height:1px;background:rgba(123,154,128,.15);}
+
+/* COMMENT CA MARCHE */
+.how-section{background:var(--txt);padding:80px 48px;}
+.how-inner{max-width:1100px;margin:0 auto;}
+.how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:48px;}
+.how-step{position:relative;}
+.how-step::after{content:'→';position:absolute;top:20px;right:-14px;color:rgba(255,255,255,.2);font-size:18px;}
+.how-step:last-child::after{display:none;}
+.how-num{font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:rgba(255,255,255,.06);line-height:1;margin-bottom:12px;}
+.how-title{font-size:14px;font-weight:500;color:white;margin-bottom:6px;}
+.how-sub{font-size:12px;color:rgba(255,255,255,.4);line-height:1.6;}
+
+/* PITCH LOCAL */
+.local-pitch{background:white;border:1px solid rgba(123,154,128,.12);border-radius:20px;padding:40px 48px;margin-top:60px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;align-items:start;}
+.lp-item{display:flex;flex-direction:column;gap:8px;}
+.lp-icon{font-size:28px;margin-bottom:4px;}
+.lp-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--txt);}
+.lp-desc{font-size:13px;color:var(--txt2);line-height:1.65;}
+
+/* SUR MESURE */
+.custom-section{background:var(--txt);padding:80px 48px;}
+.custom-inner{max-width:800px;margin:0 auto;text-align:center;}
+.custom-title{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,52px);font-weight:700;color:white;line-height:1.1;margin-bottom:16px;}
+.custom-title em{color:var(--v);font-style:italic;}
+.custom-sub{font-size:15px;color:rgba(255,255,255,.5);line-height:1.75;margin-bottom:40px;}
+.custom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:40px;}
+.custom-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px;text-align:left;}
+.custom-item-name{font-size:13px;font-weight:500;color:white;margin-bottom:4px;}
+.custom-item-desc{font-size:11px;color:rgba(255,255,255,.4);line-height:1.5;}
+.custom-item-price{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--f);margin-top:8px;}
+.custom-cta{display:inline-flex;align-items:center;gap:10px;background:var(--f);color:white;text-decoration:none;padding:16px 36px;border-radius:12px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;transition:opacity .2s;}
+.custom-cta:hover{opacity:.88;}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(26,23,20,.85);backdrop-filter:blur(8px);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--cr);border-radius:24px;width:100%;max-width:960px;max-height:90vh;overflow:hidden;display:grid;grid-template-columns:380px 1fr;position:relative;}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.1);border:none;cursor:pointer;font-size:16px;color:var(--txt2);display:flex;align-items:center;justify-content:center;z-index:10;transition:background .2s;}
+.modal-close:hover{background:rgba(0,0,0,.2);}
+.modal-form{background:white;overflow-y:auto;padding:32px 28px;}
+.modal-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--txt);margin-bottom:4px;}
+.modal-sub{font-size:13px;color:var(--txt2);margin-bottom:24px;line-height:1.6;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt2);margin-bottom:6px;}
+.field input[type="text"],.field input[type="url"],.field input[type="email"],.field input[type="number"],.field textarea,.field select{width:100%;padding:10px 12px;border:1px solid rgba(123,154,128,.2);border-radius:10px;font-family:'Jost',sans-serif;font-size:13px;color:var(--txt);background:var(--cr);outline:none;transition:border-color .2s,background .2s;}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--v);background:white;}
+.field textarea{resize:none;height:70px;}
+.colors-row{display:flex;gap:8px;}
+.color-item{flex:1;text-align:center;}
+.color-item label{font-size:7px;letter-spacing:1px;color:var(--txt2);margin-bottom:5px;display:block;}
+.color-item input[type="color"]{width:100%;height:38px;border-radius:8px;border:1px solid rgba(123,154,128,.2);cursor:pointer;padding:2px;background:white;}
+.links-list{display:flex;flex-direction:column;gap:7px;margin-bottom:10px;}
+.link-row{display:grid;grid-template-columns:28px 1fr 1fr 26px;gap:5px;align-items:center;}
+.link-row-emoji{width:28px;height:32px;border:1px solid rgba(123,154,128,.2);border-radius:7px;font-size:14px;text-align:center;background:var(--cr);cursor:pointer;outline:none;}
+.link-row input{padding:7px 9px;border:1px solid rgba(123,154,128,.2);border-radius:7px;font-size:12px;font-family:'Jost',sans-serif;color:var(--txt);background:var(--cr);outline:none;transition:border-color .2s;}
+.link-row input:focus{border-color:var(--v);background:white;}
+.link-row-remove{width:26px;height:26px;border-radius:6px;border:none;background:rgba(238,7,165,.08);color:var(--f);cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;}
+.btn-add-link{width:100%;padding:8px;border:1.5px dashed rgba(123,154,128,.3);border-radius:9px;background:transparent;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--vc);cursor:pointer;transition:all .2s;margin-bottom:20px;}
+.btn-add-link:hover{border-color:var(--v);color:var(--v);}
+.modal-preview{background:var(--cr);overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:16px;}
+.modal-cta{padding:20px 0 0;}
+.preview-live-badge{display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--v);}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--v);animation:blink 1.5s ease infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.phone-wrap{display:flex;justify-content:center;}
+.phone{width:220px;background:#f0ece3;border-radius:32px;border:7px solid #1a1714;box-shadow:0 0 0 1px rgba(255,255,255,.1) inset,0 20px 50px rgba(0,0,0,.25);overflow:hidden;}
+.phone-notch{width:80px;height:22px;background:#1a1714;border-radius:0 0 12px 12px;margin:0 auto;}
+.phone-content{padding:12px 12px 20px;max-height:420px;overflow-y:auto;}
+.lp-header{text-align:center;padding:12px 0 10px;}
+.lp-avatar{width:58px;height:58px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:24px;border:3px solid white;box-shadow:0 4px 12px rgba(0,0,0,.12);}
+.lp-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:2px;}
+.lp-job{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;margin-bottom:6px;opacity:.75;}
+.lp-slogan{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1.5px;text-transform:uppercase;opacity:.55;margin-bottom:10px;}
+.lp-divider{display:flex;align-items:center;gap:6px;margin:10px 0 8px;}
+.lp-div-line{flex:1;height:1px;opacity:.3;}
+.lp-div-diamond{width:5px;height:5px;transform:rotate(45deg);}
+.lp-links{display:flex;flex-direction:column;gap:6px;}
+.lp-link{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.6);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.7);box-shadow:0 2px 0 rgba(255,255,255,.8) inset,0 3px 8px rgba(0,0,0,.06);}
+.lp-link.featured{border:none;box-shadow:0 2px 0 rgba(255,255,255,.2) inset,0 5px 16px rgba(0,0,0,.15);}
+.lp-link-icon{width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
+.lp-link-label{font-size:10px;font-weight:500;display:block;margin-bottom:1px;}
+.lp-link-sub{font-family:'DM Mono',monospace;font-size:6px;letter-spacing:.5px;opacity:.55;}
+.lp-link-arrow{font-size:11px;opacity:.45;margin-left:auto;}
+.lp-footer{text-align:center;margin-top:12px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:9px;opacity:.4;}
+.wa-preview-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;}
+.wa-mini-card{border-radius:8px;padding:10px;aspect-ratio:1;display:flex;flex-direction:column;justify-content:flex-end;}
+.wa-mini-label{font-family:'DM Mono',monospace;font-size:6px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:3px;}
+.wa-mini-name{font-family:'Playfair Display',serif;font-size:11px;font-weight:700;color:white;line-height:1.1;margin-bottom:4px;}
+.wa-mini-price{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;}
+.sig-preview{background:white;border-radius:10px;padding:14px;border:1px solid rgba(0,0,0,.08);}
+.sig-top{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.sig-avatar-preview{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.sig-name-preview{font-size:14px;font-weight:700;}
+.sig-job-preview{font-size:11px;opacity:.6;}
+.sig-divider-preview{height:1px;margin-bottom:10px;opacity:.2;}
+.sig-links-preview{display:flex;gap:8px;flex-wrap:wrap;}
+.sig-link-preview{font-size:10px;padding:3px 10px;border-radius:20px;text-decoration:none;}
+.included-box{background:white;border-radius:12px;padding:16px;}
+.included-title{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt2);margin-bottom:10px;}
+.included-item{font-size:12px;color:var(--txt2);padding:5px 0;border-bottom:1px solid rgba(123,154,128,.08);display:flex;align-items:center;gap:8px;}
+.included-item:last-child{border-bottom:none;}
+.included-item::before{content:'✓';color:var(--v);font-size:11px;flex-shrink:0;}
+.btn-buy{width:100%;padding:14px;background:var(--f);border:none;border-radius:12px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:white;cursor:pointer;transition:opacity .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-buy:hover{opacity:.88;}
+.btn-buy.green{background:var(--v);}
+.btn-buy-note{text-align:center;font-size:11px;color:var(--txt2);opacity:.6;margin-top:7px;}
+
+/* DASHBOARD PREVIEW */
+.dash-preview{background:#1a1714;border-radius:12px;padding:16px;overflow:hidden;}
+.dash-prev-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.dash-prev-title{font-family:'Playfair Display',serif;font-size:13px;color:white;font-weight:700;}
+.dash-prev-date{font-family:'DM Mono',monospace;font-size:7px;color:rgba(255,255,255,.3);letter-spacing:1px;}
+.dash-prev-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;}
+.dash-prev-card{border-radius:8px;padding:10px;}
+.dash-prev-num{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;line-height:1;}
+.dash-prev-label{font-family:'DM Mono',monospace;font-size:6px;letter-spacing:1px;text-transform:uppercase;opacity:.6;margin-top:3px;}
+
+/* URSSAF PREVIEW */
+.urssaf-preview{background:white;border-radius:12px;padding:16px;}
+.urssaf-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(123,154,128,.1);font-size:11px;}
+.urssaf-row:last-child{border-bottom:none;font-weight:600;color:var(--v);}
+.urssaf-label{color:var(--txt2);}
+.urssaf-val{font-family:'DM Mono',monospace;font-size:11px;color:var(--txt);}
+
+/* FORMATION PREVIEW */
+.formation-preview{background:var(--txt);border-radius:12px;padding:16px;overflow:hidden;}
+.form-prev-module{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.form-prev-module:last-child{border-bottom:none;}
+.form-prev-num{font-family:'DM Mono',monospace;font-size:8px;color:var(--f);width:24px;flex-shrink:0;}
+.form-prev-title{font-size:11px;color:rgba(255,255,255,.75);}
+.form-prev-badge{font-family:'DM Mono',monospace;font-size:7px;padding:2px 7px;border-radius:4px;margin-left:auto;flex-shrink:0;}
+
+/* FACTURE PREVIEW */
+.facture-preview{background:white;border-radius:10px;padding:14px;border:1px solid rgba(0,0,0,.08);}
+.facture-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.facture-brand{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;}
+.facture-num{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:rgba(0,0,0,.4);}
+.facture-line{display:flex;justify-content:space-between;font-size:10px;padding:4px 0;border-bottom:1px solid rgba(0,0,0,.05);}
+.facture-line:last-child{border-bottom:none;font-weight:600;}
+.facture-total{display:flex;justify-content:space-between;padding:8px 0;margin-top:6px;border-top:2px solid;}
+.facture-total-label{font-size:11px;font-weight:600;}
+.facture-total-val{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;}
+
+/* PV PREVIEW */
+.pv-hero-preview{border-radius:8px;padding:16px;margin-bottom:8px;}
+.pv-hero-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:white;line-height:1.2;margin-bottom:6px;}
+.pv-hero-sub{font-size:10px;color:rgba(255,255,255,.6);margin-bottom:10px;}
+.pv-hero-btn{display:inline-block;padding:6px 14px;border-radius:8px;font-size:9px;color:white;font-family:'DM Mono',monospace;letter-spacing:1px;}
+
+/* FOOTER */
+footer{background:var(--txt);padding:48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--vc);}
+.footer-copy{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:rgba(255,255,255,.25);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .products-grid{grid-template-columns:1fr 1fr;}
+  .prod.featured{grid-column:span 2;grid-template-columns:1fr;}
+  .prod.full{grid-column:span 2;}
+  .hero-inner{grid-template-columns:1fr;}
+  .how-steps{grid-template-columns:1fr 1fr;}
+  .custom-grid{grid-template-columns:1fr 1fr;}
+  .modal{grid-template-columns:1fr;}
+  .modal-preview{display:none;}
+  .local-pitch{grid-template-columns:1fr;}
+  nav{padding:14px 20px;}
+  .section{padding:48px 20px;}
+}
+@media(max-width:600px){
+  .products-grid{grid-template-columns:1fr;}
+  .prod.featured,.prod.full{grid-column:span 1;display:flex;flex-direction:column;}
+  .hero-stats{grid-template-columns:1fr 1fr;}
+  .custom-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Nendy Services<small>Boutique Digitale</small></div>
+  <div class="nav-right">
+    <a href="https://nendyservices.com" class="nav-link">← Site principal</a>
+    <a href="#sur-mesure" class="nav-link">Sur mesure</a>
+    <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" target="_blank" class="nav-cta">Appel gratuit</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Boutique digitale</div>
+      <h1>Des outils qui<br>travaillent <em>pour vous.</em></h1>
+      <p class="hero-sub">Chaque outil tourne entièrement en local sur votre ordinateur. Vos données ne quittent jamais votre appareil. Aucun abonnement. Un fichier qui vous appartient — pour toujours.</p>
+      <div class="hero-badges">
+        <span class="hero-badge highlight">🔒 100% local · zéro fuite de données</span>
+        <span class="hero-badge">Aucun abonnement</span>
+        <span class="hero-badge">Livraison sous 24h</span>
+        <span class="hero-badge">Personnalisé à votre charte</span>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num">100%</div><div class="hstat-lbl">Local · Vos données restent chez vous</div></div>
+      <div class="hstat"><div class="hstat-num">24h</div><div class="hstat-lbl">Délai de livraison moyen</div></div>
+      <div class="hstat"><div class="hstat-num">0€</div><div class="hstat-lbl">D'abonnement mensuel</div></div>
+      <div class="hstat"><div class="hstat-num">∞</div><div class="hstat-lbl">Utilisations · Vous en faites ce que vous voulez</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUITS -->
+<div class="section">
+  <div class="section-inner">
+
+    <!-- OUTILS QUOTIDIENS -->
+    <div class="cat-divider">
+      <div class="cat-divider-label">Outils quotidiens</div>
+      <div class="cat-divider-line"></div>
+    </div>
+    <div class="products-grid">
+
+      <!-- CALCULATEUR URSSAF -->
+      <div class="prod">
+        <div class="prod-visual" style="background:linear-gradient(135deg,#7b9a80,#4a6b50);">
+          <div class="prod-visual-tag">Gratuit · Lead magnet</div>
+          <div class="prod-visual-badge">🎁 Offert</div>
+          <div class="prod-visual-icon">🧮</div>
+          <div class="prod-visual-name">Calculateur<br>URSSAF</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Outil quotidien · Gratuit</div>
+          <div class="prod-name">Calculateur URSSAF Micro-entrepreneur</div>
+          <div class="prod-local">🔒 100% local · aucune donnée transmise</div>
+          <div class="prod-desc">Calculez vos cotisations URSSAF, votre net après charges et le CA à facturer pour atteindre votre objectif de revenu. Simple, beau, local.</div>
+          <div class="prod-features">
+            <div class="prod-feature">Cotisations par activité (BIC/BNC/Commerce)</div>
+            <div class="prod-feature">Net mensuel estimé en temps réel</div>
+            <div class="prod-feature">CA à facturer pour viser un salaire cible</div>
+            <div class="prod-feature">Simulation plafonds et seuils TVA</div>
+          </div>
+          <div class="prod-footer">
+            <div class="prod-price">Gratuit<small>Entrez votre email pour recevoir</small></div>
+            <button class="btn-gen primary" onclick="openModal('urssaf')">✦ Recevoir</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- GÉNÉRATEUR DE FACTURE -->
+      <div class="prod">
+        <div class="prod-visual" style="background:linear-gradient(135deg,#d8c79e,#a08c5a);">
+          <div class="prod-visual-tag">Outil quotidien</div>
+          <div class="prod-visual-icon">🧾</div>
+          <div class="prod-visual-name">Générateur<br>de Facture</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Outil quotidien</div>
+          <div class="prod-name">Générateur de Facture Pro</div>
+          <div class="prod-local">🔒 100% local · aucune donnée transmise</div>
+          <div class="prod-desc">Créez des factures professionnelles à vos couleurs en 2 minutes. Calcul automatique, export PDF, numérotation auto. Sans abonnement, sans fuite de données.</div>
+          <div class="prod-features">
+            <div class="prod-feature">Design à votre charte graphique</div>
+            <div class="prod-feature">Calcul TVA automatique</div>
+            <div class="prod-feature">Numérotation automatique</div>
+            <div class="prod-feature">Export PDF en un clic</div>
+          </div>
+          <div class="prod-footer">
+            <div class="prod-price">37€<small>Livraison sous 24h</small></div>
+            <button class="btn-gen primary" onclick="openModal('facture')">✦ Personnaliser</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DASHBOARD SOLOPRENEUR -->
+      <div class="prod">
+        <div class="prod-visual" style="background:linear-gradient(135deg,#1a1714,#2d2926);">
+          <div class="prod-visual-tag">Dashboard</div>
+          <div class="prod-visual-badge">⭐ Populaire</div>
+          <svg class="prod-spiral" width="120" height="120" viewBox="0 0 120 120">
+            <path d="M60,60 m0,-48 a48,48 0 1,1-.1,0 M60,60 m0,-34 a34,34 0 1,1-.1,0 M60,60 m0,-22 a22,22 0 1,1-.1,0 M60,60 m0,-11 a11,11 0 1,1-.1,0" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+          </svg>
+          <div class="prod-visual-icon">🏠</div>
+          <div class="prod-visual-name">Dashboard<br>Solopreneur</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Dashboard · Gestion</div>
+          <div class="prod-name">Dashboard Solopreneur</div>
+          <div class="prod-local">🔒 100% local · données dans votre navigateur</div>
+          <div class="prod-desc">Votre QG digital à vos couleurs — CA, clients actifs, tâches, objectifs, liens rapides. Tout en local, accessible depuis n'importe quel navigateur, aucun abonnement.</div>
+          <div class="prod-features">
+            <div class="prod-feature">CA mensuel · Clients · Tâches · Objectifs</div>
+            <div class="prod-feature">Design 100% à votre charte graphique</div>
+            <div class="prod-feature">Données sauvegardées localement</div>
+            <div class="prod-feature">Accessible offline</div>
+          </div>
+          <div class="prod-footer">
+            <div class="prod-price">97€<small>Livraison sous 48h</small></div>
+            <button class="btn-gen fuchsia" onclick="openModal('dashboard')">✦ Personnaliser</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STUDIO CONTENU IA -->
+      <div class="prod featured">
+        <div class="prod-visual" style="background:linear-gradient(135deg,#ee07a5,#8b0057);min-height:280px;">
+          <div class="prod-visual-tag">Outil IA</div>
+          <div class="prod-visual-badge">✦ Nouveau</div>
+          <svg class="prod-spiral" width="160" height="160" viewBox="0 0 120 120">
+            <path d="M60,60 m0,-48 a48,48 0 1,1-.1,0 M60,60 m0,-34 a34,34 0 1,1-.1,0 M60,60 m0,-22 a22,22 0 1,1-.1,0 M60,60 m0,-11 a11,11 0 1,1-.1,0" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+          </svg>
+          <div class="prod-visual-icon">✦</div>
+          <div class="prod-visual-name">Studio<br>Contenu IA</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Outil IA · Création de contenu</div>
+          <div class="prod-name">Studio Contenu IA Personnalisé</div>
+          <div class="prod-local">🔒 100% local · vos données ne partent nulle part</div>
+          <div class="prod-desc">Votre studio de création de contenu personnel avec IA intégrée — posts, carrousels, scripts avatar, planning éditorial. Génère dans votre ton, votre charte, vos couleurs. Fonctionne entièrement en local avec votre propre clé API (~5€/mois d'usage).</div>
+          <div class="prod-features">
+            <div class="prod-feature">Génération posts + carrousels + scripts IA dans votre ton</div>
+            <div class="prod-feature">5 formats export Instagram 2026 (1:1, 4:5, 3:4, Story, LinkedIn)</div>
+            <div class="prod-feature">Bibliothèque + planning éditorial + score viralité</div>
+            <div class="prod-feature">Versions de stratégie — switcher en 1 clic</div>
+            <div class="prod-feature">Série 8H12 et suggestions de séries incluses</div>
+          </div>
+          <div class="prod-footer">
+            <div class="prod-price">197€<small>Livraison sous 48h · clé API ~5€/mois</small></div>
+            <button class="btn-gen fuchsia" onclick="openModal('studio')">✦ Personnaliser</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- OUTILS DE LANCEMENT -->
+    <div class="cat-divider">
+      <div class="cat-divider-label">Outils de lancement</div>
+      <div class="cat-divider-line"></div>
+    </div>
+    <div class="products-grid">
+
+      <!-- LINKS PAGE -->
+      <div class="prod">
+        <div class="prod-visual" style="background:linear-gradient(135deg,#7b9a80,#4a6b50);">
+          <div class="prod-visual-tag">Page de liens</div>
+          <div class="prod-visual-icon">🔗</div>
+          <div class="prod-visual-name">Links Page<br>Personnalisée</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Identité · Lancement</div>
+          <div class="prod-name">Ma Links Page</div>
+          <div class="prod-local">🔒 Hébergée sur votre domaine</div>
+          <div class="prod-desc">Votre Linktree à vous — à vos couleurs, sur votre domaine. Aperçu live pendant la personnalisation. Sans abonnement mensuel.</div>
+          <div class="prod-features">
+            <div class="prod-feature">Design glassmorphism premium à vos couleurs</div>
+            <div class="prod-feature">Liens illimités personnalisables</div>
+            <div class="prod-feature">PDF installation pas à pas</div>
+            <div class="prod-feature">1 modification offerte sous 7 jours</div>
+          </div>
+          <div class="prod-footer">
+            <div class="prod-price">47€<small>Livraison sous 24h</small></div>
+            <button class="btn-gen primary" onclick="openModal('links')">✦ Personnaliser</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATALOGUE WA -->
+      <div class="prod">
+        <div class="prod-visual" style="background:linear-gradient(135deg,#25D366,#128C7E);">
+          <div class="prod-visual-tag">WhatsApp Business</div>
+          <div class="prod-visual-icon">💬</div>
+          <div class="prod-visual-name">Catalogue<br>WhatsApp</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Réseaux · Lancement</div>
+          <div class="prod-name">Catalogue WhatsApp Business</div>
+          <div class="prod-local">🔒 Fichiers livrés · vos données restent chez vous</div>
+          <div class="prod-desc">9 cartes visuelles à vos couleurs pour présenter vos offres sur WhatsApp Business. Format 400×400px, prêt à charger dans votre catalogue.</div>
+          <div class="prod-features">
+            <div class="prod-feature">9 cartes 400×400px à vos couleurs</div>
+            <div class="prod-feature">Vos offres et tarifs intégrés</div>
+            <div class="prod-feature">PDF installation inclus</div>
+          </div>
+          <div class="prod-footer">
+            <div class="prod-price">37€<small>Livraison sous 24h</small></div>
+            <button class="btn-gen primary" onclick="openModal('wa')">✦ Personnaliser</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIGNATURE EMAIL -->
+      <div class="prod">
+        <div class="prod-visual" style="background:linear-gradient(135deg,#f5f1e6,#d8c79e);">
+          <div class="prod-visual-tag">Identité</div>
+          <div class="prod-visual-badge">✉️ Express</div>
+          <div class="prod-visual-icon">✍️</div>
+          <div class="prod-visual-name" style="color:var(--txt);">Signature<br>Email Pro</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Identité · Branding</div>
+          <div class="prod-name">Signature Email Personnalisée</div>
+          <div class="prod-local">🔒 Fichier HTML · aucune donnée transmise</div>
+          <div class="prod-desc">Signature email HTML professionnelle à vos couleurs. Compatible Gmail, Outlook, Apple Mail. Livrée en 24h avec guide d'installation.</div>
+          <div class="prod-features">
+            <div class="prod-feature">HTML compatible tous clients email</div>
+            <div class="prod-feature">Logo · nom · titre · slogan · liens</div>
+            <div class="prod-feature">Guide installation pas à pas inclus</div>
+          </div>
+          <div class="prod-footer">
+            <div class="prod-price">27€<small>Livraison sous 24h</small></div>
+            <button class="btn-gen outline" onclick="openModal('signature')">✦ Personnaliser</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SITES -->
+    <div class="cat-divider">
+      <div class="cat-divider-label">Sites web</div>
+      <div class="cat-divider-line"></div>
+    </div>
+    <div class="products-grid">
+
+      <!-- SITE ONE PAGE -->
+      <div class="prod featured">
+        <div class="prod-visual" style="background:linear-gradient(135deg,#1a1714,#2d2926);min-height:260px;">
+          <div class="prod-visual-tag">Site vitrine</div>
+          <div class="prod-visual-badge">⭐ Populaire</div>
+          <div class="prod-visual-icon">🌐</div>
+          <div class="prod-visual-name">Site Vitrine<br>One-Page</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Site vitrine · One-Page</div>
+          <div class="prod-name">Site Vitrine One-Page</div>
+          <div class="prod-local">🔒 Hébergé sur GitHub Pages · gratuit</div>
+          <div class="prod-desc">Un site vitrine complet — hero, services, à propos, méthode, témoignages, contact. Design épuré et professionnel, responsive, personnalisé à votre charte. Hébergeable sur GitHub Pages gratuitement.</div>
+          <div class="prod-features">
+            <div class="prod-feature">Design 100% à votre charte graphique</div>
+            <div class="prod-feature">Responsive mobile · tablette · desktop</div>
+            <div class="prod-feature">Formulaire de contact intégré</div>
+            <div class="prod-feature">Hébergement GitHub Pages inclus</div>
+            <div class="prod-feature">Livré en 5 jours</div>
+          </div>
+          <div class="prod-footer">
+            <div class="prod-price">297€<small>+ domaine à votre charge (~10€/an)</small></div>
+            <button class="btn-gen dark" onclick="openModal('siteonepage')">✦ Discuter du projet</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SITE MULTI-PAGES -->
+      <div class="prod">
+        <div class="prod-visual" style="background:linear-gradient(135deg,#7b9a80,#4a6b50);">
+          <div class="prod-visual-tag">Site vitrine</div>
+          <div class="prod-visual-icon">📄</div>
+          <div class="prod-visual-name">Site<br>Multi-Pages</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Site vitrine · Multi-Pages</div>
+          <div class="prod-name">Site Vitrine Multi-Pages</div>
+          <div class="prod-local">🔒 Hébergé sur GitHub Pages · gratuit</div>
+          <div class="prod-desc">Un site vitrine complet avec plusieurs pages — accueil, services, à propos, blog, contact. Idéal si vous avez plusieurs offres à présenter séparément.</div>
+          <div class="prod-features">
+            <div class="prod-feature">3 à 6 pages selon vos besoins</div>
+            <div class="prod-feature">Navigation fluide entre les pages</div>
+            <div class="prod-feature">SEO de base intégré</div>
+            <div class="prod-feature">Livré en 7-10 jours</div>
+          </div>
+          <div class="prod-footer">
+            <div class="prod-price">Sur devis<small>Appel découverte requis</small></div>
+            <button class="btn-gen primary" onclick="window.open('https://calendar.notion.so/meet/nendyservices/appeldecouverte','_blank')">✦ Discuter du projet</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- OUTILS ADMINISTRATIFS -->
+    <div class="cat-divider">
+      <div class="cat-divider-label">Outils administratifs</div>
+      <div class="cat-divider-line"></div>
+    </div>
+    <div class="products-grid">
+
+      <!-- KIT DEVIS → CONTRAT → FACTURE -->
+      <div class="prod featured">
+        <div class="prod-visual" style="background:linear-gradient(135deg,#1a1714,#2d2926);min-height:260px;">
+          <div class="prod-visual-tag">Kit complet</div>
+          <div class="prod-visual-badge">🔥 Différenciant</div>
+          <svg class="prod-spiral" width="140" height="140" viewBox="0 0 120 120">
+            <path d="M60,60 m0,-48 a48,48 0 1,1-.1,0 M60,60 m0,-34 a34,34 0 1,1-.1,0 M60,60 m0,-22 a22,22 0 1,1-.1,0 M60,60 m0,-11 a11,11 0 1,1-.1,0" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
+          </svg>
+          <div class="prod-visual-icon">📋</div>
+          <div class="prod-visual-name">Devis → Contrat<br>→ Facture</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Kit administratif · Flux complet</div>
+          <div class="prod-name">Kit Devis → Contrat → Facture</div>
+          <div class="prod-local">🔒 100% local · aucun abonnement · vos données chez vous</div>
+          <div class="prod-desc">Un flux administratif complet en un seul fichier — vous générez le devis, le client accepte, ça devient un contrat signable, puis une facture numérotée automatiquement. Fini les 4 outils qui ne se parlent pas.</div>
+          <div class="prod-features">
+            <div class="prod-feature">Devis professionnel à vos couleurs en 2 min</div>
+            <div class="prod-feature">Contrat généré automatiquement depuis le devis</div>
+            <div class="prod-feature">Facture numérotée auto avec calcul TVA</div>
+            <div class="prod-feature">Export PDF en un clic à chaque étape</div>
+            <div class="prod-feature">Historique local de tous vos documents</div>
+          </div>
+          <div class="prod-footer">
+            <div class="prod-price">97€<small>Livraison sous 48h</small></div>
+            <button class="btn-gen fuchsia" onclick="openModal('kitadmin')">✦ Personnaliser</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABLEAU DE BORD FINANCIER -->
+      <div class="prod">
+        <div class="prod-visual" style="background:linear-gradient(135deg,#7b9a80,#4a6b50);">
+          <div class="prod-visual-tag">Pilotage financier</div>
+          <div class="prod-visual-icon">📈</div>
+          <div class="prod-visual-name">Tableau de Bord<br>Financier</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Finance · Pilotage</div>
+          <div class="prod-name">Tableau de Bord Financier Micro-entrepreneur</div>
+          <div class="prod-local">🔒 100% local · données dans votre navigateur</div>
+          <div class="prod-desc">Pas juste un calculateur — un vrai outil de pilotage. CA mensuel, cotisations URSSAF auto-calculées, projection annuelle, objectifs, alerte plafonds TVA. Tout en local.</div>
+          <div class="prod-features">
+            <div class="prod-feature">CA mensuel + cotisations calculées en temps réel</div>
+            <div class="prod-feature">Projection annuelle et alerte plafonds TVA</div>
+            <div class="prod-feature">Objectif mensuel avec indicateur d'avancement</div>
+            <div class="prod-feature">Historique 12 mois glissants</div>
+          </div>
+          <div class="prod-footer">
+            <div class="prod-price">79€<small>Livraison sous 48h</small></div>
+            <button class="btn-gen primary" onclick="openModal('tbfinancier')">✦ Personnaliser</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PACK ADMINISTRATIF -->
+      <div class="prod">
+        <div class="prod-visual" style="background:linear-gradient(135deg,#ee07a5,#8b0057);">
+          <div class="prod-visual-tag">Pack</div>
+          <div class="prod-visual-badge">💰 Best value</div>
+          <div class="prod-visual-icon">⚡</div>
+          <div class="prod-visual-name">Pack<br>Administratif</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Pack · Admin complet</div>
+          <div class="prod-name">Pack Administratif Complet</div>
+          <div class="prod-local">🔒 100% local · aucun abonnement</div>
+          <div class="prod-desc">Tout ce qu'il faut pour gérer son administratif de solopreneur proprement — Kit Devis/Contrat/Facture + Tableau de Bord Financier + Calculateur URSSAF. Livré ensemble sous 48h.</div>
+          <div class="prod-features">
+            <div class="prod-feature">Kit Devis → Contrat → Facture (97€)</div>
+            <div class="prod-feature">Tableau de Bord Financier (79€)</div>
+            <div class="prod-feature">Calculateur URSSAF (gratuit)</div>
+            <div class="prod-feature">Économie de 29€ vs achat séparé</div>
+          </div>
+          <div class="prod-footer">
+            <div class="prod-price">147€<small class="original">176€ séparément</small><small>Économie : 29€</small></div>
+            <button class="btn-gen fuchsia" onclick="openModal('packadmin')">✦ Obtenir le pack</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FORMATION -->
+    <div class="cat-divider">
+      <div class="cat-divider-label">Formation & Bundle</div>
+      <div class="cat-divider-line"></div>
+    </div>
+    <div class="products-grid">
+
+      <!-- FORMATION IA -->
+      <div class="prod featured">
+        <div class="prod-visual" style="background:linear-gradient(135deg,#1a1714,#2d2926);min-height:280px;">
+          <div class="prod-visual-tag">Formation complète</div>
+          <div class="prod-visual-badge">🎓 Certifiante</div>
+          <svg class="prod-spiral" width="160" height="160" viewBox="0 0 120 120">
+            <path d="M60,60 m0,-48 a48,48 0 1,1-.1,0 M60,60 m0,-34 a34,34 0 1,1-.1,0 M60,60 m0,-22 a22,22 0 1,1-.1,0 M60,60 m0,-11 a11,11 0 1,1-.1,0" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
+          </svg>
+          <div class="prod-visual-icon">🤖</div>
+          <div class="prod-visual-name">Formation IA<br>Complète</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Formation · 7 modules</div>
+          <div class="prod-name">Maîtrise les outils IA en profondeur</div>
+          <div class="prod-local">🔒 Accès local · vos données restent chez vous</div>
+          <div class="prod-desc">Formation complète pour maîtriser les outils IA dans votre activité — de la compréhension des IA Chat au déploiement d'agents et stratégies avancées. 7 modules + certification + 3 PDF ressources.</div>
+          <div class="prod-features">
+            <div class="prod-feature">7 modules complets (Comprendre · Prompting · Automatisation · Expert)</div>
+            <div class="prod-feature">Certification de complétion incluse</div>
+            <div class="prod-feature">Guide démarrage 48h + Bibliothèque prompts</div>
+            <div class="prod-feature">Checklist business automatisé</div>
+            <div class="prod-feature">Accès à vie · mises à jour incluses</div>
+          </div>
+          <div class="prod-footer">
+            <div class="prod-price">297€<small>Accès immédiat après paiement</small></div>
+            <button class="btn-gen fuchsia" onclick="openModal('formation')">✦ Accéder à la formation</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BUNDLE -->
+      <div class="prod">
+        <div class="prod-visual" style="background:linear-gradient(135deg,#ee07a5,#7b9a80);">
+          <div class="prod-visual-tag">Bundle</div>
+          <div class="prod-visual-badge">🔥 Best value</div>
+          <div class="prod-visual-icon">⚡</div>
+          <div class="prod-visual-name">Bundle<br>Formation + Studio</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Bundle · Formation + Outil IA</div>
+          <div class="prod-name">Bundle Formation IA + Studio Contenu</div>
+          <div class="prod-local">🔒 100% local · aucune donnée transmise</div>
+          <div class="prod-desc">La formation IA complète ET le Studio Contenu IA personnalisé à votre charte. Apprenez à maîtriser l'IA et commencez à créer votre contenu dès le premier jour.</div>
+          <div class="prod-features">
+            <div class="prod-feature">Formation IA 7 modules + certification</div>
+            <div class="prod-feature">Studio Contenu IA à vos couleurs</div>
+            <div class="prod-feature">Économie de 67€ vs achat séparé</div>
+            <div class="prod-feature">Livrés ensemble sous 48h</div>
+          </div>
+          <div class="prod-footer">
+            <div class="prod-price">427€<small class="original">494€ séparément</small><small>Économie : 67€</small></div>
+            <button class="btn-gen fuchsia" onclick="openModal('bundle')">✦ Obtenir le bundle</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PITCH LOCAL -->
+    <div class="local-pitch">
+      <div class="lp-item">
+        <div class="lp-icon">🔒</div>
+        <div class="lp-title">Vos données restent chez vous</div>
+        <div class="lp-desc">Tous les outils fonctionnent entièrement dans votre navigateur. Rien n'est envoyé à un serveur tiers. Vos données ne quittent jamais votre appareil.</div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-icon">♾️</div>
+        <div class="lp-title">Aucun abonnement</div>
+        <div class="lp-desc">Vous payez une fois, l'outil vous appartient pour toujours. Pas de frais mensuels cachés, pas de désactivation surprise, pas de hausse de tarif.</div>
+      </div>
+      <div class="lp-item">
+        <div class="lp-icon">🔧</div>
+        <div class="lp-title">Maintenance si besoin</div>
+        <div class="lp-desc">Si votre outil a besoin d'une mise à jour ou d'une modification, je m'en occupe. 30€/mois pour 1 modif, 50€/mois pour 3 modifs, 80€/mois illimité.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- COMMENT CA MARCHE -->
+<div class="how-section">
+  <div class="how-inner">
+    <div class="section-tag" style="color:var(--f);">Processus</div>
+    <h2 class="section-title" style="color:white;">Comment ça <em>fonctionne.</em></h2>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-num">01</div>
+        <div class="how-title">Vous personnalisez</div>
+        <div class="how-sub">Aperçu live de votre outil pendant que vous entrez vos couleurs, textes et informations.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">02</div>
+        <div class="how-title">Vous payez en sécurité</div>
+        <div class="how-sub">Paiement sécurisé via Stripe. Acompte 50% ou paiement complet selon le produit.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">03</div>
+        <div class="how-title">Je livre sous 24-48h</div>
+        <div class="how-sub">Votre fichier personnalisé est livré par email avec un guide d'installation complet.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">04</div>
+        <div class="how-title">Vous utilisez sans limite</div>
+        <div class="how-sub">Le fichier vous appartient. Aucun abonnement. Maintenance disponible si besoin.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUR MESURE -->
+<div class="custom-section" id="sur-mesure">
+  <div class="custom-inner">
+    <div class="section-tag" style="color:var(--f);justify-content:center;">Sur mesure</div>
+    <h2 class="custom-title">Vous avez un besoin<br><em>spécifique ?</em></h2>
+    <p class="custom-sub">Calculateur, simulateur, SaaS, formulaire multi-étapes, dashboard métier sur mesure — si vous pouvez le décrire, je peux le créer. Devis sous 48h.</p>
+    <div class="custom-grid">
+      <div class="custom-item">
+        <div class="custom-item-name">SaaS sur mesure</div>
+        <div class="custom-item-desc">Application web complète pour votre activité ou à revendre à vos clients.</div>
+        <div class="custom-item-price">Sur devis</div>
+      </div>
+      <div class="custom-item">
+        <div class="custom-item-name">Dashboard métier</div>
+        <div class="custom-item-desc">Outil de gestion spécifique à votre niche — coach, thérapeute, photographe, agence.</div>
+        <div class="custom-item-price">À partir de 150€</div>
+      </div>
+      <div class="custom-item">
+        <div class="custom-item-name">Outil IA intégré</div>
+        <div class="custom-item-desc">Quiz, formulaire, calculateur ou générateur avec IA intégrée dans votre propre outil.</div>
+        <div class="custom-item-price">À partir de 297€</div>
+      </div>
+    </div>
+    <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" target="_blank" class="custom-cta">Discuter de mon projet → Appel gratuit 30 min</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Nendy Services</div>
+  <div class="footer-copy">© 2026 · Guadeloupe · France & International · boutique.nendyservices.com</div>
+</footer>
+
+<!-- ══════════════════════════════════════ -->
+<!-- MODALS -->
+<!-- ══════════════════════════════════════ -->
+
+<!-- MODAL URSSAF -->
+<div class="modal-overlay" id="modal-urssaf">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('urssaf')">✕</button>
+    <div class="modal-form">
+      <div class="modal-title">Calculateur URSSAF</div>
+      <div class="modal-sub">Gratuit — entrez votre email pour recevoir le fichier.</div>
+      <div class="field"><label>Prénom *</label><input type="text" id="u-name" placeholder="Ex : Sophie"></div>
+      <div class="field"><label>Email *</label><input type="email" id="u-email" placeholder="votre@email.com"></div>
+      <div class="field"><label>Type d'activité</label>
+        <select id="u-type">
+          <option value="bnc">BNC — Prestations de services libérales</option>
+          <option value="bic">BIC — Prestations de services commerciales</option>
+          <option value="commerce">Commerce — Vente de marchandises</option>
+        </select>
+      </div>
+      <div class="field"><label>CA mensuel estimé (€)</label><input type="number" id="u-ca" placeholder="Ex : 2500" oninput="updateURSSAF()"></div>
+    </div>
+    <div class="modal-preview">
+      <div class="preview-live-badge"><div class="live-dot"></div>Simulation live</div>
+      <div class="urssaf-preview" id="u-preview">
+        <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--txt);margin-bottom:12px;">Simulation mensuelle</div>
+        <div class="urssaf-row"><span class="urssaf-label">CA déclaré</span><span class="urssaf-val" id="u-ca-val">0 €</span></div>
+        <div class="urssaf-row"><span class="urssaf-label">Cotisations URSSAF</span><span class="urssaf-val" id="u-cot-val">0 €</span></div>
+        <div class="urssaf-row"><span class="urssaf-label">Taux applicable</span><span class="urssaf-val" id="u-taux-val">21,2%</span></div>
+        <div class="urssaf-row"><span class="urssaf-label">Net estimé</span><span class="urssaf-val" id="u-net-val">0 €</span></div>
+      </div>
+      <div class="included-box">
+        <div class="included-title">Dans le fichier complet</div>
+        <div class="included-item">Simulation interactive en temps réel</div>
+        <div class="included-item">CA cible pour votre salaire net souhaité</div>
+        <div class="included-item">Plafonds TVA et seuils auto-entrepreneur</div>
+        <div class="included-item">Design à votre image — optionnel</div>
+      </div>
+      <div class="modal-cta">
+        <button class="btn-buy green" onclick="buyProduct('urssaf', 0)">🎁 Recevoir mon Calculateur — Gratuit</button>
+        <div class="btn-buy-note">Livraison immédiate par email</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL FACTURE -->
+<div class="modal-overlay" id="modal-facture">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('facture')">✕</button>
+    <div class="modal-form">
+      <div class="modal-title">Générateur de Facture</div>
+      <div class="modal-sub">Personnalisez votre générateur de facture en temps réel.</div>
+      <div class="field"><label>Nom / Marque *</label><input type="text" id="f-name" placeholder="Ex : Sophie Laurent Coaching" oninput="updateFacture()"></div>
+      <div class="field"><label>Métier / Activité</label><input type="text" id="f-job" placeholder="Ex : Coach de vie certifiée" oninput="updateFacture()"></div>
+      <div class="field"><label>Email (pour recevoir)</label><input type="email" id="f-email" placeholder="votre@email.com"></div>
+      <div class="field"><label>Couleurs</label>
+        <div class="colors-row">
+          <div class="color-item"><label>Principale</label><input type="color" id="f-cp" value="#7b9a80" oninput="updateFacture()"></div>
+          <div class="color-item"><label>Accent</label><input type="color" id="f-ca" value="#ee07a5" oninput="updateFacture()"></div>
+          <div class="color-item"><label>Fond</label><input type="color" id="f-cb" value="#f5f1e6" oninput="updateFacture()"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-preview">
+      <div class="preview-live-badge"><div class="live-dot"></div>Aperçu live</div>
+      <div class="facture-preview" id="f-preview">
+        <div class="facture-header">
+          <div>
+            <div class="facture-brand" id="f-prev-name" style="color:#7b9a80;">Votre Marque</div>
+            <div style="font-size:10px;color:#5c5248;margin-top:2px;" id="f-prev-job">Votre activité</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="facture-num">FACTURE #2026-001</div>
+            <div style="font-size:9px;color:#5c5248;margin-top:2px;">14 mai 2026</div>
+          </div>
+        </div>
+        <div style="height:1px;margin:10px 0;" id="f-prev-line" style="background:#7b9a80;opacity:.2;"></div>
+        <div class="facture-line"><span>Prestation de conseil</span><span>500,00 €</span></div>
+        <div class="facture-line"><span>TVA non applicable (art. 293B CGI)</span><span>—</span></div>
+        <div class="facture-total" id="f-prev-total" style="border-color:#7b9a80;">
+          <span class="facture-total-label">Total à régler</span>
+          <span class="facture-total-val" style="color:#7b9a80;">500,00 €</span>
+        </div>
+      </div>
+      <div class="included-box">
+        <div class="included-title">Inclus dans votre achat</div>
+        <div class="included-item">Générateur HTML à vos couleurs</div>
+        <div class="included-item">Export PDF en un clic</div>
+        <div class="included-item">Numérotation automatique</div>
+        <div class="included-item">Calcul TVA automatique</div>
+        <div class="included-item">Guide installation inclus</div>
+      </div>
+      <div class="modal-cta">
+        <button class="btn-buy" onclick="buyProduct('facture', 37)">⬇ Recevoir mon Générateur — 37€</button>
+        <div class="btn-buy-note">Paiement sécurisé Stripe · Livraison sous 24h</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DASHBOARD -->
+<div class="modal-overlay" id="modal-dashboard">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('dashboard')">✕</button>
+    <div class="modal-form">
+      <div class="modal-title">Dashboard Solopreneur</div>
+      <div class="modal-sub">Votre QG digital à vos couleurs, 100% local.</div>
+      <div class="field"><label>Nom / Marque *</label><input type="text" id="d-name" placeholder="Ex : Sophie Laurent" oninput="updateDash()"></div>
+      <div class="field"><label>Métier</label><input type="text" id="d-job" placeholder="Ex : Coach de vie" oninput="updateDash()"></div>
+      <div class="field"><label>Email (pour recevoir)</label><input type="email" id="d-email" placeholder="votre@email.com"></div>
+      <div class="field"><label>Couleurs</label>
+        <div class="colors-row">
+          <div class="color-item"><label>Principale</label><input type="color" id="d-cp" value="#7b9a80" oninput="updateDash()"></div>
+          <div class="color-item"><label>Accent</label><input type="color" id="d-ca" value="#ee07a5" oninput="updateDash()"></div>
+          <div class="color-item"><label>Fond</label><input type="color" id="d-cb" value="#1a1714" oninput="updateDash()"></div>
+        </div>
+      </div>
+      <div class="field"><label>Objectif CA mensuel (€)</label><input type="number" id="d-obj" placeholder="Ex : 3000" oninput="updateDash()"></div>
+    </div>
+    <div class="modal-preview">
+      <div class="preview-live-badge"><div class="live-dot"></div>Aperçu live</div>
+      <div class="dash-preview" id="d-preview" style="background:#1a1714;">
+        <div class="dash-prev-header">
+          <div class="dash-prev-title" id="d-prev-name" style="color:#7b9a80;">Votre Marque</div>
+          <div class="dash-prev-date">Mai 2026</div>
+        </div>
+        <div class="dash-prev-grid">
+          <div class="dash-prev-card" id="d-prev-c1" style="background:rgba(123,154,128,.15);">
+            <div class="dash-prev-num" id="d-prev-obj" style="color:#7b9a80;">3 000€</div>
+            <div class="dash-prev-label" style="color:rgba(255,255,255,.4);">Objectif CA</div>
+          </div>
+          <div class="dash-prev-card" style="background:rgba(238,7,165,.1);">
+            <div class="dash-prev-num" style="color:#ee07a5;">0€</div>
+            <div class="dash-prev-label" style="color:rgba(255,255,255,.4);">CA ce mois</div>
+          </div>
+          <div class="dash-prev-card" style="background:rgba(255,255,255,.04);">
+            <div class="dash-prev-num" style="color:white;">0</div>
+            <div class="dash-prev-label" style="color:rgba(255,255,255,.4);">Clients actifs</div>
+          </div>
+          <div class="dash-prev-card" style="background:rgba(255,255,255,.04);">
+            <div class="dash-prev-num" style="color:white;">0</div>
+            <div class="dash-prev-label" style="color:rgba(255,255,255,.4);">Tâches du jour</div>
+          </div>
+        </div>
+      </div>
+      <div class="included-box">
+        <div class="included-title">Inclus</div>
+        <div class="included-item">Dashboard CA · Clients · Tâches · Objectifs</div>
+        <div class="included-item">Design 100% à vos couleurs</div>
+        <div class="included-item">Données sauvegardées localement</div>
+        <div class="included-item">Accessible offline · aucun abonnement</div>
+        <div class="included-item">Guide installation inclus</div>
+      </div>
+      <div class="modal-cta">
+        <button class="btn-buy" onclick="buyProduct('dashboard', 97)">⬇ Recevoir mon Dashboard — 97€</button>
+        <div class="btn-buy-note">Paiement sécurisé Stripe · Livraison sous 48h</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL STUDIO -->
+<div class="modal-overlay" id="modal-studio">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('studio')">✕</button>
+    <div class="modal-form">
+      <div class="modal-title">Studio Contenu IA</div>
+      <div class="modal-sub">Votre studio de création de contenu personnalisé à votre charte.</div>
+      <div class="field"><label>Nom / Marque *</label><input type="text" id="st-name" placeholder="Ex : Sophie Laurent Coaching" oninput="updateStudio()"></div>
+      <div class="field"><label>Votre activité</label><input type="text" id="st-job" placeholder="Ex : Coach de vie pour entrepreneurs"></div>
+      <div class="field"><label>Votre cible</label><input type="text" id="st-target" placeholder="Ex : Entrepreneurs 30-45 ans en reconversion"></div>
+      <div class="field"><label>Ton de voix</label>
+        <select id="st-ton">
+          <option>Direct et factuel</option>
+          <option>Bienveillant et inspirant</option>
+          <option>Expert et pédagogue</option>
+          <option>Provocateur et décalé</option>
+        </select>
+      </div>
+      <div class="field"><label>Couleurs principales</label>
+        <div class="colors-row">
+          <div class="color-item"><label>Principale</label><input type="color" id="st-cp" value="#7b9a80" oninput="updateStudio()"></div>
+          <div class="color-item"><label>Accent</label><input type="color" id="st-ca" value="#ee07a5" oninput="updateStudio()"></div>
+          <div class="color-item"><label>Fond</label><input type="color" id="st-cb" value="#f5f1e6" oninput="updateStudio()"></div>
+        </div>
+      </div>
+      <div class="field"><label>Email (pour recevoir)</label><input type="email" id="st-email" placeholder="votre@email.com"></div>
+    </div>
+    <div class="modal-preview">
+      <div class="preview-live-badge"><div class="live-dot"></div>Aperçu live</div>
+      <!-- Mini studio preview -->
+      <div id="st-preview" style="background:#1a1714;border-radius:14px;overflow:hidden;">
+        <!-- Nav mini -->
+        <div style="background:rgba(255,255,255,.04);padding:8px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.06);">
+          <div style="font-family:'DM Mono',monospace;font-size:7px;color:rgba(255,255,255,.3);letter-spacing:2px;" id="st-prev-brand">VOTRE MARQUE</div>
+          <div style="display:flex;gap:4px;margin-left:auto;">
+            <div style="font-family:'DM Mono',monospace;font-size:6px;padding:2px 6px;border-radius:4px;border-bottom:1px solid;" id="st-prev-tab1">Posts</div>
+            <div style="font-family:'DM Mono',monospace;font-size:6px;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,.04);color:rgba(255,255,255,.3);">Scripts</div>
+            <div style="font-family:'DM Mono',monospace;font-size:6px;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,.04);color:rgba(255,255,255,.3);">Planning</div>
+          </div>
+        </div>
+        <!-- Post canvas mini -->
+        <div style="padding:12px;">
+          <div style="border-radius:10px;aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;padding:14px;margin-bottom:10px;position:relative;overflow:hidden;" id="st-prev-canvas">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <div style="font-family:'DM Mono',monospace;font-size:6px;letter-spacing:1.5px;text-transform:uppercase;opacity:.35;" id="st-prev-marque">VOTRE MARQUE</div>
+              <div style="font-family:'DM Mono',monospace;font-size:6px;opacity:.25;">01 / 01</div>
+            </div>
+            <div>
+              <div style="font-family:'DM Mono',monospace;font-size:6px;letter-spacing:2px;text-transform:uppercase;opacity:.4;margin-bottom:6px;">◆ PRINCIPE</div>
+              <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;line-height:1.05;margin-bottom:5px;" id="st-prev-headline">Un outil sans <em id="st-prev-em">méthode,</em><br>c'est un tiroir<br>en plus.</div>
+              <div style="font-size:8px;opacity:.5;line-height:1.5;" id="st-prev-sub">Notion, Calendly, Make... Le problème n'est jamais l'outil.</div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding-top:8px;border-top:1px solid rgba(128,128,128,.15);">
+              <svg width="16" height="16" viewBox="0 0 100 100" fill="none">
+                <path d="M50 50 m0 -8 a8 8 0 1 1 .01 0Z M50 50 m0 -18 a18 18 0 1 1 .01 0Z M50 50 m0 -30 a30 30 0 1 1 .01 0Z" fill="none" stroke="currentColor" stroke-width="2" opacity=".4"/>
+              </svg>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:7px;font-style:italic;opacity:.35;">L'harmonie entre organisation & assistance.</div>
+              <div style="font-family:'DM Mono',monospace;font-size:6px;opacity:.25;" id="st-prev-site">votresite.com</div>
+            </div>
+          </div>
+          <!-- Boutons action mini -->
+          <div style="display:flex;gap:5px;">
+            <div style="flex:1;padding:5px;border-radius:6px;border:1px solid rgba(255,255,255,.08);text-align:center;font-family:'DM Mono',monospace;font-size:6px;letter-spacing:1px;color:rgba(255,255,255,.3);">✦ Suggestions</div>
+            <div style="flex:2;padding:5px;border-radius:6px;text-align:center;font-family:'DM Mono',monospace;font-size:6px;letter-spacing:1px;color:white;" id="st-prev-btn">Générer →</div>
+          </div>
+        </div>
+      </div>
+      <div class="included-box">
+        <div class="included-title">Inclus dans votre Studio</div>
+        <div class="included-item">Posts · Carrousels · Scripts avatar · Planning</div>
+        <div class="included-item">Export 5 formats Instagram 2026</div>
+        <div class="included-item">Bibliothèque + Score viralité IA</div>
+        <div class="included-item">Formation 1h + 1 mois de support</div>
+      </div>
+      <div class="modal-cta">
+        <button class="btn-buy" onclick="buyProduct('studio', 197)">⬇ Recevoir mon Studio — 197€</button>
+        <div class="btn-buy-note">Paiement sécurisé Stripe · Livraison sous 48h · Clé API ~5€/mois</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL FORMATION -->
+<div class="modal-overlay" id="modal-formation">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('formation')">✕</button>
+    <div class="modal-form">
+      <div class="modal-title">Formation IA Complète</div>
+      <div class="modal-sub">7 modules · Certification · 3 PDF ressources · Accès à vie.</div>
+      <div class="field"><label>Prénom *</label><input type="text" id="fo-name" placeholder="Ex : Sophie"></div>
+      <div class="field"><label>Email *</label><input type="email" id="fo-email" placeholder="votre@email.com"></div>
+      <div class="field"><label>Votre activité</label><input type="text" id="fo-job" placeholder="Ex : Coach · Thérapeute · Consultante"></div>
+      <div class="field"><label>Votre niveau avec l'IA</label>
+        <select id="fo-level">
+          <option>Débutant — je commence tout juste</option>
+          <option>Intermédiaire — j'utilise ChatGPT occasionnellement</option>
+          <option>Avancé — je veux aller plus loin</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-preview">
+      <div class="preview-live-badge"><div class="live-dot"></div>Aperçu d'un module</div>
+      <!-- Mini formation preview -->
+      <div style="background:#1a1714;border-radius:14px;overflow:hidden;">
+        <div style="background:rgba(255,255,255,.04);padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:8px;">
+          <div style="font-family:'Playfair Display',serif;font-size:12px;color:white;font-weight:700;">Formation IA</div>
+          <div style="font-family:'DM Mono',monospace;font-size:7px;color:var(--f);margin-left:auto;letter-spacing:1px;">Module 02/07</div>
+        </div>
+        <div style="padding:14px;">
+          <div style="font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--f);text-transform:uppercase;margin-bottom:6px;">L'art du Prompting</div>
+          <div style="font-family:'Playfair Display',serif;font-size:15px;color:white;font-weight:700;margin-bottom:10px;line-height:1.2;">Écrire des prompts<br>qui <em style="color:var(--v);">fonctionnent vraiment.</em></div>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:12px;">
+            <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:7px 10px;font-size:10px;color:rgba(255,255,255,.65);display:flex;align-items:center;gap:8px;"><span style="color:var(--v);">✓</span> La structure d'un prompt efficace</div>
+            <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:7px 10px;font-size:10px;color:rgba(255,255,255,.65);display:flex;align-items:center;gap:8px;"><span style="color:var(--v);">✓</span> Les rôles et contextes</div>
+            <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:7px 10px;font-size:10px;color:rgba(255,255,255,.65);display:flex;align-items:center;gap:8px;"><span style="color:rgba(255,255,255,.3);">○</span> Exercices pratiques →</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
+            <div style="background:rgba(123,154,128,.12);border-radius:6px;padding:8px;text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--v);">7</div><div style="font-family:'DM Mono',monospace;font-size:6px;color:rgba(255,255,255,.3);letter-spacing:1px;">Modules</div></div>
+            <div style="background:rgba(238,7,165,.08);border-radius:6px;padding:8px;text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--f);">3</div><div style="font-family:'DM Mono',monospace;font-size:6px;color:rgba(255,255,255,.3);letter-spacing:1px;">PDF inclus</div></div>
+          </div>
+        </div>
+        <div style="background:rgba(123,154,128,.08);border-top:1px solid rgba(123,154,128,.1);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;">
+          <div style="font-family:'DM Mono',monospace;font-size:7px;color:rgba(255,255,255,.3);letter-spacing:1px;">🎓 CERTIFICATION INCLUSE</div>
+          <div style="font-family:'DM Mono',monospace;font-size:7px;color:var(--v);letter-spacing:1px;">Accès à vie →</div>
+        </div>
+      </div>
+      <div class="included-box">
+        <div class="included-title">Inclus</div>
+        <div class="included-item">7 modules HTML accessibles localement</div>
+        <div class="included-item">Attestation de complétion PDF</div>
+        <div class="included-item">3 PDF ressources téléchargeables</div>
+        <div class="included-item">Accès à vie · mises à jour incluses</div>
+      </div>
+      <div class="modal-cta">
+        <button class="btn-buy" onclick="buyProduct('formation', 297)">⬇ Accéder à la Formation — 297€</button>
+        <div class="btn-buy-note">Paiement sécurisé Stripe · Accès immédiat</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL BUNDLE -->
+<div class="modal-overlay" id="modal-bundle">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('bundle')">✕</button>
+    <div class="modal-form">
+      <div class="modal-title">Bundle Formation + Studio IA</div>
+      <div class="modal-sub">La formation complète ET le studio à vos couleurs — économie de 67€.</div>
+      <div class="field"><label>Prénom *</label><input type="text" id="b-name" placeholder="Ex : Sophie"></div>
+      <div class="field"><label>Nom / Marque</label><input type="text" id="b-brand" placeholder="Ex : Sophie Laurent Coaching"></div>
+      <div class="field"><label>Email *</label><input type="email" id="b-email" placeholder="votre@email.com"></div>
+      <div class="field"><label>Votre activité</label><input type="text" id="b-job" placeholder="Ex : Coach de vie pour entrepreneurs"></div>
+      <div class="field"><label>Couleurs du Studio</label>
+        <div class="colors-row">
+          <div class="color-item"><label>Principale</label><input type="color" id="b-cp" value="#7b9a80"></div>
+          <div class="color-item"><label>Accent</label><input type="color" id="b-ca" value="#ee07a5"></div>
+          <div class="color-item"><label>Fond</label><input type="color" id="b-cb" value="#f5f1e6"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-preview">
+      <div class="preview-live-badge"><div class="live-dot"></div>Ce que vous recevez</div>
+      <div class="included-box">
+        <div class="included-title">Formation IA Complète — 297€</div>
+        <div class="included-item">7 modules complets + certification</div>
+        <div class="included-item">3 PDF ressources</div>
+        <div class="included-item">Accès à vie</div>
+      </div>
+      <div class="included-box" style="margin-top:8px;">
+        <div class="included-title">Studio Contenu IA Personnalisé — 197€</div>
+        <div class="included-item">Fichier HTML à vos couleurs</div>
+        <div class="included-item">Stratégie pré-configurée</div>
+        <div class="included-item">Formation 1h prise en main</div>
+        <div class="included-item">1 mois de support</div>
+      </div>
+      <div style="background:rgba(238,7,165,.06);border:1px solid rgba(238,7,165,.15);border-radius:10px;padding:12px;text-align:center;">
+        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--f);margin-bottom:4px;">ÉCONOMIE</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--f);">67€</div>
+        <div style="font-size:11px;color:var(--txt2);">494€ séparément → 427€ en bundle</div>
+      </div>
+      <div class="modal-cta">
+        <button class="btn-buy" onclick="buyProduct('bundle', 427)">⬇ Obtenir le Bundle — 427€</button>
+        <div class="btn-buy-note">Paiement sécurisé Stripe · Livraison sous 48h</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL LINKS -->
+<div class="modal-overlay" id="modal-links">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('links')">✕</button>
+    <div class="modal-form">
+      <div class="modal-title">Links Page</div>
+      <div class="modal-sub">Personnalisez votre page de liens en temps réel.</div>
+      <div class="field"><label>Nom / Marque *</label><input type="text" id="l-name" placeholder="Ex : Sophie Laurent" oninput="updateLinks()"></div>
+      <div class="field"><label>Métier</label><input type="text" id="l-job" placeholder="Ex : Coach de vie" oninput="updateLinks()"></div>
+      <div class="field"><label>Slogan</label><input type="text" id="l-slogan" placeholder="Ex : Vivre mieux, un pas à la fois" oninput="updateLinks()"></div>
+      <div class="field"><label>Email (pour recevoir)</label><input type="email" id="l-email" placeholder="votre@email.com"></div>
+      <div class="field"><label>Couleurs</label>
+        <div class="colors-row">
+          <div class="color-item"><label>Principale</label><input type="color" id="l-cp" value="#7b9a80" oninput="updateLinks()"></div>
+          <div class="color-item"><label>Secondaire</label><input type="color" id="l-cs" value="#d8c79e" oninput="updateLinks()"></div>
+          <div class="color-item"><label>Fond</label><input type="color" id="l-cb" value="#f0ece3" oninput="updateLinks()"></div>
+        </div>
+      </div>
+      <div class="field"><label>Vos liens</label>
+        <div class="links-list" id="l-links-list"></div>
+        <button class="btn-add-link" onclick="addLinkL()">+ Ajouter un lien</button>
+      </div>
+    </div>
+    <div class="modal-preview">
+      <div class="preview-live-badge"><div class="live-dot"></div>Aperçu live</div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-content" id="l-phone-content"></div>
+        </div>
+      </div>
+      <div class="included-box">
+        <div class="included-title">Inclus</div>
+        <div class="included-item">Fichier HTML à vos couleurs</div>
+        <div class="included-item">Design glassmorphism premium</div>
+        <div class="included-item">PDF installation pas à pas</div>
+        <div class="included-item">1 modification offerte sous 7 jours</div>
+      </div>
+      <div class="modal-cta">
+        <button class="btn-buy" onclick="buyProduct('links', 47)">⬇ Recevoir ma Links Page — 47€</button>
+        <div class="btn-buy-note">Paiement sécurisé Stripe · Livraison sous 24h</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL WA -->
+<div class="modal-overlay" id="modal-wa">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('wa')">✕</button>
+    <div class="modal-form">
+      <div class="modal-title">Catalogue WhatsApp</div>
+      <div class="modal-sub">9 cartes visuelles à vos couleurs et vos offres.</div>
+      <div class="field"><label>Nom / Marque *</label><input type="text" id="w-name" placeholder="Ex : Sophie Laurent Coaching" oninput="updateWA()"></div>
+      <div class="field"><label>Email (pour recevoir)</label><input type="email" id="w-email" placeholder="votre@email.com"></div>
+      <div class="field"><label>Couleurs</label>
+        <div class="colors-row">
+          <div class="color-item"><label>Principale</label><input type="color" id="w-cp" value="#7b9a80" oninput="updateWA()"></div>
+          <div class="color-item"><label>Secondaire</label><input type="color" id="w-cs" value="#d8c79e" oninput="updateWA()"></div>
+          <div class="color-item"><label>Accent</label><input type="color" id="w-ca" value="#ee07a5" oninput="updateWA()"></div>
+        </div>
+      </div>
+      <div class="field"><label>Offre 1 — Nom · Prix</label><input type="text" id="w-o1" placeholder="Ex : Coaching individuel · 150€" oninput="updateWA()"></div>
+      <div class="field"><label>Offre 2 — Nom · Prix</label><input type="text" id="w-o2" placeholder="Ex : Pack 5 séances · 650€" oninput="updateWA()"></div>
+      <div class="field"><label>Offre 3 — Nom · Prix</label><input type="text" id="w-o3" placeholder="Ex : Programme 3 mois · 997€" oninput="updateWA()"></div>
+    </div>
+    <div class="modal-preview">
+      <div class="preview-live-badge"><div class="live-dot"></div>Aperçu live</div>
+      <div class="wa-preview-grid" id="w-preview-grid"></div>
+      <div class="included-box">
+        <div class="included-title">Inclus</div>
+        <div class="included-item">9 cartes 400×400px à vos couleurs</div>
+        <div class="included-item">Vos offres et tarifs intégrés</div>
+        <div class="included-item">PDF installation inclus</div>
+      </div>
+      <div class="modal-cta">
+        <button class="btn-buy" onclick="buyProduct('wa', 37)">⬇ Recevoir mon Catalogue — 37€</button>
+        <div class="btn-buy-note">Paiement sécurisé Stripe · Livraison sous 24h</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL SIGNATURE -->
+<div class="modal-overlay" id="modal-signature">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('signature')">✕</button>
+    <div class="modal-form">
+      <div class="modal-title">Signature Email</div>
+      <div class="modal-sub">Signature HTML professionnelle à vos couleurs.</div>
+      <div class="field"><label>Nom complet *</label><input type="text" id="s-name" placeholder="Ex : Sophie Laurent" oninput="updateSig()"></div>
+      <div class="field"><label>Titre / Métier</label><input type="text" id="s-title" placeholder="Ex : Coach de vie certifiée" oninput="updateSig()"></div>
+      <div class="field"><label>Slogan</label><input type="text" id="s-slogan" placeholder="Ex : Vivre mieux, un pas à la fois" oninput="updateSig()"></div>
+      <div class="field"><label>Site web</label><input type="url" id="s-site" placeholder="https://votresite.com" oninput="updateSig()"></div>
+      <div class="field"><label>WhatsApp</label><input type="text" id="s-wa" placeholder="+33 6 00 00 00 00" oninput="updateSig()"></div>
+      <div class="field"><label>Email (pour recevoir)</label><input type="email" id="s-email" placeholder="votre@email.com"></div>
+      <div class="field"><label>Couleurs</label>
+        <div class="colors-row">
+          <div class="color-item"><label>Principale</label><input type="color" id="s-cp" value="#7b9a80" oninput="updateSig()"></div>
+          <div class="color-item"><label>Accent</label><input type="color" id="s-ca" value="#ee07a5" oninput="updateSig()"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-preview">
+      <div class="preview-live-badge"><div class="live-dot"></div>Aperçu live</div>
+      <div class="sig-preview">
+        <div class="sig-top">
+          <div class="sig-avatar-preview" id="s-prev-avatar" style="background:#7b9a80;">🌿</div>
+          <div>
+            <div class="sig-name-preview" id="s-prev-name" style="color:#7b9a80;">Votre Nom</div>
+            <div class="sig-job-preview" id="s-prev-job">Votre titre</div>
+          </div>
+        </div>
+        <div class="sig-divider-preview" id="s-prev-line" style="background:#7b9a80;"></div>
+        <div style="font-size:11px;font-style:italic;color:#5c5248;margin-bottom:10px;" id="s-prev-slogan">"Votre slogan"</div>
+        <div class="sig-links-preview" id="s-prev-links"></div>
+      </div>
+      <div class="included-box">
+        <div class="included-title">Inclus</div>
+        <div class="included-item">HTML compatible Gmail · Outlook · Apple Mail</div>
+        <div class="included-item">Liens cliquables intégrés</div>
+        <div class="included-item">Guide installation inclus</div>
+      </div>
+      <div class="modal-cta">
+        <button class="btn-buy" onclick="buyProduct('signature', 27)">⬇ Recevoir ma Signature — 27€</button>
+        <div class="btn-buy-note">Paiement sécurisé Stripe · Livraison sous 24h</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL SITE ONE PAGE -->
+<div class="modal-overlay" id="modal-siteonepage">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('siteonepage')">✕</button>
+    <div class="modal-form">
+      <div class="modal-title">Site Vitrine One-Page</div>
+      <div class="modal-sub">Parlons de votre projet avant de démarrer.</div>
+      <div class="field"><label>Nom / Marque *</label><input type="text" id="so-name" placeholder="Ex : Sophie Laurent Coaching"></div>
+      <div class="field"><label>Votre activité</label><input type="text" id="so-job" placeholder="Ex : Coach de vie pour entrepreneurs"></div>
+      <div class="field"><label>Votre cible</label><input type="text" id="so-target" placeholder="Ex : Entrepreneurs en reconversion 30-45 ans"></div>
+      <div class="field"><label>Offre principale</label><input type="text" id="so-offer" placeholder="Ex : Programme Renaissance · 3 mois"></div>
+      <div class="field"><label>Avez-vous une charte graphique ?</label>
+        <select id="so-charte">
+          <option>Oui — je fournis couleurs et typos</option>
+          <option>Non — je fais confiance à Nendy pour la création</option>
+          <option>Partiellement — j'ai juste mon logo</option>
+        </select>
+      </div>
+      <div class="field"><label>Email *</label><input type="email" id="so-email" placeholder="votre@email.com"></div>
+      <div class="field"><label>Votre message (facultatif)</label><textarea id="so-msg" placeholder="Des détails sur votre projet, vos inspirations, vos contraintes..."></textarea></div>
+    </div>
+    <div class="modal-preview">
+      <div class="preview-live-badge"><div class="live-dot"></div>Ce qui est inclus</div>
+      <div class="included-box">
+        <div class="included-title">Site vitrine complet</div>
+        <div class="included-item">Design 100% personnalisé à votre charte</div>
+        <div class="included-item">Sections : Hero · Services · À propos · Méthode · Témoignages · Contact</div>
+        <div class="included-item">Responsive mobile · tablette · desktop</div>
+        <div class="included-item">Formulaire de contact fonctionnel</div>
+        <div class="included-item">Hébergement GitHub Pages gratuit</div>
+        <div class="included-item">Livré en 5 jours · 1 révision incluse</div>
+      </div>
+      <div style="background:rgba(123,154,128,.08);border:1px solid rgba(123,154,128,.15);border-radius:10px;padding:14px;font-size:12px;color:var(--txt2);line-height:1.6;">
+        <strong style="color:var(--txt);display:block;margin-bottom:4px;">Comment ça se passe</strong>
+        Après réception de votre brief, je vous propose un appel de 30 min pour aligner les attentes. Livraison du site en 5 jours avec 1 révision incluse.
+      </div>
+      <div class="modal-cta">
+        <button class="btn-buy green" onclick="buyProduct('siteonepage', 297)">→ Envoyer mon brief — 297€</button>
+        <div class="btn-buy-note">Acompte 50% · Solde à la livraison</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL KIT ADMIN -->
+<div class="modal-overlay" id="modal-kitadmin">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('kitadmin')">✕</button>
+    <div class="modal-form">
+      <div class="modal-title">Kit Devis → Contrat → Facture</div>
+      <div class="modal-sub">Un flux administratif complet à vos couleurs, 100% local.</div>
+      <div class="field"><label>Nom / Marque *</label><input type="text" id="ka-name" placeholder="Ex : Sophie Laurent Coaching" oninput="updateKitAdmin()"></div>
+      <div class="field"><label>Métier / Activité</label><input type="text" id="ka-job" placeholder="Ex : Coach de vie certifiée" oninput="updateKitAdmin()"></div>
+      <div class="field"><label>Adresse professionnelle</label><input type="text" id="ka-addr" placeholder="Ex : 12 rue des Fleurs, 75001 Paris"></div>
+      <div class="field"><label>SIRET</label><input type="text" id="ka-siret" placeholder="Ex : 123 456 789 00012"></div>
+      <div class="field"><label>Email (pour recevoir)</label><input type="email" id="ka-email" placeholder="votre@email.com"></div>
+      <div class="field"><label>Couleurs</label>
+        <div class="colors-row">
+          <div class="color-item"><label>Principale</label><input type="color" id="ka-cp" value="#7b9a80" oninput="updateKitAdmin()"></div>
+          <div class="color-item"><label>Accent</label><input type="color" id="ka-ca" value="#ee07a5" oninput="updateKitAdmin()"></div>
+          <div class="color-item"><label>Fond</label><input type="color" id="ka-cb" value="#f5f1e6" oninput="updateKitAdmin()"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-preview">
+      <div class="preview-live-badge"><div class="live-dot"></div>Aperçu live</div>
+      <div id="ka-preview" style="background:white;border-radius:12px;padding:16px;border:1px solid rgba(0,0,0,.08);">
+        <!-- Header -->
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;" id="ka-prev-name" style="color:#7b9a80;">Votre Marque</div>
+            <div style="font-size:9px;color:#5c5248;margin-top:2px;" id="ka-prev-job">Votre activité</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;" id="ka-prev-type" style="color:#ee07a5;">DEVIS</div>
+            <div style="font-size:9px;color:#5c5248;">#2026-001 · 14 mai 2026</div>
+          </div>
+        </div>
+        <div style="height:1px;margin-bottom:10px;" id="ka-prev-line" style="background:#7b9a80;opacity:.2;"></div>
+        <!-- Lignes -->
+        <div style="font-size:9px;color:#5c5248;margin-bottom:8px;font-family:'DM Mono',monospace;letter-spacing:1px;">PRESTATIONS</div>
+        <div style="font-size:10px;display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(0,0,0,.05);"><span>Coaching individuel · 3 séances</span><span>450,00 €</span></div>
+        <div style="font-size:10px;display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(0,0,0,.05);"><span>Bilan de compétences</span><span>200,00 €</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;margin-top:6px;border-top:2px solid;" id="ka-prev-total" style="border-color:#7b9a80;">
+          <span style="font-size:11px;font-weight:600;">Total</span>
+          <span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;" id="ka-prev-total-val" style="color:#7b9a80;">650,00 €</span>
+        </div>
+        <!-- Flux -->
+        <div style="display:flex;align-items:center;gap:4px;margin-top:12px;padding-top:10px;border-top:1px solid rgba(0,0,0,.06);">
+          <div style="font-family:'DM Mono',monospace;font-size:7px;padding:3px 7px;border-radius:4px;border:1px solid;" id="ka-prev-step1">DEVIS</div>
+          <div style="font-size:10px;color:rgba(0,0,0,.2);">→</div>
+          <div style="font-family:'DM Mono',monospace;font-size:7px;padding:3px 7px;border-radius:4px;background:rgba(0,0,0,.04);color:rgba(0,0,0,.3);">CONTRAT</div>
+          <div style="font-size:10px;color:rgba(0,0,0,.2);">→</div>
+          <div style="font-family:'DM Mono',monospace;font-size:7px;padding:3px 7px;border-radius:4px;background:rgba(0,0,0,.04);color:rgba(0,0,0,.3);">FACTURE</div>
+        </div>
+      </div>
+      <div class="included-box">
+        <div class="included-title">Inclus dans le kit</div>
+        <div class="included-item">Générateur de devis à vos couleurs</div>
+        <div class="included-item">Contrat auto-généré depuis le devis</div>
+        <div class="included-item">Facture avec numérotation automatique</div>
+        <div class="included-item">Export PDF à chaque étape</div>
+        <div class="included-item">Historique local de tous vos documents</div>
+      </div>
+      <div class="modal-cta">
+        <button class="btn-buy" onclick="buyProduct('kitadmin', 97)">⬇ Recevoir mon Kit — 97€</button>
+        <div class="btn-buy-note">Paiement sécurisé Stripe · Livraison sous 48h</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL TB FINANCIER -->
+<div class="modal-overlay" id="modal-tbfinancier">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('tbfinancier')">✕</button>
+    <div class="modal-form">
+      <div class="modal-title">Tableau de Bord Financier</div>
+      <div class="modal-sub">Pilotez votre activité sans abonnement, sans fuite de données.</div>
+      <div class="field"><label>Nom / Marque *</label><input type="text" id="tb-name" placeholder="Ex : Sophie Laurent" oninput="updateTBF()"></div>
+      <div class="field"><label>Type d'activité</label>
+        <select id="tb-type" onchange="updateTBF()">
+          <option value="bnc">BNC — Prestations libérales (21,2%)</option>
+          <option value="bic">BIC — Prestations commerciales (21,2%)</option>
+          <option value="commerce">Commerce — Vente marchandises (12,3%)</option>
+        </select>
+      </div>
+      <div class="field"><label>Objectif CA mensuel (€)</label><input type="number" id="tb-obj" placeholder="Ex : 3500" oninput="updateTBF()"></div>
+      <div class="field"><label>CA réalisé ce mois (€)</label><input type="number" id="tb-ca" placeholder="Ex : 2100" oninput="updateTBF()"></div>
+      <div class="field"><label>Email (pour recevoir)</label><input type="email" id="tb-email" placeholder="votre@email.com"></div>
+      <div class="field"><label>Couleurs</label>
+        <div class="colors-row">
+          <div class="color-item"><label>Principale</label><input type="color" id="tb-cp" value="#7b9a80" oninput="updateTBF()"></div>
+          <div class="color-item"><label>Accent</label><input type="color" id="tb-ca2" value="#ee07a5" oninput="updateTBF()"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-preview">
+      <div class="preview-live-badge"><div class="live-dot"></div>Simulation live</div>
+      <div id="tb-preview" style="background:#1a1714;border-radius:14px;padding:16px;overflow:hidden;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+          <div style="font-family:'Playfair Display',serif;font-size:13px;color:white;font-weight:700;" id="tb-prev-name">Votre Marque</div>
+          <div style="font-family:'DM Mono',monospace;font-size:7px;color:rgba(255,255,255,.3);letter-spacing:1px;">Mai 2026</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+          <div style="border-radius:8px;padding:10px;" id="tb-prev-ca-card" style="background:rgba(123,154,128,.12);">
+            <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;" id="tb-prev-ca" style="color:#7b9a80;">0 €</div>
+            <div style="font-family:'DM Mono',monospace;font-size:6px;letter-spacing:1px;color:rgba(255,255,255,.35);margin-top:2px;">CA CE MOIS</div>
+          </div>
+          <div style="border-radius:8px;padding:10px;background:rgba(255,255,255,.04);">
+            <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:white;" id="tb-prev-obj">0 €</div>
+            <div style="font-family:'DM Mono',monospace;font-size:6px;letter-spacing:1px;color:rgba(255,255,255,.35);margin-top:2px;">OBJECTIF</div>
+          </div>
+          <div style="border-radius:8px;padding:10px;background:rgba(238,7,165,.08);">
+            <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;" id="tb-prev-cot" style="color:#ee07a5;">0 €</div>
+            <div style="font-family:'DM Mono',monospace;font-size:6px;letter-spacing:1px;color:rgba(255,255,255,.35);margin-top:2px;">URSSAF</div>
+          </div>
+          <div style="border-radius:8px;padding:10px;background:rgba(216,199,158,.08);">
+            <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#d8c79e;" id="tb-prev-net">0 €</div>
+            <div style="font-family:'DM Mono',monospace;font-size:6px;letter-spacing:1px;color:rgba(255,255,255,.35);margin-top:2px;">NET ESTIMÉ</div>
+          </div>
+        </div>
+        <!-- Barre progression -->
+        <div style="margin-bottom:6px;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+            <div style="font-family:'DM Mono',monospace;font-size:7px;color:rgba(255,255,255,.3);letter-spacing:1px;">PROGRESSION OBJECTIF</div>
+            <div style="font-family:'DM Mono',monospace;font-size:7px;color:rgba(255,255,255,.5);" id="tb-prev-pct">0%</div>
+          </div>
+          <div style="height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;">
+            <div style="height:100%;border-radius:2px;transition:width .4s;" id="tb-prev-bar" style="width:0%;background:#7b9a80;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="included-box">
+        <div class="included-title">Inclus</div>
+        <div class="included-item">CA · Cotisations · Net · Projection annuelle</div>
+        <div class="included-item">Alerte plafonds TVA et seuils AE</div>
+        <div class="included-item">Historique 12 mois glissants</div>
+        <div class="included-item">Design à vos couleurs · 100% local</div>
+      </div>
+      <div class="modal-cta">
+        <button class="btn-buy" onclick="buyProduct('tbfinancier', 79)">⬇ Recevoir mon Tableau de Bord — 79€</button>
+        <div class="btn-buy-note">Paiement sécurisé Stripe · Livraison sous 48h</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PACK ADMIN -->
+<div class="modal-overlay" id="modal-packadmin">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('packadmin')">✕</button>
+    <div class="modal-form">
+      <div class="modal-title">Pack Administratif Complet</div>
+      <div class="modal-sub">Tout votre administratif solopreneur — kit + tableau de bord + calculateur.</div>
+      <div class="field"><label>Nom / Marque *</label><input type="text" id="pa-name" placeholder="Ex : Sophie Laurent Coaching"></div>
+      <div class="field"><label>Métier / Activité</label><input type="text" id="pa-job" placeholder="Ex : Coach de vie certifiée"></div>
+      <div class="field"><label>Type d'activité</label>
+        <select id="pa-type">
+          <option>BNC — Prestations libérales</option>
+          <option>BIC — Prestations commerciales</option>
+          <option>Commerce — Vente de marchandises</option>
+        </select>
+      </div>
+      <div class="field"><label>Email *</label><input type="email" id="pa-email" placeholder="votre@email.com"></div>
+      <div class="field"><label>Couleurs</label>
+        <div class="colors-row">
+          <div class="color-item"><label>Principale</label><input type="color" id="pa-cp" value="#7b9a80"></div>
+          <div class="color-item"><label>Accent</label><input type="color" id="pa-ca" value="#ee07a5"></div>
+          <div class="color-item"><label>Fond</label><input type="color" id="pa-cb" value="#f5f1e6"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-preview">
+      <div class="preview-live-badge"><div class="live-dot"></div>Ce que vous recevez</div>
+      <div class="included-box">
+        <div class="included-title">Kit Devis → Contrat → Facture — 97€</div>
+        <div class="included-item">Flux complet en un seul fichier</div>
+        <div class="included-item">Export PDF à chaque étape</div>
+        <div class="included-item">Historique local de vos documents</div>
+      </div>
+      <div class="included-box" style="margin-top:8px;">
+        <div class="included-title">Tableau de Bord Financier — 79€</div>
+        <div class="included-item">CA · Cotisations · Net · Projection</div>
+        <div class="included-item">Alerte plafonds TVA</div>
+        <div class="included-item">Historique 12 mois glissants</div>
+      </div>
+      <div class="included-box" style="margin-top:8px;">
+        <div class="included-title">Calculateur URSSAF — Offert</div>
+        <div class="included-item">Simulation cotisations en temps réel</div>
+        <div class="included-item">CA cible pour votre salaire net souhaité</div>
+      </div>
+      <div style="background:rgba(238,7,165,.06);border:1px solid rgba(238,7,165,.15);border-radius:10px;padding:12px;text-align:center;margin-top:8px;">
+        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--f);margin-bottom:4px;">ÉCONOMIE</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--f);">29€</div>
+        <div style="font-size:11px;color:var(--txt2);">176€ séparément → 147€ en pack</div>
+      </div>
+      <div class="modal-cta">
+        <button class="btn-buy" onclick="buyProduct('packadmin', 147)">⬇ Obtenir le Pack Admin — 147€</button>
+        <div class="btn-buy-note">Paiement sécurisé Stripe · Livraison sous 48h</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── STUDIO ──
+function updateStudio() {
+  const name = document.getElementById('st-name')?.value || 'Votre Marque';
+  const cp = document.getElementById('st-cp')?.value || '#7b9a80';
+  const ca = document.getElementById('st-ca')?.value || '#ee07a5';
+  const cb = document.getElementById('st-cb')?.value || '#f5f1e6';
+  // Déterminer couleur texte selon fond
+  const isDark = ['#1a1714','#7b9a80','#ee07a5'].some(c => cb === c);
+  const txtColor = isDark ? 'white' : '#1a1714';
+  const canvas = document.getElementById('st-prev-canvas');
+  if(canvas) {
+    canvas.style.background = cb;
+    canvas.style.color = txtColor;
+  }
+  const el = (id) => document.getElementById(id);
+  if(el('st-prev-brand')) el('st-prev-brand').textContent = name.toUpperCase();
+  if(el('st-prev-marque')) el('st-prev-marque').textContent = name.toUpperCase();
+  if(el('st-prev-em')) el('st-prev-em').style.color = ca;
+  if(el('st-prev-tab1')) { el('st-prev-tab1').style.borderColor = ca; el('st-prev-tab1').style.color = ca; }
+  if(el('st-prev-btn')) el('st-prev-btn').style.background = ca;
+  if(el('st-prev-site')) el('st-prev-site').textContent = 'votresite.com';
+}
+
+// ── MODAL ──
+function openModal(id) {
+  document.getElementById(`modal-${id}`).classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if(id === 'links') { initLinksModal(); updateLinks(); }
+  if(id === 'wa') updateWA();
+  if(id === 'signature') updateSig();
+  if(id === 'studio') updateStudio();
+  if(id === 'urssaf') updateURSSAF();
+  if(id === 'facture') updateFacture();
+  if(id === 'dashboard') updateDash();
+}
+function closeModal(id) {
+  document.getElementById(`modal-${id}`).classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if(e.target === m) closeModal(m.id.replace('modal-','')); });
+});
+
+// ── URSSAF ──
+function updateURSSAF() {
+  const ca = parseFloat(document.getElementById('u-ca')?.value) || 0;
+  const type = document.getElementById('u-type')?.value || 'bnc';
+  const taux = type === 'commerce' ? 12.3 : type === 'bic' ? 21.2 : 21.2;
+  const cot = ca * taux / 100;
+  const net = ca - cot;
+  document.getElementById('u-ca-val').textContent = ca.toFixed(0) + ' €';
+  document.getElementById('u-cot-val').textContent = cot.toFixed(0) + ' €';
+  document.getElementById('u-taux-val').textContent = taux + '%';
+  document.getElementById('u-net-val').textContent = net.toFixed(0) + ' €';
+}
+
+// ── FACTURE ──
+function updateFacture() {
+  const name = document.getElementById('f-name')?.value || 'Votre Marque';
+  const job = document.getElementById('f-job')?.value || 'Votre activité';
+  const cp = document.getElementById('f-cp')?.value || '#7b9a80';
+  document.getElementById('f-prev-name').textContent = name;
+  document.getElementById('f-prev-name').style.color = cp;
+  document.getElementById('f-prev-job').textContent = job;
+  document.getElementById('f-prev-line').style.background = cp;
+  document.getElementById('f-prev-total').style.borderColor = cp;
+  document.getElementById('f-prev-total').querySelector('.facture-total-val').style.color = cp;
+}
+
+// ── DASHBOARD ──
+function updateDash() {
+  const name = document.getElementById('d-name')?.value || 'Votre Marque';
+  const cp = document.getElementById('d-cp')?.value || '#7b9a80';
+  const obj = document.getElementById('d-obj')?.value || '3000';
+  document.getElementById('d-prev-name').textContent = name;
+  document.getElementById('d-prev-name').style.color = cp;
+  document.getElementById('d-prev-c1').style.background = cp + '20';
+  document.getElementById('d-prev-obj').textContent = parseInt(obj).toLocaleString('fr-FR') + '€';
+  document.getElementById('d-prev-obj').style.color = cp;
+}
+
+// ── LINKS PAGE ──
+let lLinks = [
+  {emoji:'🌿',label:'Appel découverte gratuit',url:''},
+  {emoji:'🌐',label:'Mon site web',url:''},
+  {emoji:'💬',label:'WhatsApp Business',url:''},
+];
+function initLinksModal() { renderLinksList(); }
+function renderLinksList() {
+  const list = document.getElementById('l-links-list');
+  if(!list) return;
+  list.innerHTML = '';
+  lLinks.forEach((link, i) => {
+    list.innerHTML += `<div class="link-row">
+      <input class="link-row-emoji" type="text" value="${link.emoji}" maxlength="2" oninput="lLinks[${i}].emoji=this.value;updateLinks()">
+      <input type="text" placeholder="Label" value="${link.label}" oninput="lLinks[${i}].label=this.value;updateLinks()">
+      <input type="url" placeholder="https://..." value="${link.url}" oninput="lLinks[${i}].url=this.value;updateLinks()">
+      <button class="link-row-remove" onclick="removeLinkL(${i})">✕</button>
+    </div>`;
+  });
+}
+function addLinkL() { lLinks.push({emoji:'🔗',label:'',url:''}); renderLinksList(); updateLinks(); }
+function removeLinkL(i) { lLinks.splice(i,1); renderLinksList(); updateLinks(); }
+function updateLinks() {
+  const name = document.getElementById('l-name')?.value || 'Votre Marque';
+  const job = document.getElementById('l-job')?.value || 'Votre métier';
+  const slogan = document.getElementById('l-slogan')?.value || 'Votre slogan';
+  const cp = document.getElementById('l-cp')?.value || '#7b9a80';
+  const cs = document.getElementById('l-cs')?.value || '#d8c79e';
+  const cb = document.getElementById('l-cb')?.value || '#f0ece3';
+  const phone = document.getElementById('l-phone-content');
+  if(!phone) return;
+  phone.style.background = cb;
+  let linksHTML = '';
+  lLinks.forEach((link, i) => {
+    const isFirst = i === 0;
+    linksHTML += `<div class="lp-link ${isFirst?'featured':''}" style="${isFirst?`background:${cp};`:''}">
+      <div class="lp-link-icon" style="${isFirst?'background:rgba(255,255,255,.18);':'background:rgba(0,0,0,.04);'}">${link.emoji||'🔗'}</div>
+      <div style="flex:1;"><span class="lp-link-label" style="color:${isFirst?'white':'#1a1714'};">${link.label||'Mon lien'}</span><span class="lp-link-sub">${link.url?link.url.replace('https://','').split('/')[0]:'url...'}</span></div>
+      <span class="lp-link-arrow" style="color:${isFirst?'rgba(255,255,255,.7)':cp};">→</span>
+    </div>`;
+  });
+  phone.innerHTML = `
+    <div class="lp-header">
+      <div class="lp-avatar" style="background:${cp};">🌿</div>
+      <div class="lp-name" style="color:${cp};">${name}</div>
+      <div class="lp-job" style="color:${cp};opacity:.75;">${job}</div>
+      <div class="lp-slogan">${slogan}</div>
+    </div>
+    <div class="lp-divider"><div class="lp-div-line" style="background:${cs};"></div><div class="lp-div-diamond" style="background:${cs};"></div><div class="lp-div-line" style="background:${cs};"></div></div>
+    <div class="lp-links">${linksHTML}</div>
+    <div class="lp-footer">"${slogan}"</div>`;
+}
+
+// ── WA CATALOGUE ──
+function updateWA() {
+  const name = document.getElementById('w-name')?.value || 'Votre Marque';
+  const cp = document.getElementById('w-cp')?.value || '#7b9a80';
+  const cs = document.getElementById('w-cs')?.value || '#d8c79e';
+  const ca = document.getElementById('w-ca')?.value || '#ee07a5';
+  const o1 = document.getElementById('w-o1')?.value || 'Offre 1 · 150€';
+  const o2 = document.getElementById('w-o2')?.value || 'Offre 2 · 350€';
+  const o3 = document.getElementById('w-o3')?.value || 'Offre 3 · 997€';
+  const parse = (str) => { const parts = str.split('·'); return { name: parts[0]?.trim()||str, price: parts[1]?.trim()||'' }; };
+  const offers = [
+    {bg:cp,...parse(o1)},{bg:cs,textDark:true,...parse(o2)},{bg:ca,...parse(o3)},
+    {bg:'#1a1714',name:'Appel découverte',price:'Gratuit'},
+    {bg:cp,name:name,price:''},{bg:cs,textDark:true,name:'Guide inclus',price:'PDF'},
+    {bg:ca,name:'1 modif offerte',price:'7 jours'},{bg:'#1a1714',name:'WhatsApp Business',price:''},
+    {bg:cp,name:'Me contacter',price:'→'},
+  ];
+  const grid = document.getElementById('w-preview-grid');
+  if(!grid) return;
+  grid.innerHTML = offers.map(o => `
+    <div class="wa-mini-card" style="background:${o.bg};">
+      <div class="wa-mini-label">Nendy Services</div>
+      <div class="wa-mini-name" style="color:${o.textDark?'#1a1714':'white'};">${o.name}</div>
+      <div class="wa-mini-price" style="color:${o.textDark?'#1a1714':'rgba(255,255,255,.85)'};">${o.price}</div>
+    </div>`).join('');
+}
+
+// ── SIGNATURE ──
+function updateSig() {
+  const name = document.getElementById('s-name')?.value || 'Votre Nom';
+  const title = document.getElementById('s-title')?.value || 'Votre titre';
+  const slogan = document.getElementById('s-slogan')?.value || 'Votre slogan';
+  const site = document.getElementById('s-site')?.value || 'https://votresite.com';
+  const cp = document.getElementById('s-cp')?.value || '#7b9a80';
+  const ca = document.getElementById('s-ca')?.value || '#ee07a5';
+  const el = (id) => document.getElementById(id);
+  if(el('s-prev-name')) { el('s-prev-name').textContent = name; el('s-prev-name').style.color = cp; }
+  if(el('s-prev-job')) el('s-prev-job').textContent = title;
+  if(el('s-prev-slogan')) el('s-prev-slogan').textContent = `"${slogan}"`;
+  if(el('s-prev-line')) el('s-prev-line').style.background = cp;
+  if(el('s-prev-avatar')) el('s-prev-avatar').style.background = cp;
+  if(el('s-prev-links')) el('s-prev-links').innerHTML = `
+    <a class="sig-link-preview" style="background:${cp};color:white;">🌐 Site</a>
+    <a class="sig-link-preview" style="background:#25D366;color:white;">💬 WhatsApp</a>
+    <a class="sig-link-preview" style="background:${ca};color:white;">📅 RDV</a>`;
+}
+
+// ── ACHAT ──
+function buyProduct(type, price) {
+  const emailFields = {
+    urssaf:'u-email', facture:'f-email', dashboard:'d-email', studio:'st-email',
+    links:'l-email', wa:'w-email', signature:'s-email', formation:'fo-email',
+    bundle:'b-email', siteonepage:'so-email'
+  };
+  const emailId = emailFields[type];
+  const email = emailId ? document.getElementById(emailId)?.value : null;
+  if(emailId && !email) {
+    alert('Veuillez entrer votre adresse email pour recevoir votre fichier.');
+    return;
+  }
+  const stripeLinks = {
+    urssaf: 'GRATUIT',
+    facture: 'https://buy.stripe.com/FACTURE_LINK',
+    dashboard: 'https://buy.stripe.com/DASHBOARD_LINK',
+    studio: 'https://buy.stripe.com/STUDIO_LINK',
+    links: 'https://buy.stripe.com/LINKS_LINK',
+    wa: 'https://buy.stripe.com/WA_LINK',
+    signature: 'https://buy.stripe.com/SIGNATURE_LINK',
+    formation: 'https://buy.stripe.com/FORMATION_LINK',
+    bundle: 'https://buy.stripe.com/BUNDLE_LINK',
+    siteonepage: 'https://buy.stripe.com/SITEONEPAGE_LINK',
+  };
+  if(price === 0) {
+    alert(`Merci ! Votre calculateur URSSAF gratuit sera envoyé à ${email} sous quelques minutes.`);
+  } else {
+    alert(`Redirection vers le paiement sécurisé...\n\nProduit : ${type}\nPrix : ${price}€\nEmail : ${email}\n\n→ Votre fichier personnalisé sera livré sous 24-48h après paiement.`);
+  }
+}
+</script>
+</body>
+</html>
