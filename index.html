@@ -103,12 +103,23 @@ body {
   border-bottom: 1px solid rgba(28,51,32,.06);
 }
 
+/* Nav transparente sur le hero vert : texte clair */
+.nav:not(.solid) .nav-logo-name,
+.nav:not(.solid) .nav-logo { color: var(--white); }
+.nav:not(.solid) .nav-logo-sub { color: rgba(250,247,240,.6); }
+.nav:not(.solid) .nav-links a { color: rgba(250,247,240,.8); }
+.nav:not(.solid) .nav-links a:hover { color: var(--white); }
+.nav:not(.solid) .nav-cta { background: var(--white); }
+.nav:not(.solid) .nav-cta-txt { color: var(--fg); }
+.nav:not(.solid) .nav-cta:hover { background: var(--b); }
+.nav:not(.solid) .nav-hamburger span { background: var(--white); }
+
 /* ── HERO ── */
 #hero {
   min-height: 100vh;
   background: #4a6b51;
   display: flex; align-items: flex-end;
-  padding: 0 56px 80px;
+  padding: 120px 56px 80px;
   position: relative; overflow: hidden;
 }
 
@@ -864,7 +875,7 @@ footer {
     <div class="hero-eyebrow reveal">Assistante Virtuelle &amp; Écosystèmes Digitaux</div>
     <h1 class="hero-title reveal">
       Tu as osé<br>
-      lancer.<br>
+      te lancer.<br>
       Ose <span class="accent">déléguer.</span>
     </h1>
     <p class="hero-sub reveal">
