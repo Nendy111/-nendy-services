@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon business a besoin de quoi ? · Nendy Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Jost:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--v:#7b9a80;--vc:#b5c1a6;--b:#d8c79e;--cr:#f5f1e6;--f:#ee07a5;--txt:#1a1714;--txt2:#5c5248;}
+html{scroll-behavior:smooth;}
+body{font-family:"Jost",sans-serif;background:var(--txt);color:white;min-height:100vh;}
+
+/* HEADER */
+.header{padding:18px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06);}
+.logo{font-family:"Playfair Display",serif;font-size:15px;font-weight:700;color:var(--v);text-decoration:none;}
+.logo small{font-family:"DM Mono",monospace;font-size:6px;letter-spacing:3px;color:rgba(255,255,255,.2);display:block;}
+.back{font-family:"DM Mono",monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;}
+.back:hover{color:var(--vc);}
+
+/* INTRO */
+.intro{max-width:620px;margin:0 auto;padding:56px 28px 32px;text-align:center;}
+.intro-eyebrow{font-family:"DM Mono",monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--f);margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.intro-eyebrow::before,.intro-eyebrow::after{content:"";width:24px;height:1px;background:var(--f);}
+.intro-title{font-family:"Playfair Display",serif;font-size:36px;font-weight:700;line-height:1.1;margin-bottom:14px;}
+.intro-title em{color:var(--v);font-style:italic;}
+.intro-title span{color:var(--f);font-style:italic;}
+.intro-sub{font-size:14px;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto;}
+.intro-meta{display:flex;gap:20px;justify-content:center;margin-bottom:32px;}
+.intro-meta-item{font-family:"DM Mono",monospace;font-size:8px;letter-spacing:1px;color:rgba(255,255,255,.25);text-transform:uppercase;}
+.btn-start{display:inline-flex;align-items:center;gap:10px;background:var(--f);color:white;border:none;border-radius:12px;padding:16px 32px;font-family:"Jost",sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-start:hover{background:#d4069a;transform:translateY(-2px);}
+
+/* PROGRESS */
+.progress-wrap{max-width:620px;margin:0 auto;padding:0 28px;display:none;}
+.progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.progress-label{font-family:"DM Mono",monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);}
+.progress-count{font-family:"DM Mono",monospace;font-size:9px;color:var(--f);}
+.progress-bar{height:3px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--v),var(--f));border-radius:3px;transition:width .5s cubic-bezier(.4,0,.2,1);}
+
+/* QUIZ */
+.quiz-wrap{max-width:620px;margin:0 auto;padding:32px 28px 80px;}
+.question-block{display:none;animation:fadeUp .35s ease;}
+.question-block.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+.q-num{font-family:"DM Mono",monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--f);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.q-num::before{content:"";width:16px;height:1px;background:var(--f);}
+.q-title{font-family:"Playfair Display",serif;font-size:26px;font-weight:700;line-height:1.2;color:white;margin-bottom:6px;}
+.q-title em{color:var(--v);font-style:italic;}
+.q-sub{font-size:12px;color:rgba(255,255,255,.35);margin-bottom:24px;line-height:1.6;}
+
+/* OPTIONS */
+.options{display:flex;flex-direction:column;gap:8px;margin-bottom:28px;}
+.opt{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 20px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:14px;}
+.opt:hover{border-color:rgba(123,154,128,.4);background:rgba(123,154,128,.06);transform:translateX(4px);}
+.opt.selected-a{border-color:var(--v);background:rgba(123,154,128,.12);}
+.opt.selected-a .opt-check{background:var(--v);border-color:var(--v);}
+.opt.selected-a .opt-check::after{opacity:1;}
+.opt.selected-o{border-color:var(--f);background:rgba(238,7,165,.08);}
+.opt.selected-o .opt-check{background:var(--f);border-color:var(--f);}
+.opt.selected-o .opt-check::after{opacity:1;}
+.opt.selected-b{border-color:var(--b);background:rgba(216,199,158,.08);}
+.opt.selected-b .opt-check{background:var(--b);border-color:var(--b);}
+.opt.selected-b .opt-check::after{opacity:1;}
+.opt-check{width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);flex-shrink:0;position:relative;transition:all .2s;}
+.opt-check::after{content:"&#10003;";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;color:white;font-weight:700;opacity:0;transition:opacity .2s;}
+.opt-emoji{font-size:20px;flex-shrink:0;}
+.opt-content{flex:1;}
+.opt-label{font-size:14px;font-weight:500;color:white;line-height:1.4;margin-bottom:2px;}
+.opt-tag{font-family:"DM Mono",monospace;font-size:7px;letter-spacing:1px;padding:2px 6px;border-radius:6px;display:inline-block;margin-top:3px;}
+.tag-a{background:rgba(123,154,128,.15);color:var(--vc);}
+.tag-o{background:rgba(238,7,165,.1);color:rgba(238,7,165,.7);}
+.tag-b{background:rgba(216,199,158,.1);color:var(--b);}
+
+/* NAV */
+.q-nav{display:flex;justify-content:space-between;align-items:center;}
+.btn-prev{background:transparent;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4);border-radius:10px;padding:12px 20px;font-family:"Jost",sans-serif;font-size:13px;cursor:pointer;transition:all .2s;}
+.btn-prev:hover{border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.7);}
+.btn-prev:disabled{opacity:0;pointer-events:none;}
+.btn-next{background:var(--f);color:white;border:none;border-radius:10px;padding:12px 24px;font-family:"Jost",sans-serif;font-size:14px;font-weight:600;cursor:pointer;opacity:.35;pointer-events:none;transition:all .2s;}
+.btn-next.on{opacity:1;pointer-events:all;}
+.btn-next.on:hover{background:#d4069a;}
+
+/* RÉSULTAT */
+.result-wrap{max-width:620px;margin:0 auto;padding:40px 28px 80px;display:none;}
+.result-wrap.show{display:block;animation:fadeUp .5s ease;}
+
+.result-score-bar{display:grid;grid-template-columns:1fr 1fr;gap:3px;border-radius:12px;overflow:hidden;margin-bottom:28px;height:12px;}
+.score-a{background:var(--v);transition:width .8s;}
+.score-o{background:var(--f);transition:width .8s;}
+
+.result-eyebrow{font-family:"DM Mono",monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.result-eyebrow::before{content:"";width:16px;height:1px;background:rgba(255,255,255,.2);}
+.result-title{font-family:"Playfair Display",serif;font-size:32px;font-weight:700;line-height:1.1;margin-bottom:8px;}
+.result-sub{font-size:14px;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:24px;font-style:italic;}
+
+.result-profile{border-radius:16px;padding:24px;margin-bottom:16px;}
+.profile-pure-a{background:linear-gradient(135deg,#2a4a2e,#3d6642);border:1px solid rgba(123,154,128,.3);}
+.profile-pure-o{background:linear-gradient(135deg,#5a0338,#8a0455);border:1px solid rgba(238,7,165,.3);}
+.profile-orga-first{background:linear-gradient(135deg,#4a3a20,#6b5530);border:1px solid rgba(216,199,158,.3);}
+.profile-assist-first{background:linear-gradient(135deg,#2a3d2e,#5a0338);border:1px solid rgba(123,154,128,.2);}
+.profile-both{background:linear-gradient(135deg,#1a2a2e,#2d1a24);border:1px solid rgba(238,7,165,.2);}
+
+.profile-badge{font-family:"DM Mono",monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:10px;}
+.badge-a{background:rgba(123,154,128,.2);color:var(--vc);border:1px solid rgba(123,154,128,.3);}
+.badge-o{background:rgba(238,7,165,.15);color:#ff69c4;border:1px solid rgba(238,7,165,.3);}
+.badge-b{background:rgba(216,199,158,.1);color:var(--b);border:1px solid rgba(216,199,158,.2);}
+.profile-name{font-family:"Playfair Display",serif;font-size:22px;font-weight:700;color:white;margin-bottom:4px;}
+.profile-tagline{font-size:12px;color:rgba(255,255,255,.5);font-style:italic;margin-bottom:14px;}
+.profile-desc{font-size:13px;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:16px;}
+
+.score-display{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.score-item{background:rgba(255,255,255,.06);border-radius:10px;padding:12px;text-align:center;}
+.score-pct{font-family:"Playfair Display",serif;font-size:26px;font-weight:700;}
+.score-pct-a{color:var(--v);}
+.score-pct-o{color:var(--f);}
+.score-name{font-family:"DM Mono",monospace;font-size:8px;letter-spacing:1px;color:rgba(255,255,255,.3);text-transform:uppercase;margin-top:3px;}
+
+/* CTA */
+.result-cta{background:var(--cr);border-radius:14px;padding:22px;text-align:center;margin-bottom:12px;}
+.result-cta-title{font-family:"Playfair Display",serif;font-size:19px;font-weight:700;color:var(--txt);margin-bottom:6px;}
+.result-cta-sub{font-size:12px;color:var(--txt2);line-height:1.65;margin-bottom:16px;}
+.btn-cta{display:inline-flex;align-items:center;gap:8px;background:var(--f);color:white;border-radius:10px;padding:12px 20px;text-decoration:none;font-size:13px;font-weight:600;transition:all .2s;}
+.btn-cta:hover{background:#d4069a;}
+.btn-cta-sub{font-size:9px;color:rgba(255,255,255,.6);margin-top:1px;font-weight:400;}
+.btn-restart{background:transparent;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.35);border-radius:10px;padding:12px;font-family:"Jost",sans-serif;font-size:12px;cursor:pointer;width:100%;transition:all .2s;margin-top:4px;}
+.btn-restart:hover{border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.6);}
+
+/* SHARE */
+.share-strip{display:flex;gap:8px;margin-top:12px;justify-content:center;flex-wrap:wrap;}
+.share-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 14px;font-family:"DM Mono",monospace;font-size:8px;letter-spacing:1px;color:rgba(255,255,255,.4);cursor:pointer;text-decoration:none;transition:all .2s;}
+.share-btn:hover{background:rgba(255,255,255,.1);color:white;}
+
+/* DECO */
+.deco{position:fixed;pointer-events:none;z-index:0;}
+.deco-1{width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(238,7,165,.05),transparent 70%);top:-150px;right:-100px;}
+.deco-2{width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(123,154,128,.04),transparent 70%);bottom:-80px;left:-60px;}
+
+@media(max-width:600px){
+  .intro{padding:40px 20px 24px;}
+  .intro-title{font-size:26px;}
+  .quiz-wrap,.result-wrap{padding:24px 20px 60px;}
+  .q-title{font-size:20px;}
+  .result-title{font-size:24px;}
+}
+</style>
+</head>
+<body>
+
+<div class="deco deco-1"></div>
+<div class="deco deco-2"></div>
+
+<!-- HEADER -->
+<header class="header">
+  <a href="https://nendyservices.com" class="logo">NENDY <small>Services</small></a>
+  <a href="https://nendyservices.com" class="back">&#8592; Retour</a>
+</header>
+
+<!-- INTRO -->
+<div class="intro" id="intro-screen">
+  <div class="intro-eyebrow">Diagnostic gratuit</div>
+  <h1 class="intro-title">
+    Mon business<br>a besoin<br>de <span>quoi ?</span>
+  </h1>
+  <p class="intro-sub">Organisation, assistance — ou les deux ? 10 questions pour identifier ce qui bloque vraiment votre business et trouver votre point de départ.</p>
+  <div class="intro-meta">
+    <span class="intro-meta-item">&#9679; 10 questions</span>
+    <span class="intro-meta-item">&#9679; 3 minutes</span>
+    <span class="intro-meta-item">&#9679; Résultat immédiat</span>
+  </div>
+  <button class="btn-start" onclick="startQuiz()">Commencer le quiz &#8594;</button>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap" id="progress-wrap">
+  <div class="progress-top">
+    <span class="progress-label">Votre profil</span>
+    <span class="progress-count" id="prog-count">1 / 10</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:10%"></div></div>
+</div>
+
+<!-- QUIZ -->
+<div class="quiz-wrap" id="quiz-wrap" style="display:none;">
+
+  <!-- Q1 -->
+  <div class="question-block active" id="q1">
+    <div class="q-num">Question 01</div>
+    <h2 class="q-title">Votre plus grand problème<br>du <em>quotidien ?</em></h2>
+    <p class="q-sub">Ce qui vous pèse le plus en ce moment.</p>
+    <div class="options">
+      <div class="opt" onclick="pick(this,1,'a')"><span class="opt-emoji">&#128236;</span><div class="opt-content"><div class="opt-label">Je croule sous les emails et les demandes clients</div><span class="opt-tag tag-a">Assistance</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,1,'o')"><span class="opt-emoji">&#128202;</span><div class="opt-content"><div class="opt-label">Je n'ai aucun système en place — tout est dans ma tête</div><span class="opt-tag tag-o">Organisation</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,1,'o')"><span class="opt-emoji">&#9881;&#65039;</span><div class="opt-content"><div class="opt-label">Je fais tout manuellement — rien n'est automatisé</div><span class="opt-tag tag-o">Organisation</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,1,'a')"><span class="opt-emoji">&#128193;</span><div class="opt-content"><div class="opt-label">Je perds du temps à chercher des infos éparpillées partout</div><span class="opt-tag tag-a">Assistance</span></div><div class="opt-check"></div></div>
+    </div>
+    <div class="q-nav"><button class="btn-prev" disabled>&#8592; Précédent</button><button class="btn-next" id="n1" onclick="next()">Suivant &#8594;</button></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question-block" id="q2">
+    <div class="q-num">Question 02</div>
+    <h2 class="q-title">Quand vous partez en vacances,<br>votre business <em>...</em></h2>
+    <p class="q-sub">Soyez honnête — pas de jugement.</p>
+    <div class="options">
+      <div class="opt" onclick="pick(this,2,'a')"><span class="opt-emoji">&#128683;</span><div class="opt-content"><div class="opt-label">S'arrête complètement — personne pour prendre le relais</div><span class="opt-tag tag-a">Assistance</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,2,'a')"><span class="opt-emoji">&#128566;</span><div class="opt-content"><div class="opt-label">Continue mal — des choses passent à la trappe</div><span class="opt-tag tag-a">Assistance</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,2,'o')"><span class="opt-emoji">&#10024;</span><div class="opt-content"><div class="opt-label">Tourne seul grâce à mes process — enfin presque</div><span class="opt-tag tag-o">Organisation</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,2,'b')"><span class="opt-emoji">&#128517;</span><div class="opt-content"><div class="opt-label">Quelles vacances ? Ce mot ne fait pas partie de mon vocabulaire</div><span class="opt-tag tag-b">Les deux</span></div><div class="opt-check"></div></div>
+    </div>
+    <div class="q-nav"><button class="btn-prev" onclick="prev()">&#8592; Précédent</button><button class="btn-next" id="n2" onclick="next()">Suivant &#8594;</button></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question-block" id="q3">
+    <div class="q-num">Question 03</div>
+    <h2 class="q-title">Vos outils digitaux<br><em>aujourd'hui...</em></h2>
+    <p class="q-sub">Notion, Zapier, CRM, agenda... comment vous en sortez-vous ?</p>
+    <div class="options">
+      <div class="opt" onclick="pick(this,3,'o')"><span class="opt-emoji">&#129300;</span><div class="opt-content"><div class="opt-label">Je n'en ai pas vraiment — je gère tout à la main</div><span class="opt-tag tag-o">Organisation</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,3,'o')"><span class="opt-emoji">&#128165;</span><div class="opt-content"><div class="opt-label">J'en ai trop — ils se chevauchent et je m'y perds</div><span class="opt-tag tag-o">Organisation</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,3,'b')"><span class="opt-emoji">&#128268;</span><div class="opt-content"><div class="opt-label">Quelques-uns en place mais pas connectés entre eux</div><span class="opt-tag tag-b">Les deux</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,3,'a')"><span class="opt-emoji">&#128064;</span><div class="opt-content"><div class="opt-label">Ils sont là mais personne pour les faire tourner au quotidien</div><span class="opt-tag tag-a">Assistance</span></div><div class="opt-check"></div></div>
+    </div>
+    <div class="q-nav"><button class="btn-prev" onclick="prev()">&#8592; Précédent</button><button class="btn-next" id="n3" onclick="next()">Suivant &#8594;</button></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question-block" id="q4">
+    <div class="q-num">Question 04</div>
+    <h2 class="q-title">Votre agenda<br>ressemble à <em>quoi ?</em></h2>
+    <p class="q-sub">La vérité sur votre gestion du temps.</p>
+    <div class="options">
+      <div class="opt" onclick="pick(this,4,'a')"><span class="opt-emoji">&#128293;</span><div class="opt-content"><div class="opt-label">Plein de RDV mal organisés que je gère difficilement</div><span class="opt-tag tag-a">Assistance</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,4,'o')"><span class="opt-emoji">&#128203;</span><div class="opt-content"><div class="opt-label">Vide — je n'arrive pas à planifier correctement</div><span class="opt-tag tag-o">Organisation</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,4,'a')"><span class="opt-emoji">&#127775;</span><div class="opt-content"><div class="opt-label">Structuré mais que je dois gérer entièrement seule</div><span class="opt-tag tag-a">Assistance</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,4,'b')"><span class="opt-emoji">&#128565;</span><div class="opt-content"><div class="opt-label">Un document vivant impossible à tenir — ni fait ni à faire</div><span class="opt-tag tag-b">Les deux</span></div><div class="opt-check"></div></div>
+    </div>
+    <div class="q-nav"><button class="btn-prev" onclick="prev()">&#8592; Précédent</button><button class="btn-next" id="n4" onclick="next()">Suivant &#8594;</button></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question-block" id="q5">
+    <div class="q-num">Question 05</div>
+    <h2 class="q-title">Vos clients vous<br>disent <em>souvent...</em></h2>
+    <p class="q-sub">Ce qu'ils ressentent dans leur expérience avec vous.</p>
+    <div class="options">
+      <div class="opt" onclick="pick(this,5,'a')"><span class="opt-emoji">&#9201;</span><div class="opt-content"><div class="opt-label">Vous mettez du temps à répondre — ils s'impatientent</div><span class="opt-tag tag-a">Assistance</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,5,'o')"><span class="opt-emoji">&#128260;</span><div class="opt-content"><div class="opt-label">Votre onboarding est flou — ils ne savent pas comment ça se passe</div><span class="opt-tag tag-o">Organisation</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,5,'o')"><span class="opt-emoji">&#10067;</span><div class="opt-content"><div class="opt-label">Votre process manque de clarté — ils se perdent</div><span class="opt-tag tag-o">Organisation</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,5,'b')"><span class="opt-emoji">&#128170;</span><div class="opt-content"><div class="opt-label">Vous êtes débordée — et ça se ressent dans le suivi</div><span class="opt-tag tag-b">Les deux</span></div><div class="opt-check"></div></div>
+    </div>
+    <div class="q-nav"><button class="btn-prev" onclick="prev()">&#8592; Précédent</button><button class="btn-next" id="n5" onclick="next()">Suivant &#8594;</button></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="question-block" id="q6">
+    <div class="q-num">Question 06</div>
+    <h2 class="q-title">Ce qui vous empêche<br>de <em>scaler...</em></h2>
+    <p class="q-sub">Le vrai frein à votre croissance.</p>
+    <div class="options">
+      <div class="opt" onclick="pick(this,6,'a')"><span class="opt-emoji">&#129309;</span><div class="opt-content"><div class="opt-label">Je n'ai personne pour m'aider au quotidien — je fais tout seule</div><span class="opt-tag tag-a">Assistance</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,6,'o')"><span class="opt-emoji">&#128257;</span><div class="opt-content"><div class="opt-label">Je n'ai pas de systèmes reproductibles — je réinvente la roue</div><span class="opt-tag tag-o">Organisation</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,6,'b')"><span class="opt-emoji">&#128165;</span><div class="opt-content"><div class="opt-label">Les deux à la fois — ni système ni soutien humain</div><span class="opt-tag tag-b">Les deux</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,6,'b')"><span class="opt-emoji">&#129300;</span><div class="opt-content"><div class="opt-label">Je ne sais pas encore — j'ai besoin d'y voir clair</div><span class="opt-tag tag-b">Les deux</span></div><div class="opt-check"></div></div>
+    </div>
+    <div class="q-nav"><button class="btn-prev" onclick="prev()">&#8592; Précédent</button><button class="btn-next" id="n6" onclick="next()">Suivant &#8594;</button></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="question-block" id="q7">
+    <div class="q-num">Question 07</div>
+    <h2 class="q-title">En fin de journée,<br>vous vous dites <em>...</em></h2>
+    <p class="q-sub">Le sentiment dominant après une journée de travail.</p>
+    <div class="options">
+      <div class="opt" onclick="pick(this,7,'a')"><span class="opt-emoji">&#128566;</span><div class="opt-content"><div class="opt-label">J'ai tout géré — mais je suis complètement épuisée</div><span class="opt-tag tag-a">Assistance</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,7,'o')"><span class="opt-emoji">&#128683;</span><div class="opt-content"><div class="opt-label">J'ai travaillé — mais rien n'avance vraiment</div><span class="opt-tag tag-o">Organisation</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,7,'b')"><span class="opt-emoji">&#128257;</span><div class="opt-content"><div class="opt-label">Je cours après les mêmes problèmes depuis des mois</div><span class="opt-tag tag-b">Les deux</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,7,'o')"><span class="opt-emoji">&#127919;</span><div class="opt-content"><div class="opt-label">Je n'ai pas avancé sur ce qui compte vraiment pour mon business</div><span class="opt-tag tag-o">Organisation</span></div><div class="opt-check"></div></div>
+    </div>
+    <div class="q-nav"><button class="btn-prev" onclick="prev()">&#8592; Précédent</button><button class="btn-next" id="n7" onclick="next()">Suivant &#8594;</button></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="question-block" id="q8">
+    <div class="q-num">Question 08</div>
+    <h2 class="q-title">Votre relation aux outils<br><em>Notion, Zapier, Make...</em></h2>
+    <p class="q-sub">Votre niveau de confort avec les outils digitaux.</p>
+    <div class="options">
+      <div class="opt" onclick="pick(this,8,'o')"><span class="opt-emoji">&#128268;</span><div class="opt-content"><div class="opt-label">Je ne sais pas m'en servir — c'est du grec pour moi</div><span class="opt-tag tag-o">Organisation</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,8,'o')"><span class="opt-emoji">&#9203;</span><div class="opt-content"><div class="opt-label">Je les connais mais je n'ai pas le temps de les configurer</div><span class="opt-tag tag-o">Organisation</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,8,'b')"><span class="opt-emoji">&#128200;</span><div class="opt-content"><div class="opt-label">Je les utilise mais mal — je perds plus de temps qu'autre chose</div><span class="opt-tag tag-b">Les deux</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,8,'a')"><span class="opt-emoji">&#128640;</span><div class="opt-content"><div class="opt-label">Ils sont configurés — il me faut juste quelqu'un pour les faire tourner</div><span class="opt-tag tag-a">Assistance</span></div><div class="opt-check"></div></div>
+    </div>
+    <div class="q-nav"><button class="btn-prev" onclick="prev()">&#8592; Précédent</button><button class="btn-next" id="n8" onclick="next()">Suivant &#8594;</button></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="question-block" id="q9">
+    <div class="q-num">Question 09</div>
+    <h2 class="q-title">Déléguer pour vous<br>c'est <em>quoi ?</em></h2>
+    <p class="q-sub">Votre vision idéale de la délégation.</p>
+    <div class="options">
+      <div class="opt" onclick="pick(this,9,'a')"><span class="opt-emoji">&#129309;</span><div class="opt-content"><div class="opt-label">Confier des tâches précises à quelqu'un de confiance</div><span class="opt-tag tag-a">Assistance</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,9,'o')"><span class="opt-emoji">&#9881;&#65039;</span><div class="opt-content"><div class="opt-label">Mettre en place des systèmes qui tournent sans moi</div><span class="opt-tag tag-o">Organisation</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,9,'b')"><span class="opt-emoji">&#128165;</span><div class="opt-content"><div class="opt-label">Les deux — humain ET automatisation en simultané</div><span class="opt-tag tag-b">Les deux</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,9,'b')"><span class="opt-emoji">&#128161;</span><div class="opt-content"><div class="opt-label">Je n'y ai pas encore pensé sérieusement — j'explore</div><span class="opt-tag tag-b">Les deux</span></div><div class="opt-check"></div></div>
+    </div>
+    <div class="q-nav"><button class="btn-prev" onclick="prev()">&#8592; Précédent</button><button class="btn-next" id="n9" onclick="next()">Suivant &#8594;</button></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="question-block" id="q10">
+    <div class="q-num">Question 10</div>
+    <h2 class="q-title">Dans 6 mois,<br>votre <em>priorité c'est...</em></h2>
+    <p class="q-sub">L'objectif qui vous tient le plus à coeur.</p>
+    <div class="options">
+      <div class="opt" onclick="pick(this,10,'a')"><span class="opt-emoji">&#129392;</span><div class="opt-content"><div class="opt-label">Avoir quelqu'un qui gère l'opérationnel à ma place</div><span class="opt-tag tag-a">Assistance</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,10,'o')"><span class="opt-emoji">&#127775;</span><div class="opt-content"><div class="opt-label">Avoir un écosystème digital fluide qui tourne seul</div><span class="opt-tag tag-o">Organisation</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,10,'b')"><span class="opt-emoji">&#128640;</span><div class="opt-content"><div class="opt-label">Les deux — déléguer ET avoir des systèmes solides</div><span class="opt-tag tag-b">Les deux</span></div><div class="opt-check"></div></div>
+      <div class="opt" onclick="pick(this,10,'a')"><span class="opt-emoji">&#127807;</span><div class="opt-content"><div class="opt-label">Juste avoir la tête libre et retrouver de l'énergie</div><span class="opt-tag tag-a">Assistance</span></div><div class="opt-check"></div></div>
+    </div>
+    <div class="q-nav"><button class="btn-prev" onclick="prev()">&#8592; Précédent</button><button class="btn-next on" id="n10" onclick="showResult()">Voir mon profil &#8594;</button></div>
+  </div>
+
+</div>
+
+<!-- RÉSULTAT -->
+<div class="result-wrap" id="result-wrap">
+  <div id="result-content"></div>
+</div>
+
+<script>
+var state={current:1,total:10,answers:{},scores:{a:0,o:0,b:0}};
+
+var profiles={
+  "pure-a":{
+    badge:"badge-a",badgeText:"Pure Assistance",
+    cardClass:"profile-pure-a",
+    name:"Vous avez besoin d'un bras droit.",
+    tagline:"Vos systèmes existent — il vous faut quelqu'un pour les faire tourner.",
+    desc:"Votre organisation est en place ou suffisante pour le moment. Ce qui vous manque, c'est une personne de confiance qui prend en charge l'exécution au quotidien — emails, suivi clients, agenda, tâches administratives. Vous avez besoin de déléguer l'humain, pas de tout reconstruire.",
+    cta:"Découvrir les modules AV",
+    ctaUrl:"https://nendyservices.com#services",
+    ctaSub:"Flow, Structure ou Expansion — selon votre niveau de besoin"
+  },
+  "pure-o":{
+    badge:"badge-o",badgeText:"Pure Organisation",
+    cardClass:"profile-pure-o",
+    name:"Vous avez besoin de systèmes.",
+    tagline:"Avant de déléguer, il faut poser les fondations digitales.",
+    desc:"Ce qui vous manque en priorité, ce ne sont pas des bras supplémentaires — c'est une architecture. Des outils qui se parlent, des process clairs, des automatisations qui font le travail à votre place. Une fois les systèmes en place, la délégation deviendra naturelle et efficace.",
+    cta:"Réserver un audit écosystème",
+    ctaUrl:"https://calendar.notion.so/meet/nendyservices/audit-ecosysteme",
+    ctaSub:"30 min pour cartographier votre situation digitale"
+  },
+  "orga-first":{
+    badge:"badge-b",badgeText:"Organisation d'abord",
+    cardClass:"profile-orga-first",
+    name:"Structurer, puis déléguer.",
+    tagline:"Poser les bases maintenant pour déléguer efficacement ensuite.",
+    desc:"Vous avez besoin des deux — mais dans le bon ordre. Construire les systèmes en premier vous permettra de déléguer de façon beaucoup plus fluide et efficace. Déléguer sans structure revient à confier le chaos à quelqu'un d'autre. On commence par le fond, ensuite on passe à l'exécution.",
+    cta:"Réserver un appel découverte",
+    ctaUrl:"https://calendar.notion.so/meet/nendyservices/appeldecouverte",
+    ctaSub:"On définit ensemble la bonne séquence pour vous"
+  },
+  "assist-first":{
+    badge:"badge-a",badgeText:"Assistance d'abord",
+    cardClass:"profile-assist-first",
+    name:"Souffler maintenant, structurer après.",
+    tagline:"L'urgence c'est de décompresser — les systèmes peuvent attendre un peu.",
+    desc:"Vous êtes débordée et vous avez besoin de souffler maintenant. Le mieux dans votre situation, c'est de commencer par déléguer ce qui vous prend le plus d'énergie au quotidien. Une fois la tête libre, on pourra poser les bons systèmes en place progressivement.",
+    cta:"Réserver un appel découverte",
+    ctaUrl:"https://calendar.notion.so/meet/nendyservices/appeldecouverte",
+    ctaSub:"30 min pour identifier ce qu'on délègue en premier"
+  },
+  "both":{
+    badge:"badge-b",badgeText:"Les deux ensemble",
+    cardClass:"profile-both",
+    name:"Vous avez besoin des deux en simultané.",
+    tagline:"Structure + exécution — l'un sans l'autre ne suffira pas.",
+    desc:"Votre situation demande une approche globale. Vous avez besoin de systèmes ET de quelqu'un pour les faire tourner, en parallèle. C'est exactement ce que propose Nendy Services — concevoir l'architecture de vos opérations et piloter vos flux pour que tout tourne sans vous.",
+    cta:"Réserver un appel découverte",
+    ctaUrl:"https://calendar.notion.so/meet/nendyservices/appeldecouverte",
+    ctaSub:"On construit ensemble votre plan d'action complet"
+  }
+};
+
+function startQuiz(){
+  document.getElementById("intro-screen").style.display="none";
+  document.getElementById("quiz-wrap").style.display="block";
+  document.getElementById("progress-wrap").style.display="block";
+}
+
+function pick(el,q,type){
+  document.querySelectorAll("#q"+q+" .opt").forEach(function(o){
+    o.classList.remove("selected-a","selected-o","selected-b");
+  });
+  el.classList.add("selected-"+type);
+  state.answers[q]=type;
+  var btn=document.getElementById("n"+q);
+  if(btn)btn.classList.add("on");
+}
+
+function next(){
+  if(!state.answers[state.current])return;
+  document.getElementById("q"+state.current).classList.remove("active");
+  state.current++;
+  document.getElementById("q"+state.current).classList.add("active");
+  updateProg();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function prev(){
+  document.getElementById("q"+state.current).classList.remove("active");
+  state.current--;
+  document.getElementById("q"+state.current).classList.add("active");
+  updateProg();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function updateProg(){
+  var pct=(state.current/state.total)*100;
+  document.getElementById("prog-fill").style.width=pct+"%";
+  document.getElementById("prog-count").textContent=state.current+" / "+state.total;
+}
+
+function calcProfile(){
+  var a=0,o=0,b=0;
+  Object.values(state.answers).forEach(function(v){
+    if(v==="a")a++;
+    else if(v==="o")o++;
+    else b++;
+  });
+  state.scores={a:a,o:o,b:b};
+  var total=a+o+b;
+  var pctA=Math.round((a/total)*100);
+  var pctO=Math.round((o/total)*100);
+
+  if(b>=4)return"both";
+  if(pctA>=70)return"pure-a";
+  if(pctO>=70)return"pure-o";
+  if(pctO>pctA&&b>=2)return"orga-first";
+  if(pctA>pctO&&b>=2)return"assist-first";
+  if(pctA>pctO)return"pure-a";
+  return"pure-o";
+}
+
+function showResult(){
+  if(!state.answers[10])return;
+  document.getElementById("quiz-wrap").style.display="none";
+  document.getElementById("progress-wrap").style.display="none";
+
+  var key=calcProfile();
+  var p=profiles[key];
+  var total=state.scores.a+state.scores.o+state.scores.b;
+  var pctA=Math.round(((state.scores.a+(state.scores.b*0.5))/total)*100);
+  var pctO=100-pctA;
+
+  document.getElementById("result-content").innerHTML=
+    "<div class=\"result-eyebrow\">Votre profil</div>"+
+    "<h2 class=\"result-title\">"+p.name+"</h2>"+
+    "<p class=\"result-sub\">"+p.tagline+"</p>"+
+
+    "<div class=\"score-display\">"+
+      "<div class=\"score-item\"><div class=\"score-pct score-pct-a\">"+pctA+"%</div><div class=\"score-name\">Assistance</div></div>"+
+      "<div class=\"score-item\"><div class=\"score-pct score-pct-o\">"+pctO+"%</div><div class=\"score-name\">Organisation</div></div>"+
+    "</div>"+
+
+    "<div class=\"result-profile "+p.cardClass+"\">"+
+      "<div class=\"profile-badge "+p.badge+"\">"+p.badgeText+"</div>"+
+      "<div class=\"profile-name\">"+p.name+"</div>"+
+      "<div class=\"profile-tagline\">"+p.tagline+"</div>"+
+      "<div class=\"profile-desc\">"+p.desc+"</div>"+
+    "</div>"+
+
+    "<div class=\"result-cta\">"+
+      "<div class=\"result-cta-title\">Et maintenant ? &#127807;</div>"+
+      "<div class=\"result-cta-sub\">Un appel de 30 min pour affiner votre profil et trouver le bon point de d\u00e9part.</div>"+
+      "<a href=\""+p.ctaUrl+"\" target=\"_blank\" class=\"btn-cta\">"+
+        "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" width=\"16\" height=\"16\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M16 2v4M8 2v4M3 10h18\"/></svg>"+
+        "<div><div>"+p.cta+"</div><div class=\"btn-cta-sub\">"+p.ctaSub+"</div></div>"+
+      "</a>"+
+    "</div>"+
+
+    "<div class=\"share-strip\">"+
+      "<span class=\"share-btn\" onclick=\"copyResult()\">&#128203; Copier mon profil</span>"+
+      "<a class=\"share-btn\" href=\"https://nendyservices.com/quiz/\" target=\"_blank\">&#127801; Partager le quiz</a>"+
+    "</div>"+
+
+    "<button class=\"btn-restart\" onclick=\"restart()\">&#8617; Recommencer le quiz</button>";
+
+  document.getElementById("result-wrap").classList.add("show");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function copyResult(){
+  var key=calcProfile();
+  var p=profiles[key];
+  var text="Mon profil Nendy Services : "+p.badgeText+"\n"+p.tagline+"\n\nFais le quiz : https://nendyservices.com/quiz/";
+  navigator.clipboard.writeText(text).then(function(){
+    alert("Profil copié ! Vous pouvez le partager.");
+  });
+}
+
+function restart(){
+  state={current:1,total:10,answers:{},scores:{a:0,o:0,b:0}};
+  document.querySelectorAll(".opt").forEach(function(o){o.classList.remove("selected-a","selected-o","selected-b");});
+  document.querySelectorAll(".btn-next").forEach(function(b){b.classList.remove("on");});
+  document.getElementById("result-wrap").classList.remove("show");
+  document.getElementById("result-content").innerHTML="";
+  document.getElementById("q1").classList.add("active");
+  document.querySelectorAll(".question-block").forEach(function(q,i){if(i>0)q.classList.remove("active");});
+  document.getElementById("quiz-wrap").style.display="block";
+  document.getElementById("progress-wrap").style.display="block";
+  updateProg();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+</script>
+</body>
+</html>
