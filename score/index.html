@@ -6,448 +6,223 @@
 <link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96.png">
 <link rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Score — À quel point ton business est organisé ? · Nendy Services</title>
-<meta property="og:title" content="À quel point ton business est organisé ? 🌿">
-<meta property="og:description" content="Réponds à 10 questions et obtiens ton score sur 100 — avec un plan d'action personnalisé.">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="description" content="Score gratuit Nendy Services : 10 questions, une note sur 100 et un plan d'action pour organiser ton business.">
+<meta property="og:title" content="À quel point ton business est organisé ?">
+<meta property="og:description" content="Réponds à 10 questions et obtiens ton score sur 100, avec un plan d'action personnalisé.">
+<meta property="og:image" content="https://nendyservices.com/img/nendy-spirale-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Jost:wght@300;400;500&family=DM+Mono:wght@400;500&family=Montserrat:ital,wght@1,700&family=Playfair+Display+SC&display=swap">
+<link rel="stylesheet" href="/assets/da2026-outils.css">
 <style>
-:root{--v:#7b9a80;--vc:#b5c1a6;--b:#d8c79e;--cr:#f5f1e6;--f:#ee07a5;--txt:#1a1714;--txt2:#5c5248;--bg:#1a1714;--card:#221f1c;}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Jost',sans-serif;background:var(--cr);color:var(--txt);min-height:100vh;}
-.pbar{position:fixed;top:0;left:0;right:0;height:3px;background:rgba(123,154,128,.15);z-index:100;}
-.pfill{height:3px;background:var(--f);transition:width .5s ease;width:0%;}
-header{padding:22px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(123,154,128,.15);}
-.logo{font-family:'Playfair Display',serif;font-size:16px;color:var(--v);}
-.logo small{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--b);display:block;}
-.qc{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--txt2);}
-main{max-width:640px;margin:0 auto;padding:52px 28px 80px;}
-.step{display:none;animation:up .35s ease;}
-.step.active{display:block;}
-@keyframes up{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
-.tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--f);text-transform:uppercase;margin-bottom:12px;}
-h1{font-family:'Playfair Display',serif;font-size:clamp(30px,6vw,50px);font-weight:700;line-height:1.1;margin-bottom:14px;}
-h1 em{color:var(--v);font-style:italic;}
-h2{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,32px);font-weight:700;line-height:1.2;margin-bottom:8px;}
-.sub{font-size:14px;color:var(--txt2);line-height:1.75;margin-bottom:32px;}
-.intro-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:40px;}
-.stat{background:white;border-radius:12px;padding:16px;text-align:center;border:1px solid rgba(123,154,128,.12);}
-.stat-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--f);}
-.stat-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--txt2);margin-top:4px;text-transform:uppercase;}
-.btn-start{display:inline-flex;align-items:center;gap:10px;background:var(--f);color:white;border:none;border-radius:12px;padding:16px 32px;font-family:'Jost',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:transform .2s;}
-.btn-start:hover{transform:translateY(-2px);}
-
-/* QUESTIONS */
-.q-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--vc);text-transform:uppercase;margin-bottom:10px;}
-.q-category{display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:4px 12px;border-radius:10px;background:rgba(123,154,128,.1);color:var(--v);margin-bottom:14px;text-transform:uppercase;}
-.options{display:flex;flex-direction:column;gap:9px;}
-.opt{padding:14px 18px;border:1.5px solid rgba(123,154,128,.18);border-radius:12px;background:white;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px;user-select:none;}
-.opt:hover{border-color:var(--v);transform:translateX(3px);}
-.opt.sel{border-color:var(--f);background:rgba(238,7,165,.04);transform:translateX(3px);}
-.opt-score{font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);width:28px;flex-shrink:0;text-align:center;}
-.opt.sel .opt-score{color:var(--f);}
-.opt-txt{font-size:13px;color:var(--txt);line-height:1.5;}
-.nav{display:flex;justify-content:space-between;align-items:center;margin-top:32px;padding-top:20px;border-top:1px solid rgba(123,154,128,.1);}
-.bbk{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--txt2);background:none;border:none;cursor:pointer;}
-.bnx{display:inline-flex;align-items:center;gap:8px;background:var(--txt);color:white;border:none;border-radius:10px;padding:12px 24px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:transform .15s;opacity:.35;pointer-events:none;}
-.bnx.on{opacity:1;pointer-events:all;}
-.bnx.on:hover{transform:translateY(-2px);}
-.bnx.pk{background:var(--f);}
-
-/* EMAIL */
-.email-input{width:100%;padding:13px 15px;border:1.5px solid rgba(123,154,128,.2);border-radius:10px;font-family:'Jost',sans-serif;font-size:14px;background:white;color:var(--txt);outline:none;transition:border .2s;margin-bottom:8px;}
-.email-input:focus{border-color:var(--v);}
-.email-hint{font-size:11px;color:var(--txt2);}
-
-/* RÉSULTAT */
-#result{display:none;}
-.score-circle{width:180px;height:180px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 32px;position:relative;}
-.score-circle::before{content:'';position:absolute;inset:0;border-radius:50%;border:4px solid rgba(123,154,128,.1);}
-.score-num{font-family:'Playfair Display',serif;font-size:56px;font-weight:700;line-height:1;}
-.score-max{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--txt2);margin-top:4px;}
-.score-low .score-num{color:var(--f);}
-.score-mid .score-num{color:var(--b);}
-.score-high .score-num{color:var(--v);}
-.score-label{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;text-align:center;margin-bottom:6px;}
-.score-sub{font-size:14px;color:var(--txt2);text-align:center;margin-bottom:40px;font-style:italic;}
-
-/* AXES */
-.axes{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
-.axe{background:white;border-radius:12px;padding:16px 18px;border:1px solid rgba(123,154,128,.1);}
-.axe-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
-.axe-name{font-size:13px;font-weight:500;color:var(--txt);}
-.axe-score{font-family:'DM Mono',monospace;font-size:11px;color:var(--txt2);}
-.axe-bar{height:4px;background:rgba(123,154,128,.12);border-radius:2px;overflow:hidden;}
-.axe-fill{height:4px;border-radius:2px;transition:width 1s ease;}
-.axe-fill.low{background:var(--f);}
-.axe-fill.mid{background:var(--b);}
-.axe-fill.high{background:var(--v);}
-.axe-note{font-size:11px;color:var(--txt2);margin-top:6px;line-height:1.5;}
-
-/* PLAN */
-.plan-item{background:white;border-radius:12px;border:1px solid rgba(123,154,128,.1);padding:16px 18px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start;}
-.plan-item.urgent{border-color:var(--f);background:rgba(238,7,165,.03);}
-.plan-num{font-family:'Playfair Display',serif;font-size:22px;color:var(--f);min-width:22px;flex-shrink:0;}
-.plan-title{font-size:13px;font-weight:500;color:var(--txt);margin-bottom:3px;}
-.plan-desc{font-size:12px;color:var(--txt2);line-height:1.5;}
-.plan-badge{font-family:'DM Mono',monospace;font-size:8px;padding:2px 8px;border-radius:4px;margin-top:5px;display:inline-block;}
-.badge-urgent{background:rgba(238,7,165,.1);color:var(--f);}
-.badge-moyen{background:rgba(216,199,158,.2);color:#8a7040;}
-.badge-long{background:rgba(123,154,128,.1);color:var(--v);}
-
-.cta-box{background:var(--txt);border-radius:18px;padding:28px;text-align:center;margin-top:24px;}
-.cta-title{font-family:'Playfair Display',serif;font-size:22px;color:white;margin-bottom:8px;}
-.cta-sub{font-size:13px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:20px;}
-.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--f);color:white;border:none;border-radius:10px;padding:14px 28px;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:opacity .2s;}
-.cta-btn:hover{opacity:.85;}
-
-.share-row{display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap;}
-.share-btn{padding:7px 14px;border-radius:8px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;border:1.5px solid rgba(255,255,255,.15);color:rgba(255,255,255,.5);background:transparent;cursor:pointer;transition:all .15s;text-decoration:none;display:inline-flex;align-items:center;gap:5px;}
-.share-btn:hover{border-color:white;color:white;}
-
-.loading{text-align:center;padding:60px 0;}
-.ldot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--f);animation:pulse 1.4s ease-in-out infinite;margin:0 3px;}
-.ldot:nth-child(2){animation-delay:.2s;background:var(--v);}
-.ldot:nth-child(3){animation-delay:.4s;background:var(--b);}
-@keyframes pulse{0%,80%,100%{transform:scale(.6);opacity:.4;}40%{transform:scale(1);opacity:1;}}
-
-@media(max-width:540px){header{padding:14px 18px;flex-wrap:wrap;gap:10px;}.intro-stats{grid-template-columns:1fr;}.main{padding:36px 18px 60px;}}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:26px 0 28px}
+.stat{padding:14px 10px;border-radius:14px;border:1px solid rgba(26,23,20,.18);background:rgba(255,255,255,.35)}
+.stat b{display:block;font-family:var(--serif);font-weight:400;font-size:40px;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;white-space:nowrap;text-transform:uppercase;color:rgba(26,23,20,.7)}
+.qwrap{position:relative}
+.qwrap .big{position:absolute;right:0;top:-34px;font-family:var(--serif);font-style:italic;font-size:150px;line-height:1;color:var(--sable);opacity:.32;pointer-events:none}
+.cat{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid var(--sable);font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sauge-f);margin:0 0 14px;background:var(--carte)}
+.cat::before{content:"";width:6px;height:6px;background:var(--sauge);transform:rotate(45deg)}
+h2.q{position:relative;margin-bottom:22px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;padding:16px;cursor:pointer;color:var(--encre);font:inherit;font-weight:400;transition:border-color .15s,transform .15s}
+.opt:hover{border-color:var(--or);transform:translateY(-1px)}
+.opt .k{flex:0 0 auto;width:26px;height:26px;border-radius:50%;border:1px solid var(--or);display:grid;place-items:center;font-family:var(--mono);font-size:11px;color:var(--or);margin-top:1px}
+.opt .t{font-size:16px;line-height:1.45;min-width:0}
+.opt[aria-pressed="true"]{border-color:var(--rose)}
+.opt[aria-pressed="true"] .k{background:linear-gradient(180deg,#ff3cc0,var(--rose));border-color:var(--rose);color:#fff}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:26px;flex-wrap:wrap}
+.form{display:grid;gap:10px;margin-top:22px;max-width:440px}
+.hint{font-size:14px;color:var(--doux);margin:4px 0 0}
+.load{padding:60px 0;text-align:left}
+.load .d{display:inline-block;width:10px;height:10px;margin-right:6px;transform:rotate(45deg);background:var(--rose);animation:p 1.2s ease-in-out infinite}
+.load .d:nth-child(2){background:var(--sauge);animation-delay:.2s}.load .d:nth-child(3){background:var(--sable);animation-delay:.4s}
+.load p{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--doux);margin-top:18px}
+@keyframes p{0%,80%,100%{opacity:.3}40%{opacity:1}}
+.ring{position:relative;width:190px;height:190px;margin:18px 0 22px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .v{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .v b{font-family:var(--serif);font-weight:400;font-size:68px;line-height:1;font-variant-numeric:tabular-nums}
+.ring .v span{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--doux)}
+.tagl{font-family:var(--serif);font-style:italic;font-size:23px;line-height:1.3;color:var(--sauge-f);margin:12px 0 0}
+.sec{margin-top:34px}
+.axes{display:grid;gap:10px}
+.axe{padding:14px 16px}
+.axe .top2{display:flex;justify-content:space-between;gap:10px;font-size:15.5px;font-weight:400}
+.axe .top2 span:last-child{font-family:var(--mono);font-size:12px;color:var(--doux);font-variant-numeric:tabular-nums;white-space:nowrap}
+.axe .bar{height:5px;border-radius:99px;background:rgba(216,199,158,.4);overflow:hidden;margin-top:8px}
+.axe .bar i{display:block;height:100%;transition:width 1s ease}
+.low{background:linear-gradient(90deg,#ff3cc0,var(--rose))}.mid{background:var(--or)}.high{background:var(--sauge)}
+.axe small{display:block;margin-top:6px;font-size:13.5px;color:var(--doux)}
+.plan{display:grid;gap:10px}
+.pi{display:flex;gap:14px;padding:16px}
+.pi.urg{border-color:var(--rose)}
+.pi .num{font-family:var(--serif);font-style:italic;font-size:30px;line-height:1;color:var(--rose);min-width:26px}
+.pi b{display:block;font-weight:500;font-size:16px}
+.pi p{margin:4px 0 0;font-size:14.5px;color:var(--doux)}
+.pill{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid currentColor}
+.pill.u{color:var(--rose)}.pill.m{color:var(--or)}.pill.l{color:var(--sauge-f)}
+.share{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.share button,.share a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:999px;border:1px solid rgba(216,199,158,.6);background:transparent;color:var(--creme);cursor:pointer;text-decoration:none}
+.share button:hover,.share a:hover{border-color:var(--creme)}
 </style>
 </head>
 <body>
-
-<div class="pbar"><div class="pfill" id="pbar"></div></div>
-
-<header>
-  <div class="logo">NENDY Services<small>Score Organisation</small></div>
-  <div class="qc" id="qc">10 questions · 3 min</div>
-</header>
-
-<main>
-
-<!-- INTRO -->
-<div class="step active" id="s0">
-  <div class="tag">Score · Gratuit · 3 minutes</div>
-  <h1>À quel point<br>ton business<br><em>est organisé ?</em></h1>
-  <p class="sub">10 questions. Un score sur 100. Un plan d'action concret pour passer au niveau suivant.</p>
-  <div class="intro-stats">
-    <div class="stat"><div class="stat-num">10</div><div class="stat-lbl">Questions</div></div>
-    <div class="stat"><div class="stat-num">100</div><div class="stat-lbl">Points max</div></div>
-    <div class="stat"><div class="stat-num">3<span style="font-size:16px">min</span></div><div class="stat-lbl">Durée</div></div>
+<div class="wrap">
+  <div class="top">
+    <a class="logo" href="https://nendyservices.com" aria-label="Nendy Services, retour au site">
+      <img src="/img/nendy-spirale.svg" alt="" width="30" height="30">
+      <span class="lt"><span class="n">Nendy</span><span class="r"></span><span class="s">Services</span></span>
+    </a>
+    <a class="back" href="https://nendyservices.com">Le site →</a>
   </div>
-  <button class="btn-start" onclick="start()">Calculer mon score →</button>
-</div>
 
-<!-- Q1 — COMMUNICATION -->
-<div class="step" id="s1">
-  <div class="q-tag">Question 01 / 10</div>
-  <div class="q-category">📱 Communication client</div>
-  <h2>Comment tes clients te contactent-ils ?</h2>
-  <div class="options" id="o1">
-    <div class="opt" onclick="pick(this,1,0)"><div class="opt-score">0 pt</div><div class="opt-txt">Partout — WhatsApp perso, Instagram, SMS, email... tout en même temps.</div></div>
-    <div class="opt" onclick="pick(this,1,5)"><div class="opt-score">5 pt</div><div class="opt-txt">Un ou deux canaux mais pas vraiment structurés.</div></div>
-    <div class="opt" onclick="pick(this,1,8)"><div class="opt-score">8 pt</div><div class="opt-txt">WhatsApp Business configuré + email professionnel.</div></div>
-    <div class="opt" onclick="pick(this,1,10)"><div class="opt-score">10 pt</div><div class="opt-txt">Un canal principal avec messages automatiques, catalogue et étiquettes.</div></div>
-  </div>
-  <div class="nav"><button class="bbk" onclick="back(0)">← Retour</button><button class="bnx" id="n1" onclick="next(2)">Continuer →</button></div>
-</div>
+  <div class="frame">
+    <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+    <div class="cadre"><span class="lab" id="lab">Nendy Services · Score</span><span class="cnt" id="count"><b>00</b> / 10</span></div>
+    <div class="prog" aria-hidden="true"><span id="fill"></span></div>
 
-<!-- Q2 — RDV -->
-<div class="step" id="s2">
-  <div class="q-tag">Question 02 / 10</div>
-  <div class="q-category">📅 Prise de rendez-vous</div>
-  <h2>Comment se gèrent tes rendez-vous ?</h2>
-  <div class="options" id="o2">
-    <div class="opt" onclick="pick(this,2,0)"><div class="opt-score">0 pt</div><div class="opt-txt">Par message, je propose des créneaux, on négocie. C'est long.</div></div>
-    <div class="opt" onclick="pick(this,2,4)"><div class="opt-score">4 pt</div><div class="opt-txt">Google Calendar partagé mais sans automatisation.</div></div>
-    <div class="opt" onclick="pick(this,2,7)"><div class="opt-score">7 pt</div><div class="opt-txt">Un outil de réservation mais sans rappels automatiques.</div></div>
-    <div class="opt" onclick="pick(this,2,10)"><div class="opt-score">10 pt</div><div class="opt-txt">Calendly ou équivalent — réservation, confirmation et rappels automatiques.</div></div>
-  </div>
-  <div class="nav"><button class="bbk" onclick="back(1)">← Retour</button><button class="bnx" id="n2" onclick="next(3)">Continuer →</button></div>
-</div>
+    <main>
+      <section class="screen fade" id="intro">
+        <div class="panel sable">
+          <img class="spi" src="/img/nendy-spirale.svg" alt="" style="opacity:.28">
+          <p class="kicker">Score · Gratuit · 3 minutes</p>
+          <h1>À quel point<br>ton business<br>est <em class="f">organisé&nbsp;?</em></h1>
+          <p class="lead">10 questions. Un score sur 100. Un plan d'action concret pour passer au niveau suivant.</p>
+          <div class="stats"><div class="stat"><b>10</b><span>Questions</span></div><div class="stat"><b>100</b><span>Points max</span></div><div class="stat"><b>3</b><span>Minutes</span></div></div>
+          <button class="btn" id="start" type="button">Calculer mon score →</button>
+        </div>
+      </section>
 
-<!-- Q3 — FACTURATION -->
-<div class="step" id="s3">
-  <div class="q-tag">Question 03 / 10</div>
-  <div class="q-category">💰 Facturation</div>
-  <h2>Comment tu gères tes devis et factures ?</h2>
-  <div class="options" id="o3">
-    <div class="opt" onclick="pick(this,3,0)"><div class="opt-score">0 pt</div><div class="opt-txt">Je les fais quand j'y pense. Souvent en retard.</div></div>
-    <div class="opt" onclick="pick(this,3,4)"><div class="opt-score">4 pt</div><div class="opt-txt">Word ou Excel — je recrée à chaque fois.</div></div>
-    <div class="opt" onclick="pick(this,3,7)"><div class="opt-score">7 pt</div><div class="opt-txt">J'ai un template mais le suivi des paiements est manuel.</div></div>
-    <div class="opt" onclick="pick(this,3,10)"><div class="opt-score">10 pt</div><div class="opt-txt">Logiciel dédié — devis, factures, relances de paiement automatiques.</div></div>
-  </div>
-  <div class="nav"><button class="bbk" onclick="back(2)">← Retour</button><button class="bnx" id="n3" onclick="next(4)">Continuer →</button></div>
-</div>
+      <section class="screen" id="quiz" hidden>
+        <div id="qbox" aria-live="polite"></div>
+        <div class="nav">
+          <button class="btn ghost" id="prev" type="button">← Retour</button>
+          <button class="btn" id="next" type="button" disabled>Continuer →</button>
+        </div>
+      </section>
 
-<!-- Q4 — SUIVI CLIENTS -->
-<div class="step" id="s4">
-  <div class="q-tag">Question 04 / 10</div>
-  <div class="q-category">👥 Suivi clients</div>
-  <h2>Comment tu suis tes clients et prospects ?</h2>
-  <div class="options" id="o4">
-    <div class="opt" onclick="pick(this,4,0)"><div class="opt-score">0 pt</div><div class="opt-txt">Dans ma tête et dans mes messages WhatsApp.</div></div>
-    <div class="opt" onclick="pick(this,4,4)"><div class="opt-score">4 pt</div><div class="opt-txt">Un tableau Excel basique.</div></div>
-    <div class="opt" onclick="pick(this,4,7)"><div class="opt-score">7 pt</div><div class="opt-txt">Notion ou CRM simple — mais pas toujours à jour.</div></div>
-    <div class="opt" onclick="pick(this,4,10)"><div class="opt-score">10 pt</div><div class="opt-txt">CRM complet avec historique, relances et statuts à jour.</div></div>
-  </div>
-  <div class="nav"><button class="bbk" onclick="back(3)">← Retour</button><button class="bnx" id="n4" onclick="next(5)">Continuer →</button></div>
-</div>
+      <section class="screen fade" id="mail" hidden>
+        <p class="kicker">Dernière étape</p>
+        <h2>Où on envoie<br>ton <em class="f">score&nbsp;?</em></h2>
+        <p class="lead">Tu recevras ton score détaillé et ton plan d'action personnalisé.</p>
+        <form class="form" id="form" novalidate>
+          <input type="email" class="input" id="emailInput" placeholder="ton@email.com" autocomplete="email">
+          <button class="btn" type="submit">Révéler mon score →</button>
+          <p class="hint">Aucun spam. Juste ce qui est utile.</p>
+        </form>
+      </section>
 
-<!-- Q5 — ORGANISATION -->
-<div class="step" id="s5">
-  <div class="q-tag">Question 05 / 10</div>
-  <div class="q-category">🗂️ Organisation interne</div>
-  <h2>Ton outil central de travail, c'est quoi ?</h2>
-  <div class="options" id="o5">
-    <div class="opt" onclick="pick(this,5,0)"><div class="opt-score">0 pt</div><div class="opt-txt">Ma tête et des notes éparpillées partout.</div></div>
-    <div class="opt" onclick="pick(this,5,4)"><div class="opt-score">4 pt</div><div class="opt-txt">Google Drive ou email — pas vraiment centralisé.</div></div>
-    <div class="opt" onclick="pick(this,5,7)"><div class="opt-score">7 pt</div><div class="opt-txt">Notion ou Trello — mais pas tout dedans.</div></div>
-    <div class="opt" onclick="pick(this,5,10)"><div class="opt-score">10 pt</div><div class="opt-txt">Un espace central structuré avec clients, projets, finances et contenu.</div></div>
-  </div>
-  <div class="nav"><button class="bbk" onclick="back(4)">← Retour</button><button class="bnx" id="n5" onclick="next(6)">Continuer →</button></div>
-</div>
+      <section class="screen" id="result" hidden>
+        <div class="load" id="loading"><span class="d"></span><span class="d"></span><span class="d"></span><p>Calcul de ton score…</p></div>
+        <div id="rc" hidden class="fade">
+          <p class="kicker">Ton score organisation</p>
+          <div class="ring" id="ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" fill="none" stroke="rgba(216,199,158,.45)" stroke-width="6"/><circle id="arc" cx="60" cy="60" r="52" fill="none" stroke="#ee07a5" stroke-width="6" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition:stroke-dashoffset 1.2s ease"/></svg><div class="v"><b id="sn">0</b><span>/ 100</span></div></div>
+          <h2 id="sl"></h2>
+          <p class="tagl" id="ss"></p>
 
-<!-- Q6 — PROCESS -->
-<div class="step" id="s6">
-  <div class="q-tag">Question 06 / 10</div>
-  <div class="q-category">⚙️ Process & Templates</div>
-  <h2>As-tu des process documentés pour ton activité ?</h2>
-  <div class="options" id="o6">
-    <div class="opt" onclick="pick(this,6,0)"><div class="opt-score">0 pt</div><div class="opt-txt">Rien — je recrée tout à chaque fois.</div></div>
-    <div class="opt" onclick="pick(this,6,4)"><div class="opt-score">4 pt</div><div class="opt-txt">Quelques templates éparpillés dans mes fichiers.</div></div>
-    <div class="opt" onclick="pick(this,6,7)"><div class="opt-score">7 pt</div><div class="opt-txt">Des templates pour les tâches récurrentes mais pas de process global.</div></div>
-    <div class="opt" onclick="pick(this,6,10)"><div class="opt-score">10 pt</div><div class="opt-txt">Process documentés, checklists et templates prêts pour tout.</div></div>
-  </div>
-  <div class="nav"><button class="bbk" onclick="back(5)">← Retour</button><button class="bnx" id="n6" onclick="next(7)">Continuer →</button></div>
-</div>
+          <div class="sec"><p class="kicker">Détail par axe</p><div class="axes" id="axes"></div></div>
+          <div class="sec"><p class="kicker">Ton plan d'action</p><div class="plan" id="plan"></div></div>
 
-<!-- Q7 — ONBOARDING -->
-<div class="step" id="s7">
-  <div class="q-tag">Question 07 / 10</div>
-  <div class="q-category">🤝 Accueil client</div>
-  <h2>Comment tu accueilles un nouveau client ?</h2>
-  <div class="options" id="o7">
-    <div class="opt" onclick="pick(this,7,0)"><div class="opt-score">0 pt</div><div class="opt-txt">Au cas par cas — chaque fois différemment.</div></div>
-    <div class="opt" onclick="pick(this,7,4)"><div class="opt-score">4 pt</div><div class="opt-txt">Quelques messages d'accueil mais pas de process structuré.</div></div>
-    <div class="opt" onclick="pick(this,7,7)"><div class="opt-score">7 pt</div><div class="opt-txt">Un email de bienvenue et un questionnaire mais c'est manuel.</div></div>
-    <div class="opt" onclick="pick(this,7,10)"><div class="opt-score">10 pt</div><div class="opt-txt">Process automatisé — email, questionnaire, accès partagés, contrat en moins de 10 min.</div></div>
-  </div>
-  <div class="nav"><button class="bbk" onclick="back(6)">← Retour</button><button class="bnx" id="n7" onclick="next(8)">Continuer →</button></div>
-</div>
+          <div class="sec panel noir">
+            <img class="spi" src="/img/nendy-spirale.svg" alt="">
+            <p class="kicker">Prochaine étape</p>
+            <h2>On améliore ce score <em class="f">ensemble&nbsp;?</em></h2>
+            <p class="lead">Un appel découverte de 30 minutes : on repère les gains rapides et ce qui aura le plus d'impact sur ton organisation.</p>
+            <p style="margin:22px 0 0"><a class="btn" href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" target="_blank" rel="noopener">Réserver mon appel offert →</a></p>
+            <div class="share"><button type="button" id="copy">Copier mon score</button><a id="li" target="_blank" rel="noopener">LinkedIn</a><a id="wa" target="_blank" rel="noopener">WhatsApp</a></div>
+          </div>
 
-<!-- Q8 — AUTOMATISATION -->
-<div class="step" id="s8">
-  <div class="q-tag">Question 08 / 10</div>
-  <div class="q-category">🤖 Automatisation</div>
-  <h2>Qu'est-ce qui est automatisé dans ton business ?</h2>
-  <div class="options" id="o8">
-    <div class="opt" onclick="pick(this,8,0)"><div class="opt-score">0 pt</div><div class="opt-txt">Rien — tout est manuel.</div></div>
-    <div class="opt" onclick="pick(this,8,4)"><div class="opt-score">4 pt</div><div class="opt-txt">Quelques réponses automatiques sur WhatsApp ou email.</div></div>
-    <div class="opt" onclick="pick(this,8,7)"><div class="opt-score">7 pt</div><div class="opt-txt">RDV automatisés + quelques relances.</div></div>
-    <div class="opt" onclick="pick(this,8,10)"><div class="opt-score">10 pt</div><div class="opt-txt">Flux automatisés entre mes outils — relances, reporting, onboarding.</div></div>
-  </div>
-  <div class="nav"><button class="bbk" onclick="back(7)">← Retour</button><button class="bnx" id="n8" onclick="next(9)">Continuer →</button></div>
-</div>
+          <div class="nav"><button class="btn ghost" type="button" id="again">Refaire le score</button></div>
+          <div class="fin"><img src="/img/nendy-logo-arche.svg" alt="Nendy Services"><p class="slogan">L'harmonie entre organisation et assistance.</p></div>
+        </div>
+      </section>
+    </main>
 
-<!-- Q9 — PRESENCE DIGITALE -->
-<div class="step" id="s9">
-  <div class="q-tag">Question 09 / 10</div>
-  <div class="q-category">🌐 Présence digitale</div>
-  <h2>Quelle est ta présence professionnelle en ligne ?</h2>
-  <div class="options" id="o9">
-    <div class="opt" onclick="pick(this,9,0)"><div class="opt-score">0 pt</div><div class="opt-txt">Mon profil perso sur les réseaux — rien de pro.</div></div>
-    <div class="opt" onclick="pick(this,9,4)"><div class="opt-score">4 pt</div><div class="opt-txt">Une page Facebook ou Instagram pro mais peu active.</div></div>
-    <div class="opt" onclick="pick(this,9,7)"><div class="opt-score">7 pt</div><div class="opt-txt">Présence active sur 1-2 réseaux + LinkedIn.</div></div>
-    <div class="opt" onclick="pick(this,9,10)"><div class="opt-score">10 pt</div><div class="opt-txt">Site web + réseaux pro + contenu régulier + lien de réservation visible.</div></div>
-  </div>
-  <div class="nav"><button class="bbk" onclick="back(8)">← Retour</button><button class="bnx" id="n9" onclick="next(10)">Continuer →</button></div>
-</div>
-
-<!-- Q10 — AUTONOMIE -->
-<div class="step" id="s10">
-  <div class="q-tag">Question 10 / 10</div>
-  <div class="q-category">🏖️ Autonomie du système</div>
-  <h2>Si tu pars 2 semaines, que se passe-t-il ?</h2>
-  <div class="options" id="o10">
-    <div class="opt" onclick="pick(this,10,0)"><div class="opt-score">0 pt</div><div class="opt-txt">Tout s'arrête. Je suis le système.</div></div>
-    <div class="opt" onclick="pick(this,10,4)"><div class="opt-score">4 pt</div><div class="opt-txt">Ça tourne mais avec beaucoup de stress et de ratés.</div></div>
-    <div class="opt" onclick="pick(this,10,7)"><div class="opt-score">7 pt</div><div class="opt-txt">Quelqu'un peut prendre le relais partiellement.</div></div>
-    <div class="opt" onclick="pick(this,10,10)"><div class="opt-score">10 pt</div><div class="opt-txt">Mon système tourne seul — je rentre avec des demandes dans ma boîte.</div></div>
-  </div>
-  <div class="nav"><button class="bbk" onclick="back(9)">← Retour</button><button class="bnx pk" id="n10" onclick="goEmail()">Voir mon score →</button></div>
-</div>
-
-<!-- EMAIL -->
-<div class="step" id="s-email">
-  <div class="tag">Presque là ✦</div>
-  <h2>Où on envoie<br>ton score ?</h2>
-  <p class="sub">Tu recevras ton score détaillé et ton plan d'action personnalisé.</p>
-  <input type="email" class="email-input" id="emailInput" placeholder="ton@email.com">
-  <div class="email-hint">🔒 Aucun spam. Juste ce qui est utile.</div>
-  <div class="nav" style="border:none;padding-top:20px;justify-content:flex-end;">
-    <button class="bnx pk on" onclick="showScore()">Révéler mon score →</button>
-  </div>
-</div>
-
-<!-- RÉSULTAT -->
-<div id="result">
-  <div class="loading" id="loading">
-    <div style="margin-bottom:20px;"><span class="ldot"></span><span class="ldot"></span><span class="ldot"></span></div>
-    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--txt2);">Calcul de ton score...</div>
-  </div>
-  <div id="rc" style="display:none;">
-    <div style="text-align:center;margin-bottom:40px;">
-      <div class="tag" style="justify-content:center;display:flex;">Ton score organisation</div>
-      <div class="score-circle" id="sc"><div class="score-num" id="sn">0</div><div class="score-max">/ 100</div></div>
-      <div class="score-label" id="sl"></div>
-      <div class="score-sub" id="ss"></div>
-    </div>
-
-    <div class="tag">Détail par axe</div>
-    <div class="axes" id="axes" style="margin-top:12px;"></div>
-
-    <div class="tag" style="margin-top:32px;">Ton plan d'action</div>
-    <div id="plan" style="margin-top:12px;"></div>
-
-    <div class="cta-box">
-      <div class="cta-title">On améliore ce score ensemble ? 🌿</div>
-      <div class="cta-sub">Un appel découverte de 30 min — on identifie les quick wins et ce qui aura le plus d'impact immédiat sur ton organisation.</div>
-      <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" target="_blank" class="cta-btn">Réserver mon appel gratuit →</a>
-      <div style="margin-top:12px;font-size:12px;color:rgba(255,255,255,.4);">Partage ton score 👇</div>
-      <div class="share-row">
-        <a href="#" onclick="shareScore()" class="share-btn">📋 Copier</a>
-        <a href="#" onclick="shareLinkedIn()" class="share-btn">💼 LinkedIn</a>
-        <a href="#" onclick="shareWA()" class="share-btn">💬 WhatsApp</a>
-      </div>
+    <div class="foot">
+      <div class="fil"></div>
+      <div class="row"><a href="https://www.instagram.com/nendy_services/">@nendy_services</a><a href="https://nendyservices.com">nendyservices.com</a></div>
     </div>
   </div>
 </div>
-
-</main>
 
 <script>
-var HOOK = 'https://hooks.zapier.com/hooks/catch/27297216/uv8zdhj/';
-var cur = 0;
-var scores = {};
-var axes = [
-  {id:1, name:'Communication client', max:10},
-  {id:2, name:'Prise de RDV', max:10},
-  {id:3, name:'Facturation', max:10},
-  {id:4, name:'Suivi clients', max:10},
-  {id:5, name:'Organisation interne', max:10},
-  {id:6, name:'Process & Templates', max:10},
-  {id:7, name:'Accueil client', max:10},
-  {id:8, name:'Automatisation', max:10},
-  {id:9, name:'Présence digitale', max:10},
-  {id:10, name:'Autonomie du système', max:10}
-];
-
-function start(){
-  document.getElementById('s0').classList.remove('active');
-  cur=1;
-  document.getElementById('s1').classList.add('active');
-  prog(1);
-  document.getElementById('qc').textContent='Question 1 / 10';
+(function(){
+var HOOK='https://hooks.zapier.com/hooks/catch/27297216/uv8zdhj/';
+var Q=[{"c": "Communication client", "t": "Comment tes clients te contactent-ils ?", "o": [["Partout, WhatsApp perso, Instagram, SMS, email... tout en même temps.", 0], ["Un ou deux canaux mais pas vraiment structurés.", 5], ["WhatsApp Business configuré + email professionnel.", 8], ["Un canal principal avec messages automatiques, catalogue et étiquettes.", 10]]}, {"c": "Prise de rendez-vous", "t": "Comment se gèrent tes rendez-vous ?", "o": [["Par message, je propose des créneaux, on négocie. C'est long.", 0], ["Google Calendar partagé mais sans automatisation.", 4], ["Un outil de réservation mais sans rappels automatiques.", 7], ["Calendly ou équivalent, réservation, confirmation et rappels automatiques.", 10]]}, {"c": "Facturation", "t": "Comment tu gères tes devis et factures ?", "o": [["Je les fais quand j'y pense. Souvent en retard.", 0], ["Word ou Excel, je recrée à chaque fois.", 4], ["J'ai un template mais le suivi des paiements est manuel.", 7], ["Logiciel dédié, devis, factures, relances de paiement automatiques.", 10]]}, {"c": "Suivi clients", "t": "Comment tu suis tes clients et prospects ?", "o": [["Dans ma tête et dans mes messages WhatsApp.", 0], ["Un tableau Excel basique.", 4], ["Notion ou CRM simple, mais pas toujours à jour.", 7], ["CRM complet avec historique, relances et statuts à jour.", 10]]}, {"c": "Organisation interne", "t": "Ton outil central de travail, c'est quoi ?", "o": [["Ma tête et des notes éparpillées partout.", 0], ["Google Drive ou email, pas vraiment centralisé.", 4], ["Notion ou Trello, mais pas tout dedans.", 7], ["Un espace central structuré avec clients, projets, finances et contenu.", 10]]}, {"c": "Process & Templates", "t": "As-tu des process documentés pour ton activité ?", "o": [["Rien, je recrée tout à chaque fois.", 0], ["Quelques templates éparpillés dans mes fichiers.", 4], ["Des templates pour les tâches récurrentes mais pas de process global.", 7], ["Process documentés, checklists et templates prêts pour tout.", 10]]}, {"c": "Accueil client", "t": "Comment tu accueilles un nouveau client ?", "o": [["Au cas par cas, chaque fois différemment.", 0], ["Quelques messages d'accueil mais pas de process structuré.", 4], ["Un email de bienvenue et un questionnaire mais c'est manuel.", 7], ["Process automatisé, email, questionnaire, accès partagés, contrat en moins de 10 min.", 10]]}, {"c": "Automatisation", "t": "Qu'est-ce qui est automatisé dans ton business ?", "o": [["Rien, tout est manuel.", 0], ["Quelques réponses automatiques sur WhatsApp ou email.", 4], ["RDV automatisés + quelques relances.", 7], ["Flux automatisés entre mes outils, relances, reporting, onboarding.", 10]]}, {"c": "Présence digitale", "t": "Quelle est ta présence professionnelle en ligne ?", "o": [["Mon profil perso sur les réseaux, rien de pro.", 0], ["Une page Facebook ou Instagram pro mais peu active.", 4], ["Présence active sur 1-2 réseaux + LinkedIn.", 7], ["Site web + réseaux pro + contenu régulier + lien de réservation visible.", 10]]}, {"c": "Autonomie du système", "t": "Si tu pars 2 semaines, que se passe-t-il ?", "o": [["Tout s'arrête. Je suis le système.", 0], ["Ça tourne mais avec beaucoup de stress et de ratés.", 4], ["Quelqu'un peut prendre le relais partiellement.", 7], ["Mon système tourne seul, je rentre avec des demandes dans ma boîte.", 10]]}];
+var cur=0, ans=new Array(Q.length).fill(null), L="ABCD";
+function $(id){return document.getElementById(id)}
+function pad(n){return (n<10?"0":"")+n}
+function frame(lab,n){$("lab").textContent="Nendy Services · "+lab;$("count").innerHTML="<b>"+pad(n)+"</b> / 10";$("fill").style.width=(n/10*100)+"%"}
+function show(id){["intro","quiz","mail","result"].forEach(function(s){$(s).hidden=(s!==id)});window.scrollTo({top:0,behavior:"smooth"})}
+function render(){
+  var q=Q[cur]; frame("Score",cur+1);
+  var h='<div class="qwrap fade"><span class="big" aria-hidden="true">'+pad(cur+1)+'</span><p class="cat">'+q.c+'</p><h2 class="q">'+q.t+'</h2><div class="opts" role="group" aria-label="Réponses">';
+  q.o.forEach(function(o,i){h+='<button type="button" class="opt carte" data-i="'+i+'" aria-pressed="'+(ans[cur]===i)+'"><span class="k">'+L[i]+'</span><span class="t">'+o[0]+'</span></button>'});
+  $("qbox").innerHTML=h+'</div></div>';
+  $("next").disabled=ans[cur]===null;
+  $("next").textContent=cur===Q.length-1?"Voir mon score →":"Continuer →";
 }
-
-function pick(el, q, s){
-  document.querySelectorAll('#o'+q+' .opt').forEach(function(o){o.classList.remove('sel');});
-  el.classList.add('sel');
-  scores[q]=s;
-  var btn=document.getElementById('n'+q);
-  if(btn)btn.classList.add('on');
+$("qbox").addEventListener("click",function(e){
+  var b=e.target.closest(".opt"); if(!b)return;
+  ans[cur]=+b.dataset.i;
+  $("qbox").querySelectorAll(".opt").forEach(function(x){x.setAttribute("aria-pressed",x===b)});
+  $("next").disabled=false;
+  setTimeout(function(){if(ans[cur]!==null)go(1)},320);
+});
+function go(d){
+  if(d>0&&ans[cur]===null)return;
+  if(d>0&&cur===Q.length-1){frame("Dernière étape",10);show("mail");return}
+  if(d<0&&cur===0){frame("Score",0);show("intro");return}
+  cur+=d; render();
 }
-
-function next(n){
-  document.getElementById('s'+(n-1)).classList.remove('active');
-  cur=n;
-  if(n<=10){document.getElementById('s'+n).classList.add('active');prog(n);document.getElementById('qc').textContent='Question '+n+' / 10';}
-  window.scrollTo(0,0);
+$("next").addEventListener("click",function(){go(1)});
+$("prev").addEventListener("click",function(){go(-1)});
+$("start").addEventListener("click",function(){cur=0;show("quiz");render()});
+function scores(){var s={};ans.forEach(function(v,i){s[i+1]=Q[i].o[v][1]});return s}
+function total(){return ans.reduce(function(a,v,i){return a+Q[i].o[v][1]},0)}
+$("form").addEventListener("submit",function(e){
+  e.preventDefault();
+  var t=total(), email=$("emailInput").value;
+  try{var x=new XMLHttpRequest();x.open('POST',HOOK,true);x.setRequestHeader('Content-Type','application/json');x.send(JSON.stringify({type:'Score Organisation',email:email,score:t,detail:scores()}))}catch(err){}
+  frame("Ton score",10); show("result"); $("loading").hidden=false; $("rc").hidden=true;
+  setTimeout(function(){reveal(t)},1800);
+});
+function reveal(t){
+  $("loading").hidden=true; $("rc").hidden=false;
+  $("sn").textContent=t;
+  var col=t<40?"#ee07a5":t<70?"#b08d57":"#7b9a80";
+  $("arc").setAttribute("stroke",col);
+  requestAnimationFrame(function(){$("arc").style.strokeDashoffset=326.7*(1-t/100)});
+  var lab,sub;
+  if(t<40){lab="Système à construire";sub="Tu as les fondations, il manque l'architecture qui tient tout ensemble."}
+  else if(t<70){lab="Système en construction";sub="Tu avances bien : quelques axes clés peuvent tout changer rapidement."}
+  else if(t<90){lab="Système solide";sub="Tu as un bon socle. Le prochain palier, c'est l'automatisation avancée."}
+  else{lab="Système exemplaire";sub="Tu es dans les meilleurs. Voyons comment aller encore plus loin."}
+  $("sl").textContent=lab; $("ss").textContent=sub;
+  var s=scores(), ax='';
+  Q.forEach(function(q,i){
+    var v=s[i+1], pct=v*10, cls=pct<50?'low':pct<80?'mid':'high';
+    var note=v===0?'À mettre en place en priorité':v<=4?'Partiel : des améliorations rapides possibles':v<=7?'Bon début : quelques optimisations':v===10?'Excellent ✓':'Très bon';
+    ax+='<div class="axe carte"><div class="top2"><span>'+q.c+'</span><span>'+v+' / 10</span></div><div class="bar"><i class="'+cls+'" style="width:'+pct+'%"></i></div><small>'+note+'</small></div>';
+  });
+  $("axes").innerHTML=ax;
+  var low=Q.map(function(q,i){return{c:q.c,v:s[i+1]}}).filter(function(a){return a.v<=4}).slice(0,3);
+  var mid=Q.map(function(q,i){return{c:q.c,v:s[i+1]}}).filter(function(a){return a.v>4&&a.v<=7}).slice(0,2);
+  var pl='';
+  low.forEach(function(a,i){pl+='<div class="pi carte urg"><span class="num">'+(i+1)+'</span><div><b>Améliorer : '+a.c+'</b><p>C\'est l\'un de tes axes les plus faibles : une intervention rapide ici aura un impact immédiat sur ton quotidien.</p><span class="pill u">Prioritaire</span></div></div>'});
+  mid.forEach(function(a,i){pl+='<div class="pi carte"><span class="num">'+(low.length+i+1)+'</span><div><b>Optimiser : '+a.c+'</b><p>Tu as des bases : on peut pousser cet axe au niveau supérieur avec quelques ajustements.</p><span class="pill m">Moyen terme</span></div></div>'});
+  if(!pl)pl='<div class="pi carte"><span class="num">✓</span><div><b>Excellent travail !</b><p>Ton système est déjà très structuré. L\'étape suivante : automatisation avancée et IA.</p><span class="pill l">Optimisation</span></div></div>';
+  $("plan").innerHTML=pl;
+  var url=location.href.split('#')[0], txt='J\'ai obtenu '+t+'/100 au score organisation Nendy Services ! Teste le tien → '+url;
+  $("li").href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  $("wa").href='https://wa.me/?text='+encodeURIComponent(txt);
+  $("copy").onclick=function(){var b=this;if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){b.textContent='Copié ✓'},function(){})}};
 }
-
-function back(n){
-  document.getElementById('s'+(n+1)).classList.remove('active');
-  cur=n;
-  if(n===0){document.getElementById('s0').classList.add('active');document.getElementById('qc').textContent='10 questions · 3 min';}
-  else{document.getElementById('s'+n).classList.add('active');document.getElementById('qc').textContent='Question '+n+' / 10';}
-  prog(n);window.scrollTo(0,0);
-}
-
-function goEmail(){
-  document.getElementById('s10').classList.remove('active');
-  document.getElementById('s-email').classList.add('active');
-  document.getElementById('pbar').style.width='95%';
-  document.getElementById('qc').textContent='Dernière étape';
-  window.scrollTo(0,0);
-}
-
-function prog(n){document.getElementById('pbar').style.width=(n/11*100)+'%';}
-
-function getTotal(){return Object.values(scores).reduce(function(a,b){return a+b;},0);}
-
-function showScore(){
-  var total=getTotal();
-  var email=document.getElementById('emailInput').value;
-  var xhr=new XMLHttpRequest();
-  xhr.open('POST',HOOK,true);
-  xhr.setRequestHeader('Content-Type','application/json');
-  xhr.send(JSON.stringify({type:'Score Organisation',email:email,score:total,detail:scores}));
-
-  document.getElementById('s-email').classList.remove('active');
-  document.getElementById('result').style.display='block';
-  document.getElementById('pbar').style.width='100%';
-  document.getElementById('qc').textContent='Ton score ✦';
-  window.scrollTo(0,0);
-
-  setTimeout(function(){
-    document.getElementById('loading').style.display='none';
-    var rc=document.getElementById('rc');
-    rc.style.display='block';
-
-    var sc=document.getElementById('sc');
-    var sn=document.getElementById('sn');
-    var sl=document.getElementById('sl');
-    var ss=document.getElementById('ss');
-
-    sn.textContent=total;
-
-    if(total<40){sc.className='score-circle score-low';sl.textContent='Système à construire';ss.textContent='Tu as les fondations — il manque l\'architecture qui tient tout ensemble.';}
-    else if(total<70){sc.className='score-circle score-mid';sl.textContent='Système en construction';ss.textContent='Tu avances bien — quelques axes clés peuvent tout changer rapidement.';}
-    else if(total<90){sc.className='score-circle score-high';sl.textContent='Système solide';ss.textContent='Tu as un bon socle — le prochain palier c\'est l\'automatisation avancée.';}
-    else{sc.className='score-circle score-high';sl.textContent='Système exemplaire';ss.textContent='Tu es dans les meilleurs — voyons comment aller encore plus loin.';}
-
-    var axesHtml='';
-    axes.forEach(function(a){
-      var s=scores[a.id]||0;
-      var pct=(s/a.max)*100;
-      var cls=pct<50?'low':pct<80?'mid':'high';
-      var note=s===0?'À mettre en place en priorité':s<=4?'Partiel — des améliorations rapides possibles':s<=7?'Bon début — quelques optimisations':s===10?'Excellent ✓':'Très bon';
-      axesHtml+='<div class="axe"><div class="axe-top"><div class="axe-name">'+a.name+'</div><div class="axe-score">'+s+' / '+a.max+'</div></div><div class="axe-bar"><div class="axe-fill '+cls+'" style="width:'+pct+'%"></div></div><div class="axe-note">'+note+'</div></div>';
-    });
-    document.getElementById('axes').innerHTML=axesHtml;
-
-    var lowAxes=axes.filter(function(a){return (scores[a.id]||0)<=4;}).slice(0,3);
-    var midAxes=axes.filter(function(a){var s=scores[a.id]||0;return s>4&&s<=7;}).slice(0,2);
-    var planHtml='';
-    lowAxes.forEach(function(a,i){
-      planHtml+='<div class="plan-item urgent"><div class="plan-num">'+(i+1)+'</div><div><div class="plan-title">Améliorer : '+a.name+'</div><div class="plan-desc">C\'est l\'un de tes axes les plus faibles — une intervention rapide ici aura un impact immédiat sur ton quotidien.</div><span class="plan-badge badge-urgent">Prioritaire</span></div></div>';
-    });
-    midAxes.forEach(function(a,i){
-      planHtml+='<div class="plan-item"><div class="plan-num">'+(lowAxes.length+i+1)+'</div><div><div class="plan-title">Optimiser : '+a.name+'</div><div class="plan-desc">Tu as des bases — on peut pousser cet axe au niveau supérieur avec quelques ajustements.</div><span class="plan-badge badge-moyen">Moyen terme</span></div></div>';
-    });
-    if(!planHtml)planHtml='<div class="plan-item"><div class="plan-num">🌿</div><div><div class="plan-title">Excellent travail !</div><div class="plan-desc">Ton système est déjà très structuré. L\'étape suivante : automatisation avancée et IA.</div><span class="plan-badge badge-long">Optimisation</span></div></div>';
-    document.getElementById('plan').innerHTML=planHtml;
-
-  },2200);
-}
-
-function shareScore(){
-  var total=getTotal();
-  navigator.clipboard.writeText('J\'ai obtenu '+total+'/100 au score organisation Nendy Services ! Teste le tien → '+window.location.href).then(function(){alert('Copié !');});
-}
-function shareLinkedIn(){window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(window.location.href),'_blank');}
-function shareWA(){var total=getTotal();window.open('https://wa.me/?text='+encodeURIComponent('J\'ai obtenu '+total+'/100 au score organisation — teste le tien : '+window.location.href),'_blank');}
+$("again").addEventListener("click",function(){ans=new Array(Q.length).fill(null);cur=0;frame("Score",0);show("intro")});
+})();
 </script>
 </body>
 </html>

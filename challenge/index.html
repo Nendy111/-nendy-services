@@ -6,151 +6,122 @@
 <link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96.png">
 <link rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Challenge 7 jours — Structure ton business · Nendy Services</title>
-<meta property="og:title" content="Challenge 7 jours — Structure ton business 🌿">
+<meta name="description" content="Challenge gratuit Nendy Services : 7 actions concrètes en 7 jours pour poser les bases d'un business qui tourne.">
+<meta property="og:title" content="Challenge 7 jours — Structure ton business">
 <meta property="og:description" content="7 actions concrètes en 7 jours pour poser les bases d'un business qui tourne.">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<meta property="og:image" content="https://nendyservices.com/img/nendy-spirale-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Jost:wght@300;400;500&family=DM+Mono:wght@400;500&family=Montserrat:ital,wght@1,700&family=Playfair+Display+SC&display=swap">
+<link rel="stylesheet" href="/assets/da2026-outils.css">
 <style>
-:root{--v:#7b9a80;--vc:#b5c1a6;--b:#d8c79e;--cr:#f5f1e6;--f:#ee07a5;--txt:#1a1714;--txt2:#5c5248;}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Jost',sans-serif;background:var(--cr);color:var(--txt);min-height:100vh;}
-header{background:var(--txt);padding:22px 36px;display:flex;align-items:center;justify-content:space-between;}
-.logo{font-family:'Playfair Display',serif;font-size:16px;color:var(--vc);}
-.logo small{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--b);display:block;}
-.htag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.3);}
-
-/* HERO */
-.hero{background:var(--txt);padding:60px 36px;text-align:center;}
-.hero-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--f);text-transform:uppercase;margin-bottom:16px;}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,6vw,56px);font-weight:700;line-height:1.1;color:white;margin-bottom:16px;}
-.hero h1 em{color:var(--f);font-style:italic;}
-.hero-sub{font-size:15px;color:rgba(255,255,255,.55);line-height:1.75;max-width:500px;margin:0 auto 36px;}
-.hero-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;}
-.hpill{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;padding:6px 14px;border-radius:20px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.08);}
-.hero-form{max-width:420px;margin:0 auto;}
-.hero-input{width:100%;padding:14px 18px;border-radius:10px;border:none;font-family:'Jost',sans-serif;font-size:14px;background:rgba(255,255,255,.08);color:white;outline:none;margin-bottom:10px;}
-.hero-input::placeholder{color:rgba(255,255,255,.3);}
-.hero-btn{width:100%;padding:14px;background:var(--f);color:white;border:none;border-radius:10px;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:opacity .2s;}
-.hero-btn:hover{opacity:.85;}
-.hero-note{font-size:11px;color:rgba(255,255,255,.25);margin-top:8px;}
-
-/* MAIN */
-main{max-width:720px;margin:0 auto;padding:60px 28px 80px;}
-
-/* SECTION */
-.section-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--f);text-transform:uppercase;margin-bottom:8px;}
-.section-title{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,36px);font-weight:700;margin-bottom:8px;}
-.section-sub{font-size:14px;color:var(--txt2);line-height:1.75;margin-bottom:36px;}
-
-/* JOURS */
-.jours{display:flex;flex-direction:column;gap:14px;margin-bottom:60px;}
-.jour{background:white;border-radius:16px;border:1px solid rgba(123,154,128,.12);overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s;}
-.jour:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.07);}
-.jour.done{border-color:var(--v);}
-.jour.done .jour-num{background:var(--v);color:white;}
-.jour.open .jour-content{display:block;}
-.jour.open .jour-arrow{transform:rotate(180deg);}
-
-.jour-header{padding:18px 22px;display:flex;align-items:center;gap:16px;}
-.jour-num{width:44px;height:44px;border-radius:50%;background:rgba(123,154,128,.08);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--v);flex-shrink:0;transition:all .2s;}
-.jour-info{flex:1;}
-.jour-day{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--vc);text-transform:uppercase;margin-bottom:3px;}
-.jour-title{font-size:15px;font-weight:500;color:var(--txt);}
-.jour-theme{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:3px 10px;border-radius:8px;background:rgba(123,154,128,.08);color:var(--v);}
-.jour-arrow{color:var(--vc);font-size:10px;transition:transform .2s;margin-left:8px;}
-.jour-check{cursor:pointer;margin-left:4px;}
-
-.jour-content{display:none;padding:0 22px 22px;border-top:1px solid rgba(123,154,128,.08);}
-.jc-inner{padding-top:18px;}
-.jc-objectif{font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:16px;padding:12px 14px;background:rgba(123,154,128,.05);border-radius:8px;border-left:2px solid var(--v);}
-.jc-title{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--f);text-transform:uppercase;margin-bottom:8px;}
-.jc-steps{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
-.jc-step{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--txt);}
-.jc-step-num{font-family:'DM Mono',monospace;font-size:9px;color:var(--vc);width:18px;flex-shrink:0;margin-top:2px;}
-.jc-tip{font-size:12px;color:var(--txt2);line-height:1.6;padding:10px 13px;background:rgba(238,7,165,.04);border-radius:8px;border-left:2px solid var(--f);}
-.jc-tip strong{color:var(--f);}
-.jc-done-btn{margin-top:14px;width:100%;padding:10px;background:transparent;border:1.5px solid rgba(123,154,128,.25);border-radius:8px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--v);cursor:pointer;transition:all .15s;text-transform:uppercase;}
-.jc-done-btn:hover{background:var(--v);color:white;border-color:var(--v);}
-.jour.done .jc-done-btn{background:var(--v);color:white;border-color:var(--v);}
-
-/* PROGRESS TRACKER */
-.tracker{background:white;border-radius:16px;border:1px solid rgba(123,154,128,.12);padding:24px;margin-bottom:60px;}
-.tracker-title{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:16px;}
-.tracker-bar{height:8px;background:rgba(123,154,128,.1);border-radius:4px;overflow:hidden;margin-bottom:10px;}
-.tracker-fill{height:8px;background:var(--v);border-radius:4px;transition:width .5s ease;width:0%;}
-.tracker-txt{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--txt2);}
-.tracker-dots{display:flex;gap:8px;margin-top:14px;}
-.tdot{width:32px;height:32px;border-radius:50%;border:2px solid rgba(123,154,128,.2);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:9px;color:var(--txt2);transition:all .2s;}
-.tdot.done{background:var(--v);border-color:var(--v);color:white;}
-
-/* CTA FINAL */
-.cta-final{background:var(--txt);border-radius:18px;padding:32px;text-align:center;}
-.cta-final h2{font-family:'Playfair Display',serif;font-size:26px;color:white;margin-bottom:10px;}
-.cta-final p{font-size:14px;color:rgba(255,255,255,.55);line-height:1.75;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;}
-.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--f);color:white;border:none;border-radius:10px;padding:14px 28px;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:opacity .2s;}
-.cta-btn:hover{opacity:.85;}
-
-@media(max-width:560px){header{padding:14px 18px;}hero{padding:40px 18px;}.main{padding:40px 18px 60px;}}
+.form{display:grid;gap:10px;max-width:440px}
+.form .btn{width:100%}
+.note{margin:10px 0 0;font-size:13.5px;color:rgba(245,241,230,.7)}
+.ok{margin:10px 0 0;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sable)}
+section.blk{margin-top:42px}
+.tracker{padding:22px}
+.tracker h3{font-size:26px}
+.tbar{height:6px;border-radius:99px;background:rgba(216,199,158,.4);overflow:hidden;margin:14px 0 10px}
+.tbar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sauge),var(--sauge-f));transition:width .5s ease}
+.ttxt{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--doux);font-variant-numeric:tabular-nums}
+.dots{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.dot{width:34px;height:34px;border-radius:50%;border:1px solid var(--sable);display:grid;place-items:center;font-family:var(--mono);font-size:10px;color:var(--or);transition:all .2s}
+.dot.done{background:var(--sauge);border-color:var(--sauge);color:#fff}
+.jours{display:grid;gap:12px;margin-top:26px}
+.jour{overflow:hidden}
+.jour.done{border-color:var(--sauge)}
+.jh{display:flex;align-items:center;gap:14px;width:100%;padding:16px;background:none;border:0;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.jn{flex:0 0 auto;width:44px;height:44px;border-radius:50%;border:1px solid var(--or);display:grid;place-items:center;font-family:var(--mono);font-size:12px;color:var(--or);transition:all .2s}
+.jour.done .jn{background:var(--sauge);border-color:var(--sauge);color:#fff}
+.ji{flex:1;min-width:0}
+.jd{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--rose)}
+.jt{font-family:var(--serif);font-size:23px;line-height:1.15;margin-top:3px}
+.jth{flex:0 0 auto;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid var(--sable);color:var(--sauge-f)}
+.ja{flex:0 0 auto;font-family:var(--mono);color:var(--or);transition:transform .2s}
+.jour.open .ja{transform:rotate(180deg)}
+.jc{display:none;padding:0 16px 18px;border-top:1px solid rgba(216,199,158,.6)}
+.jour.open .jc{display:block}
+.obj{margin:16px 0;padding:12px 14px;border-left:2px solid var(--sauge);background:rgba(123,154,128,.07);border-radius:0 10px 10px 0;font-size:15.5px}
+.et{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);margin:0 0 8px}
+.steps{display:grid;gap:8px;margin:0 0 16px;padding:0;list-style:none;counter-reset:s}
+.steps li{display:flex;gap:12px;font-size:15.5px;line-height:1.5}
+.steps li::before{counter-increment:s;content:"0" counter(s);flex:0 0 22px;font-family:var(--mono);font-size:11px;color:var(--or);margin-top:3px}
+.tip{padding:12px 14px;border-left:2px solid var(--rose);background:rgba(238,7,165,.04);border-radius:0 10px 10px 0;font-size:15px}
+.tip strong{color:var(--rose);font-weight:500}
+.jc .btn{width:100%;margin-top:14px;min-height:46px}
+@media (max-width:480px){.jth{display:none}}
 </style>
 </head>
 <body>
-
-<header>
-  <div class="logo">NENDY Services<small>Challenge 7 jours</small></div>
-  <div class="htag">Structure ton business</div>
-</header>
-
-<div class="hero">
-  <div class="hero-tag">Challenge gratuit · 7 jours · 15 min/jour</div>
-  <h1>7 jours pour structurer<br>ton <em>business.</em></h1>
-  <p class="hero-sub">Une action concrète par jour. En 7 jours, tu poses les bases d'un business qui tourne — sans y passer ta vie.</p>
-  <div class="hero-pills">
-    <div class="hpill">📱 WhatsApp Business</div>
-    <div class="hpill">📅 Prise de RDV auto</div>
-    <div class="hpill">🗂️ Notion centralisé</div>
-    <div class="hpill">💰 Facturation</div>
-    <div class="hpill">🤖 Automatisation</div>
-    <div class="hpill">🌐 Présence digitale</div>
-    <div class="hpill">🏖️ Système autonome</div>
+<div class="wrap">
+  <div class="top">
+    <a class="logo" href="https://nendyservices.com" aria-label="Nendy Services, retour au site">
+      <img src="/img/nendy-spirale.svg" alt="" width="30" height="30">
+      <span class="lt"><span class="n">Nendy</span><span class="r"></span><span class="s">Services</span></span>
+    </a>
+    <a class="back" href="https://nendyservices.com">Le site →</a>
   </div>
-  <div class="hero-form">
-    <input type="email" class="hero-input" id="heroEmail" placeholder="ton@email.com — pour recevoir le récap chaque jour">
-    <button class="hero-btn" onclick="startChallenge()">Je commence le challenge →</button>
-    <div class="hero-note">🔒 Aucun spam. Juste 7 emails utiles.</div>
+
+  <div class="frame">
+    <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+    <div class="cadre"><span class="lab">Nendy Services · Challenge</span><span class="cnt" id="count"><b>00</b> / 07</span></div>
+    <div class="prog" aria-hidden="true"><span id="fill"></span></div>
+
+    <main>
+      <section class="panel noir fade">
+        <img class="spi" src="/img/nendy-spirale.svg" alt="">
+        <p class="kicker">Challenge gratuit · 7 jours · 15 min par jour</p>
+        <h1>7 jours<br>pour structurer<br>ton <em class="f">business.</em></h1>
+        <p class="lead">Une action concrète par jour. En 7 jours, tu poses les bases d'un business qui tourne, sans y passer ta vie.</p>
+        <ul class="chips"><li>WhatsApp Business</li><li>Prise de RDV auto</li><li>Notion centralisé</li><li>Facturation</li><li>Présence en ligne</li><li>Process client</li><li>Système autonome</li></ul>
+        <form class="form" id="form" novalidate>
+          <input type="email" class="input" id="heroEmail" placeholder="ton@email.com, pour recevoir le récap chaque jour" autocomplete="email" required>
+          <button class="btn" type="submit" id="go">Je commence le challenge →</button>
+        </form>
+        <p class="note" id="note">Aucun spam. Juste 7 emails utiles.</p>
+      </section>
+
+      <section class="blk" id="suivi">
+        <div class="carte tracker">
+          <p class="kicker">Ta progression</p>
+          <h3>Coche chaque jour terminé.</h3>
+          <div class="tbar"><span id="tfill"></span></div>
+          <div class="ttxt" id="ttxt">0 / 7 jours complétés</div>
+          <div class="dots" id="tdots"></div>
+        </div>
+      </section>
+
+      <section class="blk">
+        <p class="kicker">Les 7 actions</p>
+        <h2>Une action.<br>Un jour. <em class="s">Un résultat.</em></h2>
+        <p class="lead">Chaque action se fait en 15 à 30 minutes. Coche quand c'est fait, et passe à la suivante.</p>
+        <div class="jours" id="jours"></div>
+      </section>
+
+      <section class="blk panel vert">
+        <img class="spi" src="/img/nendy-spirale.svg" alt="">
+        <p class="kicker">Tu veux aller plus vite&nbsp;?</p>
+        <h2>Je configure tout ça pour toi en 48 à 72&nbsp;h.</h2>
+        <p class="lead">Sans que tu y passes tes soirées. Un appel découverte de 30 minutes pour voir par où commencer.</p>
+        <p style="margin:24px 0 0"><a class="btn" href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" target="_blank" rel="noopener">Réserver mon appel offert →</a></p>
+      </section>
+
+      <div class="fin"><img src="/img/nendy-logo-arche.svg" alt="Nendy Services"><p class="slogan">L'harmonie entre organisation et assistance.</p></div>
+    </main>
+
+    <div class="foot">
+      <div class="fil"></div>
+      <div class="row"><a href="https://www.instagram.com/nendy_services/">@nendy_services</a><a href="https://nendyservices.com">nendyservices.com</a></div>
+    </div>
   </div>
 </div>
-
-<main>
-
-  <!-- TRACKER -->
-  <div class="tracker">
-    <div class="tracker-title">Ta progression 🌿</div>
-    <div class="tracker-bar"><div class="tracker-fill" id="tfill"></div></div>
-    <div class="tracker-txt" id="ttxt">0 / 7 jours complétés</div>
-    <div class="tracker-dots" id="tdots"></div>
-  </div>
-
-  <!-- JOURS -->
-  <div class="section-tag">Les 7 actions</div>
-  <div class="section-title">Une action.<br>Un jour. Un résultat.</div>
-  <p class="section-sub">Chaque action est réalisable en 15-30 minutes. Coche quand c'est fait — et passe au suivant.</p>
-
-  <div class="jours" id="jours"></div>
-
-  <!-- CTA FINAL -->
-  <div class="cta-final">
-    <h2>Tu veux aller plus vite ? 🌿</h2>
-    <p>Je peux configurer tout ça pour toi en 48-72h — sans que tu aies à y passer tes soirées. Un appel découverte de 30 min pour voir par où commencer.</p>
-    <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" target="_blank" class="cta-btn">Réserver mon appel gratuit →</a>
-  </div>
-
-</main>
 
 <script>
 var HOOK = 'https://hooks.zapier.com/hooks/catch/27297216/uv8zdhj/';
 var done = {};
-
 var JOURS_DATA = [
   {
     num:'J1', day:'Jour 1', title:'Configure ton WhatsApp Business', theme:'Communication',
@@ -244,88 +215,59 @@ var JOURS_DATA = [
   }
 ];
 
-function buildJours() {
-  var html = '';
-  var dotsHtml = '';
-  JOURS_DATA.forEach(function(j, i) {
-    var idx = i + 1;
-    html += '<div class="jour" id="j'+idx+'" onclick="toggleJour('+idx+')">';
-    html += '<div class="jour-header">';
-    html += '<div class="jour-num" id="jnum'+idx+'">'+j.num+'</div>';
-    html += '<div class="jour-info"><div class="jour-day">'+j.day+'</div><div class="jour-title">'+j.title+'</div></div>';
-    html += '<div class="jour-theme">'+j.theme+'</div>';
-    html += '<div class="jour-arrow" id="jarr'+idx+'">▼</div>';
-    html += '</div>';
-    html += '<div class="jour-content" id="jc'+idx+'">';
-    html += '<div class="jc-inner">';
-    html += '<div class="jc-objectif">🎯 '+j.objectif+'</div>';
-    html += '<div class="jc-title">Les étapes</div>';
-    html += '<div class="jc-steps">';
-    j.steps.forEach(function(s, si) {
-      html += '<div class="jc-step"><div class="jc-step-num">0'+(si+1)+'</div>'+s+'</div>';
-    });
-    html += '</div>';
-    html += '<div class="jc-tip">'+j.tip+'</div>';
-    html += '<button class="jc-done-btn" id="dbtn'+idx+'" onclick="markDone(event,'+idx+')">✓ Marquer comme complété</button>';
-    html += '</div></div></div>';
 
-    dotsHtml += '<div class="tdot" id="tdot'+idx+'">'+idx+'</div>';
+function $(id){return document.getElementById(id)}
+function buildJours(){
+  var html='',dots='';
+  JOURS_DATA.forEach(function(j,i){
+    var n=i+1;
+    html+='<article class="jour carte" id="j'+n+'">'+
+      '<button type="button" class="jh" aria-expanded="false" data-n="'+n+'"><span class="jn" id="jnum'+n+'">'+j.num+'</span>'+
+      '<span class="ji"><span class="jd">'+j.day+'</span><span class="jt" style="display:block">'+j.title+'</span></span>'+
+      '<span class="jth">'+j.theme+'</span><span class="ja" aria-hidden="true">▾</span></button>'+
+      '<div class="jc"><p class="obj">'+j.objectif+'</p><p class="et">Les étapes</p><ol class="steps">'+
+      j.steps.map(function(s){return '<li><span>'+s+'</span></li>'}).join('')+'</ol>'+
+      '<p class="tip">'+j.tip+'</p>'+
+      '<button type="button" class="btn vert" id="dbtn'+n+'" data-done="'+n+'">✓ Marquer comme fait</button></div></article>';
+    dots+='<span class="dot" id="tdot'+n+'">J'+n+'</span>';
   });
-  document.getElementById('jours').innerHTML = html;
-  document.getElementById('tdots').innerHTML = dotsHtml;
+  $('jours').innerHTML=html; $('tdots').innerHTML=dots;
 }
-
-function toggleJour(n) {
-  var jour = document.getElementById('j'+n);
-  var isOpen = jour.classList.contains('open');
-  document.querySelectorAll('.jour').forEach(function(j) { j.classList.remove('open'); });
-  document.querySelectorAll('.jour-arrow').forEach(function(a) { a.style.transform = ''; });
-  if (!isOpen) {
-    jour.classList.add('open');
-  }
-}
-
-function markDone(e, n) {
-  e.stopPropagation();
-  done[n] = !done[n];
-  var jour = document.getElementById('j'+n);
-  var btn = document.getElementById('dbtn'+n);
-  var dot = document.getElementById('tdot'+n);
-  var num = document.getElementById('jnum'+n);
-  if (done[n]) {
-    jour.classList.add('done');
-    btn.textContent = '✓ Complété !';
-    dot.classList.add('done');
-    num.textContent = '✓';
-  } else {
-    jour.classList.remove('done');
-    btn.textContent = '✓ Marquer comme complété';
-    dot.classList.remove('done');
-    num.textContent = JOURS_DATA[n-1].num;
-  }
+$('jours').addEventListener('click',function(e){
+  var d=e.target.closest('[data-done]'); if(d){markDone(+d.dataset.done);return}
+  var h=e.target.closest('.jh'); if(!h)return;
+  var j=h.parentNode, open=j.classList.contains('open');
+  document.querySelectorAll('.jour').forEach(function(x){x.classList.remove('open');x.querySelector('.jh').setAttribute('aria-expanded','false')});
+  if(!open){j.classList.add('open');h.setAttribute('aria-expanded','true')}
+});
+function markDone(n){
+  done[n]=!done[n];
+  $('j'+n).classList.toggle('done',done[n]);
+  $('tdot'+n).classList.toggle('done',done[n]);
+  $('dbtn'+n).textContent=done[n]?'✓ Fait !':'✓ Marquer comme fait';
+  $('jnum'+n).textContent=done[n]?'✓':JOURS_DATA[n-1].num;
   updateTracker();
 }
-
-function updateTracker() {
-  var count = Object.values(done).filter(Boolean).length;
-  var pct = (count / 7) * 100;
-  document.getElementById('tfill').style.width = pct + '%';
-  document.getElementById('ttxt').textContent = count + ' / 7 jours complétés';
+function updateTracker(){
+  var c=Object.values(done).filter(Boolean).length, p=c/7*100;
+  $('tfill').style.width=p+'%'; $('fill').style.width=p+'%';
+  $('ttxt').textContent=c+' / 7 jours complétés';
+  $('count').innerHTML='<b>0'+c+'</b> / 07';
 }
-
-function startChallenge() {
-  var email = document.getElementById('heroEmail').value;
-  if (!email) { alert('Entre ton email pour démarrer !'); return; }
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', HOOK, true);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send(JSON.stringify({type: 'Challenge 7 jours', email: email, action: 'Inscription'}));
-  document.getElementById('heroEmail').value = '';
-  document.querySelector('.hero-btn').textContent = 'Inscrit·e ! On commence 🌿';
-  document.querySelector('.hero-btn').style.background = '#7b9a80';
-  document.querySelector('main').scrollIntoView({behavior:'smooth'});
-}
-
+$('form').addEventListener('submit',function(e){
+  e.preventDefault();
+  var em=$('heroEmail');
+  if(!em.value||!em.checkValidity()){em.focus();$('note').textContent='Entre ton email pour démarrer.';return}
+  var xhr=new XMLHttpRequest();
+  xhr.open('POST',HOOK,true);
+  xhr.setRequestHeader('Content-Type','application/json');
+  xhr.send(JSON.stringify({type:'Challenge 7 jours',email:em.value,action:'Inscription'}));
+  em.value='';
+  $('go').textContent='Inscrit·e ! On commence';
+  $('go').classList.add('vert');
+  $('note').textContent='C\'est parti : ouvre le jour 1 ci-dessous.';
+  $('suivi').scrollIntoView({behavior:'smooth'});
+});
 buildJours();
 </script>
 </body>

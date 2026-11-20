@@ -145,6 +145,10 @@ h2.q em{font-style:italic;color:var(--sauge-f)}
 .fin img{width:120px}
 .slogan{font-family:var(--slogan);font-weight:700;font-style:italic;color:var(--rose);font-size:14px;letter-spacing:.01em;margin:0}
 
+.mform{display:grid;gap:10px;max-width:440px}
+.minput{width:100%;min-height:52px;padding:14px 18px;border-radius:14px;border:1px solid rgba(216,199,158,.9);background:#fffdf8;color:var(--encre);font:inherit;font-weight:400;outline:none}
+.minput:focus{border-color:var(--rose)}
+.mhint{margin:2px 0 0;font-size:14px;color:var(--doux)}
 .fade{animation:in .35s ease both}
 @keyframes in{from{opacity:.3;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.fade{animation:none}.prog span{transition:none}}
@@ -185,6 +189,17 @@ h2.q em{font-style:italic;color:var(--sauge-f)}
           <button class="btn ghost" id="prev" type="button">← Précédent</button>
           <button class="btn" id="next" type="button" disabled>Suivant →</button>
         </div>
+      </section>
+
+      <section class="screen fade" id="mail" hidden>
+        <p class="kicker">Dernière étape</p>
+        <h2 class="q">Où vous envoie-t-on<br>votre <em class="f">profil&nbsp;?</em></h2>
+        <p class="qsub">Vous recevez votre résultat détaillé et les premières pistes pour avancer.</p>
+        <form class="mform" id="mform" novalidate>
+          <input type="email" class="minput" id="email" placeholder="votre@email.com" autocomplete="email" required>
+          <button class="btn" type="submit">Voir mon profil →</button>
+          <p class="mhint" id="mhint">Aucun spam. Vous pouvez vous désinscrire à tout moment.</p>
+        </form>
       </section>
 
       <section class="screen res" id="result" hidden></section>
@@ -273,7 +288,8 @@ h2.q em{font-style:italic;color:var(--sauge-f)}
   var L="ABCD";
   function pad(n){return (n<10?"0":"")+n}
   function frame(lab,n){$("lab").textContent="Nendy Services · "+lab;$("count").innerHTML="<b>"+pad(n)+"</b> / "+Q.length;$("fill").style.width=(n/Q.length*100)+"%"}
-  function show(id){["intro","quiz","result"].forEach(function(s){$(s).hidden=(s!==id)});window.scrollTo({top:0,behavior:"smooth"})}
+  var HOOK='https://hooks.zapier.com/hooks/catch/27297216/uv8zdhj/';
+  function show(id){["intro","quiz","mail","result"].forEach(function(s){$(s).hidden=(s!==id)});window.scrollTo({top:0,behavior:"smooth"})}
   function render(){
     var q=Q[cur];
     frame("Question",cur+1);
@@ -293,7 +309,7 @@ h2.q em{font-style:italic;color:var(--sauge-f)}
   });
   function go(d){
     if(d>0&&ans[cur]===null)return;
-    if(d>0&&cur===Q.length-1){result();return}
+    if(d>0&&cur===Q.length-1){frame("Dernière étape",Q.length);show("mail");return}
     cur=Math.max(0,Math.min(Q.length-1,cur+d)); render();
   }
   $("next").addEventListener("click",function(){go(1)});
@@ -309,6 +325,18 @@ h2.q em{font-style:italic;color:var(--sauge-f)}
     if(pa>po)return"pure-a";
     return"pure-o";
   }
+  $("mform").addEventListener("submit",function(e){
+    e.preventDefault();
+    var em=$("email");
+    if(!em.value||!em.checkValidity()){em.focus();$("mhint").textContent="Indiquez une adresse email valide pour recevoir votre profil.";return}
+    var a=0,o=0,b=0;
+    ans.forEach(function(v,i){var k=Q[i].o[v][1]; if(k==="a")a++; else if(k==="o")o++; else b++});
+    var key=profile(a,o,b), t=a+o+b, pa=Math.round((a+b*.5)/t*100);
+    try{var x=new XMLHttpRequest();x.open("POST",HOOK,true);x.setRequestHeader("Content-Type","application/json");
+      x.send(JSON.stringify({type:"Quiz Mon business a besoin de quoi",email:em.value,profil:P[key].badge,assistance:pa,organisation:100-pa,
+        reponses:ans.map(function(v,i){return (i+1)+". "+Q[i].o[v][0].replace(/&nbsp;/g," ")}).join(" | ")}))}catch(err){}
+    result();
+  });
   function result(){
     var a=0,o=0,b=0;
     ans.forEach(function(v,i){var k=Q[i].o[v][1]; if(k==="a")a++; else if(k==="o")o++; else b++});
