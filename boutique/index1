@@ -153,7 +153,7 @@ footer{background:var(--txt);padding:32px 40px;text-align:center;}
     <a href="#produits" class="nav-link">Produits</a>
     <a href="#maintenance" class="nav-link">Maintenance</a>
     <a href="#faq" class="nav-link">FAQ</a>
-    <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="nav-cta">Discutons</a>
+    <a href="https://calendar.notion.so/meet/nendyticout/appeldecouverte" class="nav-cta">Discutons</a>
   </div>
 </nav>
 
@@ -232,7 +232,7 @@ footer{background:var(--txt);padding:32px 40px;text-align:center;}
         </div>
         <div class="product-footer">
           <div class="product-price">120 €<small>Fichier livré · hébergement en option</small></div>
-          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order">Commander</a>
+          <a href="https://calendar.notion.so/meet/nendyticout/appeldecouverte" class="btn-order">Commander</a>
         </div>
       </div>
     </div>
@@ -258,7 +258,7 @@ footer{background:var(--txt);padding:32px 40px;text-align:center;}
         </div>
         <div class="product-footer">
           <div class="product-price">150 €<small>Fichier livré · hébergement en option</small></div>
-          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order">Commander</a>
+          <a href="https://calendar.notion.so/meet/nendyticout/appeldecouverte" class="btn-order">Commander</a>
         </div>
       </div>
     </div>
@@ -285,7 +285,7 @@ footer{background:var(--txt);padding:32px 40px;text-align:center;}
         </div>
         <div class="product-footer">
           <div class="product-price">250 €<small>Fichier livré · hébergement en option</small></div>
-          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order pink">Commander</a>
+          <a href="https://calendar.notion.so/meet/nendyticout/appeldecouverte" class="btn-order pink">Commander</a>
         </div>
       </div>
     </div>
@@ -311,7 +311,7 @@ footer{background:var(--txt);padding:32px 40px;text-align:center;}
         </div>
         <div class="product-footer">
           <div class="product-price">180 €<small>Fichier livré · hébergement en option</small></div>
-          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order">Commander</a>
+          <a href="https://calendar.notion.so/meet/nendyticout/appeldecouverte" class="btn-order">Commander</a>
         </div>
       </div>
     </div>
@@ -337,7 +337,7 @@ footer{background:var(--txt);padding:32px 40px;text-align:center;}
         </div>
         <div class="product-footer">
           <div class="product-price">120 €<small>Fichier local · pas d'hébergement nécessaire</small></div>
-          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order">Commander</a>
+          <a href="https://calendar.notion.so/meet/nendyticout/appeldecouverte" class="btn-order">Commander</a>
         </div>
       </div>
     </div>
@@ -364,7 +364,7 @@ footer{background:var(--txt);padding:32px 40px;text-align:center;}
         </div>
         <div class="product-footer">
           <div class="product-price">350 €<small>+ domaine à votre charge (~10€/an)</small></div>
-          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order pink">Commander</a>
+          <a href="https://calendar.notion.so/meet/nendyticout/appeldecouverte" class="btn-order pink">Commander</a>
         </div>
       </div>
     </div>
@@ -390,7 +390,7 @@ footer{background:var(--txt);padding:32px 40px;text-align:center;}
         </div>
         <div class="product-footer">
           <div class="product-price">60 €<small>Fichier livré · hébergement en option</small></div>
-          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order">Commander</a>
+          <a href="https://calendar.notion.so/meet/nendyticout/appeldecouverte" class="btn-order">Commander</a>
         </div>
       </div>
     </div>
@@ -417,7 +417,7 @@ footer{background:var(--txt);padding:32px 40px;text-align:center;}
         </div>
         <div class="product-footer">
           <div class="product-price">45 €<small>Fichier livré · installation guidée</small></div>
-          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order">Commander</a>
+          <a href="https://calendar.notion.so/meet/nendyticout/appeldecouverte" class="btn-order">Commander</a>
         </div>
       </div>
     </div>
@@ -443,7 +443,7 @@ footer{background:var(--txt);padding:32px 40px;text-align:center;}
         </div>
         <div class="product-footer">
           <div class="product-price">90 €<small>Fichiers livrés · modifiables</small></div>
-          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order">Commander</a>
+          <a href="https://calendar.notion.so/meet/nendyticout/appeldecouverte" class="btn-order">Commander</a>
         </div>
       </div>
     </div>
@@ -469,7 +469,7 @@ footer{background:var(--txt);padding:32px 40px;text-align:center;}
         </div>
         <div class="product-footer">
           <div class="product-price">120 €<small>Fichier HTML interactif livré</small></div>
-          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order">Commander</a>
+          <a href="https://calendar.notion.so/meet/nendyticout/appeldecouverte" class="btn-order">Commander</a>
         </div>
       </div>
     </div>
@@ -496,7 +496,7 @@ footer{background:var(--txt);padding:32px 40px;text-align:center;}
         </div>
         <div class="product-footer">
           <div class="product-price">290 €<small>Fichier livré · hébergement en option</small></div>
-          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order pink">Commander</a>
+          <a href="https://calendar.notion.so/meet/nendyticout/appeldecouverte" class="btn-order pink">Commander</a>
         </div>
       </div>
     </div>
@@ -524,7 +524,7 @@ footer{background:var(--txt);padding:32px 40px;text-align:center;}
         </div>
         <div class="product-footer">
           <div class="product-price">790 €<small>Valeur : 1100€ · Économie : 310€</small></div>
-          <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="btn-order pink">Commander</a>
+          <a href="https://calendar.notion.so/meet/nendyticout/appeldecouverte" class="btn-order pink">Commander</a>
         </div>
       </div>
     </div>
@@ -572,7 +572,7 @@ footer{background:var(--txt);padding:32px 40px;text-align:center;}
     <div class="custom-tag">Vous ne trouvez pas ce qu'il vous faut ?</div>
     <div class="custom-title">Décrivez-moi votre besoin.<br>Je crée l'outil.</div>
     <div class="custom-sub">Calculateur, simulateur, formulaire multi-étapes, tableau de bord interactif — si vous pouvez le décrire, je peux le créer.</div>
-    <a href="https://calendar.notion.so/meet/nendyservices/appeldecouverte" class="custom-btn">Discutons de votre projet →</a>
+    <a href="https://calendar.notion.so/meet/nendyticout/appeldecouverte" class="custom-btn">Discutons de votre projet →</a>
   </div>
 </div>
 
