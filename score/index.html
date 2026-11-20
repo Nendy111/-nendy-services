@@ -67,6 +67,7 @@ h2.q{position:relative;margin-bottom:22px}
 .share{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
 .share button,.share a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:999px;border:1px solid rgba(216,199,158,.6);background:transparent;color:var(--creme);cursor:pointer;text-decoration:none}
 .share button:hover,.share a:hover{border-color:var(--creme)}
+.bravo{margin:16px 0 0;padding:12px 16px;border-left:3px solid #ee07a5;background:rgba(238,7,165,.06);border-radius:0 12px 12px 0;font-weight:500;font-size:16.5px;line-height:1.45;color:#1a1714}
 </style>
 </head>
 <body>
@@ -122,6 +123,7 @@ h2.q{position:relative;margin-bottom:22px}
           <div class="ring" id="ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" fill="none" stroke="rgba(216,199,158,.45)" stroke-width="6"/><circle id="arc" cx="60" cy="60" r="52" fill="none" stroke="#ee07a5" stroke-width="6" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition:stroke-dashoffset 1.2s ease"/></svg><div class="v"><b id="sn">0</b><span>/ 100</span></div></div>
           <h2 id="sl"></h2>
           <p class="tagl" id="ss"></p>
+          <p class="bravo" id="bv"></p>
 
           <div class="sec"><p class="kicker">Détail par axe</p><div class="axes" id="axes"></div></div>
           <div class="sec"><p class="kicker">Ton plan d'action</p><div class="plan" id="plan"></div></div>
@@ -201,7 +203,7 @@ function reveal(t){
   else if(t<70){lab="Système en construction";sub="Tu avances bien : quelques axes clés peuvent tout changer rapidement."}
   else if(t<90){lab="Système solide";sub="Tu as un bon socle. Le prochain palier, c'est l'automatisation avancée."}
   else{lab="Système exemplaire";sub="Tu es dans les meilleurs. Voyons comment aller encore plus loin."}
-  $("sl").textContent=lab; $("ss").textContent=sub;
+  $("sl").textContent=lab; $("ss").textContent=sub; $("bv").textContent=["Bravo d’avoir pris ces quelques minutes : regarder son organisation en face, c’est déjà le premier pas.", "Bravo, tu as déjà de bonnes bases : tu es sur la bonne voie.", "Bravo, ton organisation est solide : peu d’entrepreneuses en sont à ce niveau.", "Bravo, ton système fait partie des meilleurs : tu as fait un vrai travail de fond."][t<40?0:t<70?1:t<90?2:3];
   var s=scores(), ax='';
   Q.forEach(function(q,i){
     var v=s[i+1], pct=v*10, cls=pct<50?'low':pct<80?'mid':'high';

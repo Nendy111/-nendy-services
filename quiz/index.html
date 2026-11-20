@@ -121,6 +121,7 @@ h2.q em{font-style:italic;color:var(--sauge-f)}
 .badge::before{content:"";width:6px;height:6px;transform:rotate(45deg);background:var(--rose)}
 .badge.o::before{background:var(--sauge)}.badge.b::before{background:var(--or)}
 .res h2{font-size:clamp(42px,10vw,70px);line-height:1;letter-spacing:-.015em;margin-top:16px}
+.bravo{margin:16px 0 0;padding:12px 16px;border-left:3px solid #ee07a5;background:rgba(238,7,165,.06);border-radius:0 12px 12px 0;font-weight:500;font-size:16.5px;line-height:1.45;color:#1a1714}
 .tag{font-family:var(--serif);font-style:italic;font-size:24px;line-height:1.25;margin:14px 0 0;color:var(--sauge-f)}
 .split{margin:28px 0 6px}
 .split .row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-variant-numeric:tabular-nums}
@@ -340,11 +341,12 @@ h2.q em{font-style:italic;color:var(--sauge-f)}
   function result(){
     var a=0,o=0,b=0;
     ans.forEach(function(v,i){var k=Q[i].o[v][1]; if(k==="a")a++; else if(k==="o")o++; else b++});
-    var p=P[profile(a,o,b)], t=a+o+b, pa=Math.round((a+b*.5)/t*100), po=100-pa;
+    var BR={"pure-a": "Bravo : vos systèmes sont déjà en place, c’est une vraie force.", "assist-first": "Bravo d’avoir pris ce temps pour vous, alors que vos journées sont si pleines.", "both": "Bravo d’avoir fait le point : voir clairement ce qui manque, c’est déjà avancer.", "orga-first": "Bravo : vous savez déjà qu’il faut des bases solides avant de déléguer, c’est la bonne intuition.", "pure-o": "Bravo : vous avez l’énergie et l’envie, il ne manque que la structure."};var pk=profile(a,o,b);
+    var p=P[pk], t=a+o+b, pa=Math.round((a+b*.5)/t*100), po=100-pa;
     frame("Votre profil",Q.length);
     $("result").innerHTML=
       '<div class="fade"><span class="badge '+p.c+'">'+p.badge+'</span>'+
-      '<h2>'+p.name+'</h2><p class="tag">'+p.tag+'</p>'+
+      '<h2>'+p.name+'</h2><p class="tag">'+p.tag+'</p><p class="bravo">'+BR[pk]+'</p>'+
       '<div class="split"><div class="row"><span>Assistance '+pa+'&nbsp;%</span><span>Organisation '+po+'&nbsp;%</span></div>'+
       '<div class="track" role="img" aria-label="Assistance '+pa+' %, organisation '+po+' %"><span class="ta" style="width:'+pa+'%"></span><span class="to" style="width:'+po+'%"></span></div></div>'+
       '<p class="desc">'+p.desc+'</p>'+

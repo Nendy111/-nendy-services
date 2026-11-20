@@ -65,6 +65,7 @@ h2.q{font-style:italic;font-size:clamp(34px,7.5vw,52px);line-height:1.06;positio
 .nav{display:flex;justify-content:space-between;gap:12px;margin-top:28px;flex-wrap:wrap}
 .badge{display:inline-block;padding:7px 14px;border-radius:999px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#fff}
 .res h2{font-size:clamp(48px,11vw,80px);line-height:1;margin-top:18px}
+.bravo{margin:16px 0 0;padding:12px 16px;border-left:3px solid #ee07a5;background:rgba(238,7,165,.06);border-radius:0 12px 12px 0;font-weight:500;font-size:16.5px;line-height:1.45;color:#1a1714}
 .tag{font-family:var(--serif);font-style:italic;font-size:24px;line-height:1.25;margin:14px 0 0}
 .mix{margin:30px 0 6px;border:1px solid var(--ligne);border-radius:16px;padding:20px;background:var(--carte)}
 .mix .row{display:grid;grid-template-columns:130px 1fr 44px;gap:12px;align-items:center;padding:6px 0;font-size:14px}
@@ -243,7 +244,7 @@ function draw(k,c){
   var dt=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
   $("result").innerHTML='<div class="fade"><div class="hdr"><div class="t">Résultat du quiz<b>Nendy Services</b></div><div class="r">Réf. QE-'+k+'-'+String(Date.now()).slice(-4)+'<br>'+dt+'</div></div><div class="label k2">Ton profil</div>'+
    '<div style="margin-top:18px"><span class="badge" style="background:'+p.c+'">Profil entrepreneur</span></div>'+
-   '<h2>'+p.n+'</h2><p class="tag">'+p.tag+'</p>'+
+   '<h2>'+p.n+'</h2><p class="tag">'+p.tag+'</p><p class="bravo">'+{"V": "Bravo, ta vision est un vrai moteur : peu de gens voient aussi loin.", "M": "Bravo pour tout ce que tu portes chaque jour : tenir autant de rôles, c’est une vraie force.", "P": "Bravo pour ton exigence : tes clients sentent la qualité de ton travail.", "A": "Bravo, ton business est déjà bien organisé : tu as fait le plus difficile."}[k]+'</p>'+
    '<div class="mix"><div class="label" style="font-size:11px;color:var(--or);margin-bottom:8px">Ton mélange</div>'+mix+'</div>'+
    '<p class="desc">'+p.d+'</p>'+
    '<div class="trio"><div><div class="label">Ta force</div><p>'+p.f+'</p></div><div><div class="label">Ton piège</div><p>'+p.p+'</p></div><div><div class="label">Ce qu’il te faut</div><p>'+p.b+'</p></div></div>'+
