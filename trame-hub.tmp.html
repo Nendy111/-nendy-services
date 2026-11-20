@@ -1,0 +1,484 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Trame appel découverte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Jost:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+html,body{margin:0}
+/* Layout : colonne d'étapes chronométrées à gauche, fiche d'appel au centre, récap vivant à droite. DA 2026 Nendy Services. */
+:root{
+  --bg:#f5f1e6; --paper:#fbf8f1; --ink:#1a1714; --muted:#6e7a6e; --line:#e2d9c4;
+  --sage:#7b9a80; --sage-soft:#e3ebe2; --fuchsia:#d1068f; --fuchsia-soft:#fbe3f2;
+  --gold:#b8963f; --gold-soft:#efe4c6; --chip:#efe9da;
+  --serif:"Instrument Serif","Playfair Display",Georgia,serif;
+  --sans:"Jost","Helvetica Neue",Arial,sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1a1714; --paper:#221e1a; --ink:#f2ecdf; --muted:#a8b0a4; --line:#3a332b;
+  --sage:#94b39a; --sage-soft:#28332a; --fuchsia:#ff4fc0; --fuchsia-soft:#3a1630;
+  --gold:#d8bb6c; --gold-soft:#3a3020; --chip:#2c2620; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1a1714; --paper:#221e1a; --ink:#f2ecdf; --muted:#a8b0a4; --line:#3a332b;
+  --sage:#94b39a; --sage-soft:#28332a; --fuchsia:#ff4fc0; --fuchsia-soft:#3a1630;
+  --gold:#d8bb6c; --gold-soft:#3a3020; --chip:#2c2620; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 40px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+button,input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1320px;margin:0 auto}
+
+/* En-tête */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-block:14px 12px}
+.toprow{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand svg{flex:none}
+.word{font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.word i{font-style:normal;color:var(--fuchsia);font-size:9px}
+.word .filet{width:22px;height:1px;background:var(--gold)}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.timer{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.clock{font-family:var(--mono);font-size:22px;font-variant-numeric:tabular-nums;min-width:4.2ch;text-align:right}
+.clock small{font-size:12px;color:var(--muted)}
+.btn{border:1px solid var(--ink);background:transparent;border-radius:999px;padding:7px 14px;cursor:pointer;font-size:13px;font-weight:500;letter-spacing:.02em}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.btn.solid{background:var(--ink);color:var(--bg)}
+.btn.solid:hover{background:var(--fuchsia);border-color:var(--fuchsia);color:#fff}
+.btn.ghost{border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--ink)}
+.toggle{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);cursor:pointer;user-select:none}
+.toggle input{accent-color:var(--fuchsia);width:16px;height:16px}
+.bar{height:3px;background:var(--line);margin-top:12px;position:relative;overflow:hidden;border-radius:2px}
+.bar span{position:absolute;inset:0 auto 0 0;width:0;background:var(--gold);transition:width .6s linear}
+.bar span.over{background:var(--fuchsia)}
+
+/* Grille */
+.grid{display:grid;grid-template-columns:230px minmax(0,1fr) 330px;gap:28px;margin-top:26px;align-items:start}
+@media (max-width:1100px){.grid{grid-template-columns:200px minmax(0,1fr)}.side{grid-column:1/-1}nav.steps{position:static}}
+@media (max-width:720px){.grid{grid-template-columns:minmax(0,1fr)}}
+
+/* Étapes */
+nav.steps{position:sticky;top:calc(env(safe-area-inset-top,0px) + 110px);display:flex;flex-direction:column;gap:2px}
+@media (max-width:720px){nav.steps{position:static;flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:6px}}
+.st{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;text-align:left;border:0;background:transparent;padding:9px 10px;border-radius:10px;cursor:pointer;color:var(--muted)}
+.st:hover{background:var(--chip)}
+.st .dot{width:22px;height:22px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-family:var(--mono);font-size:10px;margin-top:2px}
+.st b{display:block;font-weight:500;color:var(--ink);font-size:14px;line-height:1.3}
+.st em{font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.06em}
+.st.on{background:var(--paper);box-shadow:inset 2px 0 0 var(--gold)}
+.st.on .dot{background:var(--gold);border-color:var(--gold);color:var(--bg)}
+.st.done .dot{background:var(--sage);border-color:var(--sage);color:var(--bg)}
+.st.late em{color:var(--fuchsia)}
+@media (max-width:720px){.st{min-width:150px}}
+
+/* Fiche */
+main{min-width:0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:30px 32px 32px;position:relative}
+@media (max-width:560px){.card{padding:22px 18px}}
+.card::before,.card::after{content:"";position:absolute;width:14px;height:14px;border:1px solid var(--gold)}
+.card::before{top:8px;left:8px;border-right:0;border-bottom:0}
+.card::after{bottom:8px;right:8px;border-left:0;border-top:0}
+.eyebrow{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--gold);font-weight:500}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(30px,4vw,44px);line-height:1.05;margin:14px 0 6px;text-wrap:balance}
+h1 i{color:var(--fuchsia)}
+.goal{color:var(--muted);margin:0 0 22px;max-width:62ch}
+h3{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:26px 0 10px}
+.say{border-left:2px solid var(--gold);padding:4px 0 4px 16px;margin:0 0 10px;font-family:var(--serif);font-size:20px;line-height:1.35}
+.say small{display:block;font-family:var(--sans);font-size:12px;color:var(--muted);margin-top:2px}
+.asks{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.asks label{display:flex;gap:10px;align-items:flex-start;cursor:pointer;padding:6px 8px;border-radius:8px}
+.asks label:hover{background:var(--chip)}
+.asks input{accent-color:var(--sage);width:16px;height:16px;margin-top:4px;flex:none}
+.asks input:checked + span{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--sage)}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 18px}
+@media (max-width:560px){.fields{grid-template-columns:minmax(0,1fr)}}
+.f{display:flex;flex-direction:column;gap:5px;min-width:0}
+.f.full{grid-column:1/-1}
+.f label{font-size:12px;font-weight:500;letter-spacing:.02em}
+.f input,.f textarea,.f select{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:9px 11px;width:100%}
+.f textarea{min-height:76px;resize:vertical}
+.f input:focus,.f textarea:focus,.f select:focus{border-color:var(--gold);outline:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:6px 13px;font-size:13px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.dom{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.dom:last-child{border-bottom:0}
+.dom b{font-weight:500}
+.dom small{display:block;color:var(--muted);font-size:12px}
+.seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:6px 12px;font-size:12px;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed="true"][data-v="1"]{background:var(--gold-soft);color:var(--ink)}
+.seg button[aria-pressed="true"][data-v="2"]{background:var(--fuchsia);color:#fff}
+.seg button[aria-pressed="true"][data-v="0"]{background:var(--chip);color:var(--ink)}
+.range{display:flex;align-items:center;gap:12px}
+.range input{flex:1;accent-color:var(--fuchsia)}
+.range output{font-family:var(--mono);font-size:18px;min-width:3ch;text-align:right}
+.navrow{display:flex;justify-content:space-between;gap:10px;margin-top:28px;flex-wrap:wrap}
+
+/* Solutions */
+.sol{display:grid;gap:12px}
+.pick{border:1px solid var(--line);border-radius:4px;padding:14px 16px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;cursor:pointer;background:var(--bg)}
+.pick input{accent-color:var(--fuchsia);width:17px;height:17px}
+.pick b{font-weight:500}
+.pick small{display:block;color:var(--muted);font-size:12.5px}
+.pick .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.packs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:820px){.packs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.packs{grid-template-columns:minmax(0,1fr)}}
+.pack{border:1px solid var(--line);border-radius:4px;padding:14px;background:var(--bg);cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:4px}
+.pack .mod{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage)}
+.pack .nm{font-family:var(--serif);font-size:22px;line-height:1.1}
+.pack .hr{font-size:12.5px;color:var(--muted)}
+.pack .pr{font-family:var(--mono);font-size:14px;margin-top:4px}
+.pack[aria-pressed="true"]{border-color:var(--fuchsia);box-shadow:0 0 0 1px var(--fuchsia);background:var(--paper)}
+.pack .reco{align-self:flex-start;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:var(--bg);padding:2px 7px;border-radius:2px}
+.why{background:var(--sage-soft);border-radius:4px;padding:12px 14px;font-size:13.5px;margin-top:10px}
+
+/* Récap latéral */
+.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 110px);display:grid;gap:14px;min-width:0}
+@media (max-width:1100px){.side{position:static}}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:18px 18px 16px;min-width:0}
+.panel h4{margin:0 0 10px;font-family:var(--serif);font-weight:400;font-size:22px}
+.panel h4 i{color:var(--fuchsia)}
+.kv{display:grid;gap:9px;font-size:13.5px}
+.kv div{display:grid;gap:1px}
+.kv span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.kv p{margin:0;overflow-wrap:anywhere}
+.kv .empty{color:var(--muted);font-style:italic}
+.kv .mini{display:flex;flex-wrap:wrap;gap:5px}
+.mini em{font-style:normal;font-size:12px;padding:2px 8px;border-radius:999px;background:var(--chip)}
+.mini em.hot{background:var(--fuchsia-soft);color:var(--fuchsia)}
+.private{border-style:dashed;border-color:var(--gold)}
+.private h4{font-size:18px}
+.private textarea{width:100%;min-height:110px;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:9px 11px;resize:vertical}
+.lock{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+
+/* Récap final */
+.recap{white-space:pre-wrap;background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:18px;font-size:14px;max-height:420px;overflow:auto;overflow-wrap:anywhere}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+a.btn{text-decoration:none;display:inline-flex;align-items:center}
+.note{font-size:12.5px;color:var(--muted);margin-top:10px}
+.carto{border:1px solid var(--line);border-radius:4px;background:var(--bg);padding:18px;margin-top:6px}
+.carto svg{width:100%;height:auto;display:block;max-width:100%}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted);margin:8px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:16px}
+.col{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:14px;min-width:0}
+.col h5{margin:0 0 8px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.col ul{margin:0;padding-left:16px;font-size:13.5px;display:grid;gap:4px}
+.col p{margin:0;font-size:13.5px}
+.col .big{font-family:var(--serif);font-size:24px;line-height:1.1}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:999px;font-size:13px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:20}
+.toast.show{opacity:1}
+.sample{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fuchsia);border:1px solid var(--fuchsia);padding:2px 7px;border-radius:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head><body>
+<div class="wrap">
+<header class="top">
+  <div class="toprow">
+    <div class="brand">
+      <svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 20m0 0c1.6-1.6 4.2-.6 4.2 1.8 0 3-3.6 4.6-6.2 3.2-3.6-2-3.4-7.4.2-9.6 4.6-2.8 10.6.2 11.2 5.6.8 6.6-5.6 11.4-11.8 9.8C10 29 7.4 20.6 11.4 14.6 16 7.8 26.6 7.4 31.6 14" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <div>
+        <div class="word">Nendy <span class="filet"></span><i>◆</i><span class="filet"></span> Services</div>
+        <div class="kicker">Appel découverte · 45 min</div>
+      </div>
+    </div>
+    <div class="timer">
+      <label class="toggle" title="Masque tes notes privées pendant le partage d'écran"><input type="checkbox" id="share" checked> Mode partage d'écran</label>
+      <div class="clock" id="clock">00:00 <small>/ 45:00</small></div>
+      <button class="btn solid" id="go">Lancer l'appel</button>
+      <button class="btn" id="hubsave" hidden>Enregistrer dans le Hub</button>
+      <button class="btn ghost" id="reset">Nouvel appel</button>
+    </div>
+  </div>
+  <div class="bar"><span id="barfill"></span></div>
+</header>
+
+<div class="grid">
+  <nav class="steps" id="steps" aria-label="Étapes de l'appel"></nav>
+  <main id="main"></main>
+  <aside class="side">
+    <div class="panel">
+      <h4>Ce que je <i>retiens</i></h4>
+      <div class="kv" id="live"></div>
+    </div>
+    <div class="panel private" id="privPanel" hidden>
+      <div class="lock">Privé · jamais dans le récap</div>
+      <h4>Mes notes</h4>
+      <textarea id="priv" placeholder="Ressenti, budget évoqué, points de vigilance, signaux d'achat…"></textarea>
+    </div>
+  </aside>
+</div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+var IN_HUB=window.parent!==window;
+var DOMAINS=[
+ {id:'admin',n:'Gestion administrative',d:'Emails, devis, facturation, relances, contrats',w:['Modèles de devis et de factures prêts à l’emploi','Relances de paiement automatiques','Une boîte mail triée avec des libellés et des réponses types']},
+ {id:'plan',n:'Planning & organisation',d:'Agenda, priorités, deadlines, rétroplanning',w:['Un agenda unique avec des blocs de travail protégés','Un rétroplanning pour les projets en cours','Une revue hebdomadaire de 20 minutes pour fixer les priorités']},
+ {id:'proj',n:'Gestion des projets',d:'Suivi des tâches, livrables, prestataires, SOP',w:['Un tableau de suivi des tâches et des livrables','Des fiches process (SOP) pour les tâches qui reviennent','Un point de suivi régulier avec les prestataires']},
+ {id:'client',n:'Service client',d:'Messages, demandes, avis, SAV',w:['Des réponses types sur WhatsApp Business et par mail','Toutes les demandes clients suivies dans un seul outil','Une demande d’avis envoyée après chaque prestation']},
+ {id:'crm',n:'Prospection & CRM',d:'Pipeline, leads, relances, contacts',w:['Un pipeline prospects simple, étape par étape','Des relances programmées pour ne plus oublier personne','Un fichier contacts propre et à jour']},
+ {id:'contenu',n:'Présence en ligne & contenu',d:'Réseaux, site, fiche Google, newsletter, DM',w:['Un calendrier éditorial sur un mois','Des modèles de posts et la programmation à l’avance','Une fiche Google Business à jour']},
+ {id:'outils',n:'Outils & automatisations',d:'Notion, Zapier, Make, IA, tableau de bord',w:['Connecter les outils entre eux pour supprimer les doubles saisies','Automatiser les tâches répétées à la main','Un Poste de pilotage : toute l’activité sur un seul tableau de bord']}
+];
+var TOOLS=['Gmail','Outlook','Google Agenda','Notion','Trello','Asana','Google Drive','Excel / Sheets','Canva','WhatsApp Business','Instagram','Facebook','LinkedIn','TikTok','Calendly','Notion Calendar','Qonto','Stripe','PayPal','Logiciel de facturation','Site web','Zapier / Make','ChatGPT / IA','Papier & carnet'];
+var PACKS=[
+ {id:'mini',mod:'Flow',n:'Mini Flow',h:'5 h · coup de pouce ponctuel',p:'180 €'},
+ {id:'starter',mod:'Flow',n:'Starter',h:'10 h · soutien régulier',p:'340 €'},
+ {id:'focus',mod:'Structure',n:'Focus',h:'20 h · un chantier précis',p:'640 €'},
+ {id:'org',mod:'Structure',n:'Abo Org',h:'25 h par mois · maintenance continue',p:'775 € / mois'},
+ {id:'partner',mod:'Expansion',n:'Abo Partner',h:'45 h par mois · partenariat stratégique',p:'1 350 € / mois'},
+ {id:'align',mod:'Expansion',n:'Alignement',h:'60 h · lancement complet',p:'1 800 €'}
+];
+var STEPS=[
+ {id:'accueil',from:0,to:5,t:'Accueil & cadre',h:'On pose le <i>cadre</i>.',g:'Mettre la personne à l’aise et annoncer le déroulé, pour qu’elle sache où on va.',
+  say:[['Bonjour [Prénom], merci d’avoir pris ce temps. On a 45 minutes ensemble.',''],['Je vous propose ce déroulé : vous me parlez de votre activité, de ce qui vous prend du temps, de vos outils. À la fin, je vous montre des pistes concrètes.','Montrer l’écran à ce moment-là.'],['Je prends des notes pendant qu’on parle, et je vous envoie un récap juste après.','']],
+  ask:['Vérifier le son et le partage d’écran','Confirmer le prénom et l’adresse mail','Demander comment elle a connu Nendy Services']},
+ {id:'activite',from:5,to:12,t:'Son activité',h:'Parlez-moi de votre <i>activité</i>.',g:'Comprendre le business avant de parler d’organisation.',
+  say:[['Racontez-moi votre activité : ce que vous faites, pour qui, et depuis combien de temps.',''],['Aujourd’hui, à quoi ressemble une semaine type pour vous ?','Écouter, ne pas proposer de solution tout de suite.']],
+  ask:['Ce qu’elle vend et à qui','Ancienneté de l’activité','Seule ou avec une équipe, des prestataires','Une semaine type']},
+ {id:'blocages',from:12,to:22,t:'Ce qui bloque',h:'Ce qui vous prend de l’<i>énergie</i>.',g:'Repérer les domaines où ça coince, et à quel point.',
+  say:[['Qu’est-ce qui vous prend le plus de temps ou d’énergie en ce moment ?',''],['S’il y avait une seule tâche que vous ne vouliez plus jamais faire, ce serait laquelle ?',''],['Sur 10, à combien est votre charge mentale liée à l’organisation ?','']],
+  ask:['Parcourir les 7 domaines avec elle','Noter la tâche qu’elle ne veut plus faire','Demander la note de charge mentale']},
+ {id:'outils',from:22,to:30,t:'Ses outils',h:'Vos outils au <i>quotidien</i>.',g:'Faire l’inventaire des outils, des doublons et des tâches faites à la main.',
+  say:[['Quels outils utilisez-vous au quotidien ? On les coche ensemble.',''],['Est-ce qu’il y a des informations que vous notez à plusieurs endroits ?',''],['Quelles tâches refaites-vous à la main chaque semaine ?','']],
+  ask:['Outils de communication','Outils d’organisation et de stockage','Outils de vente et de paiement','Doublons et ressaisies']},
+ {id:'objectifs',from:30,to:37,t:'Objectifs & priorités',h:'Où vous voulez <i>aller</i>.',g:'Savoir ce que la personne veut obtenir, à quel rythme et pour quand.',
+  say:[['Dans trois mois, qu’est-ce qui aurait changé pour que vous soyez soulagée ?',''],['Ce que vous aimeriez déléguer en premier, ce serait quoi ?',''],['Vous imaginez plutôt un coup de pouce ponctuel, un chantier précis, ou quelqu’un à vos côtés chaque mois ?','']],
+  ask:['Objectif à trois mois','Ce qu’elle délègue en premier','Rythme souhaité','Délai ou date importante']},
+ {id:'solutions',from:37,to:43,t:'Solutions à la carte',h:'Vos solutions à la <i>carte</i>.',g:'Montrer les pistes et la formule qui correspondent, puis laisser la personne réagir.',
+  say:[['Voilà ce que je retiens, et ce que je vous propose.',''],['Qu’est-ce qui vous parle le plus là-dedans ?','Laisser répondre, ajuster la sélection en direct.']],
+  ask:[]},
+ {id:'suite',from:43,to:45,t:'Cartographie & suite',h:'Votre <i>cartographie</i>.',g:'Montrer la carte de son écosystème, conclure clairement et envoyer le récap.',
+  say:[['Je vous envoie le récap de notre échange par mail juste après l’appel.',''],['Sous 24 h, vous recevez ma proposition détaillée : plan de travail, outils et délais.',''],['Vous validez, et on démarre. Est-ce que vous avez une question avant qu’on se quitte ?','']],
+  ask:['Envoyer le récap','Noter la date de relance','Remercier']}
+];
+
+var KEY='nendy-trame-appel-v1';
+var S=blank();
+function blank(){return {step:0,checks:{},f:{},pains:{},tools:[],quick:{},pack:null,priv:'',start:null,elapsed:0,running:false,sample:false};}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function load(){try{var v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&v.f){S=Object.assign(blank(),v);return true}}catch(e){}return false}
+function sample(){
+  S=blank();S.sample=true;
+  S.f={prenom:'Maëva',email:'',activite:'Coach en reconversion professionnelle, accompagnements individuels et ateliers',depuis:'2 ans',equipe:'Seule, une graphiste ponctuelle',source:'Instagram',semaine:'Séances le matin, admin et messages le soir',tache:'Faire les factures et relancer les paiements',temps:'Les messages WhatsApp et les relances',charge:'8',autres:'',doublons:'Rendez-vous notés dans Google Agenda et dans un carnet',manuel:'Factures sur Canva, confirmations de rendez-vous une par une',objectif:'Ne plus travailler le soir et lancer ses ateliers en groupe',deleguer:'La facturation et les relances',rythme:'continu',heures:'5-10',delai:'Avant le lancement des ateliers en février'};
+  S.pains={admin:2,client:2,plan:1,outils:1};
+  S.tools=['Gmail','Google Agenda','Canva','WhatsApp Business','Instagram','Papier & carnet'];
+}
+if(!load())sample();
+
+function $(s,r){return (r||document).querySelector(s)}
+function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function v(k){return (S.f[k]||'').trim()}
+
+/* ---------- Rendu des étapes ---------- */
+function renderNav(){
+  var min=S.elapsed/60;
+  $('#steps').innerHTML=STEPS.map(function(s,i){
+    var cls='st'+(i===S.step?' on':'')+(i<S.step?' done':'')+(S.running&&i===S.step&&min>s.to?' late':'');
+    return '<button class="'+cls+'" data-i="'+i+'"><span class="dot">'+(i<S.step?'✓':i+1)+'</span><span><b>'+s.t+'</b><em>'+s.from+'–'+s.to+' min</em></span></button>';
+  }).join('');
+}
+function field(k,label,type,opts){
+  opts=opts||{};var full=opts.full?' full':'';var val=esc(S.f[k]||'');
+  if(type==='area')return '<div class="f'+full+'"><label for="f_'+k+'">'+label+'</label><textarea id="f_'+k+'" data-k="'+k+'" placeholder="'+(opts.ph||'')+'">'+val+'</textarea></div>';
+  if(type==='select')return '<div class="f'+full+'"><label for="f_'+k+'">'+label+'</label><select id="f_'+k+'" data-k="'+k+'"><option value="">À choisir</option>'+opts.o.map(function(o){return '<option value="'+o[0]+'"'+(S.f[k]===o[0]?' selected':'')+'>'+o[1]+'</option>'}).join('')+'</select></div>';
+  return '<div class="f'+full+'"><label for="f_'+k+'">'+label+'</label><input id="f_'+k+'" data-k="'+k+'" type="'+(type||'text')+'" value="'+val+'" placeholder="'+(opts.ph||'')+'"></div>';
+}
+function body(s){
+  switch(s.id){
+  case 'accueil': return '<h3>Je note</h3><div class="fields">'+field('prenom','Prénom')+field('email','Adresse mail','email',{ph:'pour lui envoyer le récap'})+field('source','Comment elle m’a connue','text',{full:1,ph:'Instagram, bouche-à-oreille, quiz…'})+'</div>';
+  case 'activite': return '<h3>Je note</h3><div class="fields">'+field('activite','Son activité','area',{full:1,ph:'Ce qu’elle vend, à qui'})+field('depuis','Depuis combien de temps')+field('equipe','Seule ou en équipe')+field('semaine','Sa semaine type','area',{full:1})+'</div>';
+  case 'blocages': return '<h3>Les 7 domaines</h3><div>'+DOMAINS.map(function(d){var p=S.pains[d.id]||0;return '<div class="dom"><div><b>'+d.n+'</b><small>'+d.d+'</small></div><div class="seg" data-dom="'+d.id+'">'+[['0','Ça va'],['1','Ça gêne'],['2','Ça bloque']].map(function(o){return '<button data-v="'+o[0]+'" aria-pressed="'+(String(p)===o[0])+'">'+o[1]+'</button>'}).join('')+'</div></div>'}).join('')+'</div>'
+     +'<h3>Je note</h3><div class="fields">'+field('temps','Ce qui lui prend le plus de temps','area')+field('tache','La tâche qu’elle ne veut plus faire','area')+'<div class="f full"><label for="f_charge">Charge mentale liée à l’organisation</label><div class="range"><input type="range" id="f_charge" data-k="charge" min="1" max="10" value="'+(S.f.charge||5)+'"><output id="chargeOut">'+(S.f.charge||5)+'/10</output></div></div></div>';
+  case 'outils': return '<h3>Ses outils</h3><div class="chips" id="tools">'+TOOLS.map(function(t){return '<button class="chip" aria-pressed="'+(S.tools.indexOf(t)>-1)+'">'+esc(t)+'</button>'}).join('')+'</div>'
+     +'<h3>Je note</h3><div class="fields">'+field('autres','Autres outils','text',{full:1})+field('doublons','Informations notées à plusieurs endroits','area')+field('manuel','Tâches refaites à la main','area')+'</div>';
+  case 'objectifs': return '<h3>Je note</h3><div class="fields">'+field('objectif','Son objectif à trois mois','area',{full:1})+field('deleguer','Ce qu’elle délègue en premier','area',{full:1})
+     +field('rythme','Rythme souhaité','select',{o:[['ponctuel','Un coup de pouce ponctuel'],['chantier','Un chantier précis'],['continu','Un accompagnement chaque mois'],['lancement','Un lancement complet']]})
+     +field('heures','Temps à récupérer par semaine','select',{o:[['-2','Moins de 2 h'],['2-5','2 à 5 h'],['5-10','5 à 10 h'],['10+','Plus de 10 h']]})
+     +field('delai','Délai ou date importante','text',{full:1})+'</div>';
+  case 'solutions': return solutions();
+  case 'suite': return cartoBlock()+recapBlock();
+  }
+}
+function renderMain(){
+  var s=STEPS[S.step];
+  var h='<div class="card"><div class="eyebrow"><span>◆ Étape '+(S.step+1)+' / '+STEPS.length+'</span><b>'+s.from+'–'+s.to+' min</b></div>'
+   +(S.sample?'<p style="margin:12px 0 0"><span class="sample">Exemple</span> <span class="note">Fiche pré-remplie pour te montrer. Clique sur « Nouvel appel » pour partir de zéro.</span></p>':'')
+   +'<h1>'+s.h+'</h1><p class="goal">'+s.g+'</p>'
+   +(s.say.length?'<h3>Je dis</h3>'+s.say.map(function(x){return '<p class="say">« '+esc(x[0])+' »'+(x[1]?'<small>'+esc(x[1])+'</small>':'')+'</p>'}).join(''):'')
+   +(s.ask.length?'<h3>Je vérifie</h3><ul class="asks">'+s.ask.map(function(a,j){var id=s.id+'_'+j;return '<li><label><input type="checkbox" data-c="'+id+'"'+(S.checks[id]?' checked':'')+'><span>'+esc(a)+'</span></label></li>'}).join('')+'</ul>':'')
+   +body(s)
+   +'<div class="navrow">'+(S.step>0?'<button class="btn ghost" data-nav="-1">← '+STEPS[S.step-1].t+'</button>':'<span></span>')
+   +(S.step<STEPS.length-1?'<button class="btn solid" data-nav="1">'+STEPS[S.step+1].t+' →</button>':'')+'</div></div>';
+  $('#main').innerHTML=h;
+}
+
+/* ---------- Moteur de solutions ---------- */
+function ranked(){return DOMAINS.filter(function(d){return (S.pains[d.id]||0)>0}).sort(function(a,b){return (S.pains[b.id]||0)-(S.pains[a.id]||0)})}
+function recoPack(){
+  var r=S.f.rythme,h=S.f.heures,blocks=DOMAINS.filter(function(d){return S.pains[d.id]===2}).length;
+  if(r==='lancement'||(r==='chantier'&&blocks>=4))return {id:'align',why:'Plusieurs domaines bloquent en même temps : un lancement complet permet de tout poser d’un coup.'};
+  if(r==='chantier')return {id:'focus',why:'Un chantier précis à mener : 20 h pour le poser du début à la fin.'};
+  if(r==='continu'){
+    if(h==='10+')return {id:'partner',why:'Plus de 10 h par semaine à récupérer, avec un besoin de suivi chaque mois : un vrai bras droit.'};
+    if(h==='5-10'||blocks>=2)return {id:'org',why:'Un besoin régulier, chaque mois : 25 h de maintenance continue pour que tout tourne.'};
+    return {id:'starter',why:'Un soutien régulier mais léger : 10 h pour commencer, à renouveler.'};
+  }
+  if(r==='ponctuel')return (h==='-2'||!h)?{id:'mini',why:'Un coup de pouce ponctuel : 5 h pour souffler.'}:{id:'starter',why:'Un besoin ponctuel mais réel : 10 h de soutien.'};
+  if(h==='10+')return {id:'partner',why:'Beaucoup de temps à récupérer chaque semaine.'};
+  if(h==='5-10')return {id:'org',why:'Entre 5 et 10 h à récupérer chaque semaine : un suivi mensuel est le plus adapté.'};
+  return {id:'starter',why:'Pour commencer en douceur : 10 h de soutien.'};
+}
+function quickList(){
+  var list=[];
+  ranked().slice(0,3).forEach(function(d){var n=S.pains[d.id]===2?2:1;d.w.slice(0,n).forEach(function(w){list.push({k:d.id+':'+w,t:w,d:d.n})})});
+  var nt=S.tools.length+(v('autres')?1:0);
+  if((nt>=5||v('doublons'))&&!list.some(function(x){return x.d==='Outils & automatisations'}))list.push({k:'outils:poste',t:'Un Poste de pilotage : toute l’activité sur un seul tableau de bord',d:'Outils & automatisations'});
+  return list;
+}
+function selPack(){return S.pack||recoPack().id}
+function solutions(){
+  var q=quickList(),reco=recoPack(),sel=selPack();
+  var h='<h3>Les pistes pour vous</h3>';
+  if(!q.length)h+='<p class="note">Indique ce qui gêne ou bloque à l’étape « Ce qui bloque » : les pistes s’afficheront ici.</p>';
+  else h+='<div class="sol">'+q.map(function(x){var on=S.quick[x.k]!==false;return '<label class="pick"><input type="checkbox" data-q="'+esc(x.k)+'"'+(on?' checked':'')+'><span><b>'+esc(x.t)+'</b><small>'+esc(x.d)+'</small></span><span class="tag">'+(S.pains[x.k.split(':')[0]]===2?'Priorité':'Bonus')+'</span></label>'}).join('')+'</div>';
+  h+='<h3>La formule qui vous correspond</h3><div class="packs" id="packs">'+PACKS.map(function(p){return '<button class="pack" data-p="'+p.id+'" aria-pressed="'+(p.id===sel)+'">'+(p.id===reco.id?'<span class="reco">Recommandée</span>':'')+'<span class="mod">Module '+p.mod+'</span><span class="nm">'+p.n+'</span><span class="hr">'+p.h+'</span><span class="pr">'+p.p+'</span></button>'}).join('')+'</div>';
+  h+='<div class="why"><b>Pourquoi celle-ci :</b> '+esc(sel===reco.id?reco.why:'formule choisie ensemble pendant l’appel.')+'</div>';
+  h+='<p class="note">Formules dégressives, à partir de 30 € de l’heure. Clique sur une autre formule pour changer.</p>';
+  return h;
+}
+
+
+/* ---------- Cartographie ---------- */
+function cartoBlock(){
+  var W=700,H=440,cx=350,cy=220,rx=245,ry=150;
+  var col={0:'var(--sage)',1:'var(--gold)',2:'var(--fuchsia)'},lab={0:'Ça va',1:'Ça gêne',2:'Ça bloque'};
+  var g='';
+  DOMAINS.forEach(function(d,i){
+    var a=-Math.PI/2+i*2*Math.PI/DOMAINS.length,x=cx+rx*Math.cos(a),y=cy+ry*Math.sin(a),p=S.pains[d.id]||0;
+    g+='<line x1="'+cx+'" y1="'+cy+'" x2="'+x.toFixed(1)+'" y2="'+y.toFixed(1)+'" style="stroke:'+col[p]+';stroke-width:'+(p===2?2.4:1.2)+'"'+(p===0?' stroke-dasharray="3 5"':'')+'/>';
+    g+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+(p===2?11:8)+'" style="fill:'+col[p]+';stroke:var(--bg);stroke-width:3"/>';
+    var up=y<cy-60,ty=up?y-36:y+30;
+    g+='<text x="'+x.toFixed(1)+'" y="'+ty.toFixed(1)+'" text-anchor="middle" style="fill:var(--ink);font-family:var(--sans);font-size:15px;font-weight:500">'+esc(d.n)+'</text>';
+    g+='<text x="'+x.toFixed(1)+'" y="'+(ty+16).toFixed(1)+'" text-anchor="middle" style="fill:'+col[p]+';font-family:var(--mono);font-size:11px;letter-spacing:.12em">'+lab[p].toUpperCase()+'</text>';
+  });
+  g+='<circle cx="'+cx+'" cy="'+cy+'" r="64" style="fill:var(--paper);stroke:var(--gold);stroke-width:1.2"/>';
+  g+='<text x="'+cx+'" y="'+(cy-8)+'" text-anchor="middle" style="fill:var(--muted);font-family:var(--mono);font-size:9px;letter-spacing:.2em">ÉCOSYSTÈME DE</text>';
+  g+='<text x="'+cx+'" y="'+(cy+20)+'" text-anchor="middle" style="fill:var(--ink);font-family:var(--serif);font-size:26px">'+esc(v('prenom')||'Votre business')+'</text>';
+  var t=S.tools.slice();if(v('autres'))t.push(v('autres'));
+  var q=quickList().filter(function(x){return S.quick[x.k]!==false});
+  var pk=PACKS.filter(function(x){return x.id===selPack()})[0];
+  return '<h3>La carte de votre écosystème</h3><div class="carto"><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Cartographie des 7 domaines">'+g+'</svg>'
+   +'<div class="legend"><span><i style="background:var(--sage)"></i>Ça va</span><span><i style="background:var(--gold)"></i>Ça gêne</span><span><i style="background:var(--fuchsia)"></i>Ça bloque</span>'+(S.f.charge?'<span>Charge mentale : '+esc(S.f.charge)+'/10</span>':'')+'</div>'
+   +'<div class="cols"><div class="col"><h5>Vos outils · '+t.length+'</h5>'+(t.length?'<ul>'+t.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>':'<p>À compléter</p>')+(v('doublons')?'<p style="margin-top:8px;color:var(--muted)">Doublons : '+esc(v('doublons'))+'</p>':'')+'</div>'
+   +'<div class="col"><h5>Les pistes retenues</h5>'+(q.length?'<ul>'+q.map(function(x){return '<li>'+esc(x.t)+'</li>'}).join('')+'</ul>':'<p>À compléter</p>')+'</div>'
+   +'<div class="col"><h5>Votre formule</h5><p class="big">'+esc(pk.n)+'</p><p>'+esc(pk.h)+'</p><p style="font-family:var(--mono);margin-top:6px">'+esc(pk.p)+'</p>'+(v('objectif')?'<p style="margin-top:10px;color:var(--muted)">Objectif : '+esc(v('objectif'))+'</p>':'')+'</div></div></div>';
+}
+
+/* ---------- Récap ---------- */
+function recapText(){
+  var p=v('prenom')||'[Prénom]',L=[];
+  L.push('Bonjour '+p+',','','Merci pour notre échange d’aujourd’hui. Voici le récap de ce qu’on s’est dit.','');
+  L.push('CE QUE J’AI RETENU');
+  if(v('activite'))L.push('• Votre activité : '+v('activite')+(v('depuis')?' (depuis '+v('depuis')+')':''));
+  if(v('temps'))L.push('• Ce qui vous prend le plus de temps : '+v('temps'));
+  if(v('tache'))L.push('• La tâche que vous ne voulez plus faire : '+v('tache'));
+  var r=ranked();if(r.length)L.push('• Les domaines à alléger en priorité : '+r.map(function(d){return d.n}).join(', '));
+  var t=S.tools.slice();if(v('autres'))t.push(v('autres'));if(t.length)L.push('• Vos outils actuels : '+t.join(', '));
+  if(v('objectif'))L.push('• Votre objectif à trois mois : '+v('objectif'));
+  L.push('');
+  var q=quickList().filter(function(x){return S.quick[x.k]!==false});
+  if(q.length){L.push('MES PISTES POUR VOUS');q.forEach(function(x){L.push('• '+x.t)});L.push('')}
+  var pk=PACKS.filter(function(x){return x.id===selPack()})[0];
+  L.push('LA FORMULE QUI VOUS CORRESPOND','• '+pk.n+' (module '+pk.mod+') : '+pk.h+' · '+pk.p,'');
+  L.push('LA SUITE','Sous 24 h, je vous envoie ma proposition détaillée : plan de travail, outils et délais. Vous validez, et on démarre.','');
+  L.push('Si vous avez une question d’ici là, répondez simplement à ce mail ou écrivez-moi sur WhatsApp au 06 90 70 33 27.','','À très vite,','Nendy','Nendy Services · L’harmonie entre organisation et assistance.');
+  return L.join('\n');
+}
+function subject(){return 'Récap de notre appel découverte · Nendy Services'}
+function recapBlock(){
+  var txt=recapText();
+  var gm='https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(v('email'))+'&su='+encodeURIComponent(subject())+'&body='+encodeURIComponent(txt);
+  return '<h3>Le récap à envoyer</h3><div class="recap" id="recapTxt">'+esc(txt)+'</div>'
+   +'<div class="actions"><a class="btn solid" href="'+gm+'" target="_blank" rel="noopener">Ouvrir le mail dans Gmail</a><button class="btn" id="copy">Copier le récap</button>'+(IN_HUB?'<button class="btn" data-hubsave="1">Enregistrer dans le Hub</button>':'')+'</div>'
+   +'<p class="note">Gmail s’ouvre dans un nouvel onglet avec l’adresse, l’objet et le texte déjà remplis : tu relis et tu envoies. '+(v('email')?'':'Pense à noter son adresse mail à l’étape Accueil. ')+'Tes notes privées ne sont jamais dans le récap.</p>';
+}
+
+/* ---------- Panneau "Ce que je retiens" ---------- */
+function renderLive(){
+  function row(lbl,val){return '<div><span>'+lbl+'</span><p'+(val?'':' class="empty"')+'>'+(val||'À compléter')+'</p></div>'}
+  var r=ranked(),t=S.tools.slice();if(v('autres'))t.push(v('autres'));
+  var pk=PACKS.filter(function(x){return x.id===selPack()})[0];
+  $('#live').innerHTML=row('Cliente',esc(v('prenom')))+row('Activité',esc(v('activite')))
+   +'<div><span>Ce qui pèse</span>'+(r.length?'<div class="mini">'+r.map(function(d){return '<em'+(S.pains[d.id]===2?' class="hot"':'')+'>'+d.n+'</em>'}).join('')+'</div>':'<p class="empty">À compléter</p>')+'</div>'
+   +row('Charge mentale',S.f.charge?S.f.charge+'/10':'')
+   +'<div><span>Outils · '+t.length+'</span>'+(t.length?'<div class="mini">'+t.map(function(x){return '<em>'+esc(x)+'</em>'}).join('')+'</div>':'<p class="empty">À compléter</p>')+'</div>'
+   +row('Objectif',esc(v('objectif')))+row('Formule envisagée',S.f.rythme||S.f.heures||S.pack?esc(pk.n+' · '+pk.p):'');
+}
+
+/* ---------- Chrono ---------- */
+var tick=null;
+function fmt(s){s=Math.floor(s);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function now(){return S.running&&S.start?S.elapsed+(Date.now()-S.start)/1000:S.elapsed}
+function paintClock(){
+  var e=now();$('#clock').innerHTML=fmt(e)+' <small>/ 45:00</small>';
+  var b=$('#barfill');b.style.width=Math.min(100,e/2700*100)+'%';b.classList.toggle('over',e>2700);
+  $('#go').textContent=S.running?'Pause':(S.elapsed>0?'Reprendre':'Lancer l’appel');
+}
+function startTick(){clearInterval(tick);tick=setInterval(function(){paintClock();var m=now()/60;var s=STEPS[S.step];var late=m>s.to;var el=document.querySelector('.st.on');if(el)el.classList.toggle('late',late)},1000)}
+
+/* ---------- Événements ---------- */
+function all(){renderNav();renderMain();renderLive();paintClock();save()}
+function go(i){S.step=Math.max(0,Math.min(STEPS.length-1,i));all();window.scrollTo({top:0,behavior:'smooth'})}
+function toast(t){var x=$('#toast');x.textContent=t;x.classList.add('show');clearTimeout(x._t);x._t=setTimeout(function(){x.classList.remove('show')},1800)}
+
+document.addEventListener('click',function(e){
+  var b;
+  if((b=e.target.closest('.st')))return go(+b.dataset.i);
+  if((b=e.target.closest('[data-nav]')))return go(S.step+(+b.dataset.nav));
+  if((b=e.target.closest('.seg button'))){var d=b.parentNode.dataset.dom;S.pains[d]=+b.dataset.v;S.sample=false;b.parentNode.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});renderLive();save();return}
+  if((b=e.target.closest('#tools .chip'))){var t=b.textContent,i=S.tools.indexOf(t);if(i>-1)S.tools.splice(i,1);else S.tools.push(t);b.setAttribute('aria-pressed',i<0);S.sample=false;renderLive();save();return}
+  if((b=e.target.closest('.pack'))){S.pack=b.dataset.p;renderMain();renderLive();save();return}
+  if(e.target.id==='hubsave'||e.target.closest('[data-hubsave]')){hubSave();return}
+  if(e.target.id==='copy'){var txt=recapText();var done=function(){toast('Récap copié')};
+    try{navigator.clipboard.writeText(txt).then(done,function(){selectRecap()})}catch(err){selectRecap()}return}
+  if(e.target.id==='go'){if(S.running){S.elapsed=now();S.running=false;S.start=null;clearInterval(tick)}else{S.running=true;S.start=Date.now();startTick()}paintClock();save();return}
+  if(e.target.id==='reset'){var x=e.target;if(x.dataset.sure){S=blank();$("#priv").value="";clearInterval(tick);x.textContent='Nouvel appel';delete x.dataset.sure;all();toast('Fiche vierge prête')}else{x.dataset.sure='1';x.textContent='Effacer la fiche ?';setTimeout(function(){if(x.dataset.sure){delete x.dataset.sure;x.textContent='Nouvel appel'}},3000)}return}
+});
+function selectRecap(){var el=$('#recapTxt');if(!el)return;var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);toast('Texte sélectionné : fais Cmd+C')}
+document.addEventListener('input',function(e){
+  var k=e.target.dataset&&e.target.dataset.k;
+  if(k){S.f[k]=e.target.value;S.sample=false;if(k==='charge')$('#chargeOut').textContent=e.target.value+'/10';renderLive();save();return}
+  if(e.target.dataset&&e.target.dataset.c){S.checks[e.target.dataset.c]=e.target.checked;save();return}
+  if(e.target.dataset&&e.target.dataset.q){S.quick[e.target.dataset.q]=e.target.checked;save();return}
+  if(e.target.id==='priv'){S.priv=e.target.value;save()}
+});
+document.addEventListener('change',function(e){var k=e.target.dataset&&e.target.dataset.k;if(k&&e.target.tagName==='SELECT'){S.f[k]=e.target.value;if(k==='rythme'||k==='heures')S.pack=null;renderLive();save()}});
+$('#share').addEventListener('change',function(){$('#privPanel').hidden=this.checked});
+$('#priv').value=S.priv||'';
+if(S.running){startTick()}
+all();
+/* ---------- Hub ---------- */
+function hubPayload(){var pk=PACKS.filter(function(x){return x.id===selPack()})[0];return {id:S.hubId||null,prenom:v('prenom'),email:v('email'),activite:v('activite'),formule:pk.n+' · '+pk.p,charge:String(S.f.charge||''),domaines:ranked().map(function(d){return d.n+(S.pains[d.id]===2?' (bloque)':' (gêne)')}).join(', '),outils:S.tools.concat(v('autres')?[v('autres')]:[]).join(', '),objectif:v('objectif'),recap:recapText(),notes_privees:S.priv||'',donnees:JSON.stringify(S)}}
+function hubSave(){if(!v('prenom')&&!v('email')){toast('Note au moins le prénom avant d’enregistrer');return}S.sample=false;parent.postMessage({type:'trame:save',payload:hubPayload()},'*')}
+if(IN_HUB){
+  $('#hubsave').hidden=false;
+  window.addEventListener('message',function(e){var m=e.data||{};
+    if(m.type==='trame:saved'){S.hubId=m.id;save();toast('Appel enregistré dans le Hub')}
+    else if(m.type==='trame:error'){toast('Enregistrement impossible : '+(m.msg||'réessaie'))}
+    else if(m.type==='trame:load'){try{S=Object.assign(blank(),JSON.parse(m.donnees));S.hubId=m.id;S.running=false;S.start=null;clearInterval(tick);$('#priv').value=S.priv||'';all();toast('Appel rouvert')}catch(err){toast('Impossible de rouvrir cet appel')}}
+    else if(m.type==='trame:new'){S=blank();S.f.prenom=m.prenom||'';S.f.email=m.email||'';S.f.source=m.source||'';clearInterval(tick);$('#priv').value='';all()}
+  });
+  parent.postMessage({type:'trame:ready'},'*');
+}
+})();
+</script>
+</body></html>
