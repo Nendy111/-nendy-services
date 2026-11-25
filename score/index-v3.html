@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Score — À quel point ton business est organisé ? · Nendy Services</title>
+<meta name="description" content="Score gratuit Nendy Services : 10 questions, une note sur 100 et un plan d'action pour organiser ton business.">
+<meta property="og:title" content="À quel point ton business est organisé ?">
+<meta property="og:description" content="Réponds à 10 questions et obtiens ton score sur 100, avec un plan d'action personnalisé.">
+<meta property="og:image" content="https://nendyservices.com/img/nendy-spirale-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Jost:wght@300;400;500&family=DM+Mono:wght@400;500&family=Montserrat:ital,wght@1,700&family=Playfair+Display+SC&display=swap">
+<link rel="stylesheet" href="/assets/da2026-outils.css">
+<style>
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:26px 0 28px}
+.stat{padding:14px 10px;border-radius:14px;border:1px solid rgba(26,23,20,.18);background:rgba(255,255,255,.35)}
+.stat b{display:block;font-family:var(--serif);font-weight:400;font-size:40px;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;white-space:nowrap;text-transform:uppercase;color:rgba(26,23,20,.7)}
+.qwrap{position:relative}
+.qwrap .big{position:absolute;right:0;top:-34px;font-family:var(--serif);font-style:italic;font-size:150px;line-height:1;color:var(--sable);opacity:.32;pointer-events:none}
+.cat{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid var(--sable);font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sauge-f);margin:0 0 14px;background:var(--carte)}
+.cat::before{content:"";width:6px;height:6px;background:var(--sauge);transform:rotate(45deg)}
+h2.q{position:relative;margin-bottom:22px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;padding:16px;cursor:pointer;color:var(--encre);font:inherit;font-weight:400;transition:border-color .15s,transform .15s}
+.opt:hover{border-color:var(--or);transform:translateY(-1px)}
+.opt .k{flex:0 0 auto;width:26px;height:26px;border-radius:50%;border:1px solid var(--or);display:grid;place-items:center;font-family:var(--mono);font-size:11px;color:var(--or);margin-top:1px}
+.opt .t{font-size:16px;line-height:1.45;min-width:0}
+.opt[aria-pressed="true"]{border-color:var(--rose)}
+.opt[aria-pressed="true"] .k{background:linear-gradient(180deg,#ff3cc0,var(--rose));border-color:var(--rose);color:#fff}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:26px;flex-wrap:wrap}
+.form{display:grid;gap:10px;margin-top:22px;max-width:440px}
+.hint{font-size:14px;color:var(--doux);margin:4px 0 0}
+.load{padding:60px 0;text-align:left}
+.load .d{display:inline-block;width:10px;height:10px;margin-right:6px;transform:rotate(45deg);background:var(--rose);animation:p 1.2s ease-in-out infinite}
+.load .d:nth-child(2){background:var(--sauge);animation-delay:.2s}.load .d:nth-child(3){background:var(--sable);animation-delay:.4s}
+.load p{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--doux);margin-top:18px}
+@keyframes p{0%,80%,100%{opacity:.3}40%{opacity:1}}
+.ring{position:relative;width:190px;height:190px;margin:18px 0 22px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .v{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .v b{font-family:var(--serif);font-weight:400;font-size:68px;line-height:1;font-variant-numeric:tabular-nums}
+.ring .v span{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--doux)}
+.tagl{font-family:var(--serif);font-style:italic;font-size:23px;line-height:1.3;color:var(--sauge-f);margin:12px 0 0}
+.sec{margin-top:34px}
+.axes{display:grid;gap:10px}
+.axe{padding:14px 16px}
+.axe .top2{display:flex;justify-content:space-between;gap:10px;font-size:15.5px;font-weight:400}
+.axe .top2 span:last-child{font-family:var(--mono);font-size:12px;color:var(--doux);font-variant-numeric:tabular-nums;white-space:nowrap}
+.axe .bar{height:5px;border-radius:99px;background:rgba(216,199,158,.4);overflow:hidden;margin-top:8px}
+.axe .bar i{display:block;height:100%;transition:width 1s ease}
+.low{background:linear-gradient(90deg,#ff3cc0,var(--rose))}.mid{background:var(--or)}.high{background:var(--sauge)}
+.axe small{display:block;margin-top:6px;font-size:13.5px;color:var(--doux)}
+.plan{display:grid;gap:10px}
+.pi{display:flex;gap:14px;padding:16px}
+.pi.urg{border-color:var(--rose)}
+.pi .num{font-family:var(--serif);font-style:italic;font-size:30px;line-height:1;color:var(--rose);min-width:26px}
+.pi b{display:block;font-weight:500;font-size:16px}
+.pi p{margin:4px 0 0;font-size:14.5px;color:var(--doux)}
+.pill{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid currentColor}
+.pill.u{color:var(--rose)}.pill.m{color:var(--or)}.pill.l{color:var(--sauge-f)}
+.share{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.share button,.share a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border-radius:999px;border:1px solid rgba(216,199,158,.6);background:transparent;color:var(--creme);cursor:pointer;text-decoration:none}
+.share button:hover,.share a:hover{border-color:var(--creme)}
+.rep{opacity:.55}.rep.on{opacity:1;border-color:var(--rose)}
+.bravo{margin:16px 0 0;padding:12px 16px;border-left:3px solid #ee07a5;background:rgba(238,7,165,.06);border-radius:0 12px 12px 0;font-weight:500;font-size:16.5px;line-height:1.45;color:#1a1714}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="logo" href="https://nendyservices.com" aria-label="Nendy Services, retour au site">
+      <img src="/img/nendy-spirale.svg" alt="" width="30" height="30">
+      <span class="lt"><span class="n">Nendy</span><span class="r"></span><span class="s">Services</span></span>
+    </a>
+    <a class="back" href="https://nendyservices.com">Le site →</a>
+  </div>
+
+  <div class="frame">
+    <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+    <div class="cadre"><span class="lab" id="lab">Nendy Services · Score</span><span class="cnt" id="count"><b>00</b> / 10</span></div>
+    <div class="prog" aria-hidden="true"><span id="fill"></span></div>
+
+    <main>
+      <section class="screen fade" id="intro">
+        <div class="panel sable">
+          <img class="spi" src="/img/nendy-spirale.svg" alt="" style="opacity:.28">
+          <p class="kicker">Score · Gratuit · 3 minutes</p>
+          <h1>À quel point<br>ton business<br>est <em class="f">organisé&nbsp;?</em></h1>
+          <p class="lead">10 questions. Un score sur 100. Un plan d'action concret pour passer au niveau suivant.</p>
+          <div class="stats"><div class="stat"><b>10</b><span>Questions</span></div><div class="stat"><b>100</b><span>Points max</span></div><div class="stat"><b>3</b><span>Minutes</span></div></div>
+          <button class="btn" id="start" type="button">Calculer mon score →</button>
+        </div>
+      </section>
+
+      <section class="screen" id="quiz" hidden>
+        <div id="qbox" aria-live="polite"></div>
+        <div class="nav">
+          <button class="btn ghost" id="prev" type="button">← Retour</button>
+          <button class="btn" id="next" type="button" disabled>Continuer →</button>
+        </div>
+      </section>
+
+      <section class="screen fade" id="mail" hidden>
+        <p class="kicker">Dernière étape</p>
+        <h2>Où on envoie<br>ton <em class="f">score&nbsp;?</em></h2>
+        <p class="lead">Tu recevras ton score détaillé et ton plan d'action personnalisé.</p>
+        <form class="form" id="form" novalidate>
+          <input type="email" class="input" id="emailInput" placeholder="ton@email.com" autocomplete="email">
+          <button class="btn" type="submit">Révéler mon score →</button>
+          <p class="hint">Aucun spam. Juste ce qui est utile.</p>
+        </form>
+      </section>
+
+      <section class="screen" id="result" hidden>
+        <div class="load" id="loading"><span class="d"></span><span class="d"></span><span class="d"></span><p>Calcul de ton score…</p></div>
+        <div id="rc" hidden class="fade">
+          <p class="kicker">Ton score organisation</p>
+          <div class="ring" id="ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" fill="none" stroke="rgba(216,199,158,.45)" stroke-width="6"/><circle id="arc" cx="60" cy="60" r="52" fill="none" stroke="#ee07a5" stroke-width="6" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition:stroke-dashoffset 1.2s ease"/></svg><div class="v"><b id="sn">0</b><span>/ 100</span></div></div>
+          <h2 id="sl"></h2>
+          <p class="tagl" id="ss"></p>
+          <p class="bravo" id="bv"></p>
+
+          <div class="sec"><p class="kicker">Les repères</p><div class="axes" id="reperes">
+            <div class="axe carte rep"><div class="top2"><span>Sous 60</span><span>À surveiller</span></div><small>Ton système te coûte de l'énergie : c'est encore toi qui le portes.</small></div>
+            <div class="axe carte rep"><div class="top2"><span>60 à 79</span><span>Acceptable</span></div><small>Il tient, mais repose encore beaucoup sur toi.</small></div>
+            <div class="axe carte rep"><div class="top2"><span>80 et plus</span><span>Le cap à viser</span></div><small>Ton système tourne, même quand tu n'es pas là.</small></div>
+          </div></div>
+
+          <div class="sec"><p class="kicker">Détail par axe</p><div class="axes" id="axes"></div></div>
+          <div class="sec"><p class="kicker">Ton plan d'action</p><div class="plan" id="plan"></div></div>
+
+          <div class="sec panel noir">
+            <img class="spi" src="/img/nendy-spirale.svg" alt="">
+            <p class="kicker">Prochaine étape</p>
+            <h2>On améliore ce score <em class="f">ensemble&nbsp;?</em></h2>
+            <p class="lead">Un appel découverte de 45 minutes : on repère les gains rapides et ce qui aura le plus d'impact sur ton organisation.</p>
+            <p style="margin:22px 0 0"><a class="btn" href="https://calendar.notion.so/meet/nendyticout/appeldecouverte" target="_blank" rel="noopener">Réserver mon appel offert →</a></p>
+            <div class="share"><button type="button" id="copy">Copier mon score</button><a id="li" target="_blank" rel="noopener">LinkedIn</a><a id="wa" target="_blank" rel="noopener">WhatsApp</a></div>
+          </div>
+
+          <div class="nav"><button class="btn ghost" type="button" id="again">Refaire le score</button></div>
+          <div class="fin"><img src="/img/nendy-logo-arche.svg" alt="Nendy Services"><p class="slogan">L'harmonie entre organisation et assistance.</p></div>
+        </div>
+      </section>
+    </main>
+
+    <div class="foot">
+      <div class="fil"></div>
+      <div class="row"><a href="https://www.instagram.com/nendy_services/">@nendy_services</a><a href="https://nendyservices.com">nendyservices.com</a></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+var HOOK='https://nendy-client-flow.base44.app/functions/inscription';
+var Q=[{"c": "Communication client", "t": "Comment tes clients te contactent-ils ?", "o": [["Partout, WhatsApp perso, Instagram, SMS, email... tout en même temps.", 0], ["Un ou deux canaux mais pas vraiment structurés.", 5], ["WhatsApp Business configuré + email professionnel.", 8], ["Un canal principal avec messages automatiques, catalogue et étiquettes.", 10]]}, {"c": "Prise de rendez-vous", "t": "Comment se gèrent tes rendez-vous ?", "o": [["Par message, je propose des créneaux, on négocie. C'est long.", 0], ["Google Calendar partagé mais sans automatisation.", 4], ["Un outil de réservation mais sans rappels automatiques.", 7], ["Calendly ou équivalent, réservation, confirmation et rappels automatiques.", 10]]}, {"c": "Facturation", "t": "Comment tu gères tes devis et factures ?", "o": [["Je les fais quand j'y pense. Souvent en retard.", 0], ["Word ou Excel, je recrée à chaque fois.", 4], ["J'ai un template mais le suivi des paiements est manuel.", 7], ["Logiciel dédié, devis, factures, relances de paiement automatiques.", 10]]}, {"c": "Suivi clients", "t": "Comment tu suis tes clients et prospects ?", "o": [["Dans ma tête et dans mes messages WhatsApp.", 0], ["Un tableau Excel basique.", 4], ["Notion ou CRM simple, mais pas toujours à jour.", 7], ["CRM complet avec historique, relances et statuts à jour.", 10]]}, {"c": "Organisation interne", "t": "Ton outil central de travail, c'est quoi ?", "o": [["Ma tête et des notes éparpillées partout.", 0], ["Plusieurs outils, et je recopie souvent la même info à plusieurs endroits.", 4], ["Un outil principal, mais certaines infos vivent encore ailleurs.", 7], ["Un espace central : chaque info n'existe qu'à un seul endroit.", 10]]}, {"c": "Process & Templates", "t": "As-tu des process documentés pour ton activité ?", "o": [["Rien, je recrée tout à chaque fois.", 0], ["Quelques templates éparpillés dans mes fichiers.", 4], ["Des templates pour les tâches récurrentes mais pas de process global.", 7], ["Process documentés, checklists et templates prêts pour tout.", 10]]}, {"c": "Accueil client", "t": "Comment tu accueilles un nouveau client ?", "o": [["Au cas par cas, chaque fois différemment.", 0], ["Quelques messages d'accueil mais pas de process structuré.", 4], ["Un email de bienvenue et un questionnaire mais c'est manuel.", 7], ["Process automatisé, email, questionnaire, accès partagés, contrat en moins de 10 min.", 10]]}, {"c": "Automatisation", "t": "Qu'est-ce qui est automatisé dans ton business ?", "o": [["Rien, tout est manuel.", 0], ["Quelques réponses automatiques sur WhatsApp ou email.", 4], ["RDV automatisés + quelques relances.", 7], ["Flux automatisés entre mes outils, relances, reporting, onboarding.", 10]]}, {"c": "Pilotage", "t": "Suis-tu les chiffres de ton activité ?", "o": [["Non, je regarde mon compte en banque de temps en temps.", 0], ["Je regarde mon chiffre d'affaires au moment de le déclarer.", 4], ["Je suis 1 ou 2 chiffres, mais pas tous les mois.", 7], ["Chaque mois, je relève 2 ou 3 chiffres clés et je fais régulièrement le point.", 10]]}, {"c": "Autonomie du système", "t": "Si tu pars 2 semaines, que se passe-t-il ?", "o": [["Tout s'arrête. Je suis le système.", 0], ["Ça tourne mais avec beaucoup de stress et de ratés.", 4], ["Quelqu'un peut prendre le relais partiellement.", 7], ["Mon système tourne seul, je rentre avec des demandes dans ma boîte.", 10]]}];
+var cur=0, ans=new Array(Q.length).fill(null), L="ABCD";
+function $(id){return document.getElementById(id)}
+function pad(n){return (n<10?"0":"")+n}
+function frame(lab,n){$("lab").textContent="Nendy Services · "+lab;$("count").innerHTML="<b>"+pad(n)+"</b> / 10";$("fill").style.width=(n/10*100)+"%"}
+function show(id){["intro","quiz","mail","result"].forEach(function(s){$(s).hidden=(s!==id)});window.scrollTo({top:0,behavior:"smooth"})}
+function render(){
+  var q=Q[cur]; frame("Score",cur+1);
+  var h='<div class="qwrap fade"><span class="big" aria-hidden="true">'+pad(cur+1)+'</span><p class="cat">'+q.c+'</p><h2 class="q">'+q.t+'</h2><div class="opts" role="group" aria-label="Réponses">';
+  q.o.forEach(function(o,i){h+='<button type="button" class="opt carte" data-i="'+i+'" aria-pressed="'+(ans[cur]===i)+'"><span class="k">'+L[i]+'</span><span class="t">'+o[0]+'</span></button>'});
+  $("qbox").innerHTML=h+'</div></div>';
+  $("next").disabled=ans[cur]===null;
+  $("next").textContent=cur===Q.length-1?"Voir mon score →":"Continuer →";
+}
+$("qbox").addEventListener("click",function(e){
+  var b=e.target.closest(".opt"); if(!b)return;
+  ans[cur]=+b.dataset.i;
+  $("qbox").querySelectorAll(".opt").forEach(function(x){x.setAttribute("aria-pressed",x===b)});
+  $("next").disabled=false;
+  setTimeout(function(){if(ans[cur]!==null)go(1)},320);
+});
+function go(d){
+  if(d>0&&ans[cur]===null)return;
+  if(d>0&&cur===Q.length-1){frame("Dernière étape",10);show("mail");return}
+  if(d<0&&cur===0){frame("Score",0);show("intro");return}
+  cur+=d; render();
+}
+$("next").addEventListener("click",function(){go(1)});
+$("prev").addEventListener("click",function(){go(-1)});
+$("start").addEventListener("click",function(){cur=0;show("quiz");render()});
+function scores(){var s={};ans.forEach(function(v,i){s[i+1]=Q[i].o[v][1]});return s}
+function total(){return ans.reduce(function(a,v,i){return a+Q[i].o[v][1]},0)}
+$("form").addEventListener("submit",function(e){
+  e.preventDefault();
+  var t=total(), email=$("emailInput").value;
+  try{var x=new XMLHttpRequest();x.open('POST',HOOK,true);x.setRequestHeader('Content-Type','application/json');x.send(JSON.stringify({type:'Score Organisation',version:3,email:email,score:t,detail:scores()}))}catch(err){}
+  frame("Ton score",10); show("result"); $("loading").hidden=false; $("rc").hidden=true;
+  setTimeout(function(){reveal(t)},1800);
+});
+function reveal(t){
+  $("loading").hidden=true; $("rc").hidden=false;
+  $("sn").textContent=t;
+  var col=t<60?"#ee07a5":t<80?"#b08d57":"#7b9a80";
+  $("arc").setAttribute("stroke",col);
+  requestAnimationFrame(function(){$("arc").style.strokeDashoffset=326.7*(1-t/100)});
+  var lab,sub;
+  if(t<40){lab="Système à construire";sub="Tu as les fondations, il manque l'architecture qui tient tout ensemble."}
+  else if(t<60){lab="Système en construction";sub="Ton organisation existe, mais elle te coûte encore beaucoup d'énergie."}
+  else if(t<80){lab="Système à renforcer";sub="Ton système tient, mais il repose encore beaucoup sur toi."}
+  else{lab="Système solide";sub="Ton système tourne. Le prochain palier, c'est l'automatisation avancée."}
+  var pal=t<60?0:t<80?1:2;
+  document.querySelectorAll("#reperes .rep").forEach(function(x,i){x.classList.toggle("on",i===pal)});
+  $("sl").textContent=lab; $("ss").textContent=sub; $("bv").textContent=["Bravo d’avoir pris ces quelques minutes : regarder son organisation en face, c’est déjà le premier pas.", "Bravo, tu as déjà de bonnes bases : tu es sur la bonne voie.", "Bravo, ton organisation tient la route : il reste quelques réglages pour qu’elle tourne sans toi.", "Bravo, ton organisation est solide : peu d’entrepreneuses en sont à ce niveau."][t<40?0:t<60?1:t<80?2:3];
+  var s=scores(), ax='';
+  Q.forEach(function(q,i){
+    var v=s[i+1], pct=v*10, cls=pct<50?'low':pct<80?'mid':'high';
+    var note=v===0?'À mettre en place en priorité':v<=4?'Partiel : des améliorations rapides possibles':v<=7?'Bon début : quelques optimisations':v===10?'Excellent ✓':'Très bon';
+    ax+='<div class="axe carte"><div class="top2"><span>'+q.c+'</span><span>'+v+' / 10</span></div><div class="bar"><i class="'+cls+'" style="width:'+pct+'%"></i></div><small>'+note+'</small></div>';
+  });
+  $("axes").innerHTML=ax;
+  var low=Q.map(function(q,i){return{c:q.c,v:s[i+1]}}).filter(function(a){return a.v<=4}).slice(0,3);
+  var mid=Q.map(function(q,i){return{c:q.c,v:s[i+1]}}).filter(function(a){return a.v>4&&a.v<=7}).slice(0,2);
+  var pl='';
+  low.forEach(function(a,i){pl+='<div class="pi carte urg"><span class="num">'+(i+1)+'</span><div><b>Améliorer : '+a.c+'</b><p>C\'est l\'un de tes axes les plus faibles : une intervention rapide ici aura un impact immédiat sur ton quotidien.</p><span class="pill u">Prioritaire</span></div></div>'});
+  mid.forEach(function(a,i){pl+='<div class="pi carte"><span class="num">'+(low.length+i+1)+'</span><div><b>Optimiser : '+a.c+'</b><p>Tu as des bases : on peut pousser cet axe au niveau supérieur avec quelques ajustements.</p><span class="pill m">Moyen terme</span></div></div>'});
+  if(!pl)pl='<div class="pi carte"><span class="num">✓</span><div><b>Excellent travail !</b><p>Ton système est déjà très structuré. L\'étape suivante : automatisation avancée et IA.</p><span class="pill l">Optimisation</span></div></div>';
+  $("plan").innerHTML=pl;
+  var url=location.href.split('#')[0], txt='J\'ai obtenu '+t+'/100 au score organisation Nendy Services ! Teste le tien → '+url;
+  $("li").href='https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(url);
+  $("wa").href='https://wa.me/?text='+encodeURIComponent(txt);
+  $("copy").onclick=function(){var b=this;if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){b.textContent='Copié ✓'},function(){})}};
+}
+$("again").addEventListener("click",function(){ans=new Array(Q.length).fill(null);cur=0;frame("Score",0);show("intro")});
+})();
+</script>
+</body>
+</html>
