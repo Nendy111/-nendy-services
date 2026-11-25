@@ -128,9 +128,9 @@ h2.q{position:relative;margin-bottom:22px}
           <p class="bravo" id="bv"></p>
 
           <div class="sec"><p class="kicker">Les repères</p><div class="axes" id="reperes">
-            <div class="axe carte rep"><div class="top2"><span>Sous 60</span><span>À surveiller</span></div><small>Ton système te coûte de l'énergie : c'est encore toi qui le portes.</small></div>
-            <div class="axe carte rep"><div class="top2"><span>60 à 79</span><span>Acceptable</span></div><small>Il tient, mais repose encore beaucoup sur toi.</small></div>
-            <div class="axe carte rep"><div class="top2"><span>80 et plus</span><span>Le cap à viser</span></div><small>Ton système tourne, même quand tu n'es pas là.</small></div>
+            <div class="axe carte rep"><div class="top2"><span>Sous 60</span><span>À surveiller</span></div><small>Ton organisation te demande beaucoup d'énergie au quotidien.</small></div>
+            <div class="axe carte rep"><div class="top2"><span>60 à 79</span><span>Acceptable</span></div><small>Les bases sont là, il reste quelques ajustements.</small></div>
+            <div class="axe carte rep"><div class="top2"><span>80 et plus</span><span>Solide</span></div><small>Ton organisation est claire. L'automatisation devient un bonus, pas une obligation.</small></div>
           </div></div>
 
           <div class="sec"><p class="kicker">Détail par axe</p><div class="axes" id="axes"></div></div>
@@ -208,12 +208,12 @@ function reveal(t){
   requestAnimationFrame(function(){$("arc").style.strokeDashoffset=326.7*(1-t/100)});
   var lab,sub;
   if(t<40){lab="Système à construire";sub="Tu as les fondations, il manque l'architecture qui tient tout ensemble."}
-  else if(t<60){lab="Système en construction";sub="Ton organisation existe, mais elle te coûte encore beaucoup d'énergie."}
-  else if(t<80){lab="Système à renforcer";sub="Ton système tient, mais il repose encore beaucoup sur toi."}
-  else{lab="Système solide";sub="Ton système tourne. Le prochain palier, c'est l'automatisation avancée."}
+  else if(t<60){lab="Système en construction";sub="Ton organisation existe, mais elle te demande encore beaucoup d'énergie."}
+  else if(t<80){lab="Système à renforcer";sub="Les bases sont là : quelques ajustements et ton organisation sera vraiment fluide."}
+  else{lab="Système solide";sub="Ton organisation est claire et tient la route. Si tu veux aller plus loin, l'automatisation peut te libérer encore du temps."}
   var pal=t<60?0:t<80?1:2;
   document.querySelectorAll("#reperes .rep").forEach(function(x,i){x.classList.toggle("on",i===pal)});
-  $("sl").textContent=lab; $("ss").textContent=sub; $("bv").textContent=["Bravo d’avoir pris ces quelques minutes : regarder son organisation en face, c’est déjà le premier pas.", "Bravo, tu as déjà de bonnes bases : tu es sur la bonne voie.", "Bravo, ton organisation tient la route : il reste quelques réglages pour qu’elle tourne sans toi.", "Bravo, ton organisation est solide : peu d’entrepreneuses en sont à ce niveau."][t<40?0:t<60?1:t<80?2:3];
+  $("sl").textContent=lab; $("ss").textContent=sub; $("bv").textContent=["Bravo d’avoir pris ces quelques minutes : regarder son organisation en face, c’est déjà le premier pas.", "Bravo, tu as déjà de bonnes bases : tu es sur la bonne voie.", "Bravo, ton organisation tient la route : quelques ajustements et elle sera vraiment fluide.", "Bravo, ton organisation est solide : peu d’entrepreneuses en sont à ce niveau."][t<40?0:t<60?1:t<80?2:3];
   var s=scores(), ax='';
   Q.forEach(function(q,i){
     var v=s[i+1], pct=v*10, cls=pct<50?'low':pct<80?'mid':'high';
